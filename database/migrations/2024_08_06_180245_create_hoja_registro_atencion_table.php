@@ -24,7 +24,7 @@ class CreateHojaRegistroAtencionTable extends Migration
                 'No especificado', 'Ninguna', 'IMSS', 'ISSSTE', 'PEMEX', 'SEDENA', 'SEMAR', 'OTRA', 'IMSS Bienestar', 'ISSFAM', 'OPD IMSS Bienestar', 'Se ignora', 'Especifique'
             ]);
             $table->string('afiliacion_especifique')->nullable();
-            $table->integer('numero_afiliacion')->nullable();
+            $table->string('numero_afiliacion')->nullable();
             $table->boolean('gratuidad');
             $table->enum('escolaridad', ['Ninguna', 'Primaria', 'Secundaria', 'Bachillerato o preparatoria', 'Profesional', 'Posgrado', 'Se ignora']);
             $table->enum('escolaridad_seleccionada', ['Completa', 'Incompleta'])->nullable();

@@ -117,7 +117,7 @@
                   <div class="col-md-4">
                     <label for="curp">C.U.R.P.:</label>
                     <div class="form-group">
-                      <input type="text" id="curp" name="curp" minLength="18" class="form-control" placeholder="Solo 18 caracteres" required>
+                      <input type="text" id="curp" name="curp" maxLength="18" class="form-control" placeholder="Solo 18 caracteres" required>
                     </div>
                   </div>
                   <!-- Fecha de Nacimiento -->
@@ -928,7 +928,7 @@
                   <div class="col-md-4">
                     <label for="curp_responsable">C.U.R.P.:</label>
                     <div class="form-group">
-                      <input type="text" id="curp_responsable" name="curp_responsable" class="form-control" placeholder="CURP del Responsable">
+                      <input type="text" id="curp_responsable" name="curp_responsable" class="form-control" placeholder="CURP del Responsable" maxLenght="18" required>
                     </div>
                   </div>
                   <!-- Cédula Profesional -->
@@ -944,7 +944,7 @@
           </div>
           <div class="card-footer"> 
             <div class="pull-right">
-              <button type="button" id="darDeAlta" class="btn btn-info">Nuevo Paciente</button>
+              <button type="button" id="darDeAlta" class="btn btn-primary">N. Paciente</button>
               <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' name='next' value='Siguiente' />
               <button type="submit" class="btn btn-finish btn-fill btn-primary btn-wd" name="finish">Guardar</button>
             </div>
@@ -966,13 +966,17 @@
 
   <script>
     $(document).ready(function() {
-    $('.datetimepicker').datetimepicker({
-        format: 'DD/MM/YYYY hh:mm A'
-    });
+        $('.datepicker').datetimepicker({
+            format: 'DD/MM/YYYY', // Asegúrate de que este es el formato que se está enviando al backend
+        });
 
-    $('#tiempo_traslado').datetimepicker({
-        format: 'HH:mm'
-    });
+        $('.datetimepicker').datetimepicker({
+            format: 'DD/MM/YYYY hh:mm A', // Para los campos con fecha y hora
+        });
+        
+        $('#tiempo_traslado').datetimepicker({
+            format: 'HH:mm' // Solo tiempo
+        });
     });
 
     function setFormValidation(id) {

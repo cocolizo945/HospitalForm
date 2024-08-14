@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\HojaRegistroAtencion;
-use Carbon\Carbon; // Importar Carbon para manejar fechas
+use Carbon\Carbon;
 
 class HojaRegistroAtencionController extends Controller
 {
@@ -32,17 +32,17 @@ class HojaRegistroAtencionController extends Controller
             // Añadir las demás validaciones necesarias
         ]);
 
-        // Convertir las fechas al formato correcto
+        // Convertir las fechas al formato correcto para la base de datos
         $requestData = $request->all();
         $requestData['fecha_nacimiento'] = Carbon::createFromFormat('d/m/Y', $request->fecha_nacimiento)->format('Y-m-d');
-        $requestData['fecha_ocurrencia'] = Carbon::createFromFormat('d/m/Y h:i A', $request->fecha_ocurrencia)->format('Y-m-d H:i');
-        $requestData['fecha_atencion'] = Carbon::createFromFormat('d/m/Y h:i A', $request->fecha_atencion)->format('Y-m-d H:i');
+        $requestData['fecha_ocurrencia'] = Carbon::createFromFormat('d/m/Y h:i A', $request->fecha_ocurrencia)->format('Y-m-d H:i:s');
+        $requestData['fecha_atencion'] = Carbon::createFromFormat('d/m/Y h:i A', $request->fecha_atencion)->format('Y-m-d H:i:s');
 
         // Crear un nuevo registro en la base de datos
         $hojaRegistroAtencion = new HojaRegistroAtencion($requestData);
         $hojaRegistroAtencion->save();
 
         // Redirigir con un mensaje de éxito
-        return redirect()->back()->with('success', 'Formulario enviado con éxito.')->withInput();
+        return redirect()->back()->with('success', 'Formulario enviado con éxito.');
     }
 }

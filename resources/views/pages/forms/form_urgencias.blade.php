@@ -756,6 +756,10 @@
     $('.datetimepicker').datetimepicker({
         format: 'DD/MM/YYYY hh:mm A'
     });
+
+    $('#tiempo_traslado').datetimepicker({
+            format: 'HH:mm' // Solo tiempo
+        });
 });
 
     function setFormValidation(id) {
