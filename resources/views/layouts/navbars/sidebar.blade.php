@@ -14,7 +14,7 @@
           {{ __('CT') }}
         </a>
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          {{ __('Creative Tim') }}
+          {{ __('ITT TAPACHULA') }}
         </a>
     </div>
     <ul class="nav">
@@ -244,6 +244,12 @@
               <a href="{{ route('page.hospital_forms') }}">
                 <span class="sidebar-mini-icon">RF</span>
                 <span class="sidebar-normal"> {{ __('Hospital Forms') }} </span>
+              </a>
+            </li>
+            <li class="{{ $activePage == 'form_urgencias' ? ' active' : '' }}">
+              <a href="{{ route('page.urgencias_forms') }}">
+                <span class="sidebar-mini-icon">UF</span>
+                <span class="sidebar-normal"> {{ __('Urgencias Forms') }} </span>
               </a>
             </li>
           </ul>

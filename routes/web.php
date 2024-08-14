@@ -11,6 +11,7 @@
 |
 */
 use App\Http\Controllers\HojaRegistroAtencionController;
+use App\Http\Controllers\UrgenciasFormController;
 
 Route::get('/', function () {
   return redirect('login');
@@ -34,8 +35,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('item', 'ItemController', ['except' => ['show']]);
     Route::resource('role', 'RoleController', ['except' => ['show', 'destroy']]);
     Route::resource('user', 'UserController', ['except' => ['show']]);
+
     Route::get('/formulario/create', [HojaRegistroAtencionController::class, 'create'])->name('formulario.create');
     Route::post('/formulario/store', [HojaRegistroAtencionController::class, 'store'])->name('formulario.store'); 
+
+    Route::post('/form_urgencias', [UrgenciasFormController::class, 'store'])->name('form_urgencias.store');
 
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
@@ -64,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('validation-form', ['as' => 'page.validation_forms', 'uses' => 'FormPagesController@validationForms']);
     Route::get('wizard-form', ['as' => 'page.wizard_forms', 'uses' => 'FormPagesController@wizardForms']);
     Route::get('hospital-form', ['as' => 'page.hospital_forms', 'uses' => 'FormPagesController@hospitalForms']);  
+    Route::get('urgencias-form', ['as' => 'page.urgencias_forms', 'uses' => 'FormPagesController@urgenciasForms']); 
 
     Route::get('google-maps', ['as' => 'page.google_maps', 'uses' => 'MapPagesController@googleMaps']);
     Route::get('fullscreen-maps', ['as' => 'page.fullscreen_maps', 'uses' => 'MapPagesController@fullscreenMaps']);

@@ -24,15 +24,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navigation">
       <ul class="navbar-nav ml-auto">
-        <li>
-          <a class="btn btn-danger mt-2" target="_blank" href="https://www.creative-tim.com/product/black-dashboard-pro-laravel"><i class="tim-icons icon-cart"></i> Buy Now</a>
-        </li>
-        <li id="docs">
-          <a class="btn btn-success mt-2" target="_blank" href="https://black-dashboard-pro-laravel.creative-tim.com/docs/getting-started/laravel-setup.html?_ga=2.124096394.1444048996.1606126698-1702452109.1586172448"><i class="tim-icons icon-book-bookmark"></i> Documentation</a>
-        </li>
-        <li>
-          <a class="btn btn-info mt-2" target="_blank" href="https://www.creative-tim.com/product/black-dashboard-laravel"><i class="tim-icons icon-cloud-download-93"></i> Get free demo</a>
-        </li>
         <li class="search-bar input-group">
           <button class="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i>
             <span class="d-lg-none d-md-block">{{ __('Search') }}</span>

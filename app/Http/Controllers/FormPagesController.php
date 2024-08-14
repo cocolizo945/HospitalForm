@@ -59,8 +59,24 @@ class FormPagesController extends Controller
         return view('pages.forms.form_wizard');
     }
 
+    /**
+     * Display the wizard forms page
+     *
+     * @return \Illuminate\View\View
+     */
+
     public function hospitalForms()
     {
         return view('pages.forms.form_hospital');
+    }
+
+    /**
+     * Display the wizard forms page
+     *
+     * @return \Illuminate\View\View
+     */
+    public function urgenciasForms()
+    {
+        return view('pages.forms.form_urgencias');
     }
 }
