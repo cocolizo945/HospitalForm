@@ -70,6 +70,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('hospital-form', ['as' => 'page.hospital_forms', 'uses' => 'FormPagesController@hospitalForms']);  
     Route::get('urgencias-form', ['as' => 'page.urgencias_forms', 'uses' => 'FormPagesController@urgenciasForms']); 
 
+    Route::get('/buscar-folio', function () {
+      return view('pages.forms.buscar_folio');
+    })->name('buscar_folio');
+
     Route::get('google-maps', ['as' => 'page.google_maps', 'uses' => 'MapPagesController@googleMaps']);
     Route::get('fullscreen-maps', ['as' => 'page.fullscreen_maps', 'uses' => 'MapPagesController@fullscreenMaps']);
     Route::get('vector-maps', ['as' => 'page.vector_maps', 'uses' => 'MapPagesController@vectorMaps']);

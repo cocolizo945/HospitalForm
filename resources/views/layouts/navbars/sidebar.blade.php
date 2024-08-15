@@ -252,6 +252,12 @@
                 <span class="sidebar-normal"> {{ __('Urgencias Forms') }} </span>
               </a>
             </li>
+            <li class="{{ $activePage == 'buscar_folio' ? 'active' : '' }}">
+              <a href="{{ route('buscar_folio') }}">
+                <span class="sidebar-mini-icon">F</span>
+                <span class="sidebar-normal"> {{ __('Buscar Folio') }} </span>
+              </a>
+          </li>
           </ul>
         </div>
       </li>

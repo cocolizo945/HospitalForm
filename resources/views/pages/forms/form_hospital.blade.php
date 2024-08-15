@@ -206,16 +206,16 @@
                   <div class="col-md-4">
                     <label for="escolaridad">Escolaridad:</label>
                     <div class="form-group">
-                      <select id="escolaridad" class="selectpicker form-control" name="escolaridad" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="0">1. Ninguna</option>
-                        <option value="1">2. Primaria</option>
-                        <option value="2">3. Secundaria</option>
-                        <option value="3">4. Bachillerato o preparatoria</option>
-                        <option value="4">5. Profesional</option>
-                        <option value="5">6. Posgrado</option>
-                        <option value="99">7. Se ignora</option>
-                      </select>
+                    <select id="escolaridad" class="selectpicker form-control" name="escolaridad" required>
+                    <option disabled selected>Selección Única</option>
+                    <option value="Ninguna">Ninguna</option>
+                    <option value="Primaria">Primaria</option>
+                    <option value="Secundaria">Secundaria</option>
+                    <option value="Bachillerato o preparatoria">Bachillerato o preparatoria</option>
+                    <option value="Profesional">Profesional</option>
+                    <option value="Posgrado">Posgrado</option>
+                    <option value="Se ignora">Se ignora</option>
+                    </select>
                     </div>
                   </div>
                   <!-- Escolaridad Seleccionada -->
@@ -502,36 +502,36 @@
                   <div class="col-md-4">
                     <label for="agente_lesion">Agente de la Lesión:</label>
                     <div class="form-group">
-                      <select id="agente_lesion" class="selectpicker form-control" name="agente_lesion" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="0">1. Fuego, flama, sustancia caliente/vapor</option>
-                        <option value="1">2. Intoxicación por drogas o medicamentos</option>
-                        <option value="2">3. Pie o mano</option>
-                        <option value="3">4. Caída</option>
-                        <option value="4">5. Objeto contundente</option>
-                        <option value="5">6. Objeto punzocortante</option>
-                        <option value="6">7. Golpe contra piso o pared</option>
-                        <option value="7">8. Cuerpo extraño</option>
-                        <option value="8">9. Explosión</option>
-                        <option value="9">10. Asfixia o sofocación</option>
-                        <option value="10">11. Múltiples agentes</option>
-                        <option value="11">12. Proyectil arma de fuego</option>
-                        <option value="12">13. Ahorcamiento</option>
-                        <option value="13">14. Radiación</option>
-                        <option value="14">15. Sustancias químicas</option>
-                        <option value="15">16. Corriente eléctrica</option>
-                        <option value="16">17. Herramienta o maquinaria</option>
-                        <option value="17">18. Sacudidas</option>
-                        <option value="18">19. Desastre natural</option>
-                        <option value="19">20. Vehículo de motor</option>
-                        <option value="20">21. Ahogamiento por sumersión</option>
-                        <option value="21">22. Piquete / mordedura de animal</option>
-                        <option value="22">23. Fuerzas de la naturaleza</option>
-                        <option value="23">24. Intoxicación por plantas, hongos venenosos</option>
-                        <option value="24">25. Otro (Especifique)</option>
-                        <option value="25">26. Se ignora</option>
-                        <option value="26">27. No aplica</option>
-                      </select>
+                    <select id="agente_lesion" class="selectpicker form-control" name="agente_lesion" required>
+                    <option disabled selected>Selección Única</option>
+                    <option value="Fuego, flama, sustancia caliente/vapor">Fuego, flama, sustancia caliente/vapor</option>
+                    <option value="Intoxicación por drogas o medicamentos">Intoxicación por drogas o medicamentos</option>
+                    <option value="Pie o mano">Pie o mano</option>
+                    <option value="Caída">Caída</option>
+                    <option value="Objeto contundente">Objeto contundente</option>
+                    <option value="Objeto punzocortante">Objeto punzocortante</option>
+                    <option value="Golpe contra piso o pared">Golpe contra piso o pared</option>
+                    <option value="Cuerpo extraño">Cuerpo extraño</option>
+                    <option value="Explosión">Explosión</option>
+                    <option value="Asfixia o sofocación">Asfixia o sofocación</option>
+                    <option value="Múltiples agentes">Múltiples agentes</option>
+                    <option value="Proyectil arma de fuego">Proyectil arma de fuego</option>
+                    <option value="Ahorcamiento">Ahorcamiento</option>
+                    <option value="Radiación">Radiación</option>
+                    <option value="Sustancias químicas">Sustancias químicas</option>
+                    <option value="Corriente eléctrica">Corriente eléctrica</option>
+                    <option value="Herramienta o maquinaria">Herramienta o maquinaria</option>
+                    <option value="Sacudidas">Sacudidas</option>
+                    <option value="Desastre natural">Desastre natural</option>
+                    <option value="Vehículo de motor">Vehículo de motor</option>
+                    <option value="Ahogamiento por sumersión">Ahogamiento por sumersión</option>
+                    <option value="Piquete / mordedura de animal">Piquete / mordedura de animal</option>
+                    <option value="Fuerzas de la naturaleza">Fuerzas de la naturaleza</option>
+                    <option value="Intoxicación por plantas, hongos venenosos">Intoxicación por plantas, hongos venenosos</option>
+                    <option value="Otro (Especifique)">Otro (Especifique)</option>
+                    <option value="Se ignora">Se ignora</option>
+                    <option value="No aplica">No aplica</option>
+                    </select>
                     </div>
                   </div>
                   <div class="col-md-4" id="agenteEspecifique" style="display: none;">
@@ -562,14 +562,14 @@
                   <div class="col-md-4">
                     <label for="efectos_paciente">Se sospecha que la/el paciente estaba bajo los efectos de:</label>
                     <div class="form-group">
-                      <select id="efectos_paciente" class="selectpicker form-control" name="efectos_paciente" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="0">1. Alcohol</option>
-                        <option value="1">2. Droga por indicación médica</option>
-                        <option value="2">3. Drogas ilegales</option>
-                        <option value="3">4. Se ignora</option>
-                        <option value="4">5. Ninguna</option>
-                      </select>
+                    <select id="efectos_paciente" class="selectpicker form-control" name="efectos_paciente" required>
+                    <option disabled selected>Selección Única</option>
+                    <option value="Alcohol">Alcohol</option>
+                    <option value="Droga por indicación médica">Droga por indicación médica</option>
+                    <option value="Drogas ilegales">Drogas ilegales</option>
+                    <option value="Se ignora">Se ignora</option>
+                    <option value="Ninguna">Ninguna</option>
+                    </select>
                     </div>
                   </div>
                 </div>
@@ -619,13 +619,13 @@
                   <div class="col-md-4">
                     <label for="tipo_seguridad">¿Qué tipo de seguridad utilizó?</label>
                     <div class="form-group">
-                      <select id="tipo_seguridad" class="selectpicker form-control" name="tipo_seguridad" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="0">1. Cinturón de seguridad</option>
-                        <option value="1">2. Casco</option>
-                        <option value="2">3. Sillín porta infante</option>
-                        <option value="3">4. Otro (Especifique)</option>
-                      </select>
+                    <select id="tipo_seguridad" class="selectpicker form-control" name="tipo_seguridad" required>
+                    <option disabled selected>Selección Única</option>
+                    <option value="Cinturón de seguridad">Cinturón de seguridad</option>
+                    <option value="Casco">Casco</option>
+                    <option value="Sillín porta infante">Sillín porta infante</option>
+                    <option value="Otro (Especifique)">Otro (Especifique)</option>
+                    </select>
                     </div>
                   </div>
                 
@@ -648,14 +648,14 @@
                   <div class="col-md-4">
                     <label for="tipo_violencia">Tipo de Violencia:</label>
                     <div class="form-group">
-                      <select id="tipo_violencia" class="selectpicker form-control" name="tipo_violencia" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="0">1. Violencia física</option>
-                        <option value="1">2. Violencia sexual</option>
-                        <option value="2">3. Violencia psicológica</option>
-                        <option value="3">4. Violencia económica/patrimonial</option>
-                        <option value="4">5. Abandono y/o negligencia</option>
-                      </select>
+                    <select id="tipo_violencia" class="selectpicker form-control" name="tipo_violencia" required>
+                    <option disabled selected>Selección Única</option>
+                    <option value="Violencia física">Violencia física</option>
+                    <option value="Violencia sexual">Violencia sexual</option>
+                    <option value="Violencia psicológica">Violencia psicológica</option>
+                    <option value="Violencia económica/patrimonial">Violencia económica/patrimonial</option>
+                    <option value="Abandono y/o negligencia">Abandono y/o negligencia</option>
+                    </select>
                     </div>
                   </div>
                 </div>
@@ -669,11 +669,11 @@
                   <div class="col-md-4">
                     <label for="num_agresores">Num. Agresores:</label>
                     <div class="form-group">
-                      <select id="num_agresores" class="selectpicker form-control" name="num_agresores" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="0">1. Única</option>
-                        <option value="1">2. Más de una(o)</option>
-                      </select>
+                    <select id="num_agresores" class="selectpicker form-control" name="num_agresores" required>
+                    <option disabled selected>Selección Única</option>
+                    <option value="Única">Única</option>
+                    <option value="Más de una(o)">Más de una(o)</option>
+                    </select>
                     </div>
                   </div>
                   <!-- Parentesco con la/el afectada(o) -->
@@ -705,25 +705,25 @@
                   <div class="col-md-4">
                     <label for="efectos_agresor">El/La agresor(a) se sospecha que actuó bajo los efectos de:</label>
                     <div class="form-group">
-                      <select id="efectos_agresor" class="selectpicker form-control" name="efectos_agresor" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="0">1. Alcohol</option>
-                        <option value="1">2. Droga por indicación médica</option>
-                        <option value="2">3. Drogas ilegales</option>
-                        <option value="3">4. Se ignora</option>
-                        <option value="4">5. Ninguna</option>
-                      </select>
+                    <select id="efectos_agresor" class="selectpicker form-control" name="efectos_agresor" required>
+                    <option disabled selected>Selección Única</option>
+                    <option value="Alcohol">Alcohol</option>
+                    <option value="Droga por indicación médica">Droga por indicación médica</option>
+                    <option value="Drogas ilegales">Drogas ilegales</option>
+                    <option value="Se ignora">Se ignora</option>
+                    <option value="Ninguna">Ninguna</option>
+                    </select>
                     </div>
                   </div>
                   <!-- En caso de evento autoinfligido, el evento ocurrió -->
                   <div class="col-md-4">
                     <label for="evento_autoinfligido">En caso de evento autoinfligido, el evento ocurrió:</label>
                     <div class="form-group">
-                      <select id="evento_autoinfligido" class="selectpicker form-control" name="evento_autoinfligido" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="0">1. Única vez</option>
-                        <option value="1">2. Repetido</option>
-                      </select>
+                    <select id="evento_autoinfligido" class="selectpicker form-control" name="evento_autoinfligido" required>
+                    <option disabled selected>Selección Única</option>
+                    <option value="Única vez">Única vez</option>
+                    <option value="Repetido">Repetido</option>
+                    </select>
                     </div>
                   </div>
                 </div>

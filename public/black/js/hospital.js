@@ -83,9 +83,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const sectionsToToggle = [
         {selectId: 'afiliacion', targetSection: 'afiliacionEspecifique', showValues: ['12']},
         {selectId: 'sitio_ocurrencia', targetSection: 'otroLugarEspecifique', showValues: ['11']},
-        {selectId: 'agente_lesion', targetSection: 'agenteEspecifique', showValues: ['24']},
-        {selectId: 'tipo_seguridad', targetSection: 'seguridadEspecifique', showValues: ['3']},
-        {selectId: 'escolaridad', targetSection: 'escolaridad_seleccionada', showValues: ['1', '2', '3', '4', '5']},
+        {selectId: 'agente_lesion', targetSection: 'agenteEspecifique', showValues: ['Otro (Especifique)']},
+        {selectId: 'tipo_seguridad', targetSection: 'seguridadEspecifique', showValues: ['Otro (Especifique)']},
+        {selectId: 'escolaridad', targetSection: 'escolaridad_seleccionada', showValues: ['Primaria', 'Secundaria', 'Bachillerato o preparatoria', 'Profesional', 'Posgrado']},
         {selectId: 'sexo', targetSection: 'mujerFertilSection', showValues: ['Mujer', 'Intersexual']},
         {selectId: 'mujer_fertil', targetSection: 'semanasGestacionSection', showValues: ['1']},
         {selectId: 'lengua_indigena', targetSection: 'cualLenguaSection', showValues: ['1']},

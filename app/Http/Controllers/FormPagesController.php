@@ -79,4 +79,14 @@ class FormPagesController extends Controller
     {
         return view('pages.forms.form_urgencias');
     }
+
+    /**
+     * Display the wizard forms page
+     *
+     * @return \Illuminate\View\View
+     */
+    public function buscarFolio()
+    {
+        return view('pages.forms.buscar_folio');
+    }
 }

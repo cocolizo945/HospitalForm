@@ -32,48 +32,48 @@
         </h3>
         <div class="wizard-navigation" id="wizardNavigation">
           <div class="progress-with-circle" id="progressWithCircle">
-            <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" style="width: 21%;" id="progressBar"></div>
+            <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="7" style="width: 21%;" id="progressBar"></div>
           </div>
           <ul id="wizardSteps">
             <li class="nav-item" id="step1">
               <a class="nav-link active" href="#form1" data-toggle="tab">
-                <i class="tim-icons icon-single-copy-04"></i>
+                <i class="tim-icons icon-single-02"></i>
                 <p>DATOS DEL PACIENTE</p>
               </a>
             </li>
             <li class="nav-item" id="step2">
               <a class="nav-link" href="#form2" data-toggle="tab">
-                <i class="tim-icons icon-puzzle-10"></i>
+                <i class="tim-icons icon-satisfied"></i>
                 <p>ESTANCIA</p>
               </a>
             </li>
             <li class="nav-item" id="step3">
               <a class="nav-link" href="#form3" data-toggle="tab">
-                <i class="tim-icons icon-send"></i>
+                <i class="tim-icons icon-sound-wave"></i>
                 <p>AFECCIONES TRATADAS</p>
               </a>
             </li>
             <li class="nav-item" id="step4">
               <a class="nav-link" href="#form4" data-toggle="tab">
-                <i class="tim-icons icon-single-02"></i>
+                <i class="tim-icons icon-notes"></i>
                 <p>INTERCONSULTA</p>
               </a>
             </li>
             <li class="nav-item" id="step5">
               <a class="nav-link" href="#form5" data-toggle="tab">
                 <i class="tim-icons icon-settings-gear-63"></i>
-                <p> PROCEDIMIENTOS</p>
+                <p>PROCEDIMIENTOS</p>
               </a>
             </li>
             <li class="nav-item" id="step6">
               <a class="nav-link" href="#form6" data-toggle="tab">
-                <i class="tim-icons icon-delivery-fast"></i>
+                <i class="tim-icons icon-attach-87"></i>
                 <p>MEDICAMENTOS SUMINISTRADOS</p>
               </a>
             </li>
             <li class="nav-item" id="step7">
               <a class="nav-link" href="#form7" data-toggle="tab">
-                <i class="tim-icons icon-delivery-fast"></i>
+                <i class="tim-icons icon-heart-2"></i>
                 <p>PROFESIONAL DE LA SALUD RESPONSABLE:</p>
               </a>
             </li>
