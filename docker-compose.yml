@@ -1,0 +1,23 @@
+# Los archivos docker-compose.yml son versionados, lo que significa que es muy importante indicar la versión de las instrucciones que queremos darle.
+#version: "3.3"
+
+# Servidor nginx
+services:
+
+  # Configuración de php-fpm
+  php-fpm:
+    container_name: php-fpm
+    image: php:8.2-fpm
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "12000:80"
+    volumes:
+      - .:/app
+    networks:
+      - mysql_multi-host-network
+
+networks:
+  mysql_multi-host-network:
+    external: true
