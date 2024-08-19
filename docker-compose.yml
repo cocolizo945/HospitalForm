@@ -16,8 +16,7 @@ services:
     volumes:
       - .:/app
     networks:
-      - mysql_multi-host-network
-
+      - postgres_flask
 networks:
-  mysql_multi-host-network:
+  postgres_flask:
     external: true
