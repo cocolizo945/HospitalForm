@@ -13,10 +13,12 @@
                         <form>
                             <div class="form-group">
                                 <label for="folio">Número de Folio</label>
-                                <input type="text" class="form-control" id="folio" name="folio" placeholder="Ingrese el número de folio">
+                                <input type="text" id="FolioDir" class="form-control" id="folio" name="folio" placeholder="Ingrese el número de folio">
                             </div>
-                            <button type="submit" class="btn btn-primary">Buscar</button>
+                            <button type="button" id="SearchData" class="btn btn-primary">Buscar</button>
                         </form>
+
+                        <h3 id="response-container">data</h3>
                     </div>
                 </div>
 
@@ -26,6 +28,7 @@
                         <h4>Folio Encontrado: {{ $folio->numero }}</h4>
                         <p>Información del folio...</p>
                         <!-- Aquí puedes agregar más detalles del folio -->
+                         
                         <a href="{{ route('imprimir_folio', $folio->id) }}" class="btn btn-primary">Imprimir</a>
                     </div>
                 </div>
@@ -35,3 +38,6 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+<script src="{{ asset('black/js/makefolio.js') }}"></script> 

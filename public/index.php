@@ -49,6 +49,12 @@ $app = require_once '../bootstrap/app.php';
 |
 */
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__,'../.env');
+$dotenv->load();
+
+$apiUrl = $_ENV['API_URL'];
+
+
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(
@@ -58,3 +64,4 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
+

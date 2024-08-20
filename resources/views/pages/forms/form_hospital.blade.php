@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+
 <div class="content">
   <!-- Logos Section -->
   <div class="row mb-4">
@@ -65,7 +67,7 @@
           <div class="card-body">
             <div class="tab-content">
               <div class="tab-pane show active" id="folio">
-              <h5 class="info-text">Folio</h5>
+              <h5 class="info-text" id='response-container'>Folio</h5>
                 <div class="row">
                   <!-- CLUES -->
                   <div class="col-md-4 ml-auto mr-auto">
@@ -83,7 +85,7 @@
                   <div class="col-md-4 ml-auto mr-auto">
                     <label for="folio">Folio:</label>
                     <div class="form-group">
-                      <input type="text" id="folio" name="folio" minLength="8" class="form-control" placeholder="Folio" required>
+                    <input type='button' id='btnMakeFolio' class='btn btn-fill btn-primary btn-wd' name='makefolio' value='Crear Folio' />
                     </div>
                   </div>
                 </div>
@@ -91,6 +93,8 @@
               <!-- Paciente Afectada(o) -->
               <div class="tab-pane" id="about">
                 <h5 class="info-text">Información del Paciente</h5>
+                <h5 class="info-text"> Folio actual:</h5>
+                <h5 class="info-text" id="response-container2"></h5>
                 <div class="row">
                   <!-- Nombre -->
                   <div class="col-md-4">
@@ -145,14 +149,14 @@
                   <!-- Sexo -->
                   <div class="col-md-4">
                     <label for="sexo">Sexo:</label>
-                    <div class="form-group">
-                      <select id="sexo" class="selectpicker form-control" name="sexo" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="Hombre">1. Hombre</option>
-                        <option value="Mujer">2. Mujer</option>
-                        <option value="Intersexual">3. Intersexual</option>
-                      </select>
+                    <div lass="form-group">
+                        <input type="radio" id="sexo_masculino" name="sexo" value="1" required>
+                        <label for="sexo_masculino">1. Masculino</label>
+                        <input type="radio" id="sexo_femenino" name="sexo" value="2">
+                        <label for="sexo_femenino">2. Femenino</label>
                     </div>
+                    <div><input type="radio" id="sexo_intersexual" name="sexo" value="3">
+                    <label for="sexo_intersexual">3. Intersexual</label></div>
                   </div>
                   <!-- Afiliación a los Servicios de Salud -->
                   <div class="col-md-4">
@@ -193,14 +197,16 @@
                   </div>
                   <!-- Gratuidad -->
                   <div class="col-md-4">
-                    <label for="gratuidad">Gratuidad:</label>
-                    <div class="form-group">
-                      <select id="gratuidad" class="selectpicker form-control" name="gratuidad" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. SI</option>
-                        <option value="2">2. NO</option>
-                      </select>
-                    </div>
+                 
+  <label for="gratuidad">Gratuidad:</label>
+  <div class="form-group">
+    <input type="radio" id="gratuidad_si" name="gratuidad" value="1" required>
+    <label for="gratuidad_si">1. SI</label>
+    <input type="radio" id="gratuidad_no" name="gratuidad" value="2">
+    <label for="gratuidad_no">2. NO</label>
+  </div>
+  
+
                   </div>
                   <!-- Escolaridad -->
                   <div class="col-md-4">
@@ -232,34 +238,31 @@
                   <!-- Sabe Leer y Escribir -->
                   <div class="col-md-4">
                     <label for="leer_escribir">Sabe Leer y Escribir:</label>
-                    <div class="form-group">
-                      <select id="leer_escribir" class="selectpicker form-control" name="leer_escribir" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. SI</option>
-                        <option value="2">2. NO</option>
-                      </select>
-                    </div>
+                      <div lass="form-group">
+                        <input type="radio" id="leer&escribir_si" name="leer&escribir" value="1" required>
+                        <label for="leer&escribir_si">1. SI</label>
+                        <input type="radio" id="leer&escribir_no" name="leer&escribir" value="2">
+                        <label for="leer&escribir_no">2. NO</label>
+                      </div>                  
                   </div>
                   <!-- ¿Se Considera Indígena? -->
                   <div class="col-md-4">
                     <label for="indigena">¿Se Considera Indígena?</label>
-                    <div class="form-group">
-                      <select id="indigena" class="selectpicker form-control" name="indigena" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. SI</option>
-                        <option value="2">2. NO</option>
-                      </select>
-                    </div>
+                    <div lass="form-group">
+                        <input type="radio" id="indigena_si" name="indigena" value="1" required>
+                        <label for="indigena_si">1. SI</label>
+                        <input type="radio" id="indigena_no" name="indigena" value="2">
+                        <label for="indigena_no">2. NO</label>
+                      </div>
                   </div>
                   <!-- ¿Habla alguna Lengua Indígena? -->
                   <div class="col-md-4">
                     <label for="lengua_indigena">¿Habla alguna Lengua Indígena?</label>
-                    <div class="form-group">
-                      <select id="lengua_indigena" class="selectpicker form-control" name="lengua_indigena" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. SI</option>
-                        <option value="2">2. NO</option>
-                      </select>
+                    <div lass="form-group">
+                        <input type="radio" id="engua_indigena_si" name="lengua_indigena" value="1" required>
+                        <label for="lengua_indigena_si">1. SI</label>
+                        <input type="radio" id="lengua_indigena_no" name="lengua_indigena" value="2">
+                        <label for="lengua_indigena_no">2. NO</label>
                     </div>
                   </div>
                   <!-- ¿Cuál? -->
@@ -272,23 +275,21 @@
                   <!-- ¿Se considera Afrodescendiente? -->
                   <div class="col-md-4">
                     <label for="afrodescendiente">¿Se considera Afrodescendiente?</label>
-                    <div class="form-group">
-                      <select id="afrodescendiente" class="selectpicker form-control" name="afrodescendiente" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. SI</option>
-                        <option value="2">2. NO</option>
-                      </select>
+                    <div lass="form-group">
+                        <input type="radio" id="afrodescendiente_si" name="afrodescendiente" value="1" required>
+                        <label for="afrodescendiente_si">1. SI</label>
+                        <input type="radio" id="afrodescendiente_no" name="afrodescendiente" value="2">
+                        <label for="afrodescendiente_no">2. NO</label>
                     </div>
                   </div>
                   <!-- ¿Es Migrante Retornado? -->
                   <div class="col-md-4">
                     <label for="migrante">¿Es Migrante Retornado?</label>
-                    <div class="form-group">
-                      <select id="migrante" class="selectpicker form-control" name="migrante" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. SI</option>
-                        <option value="2">2. NO</option>
-                      </select>
+                    <div lass="form-group">
+                        <input type="radio" id="migrante_si" name="migrante" value="1" required>
+                        <label for="migrante_si">1. SI</label>
+                        <input type="radio" id="migrante_no" name="migrante" value="2">
+                        <label for="migrante_no">2. NO</label>
                     </div>
                   </div>
                   <!-- Mujer en Edad Fértil -->
@@ -313,12 +314,11 @@
                   <!-- Dificultad (Discapacidad) -->
                   <div class="col-md-4">
                     <label for="discapacidad">Dificultad (Discapacidad):</label>
-                    <div class="form-group">
-                      <select id="discapacidad" class="selectpicker form-control" name="discapacidad" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. SI</option>
-                        <option value="2">2. NO</option>
-                      </select>
+                    <div lass="form-group">
+                        <input type="radio" id="discapacidad_si" name="discapacidad" value="1" required>
+                        <label for="discapacidad_si">1. SI</label>
+                        <input type="radio" id="discapacidad_no" name="discapacidad" value="2">
+                        <label for="discapacidad_no">2. NO</label>
                     </div>
                   </div>
                   <!-- Referida(o) por -->
@@ -369,12 +369,11 @@
                   <!-- ¿Fue día festivo? -->
                   <div class="col-md-4">
                     <label for="festivo">¿Fue día festivo?</label>
-                    <div class="form-group">
-                      <select id="festivo" class="selectpicker form-control" name="festivo" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. SI</option>
-                        <option value="2">2. NO</option>
-                      </select>
+                    <div lass="form-group">
+                        <input type="radio" id="festivo_si" name="festivo" value="1" required>
+                        <label for="festivo_si">1. SI</label>
+                        <input type="radio" id="festivo_no" name="festivo" value="2">
+                        <label for="festivo_no">2. NO</label>
                     </div>
                   </div>
                   <!-- Sitio de Ocurrencia -->
@@ -543,12 +542,11 @@
                   <!-- ¿Recibió atención prehospitalaria? -->
                   <div class="col-md-4">
                     <label for="prehospitalaria">¿Recibió atención prehospitalaria?</label>
-                    <div class="form-group">
-                      <select id="prehospitalaria" class="selectpicker form-control" name="prehospitalaria" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. SI</option>
-                        <option value="2">2. NO</option>
-                      </select>
+                    <div lass="form-group">
+                        <input type="radio" id="prehospitalaria_si" name="prehospitalaria" value="1" required>
+                        <label for="prehospitalaria_si">1. SI</label>
+                        <input type="radio" id="prehospitalaria_no" name="prehospitalaria" value="2">
+                        <label for="prehospitalaria_no">2. NO</label>
                     </div>
                   </div>
                   <!-- Tiempo de traslado a la unidad hospitalaria -->
@@ -583,12 +581,11 @@
                   <!-- Si la causa fue accidente de vehículo de motor -->
                   <div class="col-md-4">
                     <label for="accidente_motor">Si la causa fue accidente de vehículo de motor:</label>
-                    <div class="form-group">
-                      <select id="accidente_motor" class="selectpicker form-control" name="accidente_motor" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. SI</option>
-                        <option value="2">2. NO</option>
-                      </select>
+                    <div lass="form-group">
+                        <input type="radio" id="accidente_motor_si" name="accidente_motor" value="1" required>
+                        <label for="accidente_motor_si">1. SI</label>
+                        <input type="radio" id="accidente_motor_no" name="accidente_motor" value="2">
+                        <label for="accidente_motor_no">2. NO</label>
                     </div>
                   </div>
                   <!-- La/El lesionado es -->
@@ -686,12 +683,11 @@
                   <!-- Sexo del agresor(a) -->
                   <div class="col-md-4">
                     <label for="sexo_agresor">Sexo del agresor(a):</label>
-                    <div class="form-group">
-                      <select id="sexo_agresor" class="selectpicker form-control" name="sexo_agresor" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="0">1. Masculino</option>
-                        <option value="1">2. Femenino</option>
-                      </select>
+                    <div lass="form-group">
+                        <input type="radio" id="sexo_agresor_si" name="sexo_agresor" value="1" required>
+                        <label for="sexo_agresor_si">1. Masculino</label>
+                        <input type="radio" id="sexo_agresor_no" name="sexo_agresor" value="2">
+                        <label for="sexo_agresor_no">2. Femenino</label>
                     </div>
                   </div>
                   <!-- Edad del agresor(a) (años) -->
@@ -854,12 +850,11 @@
                   <!-- ¿Se dió aviso al Ministerio Público? -->
                   <div class="col-md-4">
                     <label for="aviso_ministerio">¿Se dió aviso al Ministerio Público?</label>
-                    <div class="form-group">
-                      <select id="aviso_ministerio" class="selectpicker form-control" name="aviso_ministerio" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. SI</option>
-                        <option value="2">2. NO</option>
-                      </select>
+                    <div lass="form-group">
+                        <input type="radio" id="aviso_ministerio_si" name="aviso_ministerio" value="1" required>
+                        <label for="aviso_ministerio_si">1. Si</label>
+                        <input type="radio" id="aviso_ministerio_no" name="aviso_ministerio" value="2">
+                        <label for="aviso_ministerio_no">2. No</label>
                     </div>
                   </div>
                 </div>
@@ -944,6 +939,7 @@
           </div>
           <div class="card-footer"> 
             <div class="pull-right">
+            <button type="button" id="SaveData" class="btn btn-primary">Guardar datos</button>
               <button type="button" id="darDeAlta" class="btn btn-primary">N. Paciente</button>
               <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' name='next' value='Siguiente' />
               <button type="submit" class="btn btn-finish btn-fill btn-primary btn-wd" name="finish">Guardar</button>
@@ -962,6 +958,9 @@
 @endsection
 
 @push('js')
+
+
+  <script src="{{ asset('black/js/makefolio.js') }}"></script> 
   <script src="{{ asset('black/js/hospital.js') }}"></script>
 
   <script>
