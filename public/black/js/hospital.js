@@ -132,3 +132,56 @@ document.addEventListener('DOMContentLoaded', (event) => {
       }
     });
   });
+
+  // Codigo para introducir pais
+  document.getElementById('migrante').addEventListener('change', function() {
+  var migrante = this.value;
+  var paisInput = document.getElementById('entidad_pais');
+
+  if (migrante === "2") { 
+      paisInput.value = "Mexico"; 
+      paisInput.setAttribute('readonly', true); 
+  } else if (migrante === "1") { 
+      paisInput.value = ""; 
+      paisInput.removeAttribute('readonly'); 
+  }
+});
+
+
+  document.ready(function() {
+  // Lista de opciones para autocompletar, tomadas de tu select original
+  var agentesLesion = [
+      "Fuego, flama, sustancia caliente/vapor",
+      "Intoxicación por drogas o medicamentos",
+      "Pie o mano",
+      "Caída",
+      "Objeto contundente",
+      "Objeto punzocortante",
+      "Golpe contra piso o pared",
+      "Cuerpo extraño",
+      "Explosión",
+      "Asfixia o sofocación",
+      "Múltiples agentes",
+      "Proyectil arma de fuego",
+      "Ahorcamiento",
+      "Radiación",
+      "Sustancias químicas",
+      "Corriente eléctrica",
+      "Herramienta o maquinaria",
+      "Sacudidas",
+      "Desastre natural",
+      "Vehículo de motor",
+      "Ahogamiento por sumersión",
+      "Piquete / mordedura de animal",
+      "Fuerzas de la naturaleza",
+      "Intoxicación por plantas, hongos venenosos",
+      "Otro (Especifique)",
+      "Se ignora",
+      "No aplica"
+  ];
+
+  // Aplicar el autocompletar al input
+  $("#agente_lesion_input").autocomplete({
+      source: agentesLesion
+  });
+});

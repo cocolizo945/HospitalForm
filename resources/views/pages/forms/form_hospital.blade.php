@@ -117,7 +117,7 @@
                   <div class="col-md-4">
                     <label for="curp">C.U.R.P.:</label>
                     <div class="form-group">
-                      <input type="text" id="curp" name="curp" maxLength="18" class="form-control" placeholder="Solo 18 caracteres" required>
+                      <input type="text" id="curp" name="curp" minLength="18" class="form-control" placeholder="Solo 18 caracteres" required>
                     </div>
                   </div>
                   <!-- Fecha de Nacimiento -->
@@ -206,16 +206,16 @@
                   <div class="col-md-4">
                     <label for="escolaridad">Escolaridad:</label>
                     <div class="form-group">
-                    <select id="escolaridad" class="selectpicker form-control" name="escolaridad" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Ninguna">Ninguna</option>
-                    <option value="Primaria">Primaria</option>
-                    <option value="Secundaria">Secundaria</option>
-                    <option value="Bachillerato o preparatoria">Bachillerato o preparatoria</option>
-                    <option value="Profesional">Profesional</option>
-                    <option value="Posgrado">Posgrado</option>
-                    <option value="Se ignora">Se ignora</option>
-                    </select>
+                      <select id="escolaridad" class="selectpicker form-control" name="escolaridad" data-size="7" data-style="btn btn-primary" required>
+                        <option disabled selected>Selección Única</option>
+                        <option value="Ninguna">1. Ninguna</option>
+                        <option value="Primaria">2. Primaria</option>
+                        <option value="Secundaria">3. Secundaria</option>
+                        <option value="Bachillerato o preparatoria">4. Bachillerato o preparatoria</option>
+                        <option value="Profesional">5. Profesional</option>
+                        <option value="Posgrado">6. Posgrado</option>
+                        <option value="Se ignora">7. Se ignora</option>
+                      </select>
                     </div>
                   </div>
                   <!-- Escolaridad Seleccionada -->
@@ -500,40 +500,45 @@
                   </div>
                   <!-- Agente de la Lesión -->
                   <div class="col-md-4">
-                    <label for="agente_lesion">Agente de la Lesión:</label>
-                    <div class="form-group">
-                    <select id="agente_lesion" class="selectpicker form-control" name="agente_lesion" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Fuego, flama, sustancia caliente/vapor">Fuego, flama, sustancia caliente/vapor</option>
-                    <option value="Intoxicación por drogas o medicamentos">Intoxicación por drogas o medicamentos</option>
-                    <option value="Pie o mano">Pie o mano</option>
-                    <option value="Caída">Caída</option>
-                    <option value="Objeto contundente">Objeto contundente</option>
-                    <option value="Objeto punzocortante">Objeto punzocortante</option>
-                    <option value="Golpe contra piso o pared">Golpe contra piso o pared</option>
-                    <option value="Cuerpo extraño">Cuerpo extraño</option>
-                    <option value="Explosión">Explosión</option>
-                    <option value="Asfixia o sofocación">Asfixia o sofocación</option>
-                    <option value="Múltiples agentes">Múltiples agentes</option>
-                    <option value="Proyectil arma de fuego">Proyectil arma de fuego</option>
-                    <option value="Ahorcamiento">Ahorcamiento</option>
-                    <option value="Radiación">Radiación</option>
-                    <option value="Sustancias químicas">Sustancias químicas</option>
-                    <option value="Corriente eléctrica">Corriente eléctrica</option>
-                    <option value="Herramienta o maquinaria">Herramienta o maquinaria</option>
-                    <option value="Sacudidas">Sacudidas</option>
-                    <option value="Desastre natural">Desastre natural</option>
-                    <option value="Vehículo de motor">Vehículo de motor</option>
-                    <option value="Ahogamiento por sumersión">Ahogamiento por sumersión</option>
-                    <option value="Piquete / mordedura de animal">Piquete / mordedura de animal</option>
-                    <option value="Fuerzas de la naturaleza">Fuerzas de la naturaleza</option>
-                    <option value="Intoxicación por plantas, hongos venenosos">Intoxicación por plantas, hongos venenosos</option>
-                    <option value="Otro (Especifique)">Otro (Especifique)</option>
-                    <option value="Se ignora">Se ignora</option>
-                    <option value="No aplica">No aplica</option>
-                    </select>
-                    </div>
-                  </div>
+    <label for="agente_lesion">Agente de la Lesión:</label>
+    <div class="form-group">
+       
+        <input list="agente_lesion_list" id="agente_lesion_input" name="agente_lesion" class="form-control" placeholder="Agente de la Lesión" required />
+        
+        
+        <datalist id="agente_lesion_list">
+            <option value="Fuego, flama, sustancia caliente/vapor"></option>
+            <option value="Intoxicación por drogas o medicamentos"></option>
+            <option value="Pie o mano"></option>
+            <option value="Caída"></option>
+            <option value="Objeto contundente"></option>
+            <option value="Objeto punzocortante"></option>
+            <option value="Golpe contra piso o pared"></option>
+            <option value="Cuerpo extraño"></option>
+            <option value="Explosión"></option>
+            <option value="Asfixia o sofocación"></option>
+            <option value="Múltiples agentes"></option>
+            <option value="Proyectil arma de fuego"></option>
+            <option value="Ahorcamiento"></option>
+            <option value="Radiación"></option>
+            <option value="Sustancias químicas"></option>
+            <option value="Corriente eléctrica"></option>
+            <option value="Herramienta o maquinaria"></option>
+            <option value="Sacudidas"></option>
+            <option value="Desastre natural"></option>
+            <option value="Vehículo de motor"></option>
+            <option value="Ahogamiento por sumersión"></option>
+            <option value="Piquete / mordedura de animal"></option>
+            <option value="Fuerzas de la naturaleza"></option>
+            <option value="Intoxicación por plantas, hongos venenosos"></option>
+            <option value="Otro (Especifique)"></option>
+            <option value="Se ignora"></option>
+            <option value="No aplica"></option>
+        </datalist>
+    </div>
+</div>
+
+                     
                   <div class="col-md-4" id="agenteEspecifique" style="display: none;">
                     <label for="agente_especifique">Especifique:</label>
                     <div class="form-group">
@@ -562,14 +567,14 @@
                   <div class="col-md-4">
                     <label for="efectos_paciente">Se sospecha que la/el paciente estaba bajo los efectos de:</label>
                     <div class="form-group">
-                    <select id="efectos_paciente" class="selectpicker form-control" name="efectos_paciente" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Alcohol">Alcohol</option>
-                    <option value="Droga por indicación médica">Droga por indicación médica</option>
-                    <option value="Drogas ilegales">Drogas ilegales</option>
-                    <option value="Se ignora">Se ignora</option>
-                    <option value="Ninguna">Ninguna</option>
-                    </select>
+                      <select id="efectos_paciente" class="selectpicker form-control" name="efectos_paciente" data-size="7" data-style="btn btn-primary" required>
+                        <option disabled selected>Selección Única</option>
+                        <option value="0">1. Alcohol</option>
+                        <option value="1">2. Droga por indicación médica</option>
+                        <option value="2">3. Drogas ilegales</option>
+                        <option value="3">4. Se ignora</option>
+                        <option value="4">5. Ninguna</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -619,13 +624,13 @@
                   <div class="col-md-4">
                     <label for="tipo_seguridad">¿Qué tipo de seguridad utilizó?</label>
                     <div class="form-group">
-                    <select id="tipo_seguridad" class="selectpicker form-control" name="tipo_seguridad" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Cinturón de seguridad">Cinturón de seguridad</option>
-                    <option value="Casco">Casco</option>
-                    <option value="Sillín porta infante">Sillín porta infante</option>
-                    <option value="Otro (Especifique)">Otro (Especifique)</option>
-                    </select>
+                      <select id="tipo_seguridad" class="selectpicker form-control" name="tipo_seguridad" data-size="7" data-style="btn btn-primary" required>
+                        <option disabled selected>Selección Única</option>
+                        <option value="0">1. Cinturón de seguridad</option>
+                        <option value="1">2. Casco</option>
+                        <option value="2">3. Sillín porta infante</option>
+                        <option value="3">4. Otro (Especifique)</option>
+                      </select>
                     </div>
                   </div>
                 
@@ -648,14 +653,14 @@
                   <div class="col-md-4">
                     <label for="tipo_violencia">Tipo de Violencia:</label>
                     <div class="form-group">
-                    <select id="tipo_violencia" class="selectpicker form-control" name="tipo_violencia" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Violencia física">Violencia física</option>
-                    <option value="Violencia sexual">Violencia sexual</option>
-                    <option value="Violencia psicológica">Violencia psicológica</option>
-                    <option value="Violencia económica/patrimonial">Violencia económica/patrimonial</option>
-                    <option value="Abandono y/o negligencia">Abandono y/o negligencia</option>
-                    </select>
+                      <select id="tipo_violencia" class="selectpicker form-control" name="tipo_violencia" data-size="7" data-style="btn btn-primary" required>
+                        <option disabled selected>Selección Única</option>
+                        <option value="0">1. Violencia física</option>
+                        <option value="1">2. Violencia sexual</option>
+                        <option value="2">3. Violencia psicológica</option>
+                        <option value="3">4. Violencia económica/patrimonial</option>
+                        <option value="4">5. Abandono y/o negligencia</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -669,11 +674,11 @@
                   <div class="col-md-4">
                     <label for="num_agresores">Num. Agresores:</label>
                     <div class="form-group">
-                    <select id="num_agresores" class="selectpicker form-control" name="num_agresores" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Única">Única</option>
-                    <option value="Más de una(o)">Más de una(o)</option>
-                    </select>
+                      <select id="num_agresores" class="selectpicker form-control" name="num_agresores" data-size="7" data-style="btn btn-primary" required>
+                        <option disabled selected>Selección Única</option>
+                        <option value="0">1. Única</option>
+                        <option value="1">2. Más de una(o)</option>
+                      </select>
                     </div>
                   </div>
                   <!-- Parentesco con la/el afectada(o) -->
@@ -705,25 +710,25 @@
                   <div class="col-md-4">
                     <label for="efectos_agresor">El/La agresor(a) se sospecha que actuó bajo los efectos de:</label>
                     <div class="form-group">
-                    <select id="efectos_agresor" class="selectpicker form-control" name="efectos_agresor" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Alcohol">Alcohol</option>
-                    <option value="Droga por indicación médica">Droga por indicación médica</option>
-                    <option value="Drogas ilegales">Drogas ilegales</option>
-                    <option value="Se ignora">Se ignora</option>
-                    <option value="Ninguna">Ninguna</option>
-                    </select>
+                      <select id="efectos_agresor" class="selectpicker form-control" name="efectos_agresor" data-size="7" data-style="btn btn-primary" required>
+                        <option disabled selected>Selección Única</option>
+                        <option value="0">1. Alcohol</option>
+                        <option value="1">2. Droga por indicación médica</option>
+                        <option value="2">3. Drogas ilegales</option>
+                        <option value="3">4. Se ignora</option>
+                        <option value="4">5. Ninguna</option>
+                      </select>
                     </div>
                   </div>
                   <!-- En caso de evento autoinfligido, el evento ocurrió -->
                   <div class="col-md-4">
                     <label for="evento_autoinfligido">En caso de evento autoinfligido, el evento ocurrió:</label>
                     <div class="form-group">
-                    <select id="evento_autoinfligido" class="selectpicker form-control" name="evento_autoinfligido" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Única vez">Única vez</option>
-                    <option value="Repetido">Repetido</option>
-                    </select>
+                      <select id="evento_autoinfligido" class="selectpicker form-control" name="evento_autoinfligido" data-size="7" data-style="btn btn-primary" required>
+                        <option disabled selected>Selección Única</option>
+                        <option value="0">1. Única vez</option>
+                        <option value="1">2. Repetido</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -928,7 +933,7 @@
                   <div class="col-md-4">
                     <label for="curp_responsable">C.U.R.P.:</label>
                     <div class="form-group">
-                      <input type="text" id="curp_responsable" name="curp_responsable" class="form-control" placeholder="CURP del Responsable" maxLenght="18" required>
+                      <input type="text" id="curp_responsable" name="curp_responsable" class="form-control" placeholder="CURP del Responsable">
                     </div>
                   </div>
                   <!-- Cédula Profesional -->
@@ -944,7 +949,7 @@
           </div>
           <div class="card-footer"> 
             <div class="pull-right">
-              <button type="button" id="darDeAlta" class="btn btn-primary">N. Paciente</button>
+              <button type="button" id="darDeAlta" class="btn btn-info">Nuevo Paciente</button>
               <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' name='next' value='Siguiente' />
               <button type="submit" class="btn btn-finish btn-fill btn-primary btn-wd" name="finish">Guardar</button>
             </div>
@@ -966,17 +971,13 @@
 
   <script>
     $(document).ready(function() {
-        $('.datepicker').datetimepicker({
-            format: 'DD/MM/YYYY', // Asegúrate de que este es el formato que se está enviando al backend
-        });
+    $('.datetimepicker').datetimepicker({
+        format: 'DD/MM/YYYY hh:mm A'
+    });
 
-        $('.datetimepicker').datetimepicker({
-            format: 'DD/MM/YYYY hh:mm A', // Para los campos con fecha y hora
-        });
-        
-        $('#tiempo_traslado').datetimepicker({
-            format: 'HH:mm' // Solo tiempo
-        });
+    $('#tiempo_traslado').datetimepicker({
+        format: 'HH:mm'
+    });
     });
 
     function setFormValidation(id) {
@@ -1018,4 +1019,5 @@
       }, 600);
     });
   </script>
+
 @endpush
