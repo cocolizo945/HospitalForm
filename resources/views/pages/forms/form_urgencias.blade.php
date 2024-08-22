@@ -96,7 +96,7 @@
               </div>
 
               <!-- Primer apellido -->
-              <div class="col-md-4">
+              <div class="col-md=4">
                 <label for="primer_apellido">Primer apellido:</label>
                 <div class="form-group">
                   <input type="text" class="form-control" id="primer_apellido" name="primer_apellido" placeholder="Pérez" minlength="3" required>
@@ -496,7 +496,7 @@
               </div>
 
               <!-- Causa Externa -->
-              <div class="col-md-4">
+              <div class="col-md=4">
                 <label for="causa_externa">Causa Externa:</label>
                 <div class="form-group">
                   <input type="text" class="form-control" id="causa_externa" name="causa_externa" placeholder="Accidente automovilístico" minlength="3" required>
@@ -753,14 +753,39 @@
 
   <script>
     $(document).ready(function() {
-    $('.datetimepicker').datetimepicker({
-        format: 'DD/MM/YYYY hh:mm A'
-    });
+      $('.datetimepicker').datetimepicker({
+        format: 'DD/MM/YYYY'
+      });
 
-    $('#tiempo_traslado').datetimepicker({
-            format: 'HH:mm' // Solo tiempo
-        });
-});
+      $('#tiempo_traslado').datetimepicker({
+        format: 'HH:mm' // Solo tiempo
+      });
+
+      $('#fecha_nacimiento').on('dp.change', function (e) {
+        calculateAgeFromBirthdate();
+      });
+
+      $('#edad').on('input', function () {
+        calculateBirthdateFromAge();
+      });
+
+      function calculateAgeFromBirthdate() {
+        const birthdate = $('#fecha_nacimiento').data("DateTimePicker").date();
+        if (birthdate) {
+          const today = moment();
+          const age = today.diff(birthdate, 'years');
+          $('#edad').val(age);
+        }
+      }
+
+      function calculateBirthdateFromAge() {
+        const age = parseInt($('#edad').val());
+        if (!isNaN(age)) {
+          const birthdate = moment().subtract(age, 'years');
+          $('#fecha_nacimiento').data("DateTimePicker").date(birthdate);
+        }
+      }
+    });
 
     function setFormValidation(id) {
       $(id).validate({
