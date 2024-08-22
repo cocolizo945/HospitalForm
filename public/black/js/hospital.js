@@ -70,6 +70,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
   }
 
+
+
+function manejarValidacionCURP() {
+  const inputCurp = document.getElementById('curp');
+  const mensajeValidacion = document.getElementById('curp-validacion');
+
+  inputCurp.addEventListener('input', function() {
+      const curp = inputCurp.value.toUpperCase();
+
+      if (validarCURP(curp)) {
+          mensajeValidacion.style.display = 'none';
+      } else {
+          mensajeValidacion.style.display = 'inline';
+      }
+  });
+}
+manejarValidacionCURP();
+// Función de validación CURP (ya debes tener esta función)
+function validarCURP(curp) {
+  const regexCURP = /^[A-Z]{4}(\d{6}|X{6})[HMX](?:[A-Z]{2}|XX)(?:[A-Z\d]{3}|XXX)[A-Z\d]|x$/;
+  return regexCURP.test(curp);
+}
+
+
+
+
   // Event listeners para el input de hora
   horaOcurrenciaInput.addEventListener('input', formatTimeInput);
   horaOcurrenciaInput.addEventListener('focus', handleFocusTime);

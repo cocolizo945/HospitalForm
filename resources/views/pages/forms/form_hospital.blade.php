@@ -118,7 +118,8 @@
                   <div class="col-md-4">
                     <label for="curp">C.U.R.P.:</label>
                     <div class="form-group">
-                      <input type="text" id="curp" name="curp" maxLength="18" class="form-control" placeholder="Solo 18 caracteres" required>
+                      <input type="text" id="curp" name="curp" maxLength="18" oninput="validarInput(this)" class="form-control" placeholder="Solo 18 caracteres" required>
+                      <span id="curp-validacion" style="color: red; display: none;">CURP inválida</span>
                     </div>
                   </div>
                   <!-- Fecha de Nacimiento -->
@@ -1014,6 +1015,14 @@
         });
 
     });
+    //Autocompletar
+    document.addEventListener('keydown', function(event) {
+            // Verificar si la tecla presionada es F9
+            if (event.key === 'F9') {
+                // Rellenar el input con "X"
+                document.getElementById('curp').value = 'XXXXXXXXXXXXXXXXXX';
+            }
+        });
 
     function setFormValidation(id) {
       $(id).validate({
