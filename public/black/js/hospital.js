@@ -269,55 +269,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 
-    //Autocompletar C.P responsivo de localidad
-  document.addEventListener('DOMContentLoaded', function() {
-    const localidades = [
-        { localidad: "Acacoyagua", codigo_postal: "30500" },
-        { localidad: "Acapetahua", codigo_postal: "30510" },
-        { localidad: "Cacahoatan", codigo_postal: "30890" },
-        { localidad: "Escuintla", codigo_postal: "30470" },
-        { localidad: "Frontera Hidalgo", codigo_postal: "30860" },
-        { localidad: "Huehuetan", codigo_postal: "30660" },
-        { localidad: "Huixtla", codigo_postal: "30640" },
-        { localidad: "Mazatan", codigo_postal: "30650" },
-        { localidad: "Metapa", codigo_postal: "30870" },
-        { localidad: "Suchiate", codigo_postal: "30840" },
-        { localidad: "Tapachula", codigo_postal: "30700" },
-        { localidad: "Tuxtla Chico", codigo_postal: "30880" },
-        { localidad: "Tuzantán", codigo_postal: "30690" },
-        { localidad: "Unión Juarez", codigo_postal: "30900" },
-        { localidad: "Villa Comaltitlan", codigo_postal: "30620" }
-    ];
-
-    const localidadInput = document.getElementById('localidad');
-    const codigoPostalInput = document.getElementById('codigo_postal');
-    const localidadList = document.getElementById('localidadesList');
-
-    // Agregar opciones al datalist
-    localidades.forEach(function(item) {
-        const opcion = document.createElement('option');
-        opcion.value = item.localidad;
-        opcion.dataset.cp = item.codigo_postal;
-        localidadList.appendChild(opcion);
-    });
-
-    localidadInput.addEventListener('input', function() {
-        const valorInput = this.value.toLowerCase();
-
-        // Encuentra la localidad correspondiente
-        const localidadSeleccionada = localidades.find(function(item) {
-            return item.localidad.toLowerCase() === valorInput;
-        });
-
-        if (localidadSeleccionada) {
-            codigoPostalInput.value = localidadSeleccionada.codigo_postal;
-        } else {
-            codigoPostalInput.value = ''; // Limpiar el código postal si no hay coincidencias
-        }
-    });
-});
-
-
 // Estado/municipio/localidad
 const data = {
   "aguascalientes": ["Aguascalientes", "Asientos", "Calvillo", "Cosio", "El Llano", "Jesus Maria", "Pabellon de Arteaga", "Rincon de Romos", "San Francisco de los Romo", "San Jose de Gracia", "Tepezala"],
@@ -415,6 +366,7 @@ document.getElementById('entidad_pais').addEventListener('input', function() {
   document.getElementById('sugerencias_municipio').innerHTML = '';
   document.getElementById('sugerencias_localidad').innerHTML = '';
 });
+
     //Autocompletar C.P responsivo de localidad
   document.addEventListener('DOMContentLoaded', function() {
     const localidades = [
@@ -435,7 +387,7 @@ document.getElementById('entidad_pais').addEventListener('input', function() {
         { localidad: "Villa Comaltitlan", codigo_postal: "30620" }
     ];
 
-    const localidadInput = document.getElementById('localidad');
+    const localidadInput = document.getElementById('localidad2');
     const codigoPostalInput = document.getElementById('codigo_postal');
     const localidadList = document.getElementById('localidadesList');
 
@@ -463,3 +415,100 @@ document.getElementById('entidad_pais').addEventListener('input', function() {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  const opcionesPorInput = {
+      'tipo_vialidad': [
+          "AMPLIACIÓN", "ANDADOR", "AVENIDA", "BOULEVARD", "CALLE", "CALLEJON", 
+          "CALZADA", "CERRADA", "CIRCUITO", "CIRCUNVALACIÓN", "CONTINUACIÓN", 
+          "CORREDOR", "DIAGONAL", "EJE VIAJAL", "PASAJE", "PEATONAL", "PERIFÉRICO", 
+          "PRIVADA", "PROLONGACIÓN", "RETORNO", "VIADUCTO", "NINGUNO", "CAMINO", 
+          "CARRETERA", "LIBRAMIENTO", "PASEO", "NO APLICA", "SIN INFORMACIÓN", 
+          "NO ESPECIFICADO"
+      ],
+      'tipo_asentamiento': [
+          "AEROPUERTO", "AMPLIACIÓN", "BARRIO", "CANTÓN", "CIUDAD", "CIUDAD INDUSTRIAL", 
+          "COLONIA", "CONDOMINIO", "CONJUNTO HABITACIONAL", "CORREDOR INDUSTRIAL", 
+          "COTO", "CUARTEL", "EJIDO", "EXHACIENDA", "FRACCIÓN", "FRACCIONAMIENTO", 
+          "GRANJA", "HACIENDA", "INGENIO", "MANZANA", "PARAJE", "PARQUE INDUSTRIAL", 
+          "PRIVADA", "PROLONGACIÓN", "PUEBLO", "PUERTO", "RANCHERÍA", "RANCHO", 
+          "REGIÓN", "RESIDENCIAL", "RINCONADA", "SECCIÓN", "SECTOR", "SUPERMANZANA", 
+          "UNIDAD", "UNIDAD HABITACIONAL", "VILLA", "ZONA FEDERAL", "ZONA INDUSTRIAL", 
+          "ZONA MILITAR", "ZONA NAVAL", "NINGUNO", "CARRETERA", "NO APLICA", 
+          "SE IGNORA", "NO ESPECIFICADO", "ZONA COMERCIAL", "LOCALIDAD"
+      ]
+      // Puedes agregar más opciones para otros inputs si es necesario
+  };
+
+  document.querySelectorAll('.autocomplete-container').forEach(function(container) {
+      const input = container.querySelector('.autocomplete-input');
+      const sugerencias = container.querySelector('.autocomplete-suggestions');
+      let seleccionAnterior = '';
+
+      const opciones = opcionesPorInput[input.id] || [];
+
+      input.addEventListener('input', function () {
+          const filtro = input.value.toLowerCase();
+          sugerencias.innerHTML = '';
+          const opcionesFiltradas = opciones.filter(option => option.toLowerCase().includes(filtro));
+
+          if (opcionesFiltradas.length > 0) {
+              sugerencias.style.display = 'block';
+              opcionesFiltradas.forEach(option => {
+                  const li = document.createElement('li');
+                  li.textContent = option;
+                  li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
+                  li.addEventListener('mousedown', function () {
+                      seleccionarOpcion(input, sugerencias, option);
+                  });
+                  sugerencias.appendChild(li);
+              });
+          } else {
+              sugerencias.style.display = 'none';
+          }
+      });
+
+      input.addEventListener('focus', function () {
+          if (input.value === seleccionAnterior) {
+              input.value = '';
+          }
+          sugerencias.innerHTML = '';
+          opciones.forEach(option => {
+              const li = document.createElement('li');
+              li.textContent = option;
+              li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
+              li.addEventListener('mousedown', function () {
+                  seleccionarOpcion(input, sugerencias, option);
+              });
+              sugerencias.appendChild(li);
+          });
+          sugerencias.style.display = 'block';
+      });
+
+      input.addEventListener('blur', function () {
+          setTimeout(() => {
+              const filtro = input.value.toLowerCase();
+              const opcionCercana = opciones.find(option => option.toLowerCase().includes(filtro));
+
+              if (opcionCercana) {
+                  seleccionarOpcion(input, sugerencias, opcionCercana);
+              } else if (!input.value) {
+                  input.value = '';
+              }
+
+              sugerencias.style.transition = 'opacity 0.3s';
+              sugerencias.style.opacity = '0';
+              setTimeout(() => {
+                  sugerencias.style.display = 'none';
+                  sugerencias.style.opacity = '1';
+              }, 300);
+          }, 200);
+      });
+
+      function seleccionarOpcion(input, sugerencias, option) {
+          seleccionAnterior = option;
+          input.value = option;
+          input.placeholder = option;
+          sugerencias.style.display = 'none';
+      }
+  });
+});

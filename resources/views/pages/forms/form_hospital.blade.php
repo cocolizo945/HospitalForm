@@ -444,13 +444,15 @@
                     </div>
                   </div>
                   
-                  <!-- Tipo de la Vialidad -->
-                  <div class="col-md-4">
-                    <label for="tipo_vialidad">Tipo de la Vialidad:</label>
-                    <div class="form-group">
-                      <input type="text" id="tipo_vialidad" name="tipo_vialidad" class="form-control" placeholder="Tipo de Vialidad">
-                    </div>
+                  <div class="col-md-4 autocomplete-container">
+                  <label for="tipo_vialidad">Tipo de la Vialidad:</label>
+                  <div class="form-group">
+                      <input type="text" id="tipo_vialidad" name="tipo_vialidad" class="form-control autocomplete-input" placeholder="Tipo de Vialidad" autocomplete="off">
+                      <ul class="list-group autocomplete-suggestions"></ul>
+                      </div>
                   </div>
+
+
                   <!-- Nombre de la vialidad -->
                   <div class="col-md-4">
                     <label for="nombre_vialidad">Nombre de la vialidad:</label>
@@ -473,12 +475,14 @@
                     </div>
                   </div>
                   <!-- Tipo de asentamiento humano -->
-                  <div class="col-md-4">
-                    <label for="tipo_asentamiento">Tipo de asentamiento humano:</label>
-                    <div class="form-group">
-                      <input type="text" id="tipo_asentamiento" name="tipo_asentamiento" class="form-control" placeholder="Tipo de Asentamiento Humano">
-                    </div>
+                  <div class="col-md-4 autocomplete-container">
+                  <label for="tipo_asentamiento">Tipo de asentamiento humano:</label>
+                  <div class="form-group">
+                      <input type="text" id="tipo_asentamiento" name="tipo_asentamiento" class="form-control autocomplete-input" placeholder="Tipo de Asentamiento Humano" autocomplete="off">
+                      <ul class="list-group autocomplete-suggestions"></ul>
+                      </div>
                   </div>
+
                   <!-- Nombre de asentamiento humano -->
                   <div class="col-md-4">
                     <label for="nombre_asentamiento">Nombre de asentamiento humano:</label>
