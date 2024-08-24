@@ -424,20 +424,26 @@
                       <input type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio o Alcaldía">
                     </div>
                   </div>
+
                   <!-- Localidad -->
                   <div class="col-md-4">
-                    <label for="localidad">Localidad:</label>
-                    <div class="form-group">
-                      <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad">
-                    </div>
+                  <label for="localidad">Localidad:</label>
+                  <div class="form-group">
+                      <input list="localidadesList" id="localidad" name="localidad" class="form-control" placeholder="Localidad" required />
+                      <datalist id="localidadesList">
+                          <!-- Las opciones serán agregadas dinámicamente desde JavaScript -->
+                      </datalist>
                   </div>
+              </div>
+
                   <!-- Código Postal -->
                   <div class="col-md-4">
                     <label for="codigo_postal">Código Postal:</label>
                     <div class="form-group">
-                      <input type="text" id="codigo_postal" name="codigo_postal" class="form-control" placeholder="Código Postal">
+                      <input type="text" id="codigo_postal" name="codigo_postal" class="form-control" placeholder="Código Postal" readonly />
                     </div>
                   </div>
+                  
                   <!-- Tipo de la Vialidad -->
                   <div class="col-md-4">
                     <label for="tipo_vialidad">Tipo de la Vialidad:</label>
@@ -966,8 +972,9 @@
 @endsection
 
 @push('js')
-  <script src="{{ asset('black/js/hospital.js') }}"></script>
-
+<!-- Tu script personalizado -->
+<script src="{{ asset('black/js/hospital.js') }}"></script>
+ 
   <script>
     $(document).ready(function() {
         $('.datepicker').datetimepicker({

@@ -16904,7 +16904,7 @@ textarea.form-control:focus {
 }
 
 .tab-content .tab-pane {
-    color: hsla(0, 0%, 100%, .5)
+    color: hsla(0, 0%, 15%, 1)
 }
 
 .nav-align-center {

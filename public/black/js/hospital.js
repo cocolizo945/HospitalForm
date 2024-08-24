@@ -174,40 +174,88 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
-  document.ready(function() {
-  // Lista de opciones para autocompletar, tomadas de tu select original
-  var agentesLesion = [
-      "Fuego, flama, sustancia caliente/vapor",
-      "Intoxicación por drogas o medicamentos",
-      "Pie o mano",
-      "Caída",
-      "Objeto contundente",
-      "Objeto punzocortante",
-      "Golpe contra piso o pared",
-      "Cuerpo extraño",
-      "Explosión",
-      "Asfixia o sofocación",
-      "Múltiples agentes",
-      "Proyectil arma de fuego",
-      "Ahorcamiento",
-      "Radiación",
-      "Sustancias químicas",
-      "Corriente eléctrica",
-      "Herramienta o maquinaria",
-      "Sacudidas",
-      "Desastre natural",
-      "Vehículo de motor",
-      "Ahogamiento por sumersión",
-      "Piquete / mordedura de animal",
-      "Fuerzas de la naturaleza",
-      "Intoxicación por plantas, hongos venenosos",
-      "Otro (Especifique)",
-      "Se ignora",
-      "No aplica"
-  ];
+    $(document).ready(function() {
+    // Lista de opciones para autocompletar, tomadas de tu select original
+    var agentesLesion = [
+        "Fuego, flama, sustancia caliente/vapor",
+        "Intoxicación por drogas o medicamentos",
+        "Pie o mano",
+        "Caída",
+        "Objeto contundente",
+        "Objeto punzocortante",
+        "Golpe contra piso o pared",
+        "Cuerpo extraño",
+        "Explosión",
+        "Asfixia o sofocación",
+        "Múltiples agentes",
+        "Proyectil arma de fuego",
+        "Ahorcamiento",
+        "Radiación",
+        "Sustancias químicas",
+        "Corriente eléctrica",
+        "Herramienta o maquinaria",
+        "Sacudidas",
+        "Desastre natural",
+        "Vehículo de motor",
+        "Ahogamiento por sumersión",
+        "Piquete / mordedura de animal",
+        "Fuerzas de la naturaleza",
+        "Intoxicación por plantas, hongos venenosos",
+        "Otro (Especifique)",
+        "Se ignora",
+        "No aplica"
+    ];
 
-  // Aplicar el autocompletar al input
-  $("#agente_lesion_input").autocomplete({
-      source: agentesLesion
+    // Aplicar el autocompletar al input
+    $("#agente_lesion_input").autocomplete({
+        source: agentesLesion
+    });
   });
+
+  //Autocompletar C.P responsivo de localidad
+  document.addEventListener('DOMContentLoaded', function() {
+    const localidades = [
+        { localidad: "Acacoyagua", codigo_postal: "30500" },
+        { localidad: "Acapetahua", codigo_postal: "30510" },
+        { localidad: "Cacahoatan", codigo_postal: "30890" },
+        { localidad: "Escuintla", codigo_postal: "30470" },
+        { localidad: "Frontera Hidalgo", codigo_postal: "30860" },
+        { localidad: "Huehuetan", codigo_postal: "30660" },
+        { localidad: "Huixtla", codigo_postal: "30640" },
+        { localidad: "Mazatan", codigo_postal: "30650" },
+        { localidad: "Metapa", codigo_postal: "30870" },
+        { localidad: "Suchiate", codigo_postal: "30840" },
+        { localidad: "Tapachula", codigo_postal: "30700" },
+        { localidad: "Tuxtla Chico", codigo_postal: "30880" },
+        { localidad: "Tuzantán", codigo_postal: "30690" },
+        { localidad: "Unión Juarez", codigo_postal: "30900" },
+        { localidad: "Villa Comaltitlan", codigo_postal: "30620" }
+    ];
+
+    const localidadInput = document.getElementById('localidad');
+    const codigoPostalInput = document.getElementById('codigo_postal');
+    const localidadList = document.getElementById('localidadesList');
+
+    // Agregar opciones al datalist
+    localidades.forEach(function(item) {
+        const opcion = document.createElement('option');
+        opcion.value = item.localidad;
+        opcion.dataset.cp = item.codigo_postal;
+        localidadList.appendChild(opcion);
+    });
+
+    localidadInput.addEventListener('input', function() {
+        const valorInput = this.value.toLowerCase();
+
+        // Encuentra la localidad correspondiente
+        const localidadSeleccionada = localidades.find(function(item) {
+            return item.localidad.toLowerCase() === valorInput;
+        });
+
+        if (localidadSeleccionada) {
+            codigoPostalInput.value = localidadSeleccionada.codigo_postal;
+        } else {
+            codigoPostalInput.value = ''; // Limpiar el código postal si no hay coincidencias
+        }
+    });
 });
