@@ -348,7 +348,7 @@
                     </div>
                   </div>
                   <!-- CLUES -->
-                  <div class="col-md-4">
+                  <div class="col-md-4" id="CluesU" style="display: none;">
                     <label for="clues">Especifique su CLUES:</label>
                     <div class="form-group">
                       <input type="text" id="clues" name="clues" minLenght="3" class="form-control" placeholder="CLUES">
