@@ -508,41 +508,18 @@
                   </div>
 
                   <!-- Agente de la Lesión -->
+                 
                   <div class="col-md-4">
-                    <label for="agente_lesion">Agente de la Lesión:</label>
-                    <div class="form-group">
-                        <input list="agente_lesion_list" id="agente_lesion_input" name="agente_lesion" class="form-control" placeholder="Agente de la Lesión" required />
-                        <datalist id="agente_lesion_list">
-                        <option value="Fuego, flama, sustancia caliente/vapor"></option>
-                        <option value="Intoxicación por drogas o medicamentos"></option>
-                        <option value="Pie o mano"></option>
-                        <option value="Caída"></option>
-                        <option value="Objeto contundente"></option>
-                        <option value="Objeto punzocortante"></option>
-                        <option value="Golpe contra piso o pared"></option>
-                        <option value="Cuerpo extraño"></option>
-                        <option value="Explosión"></option>
-                        <option value="Asfixia o sofocación"></option>
-                        <option value="Múltiples agentes"></option>
-                        <option value="Proyectil arma de fuego"></option>
-                        <option value="Ahorcamiento"></option>
-                        <option value="Radiación"></option>
-                        <option value="Sustancias químicas"></option>
-                        <option value="Corriente eléctrica"></option>
-                        <option value="Herramienta o maquinaria"></option>
-                        <option value="Sacudidas"></option>
-                        <option value="Desastre natural"></option>
-                        <option value="Vehículo de motor"></option>
-                        <option value="Ahogamiento por sumersión"></option>
-                        <option value="Piquete / mordedura de animal"></option>
-                        <option value="Fuerzas de la naturaleza"></option>
-                        <option value="Intoxicación por plantas, hongos venenosos"></option>
-                        <option value="Otro (Especifique)"></option>
-                        <option value="Se ignora"></option>
-                        <option value="No aplica"></option>
-                    </datalist>
-                </div>
-            </div> 
+    <label for="agente_lesion">Agente de la Lesión:</label>
+    <div class="form-group">
+        <input list="agente_lesion_list" id="agente_lesion_input" name="agente_lesion" class="form-control" placeholder="Agente de la Lesión" required />
+        <ul id="sugerencias" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        </ul>
+    </div>
+</div>
+
+
+
 
                   <div class="col-md-4" id="agenteEspecifique" style="display: none;">
                     <label for="agente_especifique">Especifique:</label>

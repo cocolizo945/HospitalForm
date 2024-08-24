@@ -174,6 +174,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 
+<<<<<<< HEAD
     $(document).ready(function() {
     // Lista de opciones para autocompletar, tomadas de tu select original
     var agentesLesion = [
@@ -259,3 +260,105 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 });
+=======
+
+
+
+
+    
+    const opciones = [
+        "Fuego, flama, sustancia caliente/vapor",
+        "Intoxicacion por drogas o medicamentos",
+        "Pie o mano",
+        "Caida",
+        "Objeto contundente",
+        "Objeto punzocortante",
+        "Golpe contra piso o pared",
+        "Cuerpo extrano",
+        "Explosion",
+        "Asfixia o sofocacion",
+        "Multiples agentes",
+        "Proyectil arma de fuego",
+        "Ahorcamiento",
+        "Radiacion",
+        "Sustancias quimicas",
+        "Corriente electrica",
+        "Herramienta o maquinaria",
+        "Sacudidas",
+        "Desastre natural",
+        "Vehiculo de motor",
+        "Ahogamiento por sumersion",
+        "Piquete / mordedura de animal",
+        "Fuerzas de la naturaleza",
+        "Intoxicacion por plantas, hongos venenosos",
+        "Otro (Especifique)",
+        "Se ignora",
+        "No aplica"
+    ];
+
+    // Elementos del HTML
+    const input = document.getElementById('agente_lesion_input');
+    const sugerencias = document.getElementById('sugerencias');
+
+    // Mostrar sugerencias filtradas
+    input.addEventListener('input', function() {
+        const filtro = input.value.toLowerCase();
+        sugerencias.innerHTML = '';
+
+        const opcionesFiltradas = opciones.filter(option => option.toLowerCase().includes(filtro));
+
+        if (opcionesFiltradas.length > 0) {
+            sugerencias.style.display = 'block';
+            opcionesFiltradas.forEach(option => {
+                const li = document.createElement('li');
+                li.textContent = option;
+                li.style.padding = '10px';
+                li.style.cursor = 'pointer'; 
+                li.style.listStyle = 'none'; 
+                li.style.borderBottom = '1px solid #e9ecef'; 
+                li.style.fontWeight = 'bold'; 
+                li.style.color = '#000'; 
+                li.style.backgroundColor = '#fff'; 
+                li.addEventListener('click', function() {
+                    input.value = option;
+                    sugerencias.style.display = 'none';
+                });
+                sugerencias.appendChild(li);
+            });
+        } else {
+            sugerencias.style.display = 'none';
+        }
+    });
+
+  
+    input.addEventListener('blur', function() {
+        setTimeout(() => {
+            sugerencias.style.display = 'none';
+        }, 200);
+    });
+
+
+    input.addEventListener('focus', function() {
+        if (input.value === '') {
+            sugerencias.innerHTML = '';
+            opciones.forEach(option => {
+                const li = document.createElement('li');
+                li.textContent = option;
+                li.style.padding = '10px'; 
+                li.style.cursor = 'pointer'; 
+                li.style.listStyle = 'none'; 
+                li.style.borderBottom = '1px solid #e9ecef'; 
+                li.style.fontWeight = 'bold'; 
+                li.style.color = '#000'; 
+                li.style.backgroundColor = '#fff'; 
+                li.addEventListener('click', function() {
+                    input.value = option;
+                    sugerencias.style.display = 'none';
+                });
+                sugerencias.appendChild(li);
+            });
+            sugerencias.style.display = 'block';
+        }
+    });
+
+>>>>>>> e4ee020818b7b21ae81bb96b4b588a6e9ae6122a
