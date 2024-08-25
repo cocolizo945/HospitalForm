@@ -320,6 +320,7 @@
                         <option disabled selected>Selección Única</option>
                         <option value="1">1. SI</option>
                         <option value="2">2. NO</option>
+                        <option value="3">3. SE IGNORA</option>
                       </select>
                     </div>
                   </div>
