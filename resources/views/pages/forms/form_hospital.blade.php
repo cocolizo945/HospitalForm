@@ -359,7 +359,7 @@
         <ul id="clues_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
         </ul>
     </div>
-    </div>
+   
 
 
               <!-- Evento -->
