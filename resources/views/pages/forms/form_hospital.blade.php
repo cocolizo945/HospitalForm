@@ -68,7 +68,7 @@
               <h5 class="info-text">Folio</h5>
                 <div class="row">
                   <!-- CLUES -->
-                 <div class="col-lg-5 col-md-6 col-sm-3">
+                  <div class="col-lg-5 col-md-6 col-sm-3">
     <label for="clues">CLUES:</label>
     <div class="form-group">
         <input type="text" id="clues" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
@@ -352,15 +352,14 @@
                     </div>
                   </div>
                   <!-- CLUES -->
-                  <    <div class="col-lg-5 col-md-6 col-sm-3">
-    <label for="clues">CLUES:</label>
-    <div class="form-group">
-        <input type="text" id="clues" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
-        <ul id="clues_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        </ul>
-    </div>
-   
-
+                  <div class="col-md-4" id="CluesU" style="display: none;">
+                    <label for="clues">Especifique su CLUES:</label>
+                    <div class="form-group">
+                      <input type="text" id="clues" name="clues" minLenght="3" class="form-control" placeholder="CLUES">
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               <!-- Evento -->
               <div class="tab-pane" id="account">
