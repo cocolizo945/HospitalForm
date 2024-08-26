@@ -130,12 +130,15 @@
                     </div>
                   </div>
                   <!-- Entidad o País de Nacimiento -->
-                  <div class="col-md-4">
-                    <label for="entidad_nacimiento">Entidad o País de Nacimiento:</label>
-                    <div class="form-group">
-                      <input type="text" id="entidad_nacimiento" name="entidad_nacimiento" minLength="3" class="form-control" placeholder="Entidad" required>
-                    </div>
-                  </div>
+               
+            <div class="col-md-4">
+                <label for="entidad_nacimiento">Entidad o País de Nacimiento:</label>
+                <div class="form-group">
+                    <input type="text" id="entidad_nacimiento" name="entidad_nacimiento" class="form-control" placeholder="País" autocomplete="off" required>
+                    <ul id="sugerencias_entidad_nacimiento" class="list-group autocomplete-suggestions"></ul>
+                </div>
+            </div>
+
 
                   <!-- Edad -->
                   <div class="col-md-4">
@@ -282,14 +285,15 @@
                       </select>
                     </div>
                   </div>
-                  <!-- ¿Es Migrante Retornado? -->
-                  <div class="col-md-4">
+                     <!-- Select para ¿Es Migrante Retornado? -->
+                     <div class="col-md-4">
                     <label for="migrante">¿Es Migrante Retornado?</label>
                     <div class="form-group">
                       <select id="migrante" class="selectpicker form-control" name="migrante" data-size="7" data-style="btn btn-primary" required>
                         <option disabled selected>Selección Única</option>
                         <option value="1">1. SI</option>
                         <option value="2">2. NO</option>
+                        <option value="9">3.NO APLICA</option>
                       </select>
                     </div>
                   </div>
