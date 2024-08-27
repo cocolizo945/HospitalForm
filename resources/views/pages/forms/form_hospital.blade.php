@@ -126,7 +126,7 @@
                   <div class="col-md-4">
                     <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
                     <div class="form-group">
-                      <input type="text" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control datepicker" placeholder="dd/mm/yyyy" required>
+                      <input type="text" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control datepicker" placeholder="fecha" required>
                     </div>
                   </div>
                   <!-- Entidad o País de Nacimiento -->
@@ -966,6 +966,7 @@
         $('#tiempo_traslado').datetimepicker({
             format: 'HH:mm' // Solo tiempo
         });
+
 
         function calcularEdad(fecha) {
             const hoy = new Date();

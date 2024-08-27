@@ -415,6 +415,8 @@ document.getElementById('entidad_pais').addEventListener('input', function() {
     });
 });
 
+
+// Lógica para AC en input's select's (VIALIDAD, ASENTAMIENTO)
 document.addEventListener('DOMContentLoaded', function() {
   const opcionesPorInput = {
       'tipo_vialidad': [
