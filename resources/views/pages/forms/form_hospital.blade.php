@@ -68,17 +68,16 @@
               <h5 class="info-text">Folio</h5>
                 <div class="row">
                   <!-- CLUES -->
-                  <div class="col-md-4 ml-auto mr-auto">
-                    <label for="clues_folio">CLUES:</label>
-                    <div class="form-group">
-                      <select id="clues" class="selectpicker form-control" name="clues" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. CSSSA006403</option>
-                        <option value="2">2. CSSSA006415</option>
-                        <option value="3">3. CSSSA006420</option>
-                      </select>
-                    </div>
-                  </div>
+                  <div class="col-lg-5 col-md-6 col-sm-3">
+    <label for="clues">CLUES:</label>
+    <div class="form-group">
+        <input type="text" id="clues" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
+        <ul id="clues_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        </ul>
+    </div>
+    </div>
+
+
                   <!-- Folio -->
                   <div class="col-md-4 ml-auto mr-auto">
                     <label for="folio">Folio:</label>
@@ -130,12 +129,15 @@
                     </div>
                   </div>
                   <!-- Entidad o País de Nacimiento -->
-                  <div class="col-md-4">
-                    <label for="entidad_nacimiento">Entidad o País de Nacimiento:</label>
-                    <div class="form-group">
-                      <input type="text" id="entidad_nacimiento" name="entidad_nacimiento" minLength="3" class="form-control" placeholder="Entidad" required>
-                    </div>
-                  </div>
+               
+            <div class="col-md-4">
+                <label for="entidad_nacimiento">Entidad o País de Nacimiento:</label>
+                <div class="form-group">
+                    <input type="text" id="entidad_nacimiento" name="entidad_nacimiento" class="form-control" placeholder="País" autocomplete="off" required>
+                    <ul id="sugerencias_entidad_nacimiento" class="list-group autocomplete-suggestions"></ul>
+                </div>
+            </div>
+
 
                   <!-- Edad -->
                   <div class="col-md-4">
@@ -282,14 +284,15 @@
                       </select>
                     </div>
                   </div>
-                  <!-- ¿Es Migrante Retornado? -->
-                  <div class="col-md-4">
+                     <!-- Select para ¿Es Migrante Retornado? -->
+                     <div class="col-md-4">
                     <label for="migrante">¿Es Migrante Retornado?</label>
                     <div class="form-group">
                       <select id="migrante" class="selectpicker form-control" name="migrante" data-size="7" data-style="btn btn-primary" required>
                         <option disabled selected>Selección Única</option>
                         <option value="1">1. SI</option>
                         <option value="2">2. NO</option>
+                        <option value="9">3.NO APLICA</option>
                       </select>
                     </div>
                   </div>
@@ -320,6 +323,7 @@
                         <option disabled selected>Selección Única</option>
                         <option value="1">1. SI</option>
                         <option value="2">2. NO</option>
+                        <option value="3">3. SE IGNORA</option>
                       </select>
                     </div>
                   </div>
@@ -349,25 +353,35 @@
                   </div>
                   <!-- CLUES -->
                   <div class="col-md-4" id="CluesU" style="display: none;">
-                    <label for="clues">Especifique su CLUES:</label>
-                    <div class="form-group">
-                      <input type="text" id="clues" name="clues" minLenght="3" class="form-control" placeholder="CLUES">
-                    </div>
-                  </div>
+    <label for="cluesU">Especifique su CLUES:</label>
+    <div class="form-group">
+        <input type="text" id="cluesU" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
+        <ul id="cluesU_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        </ul>
+    </div>
+</div>
                 </div>
               </div>
-
               <!-- Evento -->
               <div class="tab-pane" id="account">
                 <h5 class="info-text">Información del Evento</h5>
                 <div class="row">
-                  <!-- Fecha y hora de Ocurrencia -->
+                  <!-- Fecha de Ocurrencia -->
                   <div class="col-md-4">
-                    <label for="fecha_ocurrencia">Fecha y hora de Ocurrencia:</label>
+                    <label for="fecha_ocurrencia">Fecha de Ocurrencia:</label>
                     <div class="form-group">
-                      <input type="text" id="fecha_ocurrencia" name="fecha_ocurrencia" class="form-control datetimepicker" placeholder="dd/mm/yyyy hh:mm AM/PM" required>
+                      <input type="text" id="fecha_ocurrencia" name="fecha_ocurrencia" class="form-control datepicker" placeholder="dd/mm/yyyy" required>
                     </div>
                   </div>
+
+                  <!-- hora de Ocurrencia -->
+                  <div class="col-md-4">
+                    <label for="hora_ocurrencia">hora de Ocurrencia:</label>
+                    <div class="form-group">
+                      <input type="text" id="hora_ocurrencia" name="hora_ocurrencia" class="form-control timepicker" placeholder="hh:mm AM/PM" required>
+                    </div>
+                  </div>
+
                   <!-- ¿Fue día festivo? -->
                   <div class="col-md-4">
                     <label for="festivo">¿Fue día festivo?</label>
@@ -722,11 +736,18 @@
               <div class="tab-pane" id="address">
                 <h5 class="info-text">Información de la Atención</h5>
                 <div class="row">
-                  <!-- Fecha y hora de Atención -->
+                  <!-- Fecha de Atención -->
                   <div class="col-md-4">
-                    <label for="fecha_atencion">Fecha y hora de Atención:</label>
+                    <label for="fecha_atencion">Fecha de Atención:</label>
                     <div class="form-group">
-                      <input type="text" id="fecha_atencion" name="fecha_atencion" class="form-control datetimepicker" placeholder="dd/mm/yyyy hh:mm AM/PM" required>
+                      <input type="text" id="fecha_atencion" name="fecha_atencion" class="form-control datepicker" placeholder="dd/mm/yyyy" required>
+                    </div>
+                  </div>
+                  <!-- Hora de Atención -->
+                  <div class="col-md-4">
+                    <label for="hora_atencion">Hora de Atención:</label>
+                    <div class="form-group">
+                      <input type="text" id="hora_atencion" name="hora_atencion" class="form-control timepicker" placeholder="hh:mm AM/PM" required>
                     </div>
                   </div>
                   <!-- Servicio que otorgó la atención -->
@@ -1050,5 +1071,154 @@
         $('.card.card-wizard').addClass('active');
       }, 600);
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const clues = document.getElementById('clues');
+    const cluesSuggestions = document.getElementById('clues_suggestions');
+    const preselectedClues = "CSSSA006403"; // CLUES del Hospital General
+    let cluesData = []; // Array para almacenar los datos del JSON
+
+    // Cargar el JSON con todas las CLUES
+    fetch('/json/clues.json')
+        .then(response => response.json())
+        .then(data => {
+            cluesData = data; // Asigna los datos cargados al array cluesData
+
+            // Preseleccionar la CLUES del Hospital General
+            clues.value = preselectedClues;
+        })
+        .catch(error => console.error('Error cargando el JSON de CLUES:', error));
+
+    // Mostrar sugerencias filtradas al escribir en el input
+    clues.addEventListener('input', function () {
+        const filtro = clues.value.toLowerCase();
+        cluesSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
+        const opcionesFiltradas = cluesData.filter(option => option.clues.toLowerCase().includes(filtro));
+
+        if (opcionesFiltradas.length > 0) {
+            cluesSuggestions.style.display = 'block';
+            opcionesFiltradas.forEach(option => {
+                const li = document.createElement('li');
+                li.textContent = option.clues;
+                li.style.padding = '10px';
+                li.style.cursor = 'pointer';
+                li.style.listStyle = 'none';
+                li.style.borderBottom = '1px solid #e9ecef';
+                li.style.fontWeight = 'bold';
+                li.style.color = '#000';
+                li.style.backgroundColor = '#fff';
+                li.addEventListener('click', function () {
+                    clues.value = option.clues;
+                    cluesSuggestions.style.display = 'none';
+                });
+                cluesSuggestions.appendChild(li);
+            });
+        } else {
+            cluesSuggestions.style.display = 'none';
+        }
+    });
+
+    // Mostrar todas las opciones al hacer focus en el input
+    clues.addEventListener('focus', function () {
+        cluesSuggestions.innerHTML = ''; // Limpia las sugerencias
+        cluesData.forEach(option => {
+            const li = document.createElement('li');
+            li.textContent = option.clues;
+            li.style.padding = '10px';
+            li.style.cursor = 'pointer';
+            li.style.listStyle = 'none';
+            li.style.borderBottom = '1px solid #e9ecef';
+            li.style.fontWeight = 'bold';
+            li.style.color = '#000';
+            li.style.backgroundColor = '#fff';
+            li.addEventListener('click', function () {
+                clues.value = option.clues;
+                cluesSuggestions.style.display = 'none';
+            });
+            cluesSuggestions.appendChild(li);
+        });
+        cluesSuggestions.style.display = 'block'; // Muestra todas las sugerencias
+    });
+
+    // Oculta la lista al hacer clic fuera del input
+    clues.addEventListener('blur', function () {
+        setTimeout(() => {
+            cluesSuggestions.style.display = 'none';
+        }, 200);
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const cluesU = document.getElementById('cluesU');
+    const cluesSuggestions = document.getElementById('cluesU_suggestions');
+    let cluesData = []; // Array para almacenar los datos del JSON
+
+    // Cargar el JSON con todas las CLUES
+    fetch('/json/clues.json')
+        .then(response => response.json())
+        .then(data => {
+            cluesData = data; // Asigna los datos cargados al array cluesData
+            cluesU.value = cluesData.find(clue => clue.clues === "CSSSA006403").clues; // Preseleccionar la CLUES del Hospital General
+        })
+        .catch(error => console.error('Error cargando el JSON de CLUES:', error));
+
+    // Mostrar sugerencias filtradas al escribir en el input
+    cluesU.addEventListener('input', function () {
+        const filtro = cluesU.value.toLowerCase();
+        cluesSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
+        const opcionesFiltradas = cluesData.filter(option => option.clues.toLowerCase().includes(filtro));
+
+        if (opcionesFiltradas.length > 0) {
+            cluesSuggestions.style.display = 'block';
+            opcionesFiltradas.forEach(option => {
+                const li = document.createElement('li');
+                li.textContent = option.clues;
+                li.style.padding = '10px';
+                li.style.cursor = 'pointer';
+                li.style.listStyle = 'none';
+                li.style.borderBottom = '1px solid #e9ecef';
+                li.style.fontWeight = 'bold';
+                li.style.color = '#000';
+                li.style.backgroundColor = '#fff';
+                li.addEventListener('click', function () {
+                    cluesU.value = option.clues;
+                    cluesSuggestions.style.display = 'none';
+                });
+                cluesSuggestions.appendChild(li);
+            });
+        } else {
+            cluesSuggestions.style.display = 'none';
+        }
+    });
+
+    // Mostrar todas las opciones al hacer focus en el input
+    cluesU.addEventListener('focus', function () {
+        cluesSuggestions.innerHTML = ''; // Limpia las sugerencias
+        cluesData.forEach(option => {
+            const li = document.createElement('li');
+            li.textContent = option.clues;
+            li.style.padding = '10px';
+            li.style.cursor = 'pointer';
+            li.style.listStyle = 'none';
+            li.style.borderBottom = '1px solid #e9ecef';
+            li.style.fontWeight = 'bold';
+            li.style.color = '#000';
+            li.style.backgroundColor = '#fff';
+            li.addEventListener('click', function () {
+                cluesU.value = option.clues;
+                cluesSuggestions.style.display = 'none';
+            });
+            cluesSuggestions.appendChild(li);
+        });
+        cluesSuggestions.style.display = 'block'; // Muestra todas las sugerencias
+    });
+
+    // Oculta la lista al hacer clic fuera del input
+    cluesU.addEventListener('blur', function () {
+        setTimeout(() => {
+            cluesSuggestions.style.display = 'none';
+        }, 200);
+    });
+});
+    
   </script>
 @endpush
