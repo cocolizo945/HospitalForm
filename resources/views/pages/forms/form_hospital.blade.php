@@ -524,9 +524,7 @@
                       </select>
                     </div>
                   </div>
-
                   <!-- Agente de la Lesión -->
-                 
                   <div class="col-md-4">
                   <label for="agente_lesion">Agente de la Lesión:</label>
                   <div class="form-group">
@@ -751,101 +749,38 @@
                     </div>
                   </div>
                   <!-- Servicio que otorgó la atención -->
-                  <div class="col-md-4">
+                  <div class="col-md-4 autocomplete-container">
                     <label for="servicio_atencion">Servicio que otorgó la atención:</label>
                     <div class="form-group">
-                      <select id="servicio_atencion" class="selectpicker form-control" name="servicio_atencion" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. Consulta externa</option>
-                        <option value="2">2. Hospitalización</option>
-                        <option value="3">3. Urgencias</option>
-                        <option value="4">4. Servicio especializado de atención a la violencia</option>
-                        <option value="5">5. Otro servicio (Especifique)</option>
-                      </select>
-                    </div>
+                      <input type="text" id="servicio_atencion" name="servicio_atencion" class="form-control autocomplete-input" placeholder="Servicio de atención" autocomplete="off" required>
+                      <ul class="list-group autocomplete-suggestions"></ul>
+                      </div>
                   </div>
                   <!-- Tipo de atención -->
-                  <div class="col-md-4">
+                  <div class="col-md-4 autocomplete-container">
                     <label for="tipo_atencion">Tipo de atención:</label>
                     <div class="form-group">
-                      <select id="tipo_atencion" class="selectpicker form-control" name="tipo_atencion" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. Médica</option>
-                        <option value="2">2. Psicológica</option>
-                        <option value="3">3. Quirúrgica</option>
-                        <option value="4">4. Psiquiátrica</option>
-                        <option value="5">5. Consejería</option>
-                        <option value="6">6. Otro</option>
-                        <option value="7">7. Píldora anticonceptiva de emergencia</option>
-                        <option value="8">8. Profilaxis VIH</option>
-                        <option value="9">9. Profilaxis otras ITS</option>
-                        <option value="10">10. IVE(Interrupción Voluntaria del Embarazo)</option>
-                        <option value="11">11. Vacuna VPH</option>
-                      </select>
+                      <input type="text" id="tipo_atencion" name="tipo_atencion" class="form-control autocomplete-input" placeholder="Tipo de atención" autocomplete="off" required>
+                      <ul class="list-group autocomplete-suggestions"></ul>
                     </div>
                   </div>
-                </div>
-
-                <div class="row">
                   <!-- Área Anatómica de Mayor Gravedad -->
-                  <div class="col-md-4">
+                  <div class="col-md-4 autocomplete-container">
                     <label for="area_gravedad">Área Anatómica de Mayor Gravedad:</label>
                     <div class="form-group">
-                      <select id="area_gravedad" class="selectpicker form-control" name="area_gravedad" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. Cabeza</option>
-                        <option value="2">2. Cara</option>
-                        <option value="3">3. Región ocular</option>
-                        <option value="4">4. Cuello</option>
-                        <option value="5">5. Columna vertebral</option>
-                        <option value="6">6. Extremidades superiores</option>
-                        <option value="7">7. Mano</option>
-                        <option value="8">8. Tórax</option>
-                        <option value="9">9. Espalda y/o glúteos</option>
-                        <option value="10">10. Abdomen</option>
-                        <option value="11">11. Pelvis</option>
-                        <option value="12">12. Región genital</option>
-                        <option value="13">13. Extremidades inferiores</option>
-                        <option value="14">14. Pies</option>
-                        <option value="15">15. Múltiples</option>
-                        <option value="16">16. Otro (Especifique)</option>
-                      </select>
+                      <input type="text" id="area_gravedad" name="area_gravedad" class="form-control autocomplete-input" placeholder="Areá de gravedad" autocomplete="off" required>
+                      <ul class="list-group autocomplete-suggestions"></ul>
                     </div>
                   </div>
                   <!-- Consecuencia Resultante de Mayor Gravedad -->
-                  <div class="col-md-4">
+                  <div class="col-md-4 autocomplete-container">
                     <label for="consecuencia_gravedad">Consecuencia Resultante de Mayor Gravedad:</label>
                     <div class="form-group">
-                      <select id="consecuencia_gravedad" class="selectpicker form-control" name="consecuencia_gravedad" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. Laceración/abrasión</option>
-                        <option value="2">2. Aplastamiento</option>
-                        <option value="3">3. Cicatrices</option>
-                        <option value="4">4. Depresión</option>
-                        <option value="5">5. Contusión/mallugamiento</option>
-                        <option value="6">6. Congelamiento</option>
-                        <option value="7">7. Aborto</option>
-                        <option value="8">8. Trastornos de ansiedad/estrés postraumático</option>
-                        <option value="9">9. Quemadura/corrosión</option>
-                        <option value="10">10. Asfixia</option>
-                        <option value="11">11. Embarazo</option>
-                        <option value="12">12. Trastornos psiquiátricos</option>
-                        <option value="13">13. Luxación/esguince</option>
-                        <option value="14">14. Herida</option>
-                        <option value="15">15. Infección de transmisión sexual</option>
-                        <option value="16">16. Múltiple</option>
-                        <option value="17">17. Amputación/avulsión</option>
-                        <option value="18">18. Fractura</option>
-                        <option value="19">19. Defunción</option>
-                        <option value="20">20. Malestar emocional</option>
-                        <option value="21">21. Trastorno del estado de ánimo</option>
-                        <option value="22">22. Otro (Especifique)</option>
-                      </select>
+                      <input type="text" id="consecuencia_gravedad" name="consecuencia_gravedad" class="form-control autocomplete-input" placeholder="Areá de gravedad" autocomplete="off" required>
+                      <ul class="list-group autocomplete-suggestions"></ul>
                     </div>
                   </div>
-                </div>
 
-                <div class="row">
                   <!-- Afección principal -->
                   <div class="col-md-4">
                     <label for="afeccion_principal">Afección principal:</label>
@@ -871,9 +806,7 @@
                       </select>
                     </div>
                   </div>
-                </div>
 
-                <div class="row">
                   <!-- Destino después de la atención -->
                   <div class="col-md-4">
                     <label for="destino_atencion">Destino después de la atención:</label>
@@ -908,7 +841,11 @@
                   </div>
                 </div>
 
+              <div id="responsableSection" style="display: none;">
                 <div class="row">
+                  <div class="col-md-12">
+                      <h4 class="card-title-hospital">RESPONSABLE ATENCIÓN</h4>
+                  </div>
                   <!-- Nombre(s) -->
                   <div class="col-md-4">
                     <label for="nombre_responsable">Nombre(s):</label>
@@ -924,15 +861,12 @@
                     </div>
                   </div>
                   <!-- Segundo Apellido -->
-                  <div class="col-md=4">
+                  <div class="col-md-4">
                     <label for="segundo_apellido_responsable">Segundo Apellido:</label>
                     <div class="form-group">
                       <input type="text" id="segundo_apellido_responsable" name="segundo_apellido_responsable" class="form-control" placeholder="Segundo Apellido del Responsable">
                     </div>
                   </div>
-                </div>
-
-                <div class="row">
                   <!-- C.U.R.P. -->
                   <div class="col-md-4">
                     <label for="curp_responsable">C.U.R.P.:</label>
@@ -951,6 +885,8 @@
               </div>
             </div>
           </div>
+        </div>
+
           <div class="card-footer"> 
             <div class="pull-right">
               <button type="button" id="darDeAlta" class="btn btn-primary">N. Paciente</button>

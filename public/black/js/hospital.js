@@ -160,6 +160,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
   });
 
+  document.addEventListener('DOMContentLoaded', (event) => {
+    // Toggle sections based on the selected option in "responsable_evento"
+    const responsableSelect = document.getElementById('responsable_atencion');
+    const responsableSection = document.getElementById('responsableSection');
+
+    responsableSelect.addEventListener('change', (event) => {
+      const value = event.target.value;
+
+      // Hide all sections initially
+      responsableSection.style.display = 'none';
+
+      // Show the relevant section based on the selected value
+      if (value === '1' || value === '2' || value === '3') {
+        responsableSection.style.display = 'block';
+      }
+    });
+  });
+
   // Codigo para introducir pais
   document.getElementById('migrante').addEventListener('change', function() {
   var migrante = this.value;
@@ -438,7 +456,18 @@ document.addEventListener('DOMContentLoaded', function() {
           "UNIDAD", "UNIDAD HABITACIONAL", "VILLA", "ZONA FEDERAL", "ZONA INDUSTRIAL", 
           "ZONA MILITAR", "ZONA NAVAL", "NINGUNO", "CARRETERA", "NO APLICA", 
           "SE IGNORA", "NO ESPECIFICADO", "ZONA COMERCIAL", "LOCALIDAD"
-      ]
+      ],
+      'servicio_atencion': [
+        "1. CONSULTA EXTERNA", "2. HOSPITALIZACIÓN", "3. URGENCIAS", "4. SERVICIO ESPECIALIZADO DE ATENCIÓN A LA VIOLENCIA", "5. OTRO SERVICIO (ESPECIFIQUE)"
+      ],
+      'tipo_atencion': [
+        "1. MEDICA", "2. PSICOLÓGICA", "3. QUIRÚRGICA", "4. PSIQUIÁTRICA", "5. CONSEJERÍA", "6. OTRO", "7. PÍLDORA ANTICONCEPTIVA DE EMERGENCIA", "8. PROFILAXIS VIH", "9. PROFILAXIS OTRAS ITS", "10. IVE (INTERRUPCIÓN VOLUNTARIA DEL EMBARAZO)", "11. VACUNA VPH"
+      ],
+      'area_gravedad': [
+        "1. CABEZA", "2. CARGA", "3. REGIÓN OCULAR", "4. CUELLO", "5. COLUMNA VERTEBRAL", "6. EXTREMIDADES SUPERIORES", "7. MANO", "8. TÓRAX", "9. ESPALDO Y/O GLÚTEOS", "10. ABDOMEN", "11. PELVIS", "12. REGIÓN GENITAL", "13. EXTREMIDADES INFERIORES", "14. PIES", "15. MÚLTIPLES", "16. OTRO (ESPECIFIQUE)"
+      ],
+      'consecuencia_gravedad': [
+        "1. LACERACIÓN/ABRASIÓN", "2. APLASTAMIENTO", "3. CICATRICES", "4. DEPRESIÓN", "5. CONTUSIÓN/MALLUGAMIENTO", "6. CONGELAMIENTO", "7. ABORTO", "8. TRASTORNOS DE ANSIEDAD/ESTRÉS POSTRAUMÁTICO", "9. QUEMADURA/CORROSIÓN", "10. ASFIXIA", "11. EMBARAZO", "12. TRASTORNOS PSIQUIÁTRICOS", "13. LUXACIÓN/ESGUINCE", "14. HERIDA", "15. INFECCIÓN DE TRANSMISIÓN SEXUAL", "16. MÚLTIPLE", "17. AMPUTACIÓN/AVULSIÓN", "18. FRACTURA", "19. DEFUNCIÓN", "20. MALESTAR EMOCIONAL", "21. TRASTORNO DEL ESTADO DE ÁNIMO", "22. OTRO (ESPECIFIQUE)"]
       // Puedes agregar más opciones para otros inputs si es necesario
   };
 
