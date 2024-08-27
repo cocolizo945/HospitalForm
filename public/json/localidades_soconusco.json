@@ -1,0 +1,18 @@
+    [
+        {"localidad": "Acacoyagua", "codigo_postal": "30500"},
+        {"localidad": "Acapetahua", "codigo_postal": "30510"},
+        {"localidad": "Cacahoatán", "codigo_postal": "30890"},
+        {"localidad": "Escuintla", "codigo_postal": "30470"},
+        {"localidad": "Frontera Hidalgo", "codigo_postal": "30860"},
+        {"localidad": "Huehuetán", "codigo_postal": "30660"},
+        {"localidad": "Huixtla", "codigo_postal": "30640"},
+        {"localidad": "Mazatán", "codigo_postal": "30650"},
+        {"localidad": "Metapa", "codigo_postal": "30870"},
+        {"localidad": "Suchiate", "codigo_postal": "30840"},
+        {"localidad": "Tapachula", "codigo_postal": "30700"},
+        {"localidad": "Tuxtla Chico", "codigo_postal": "30880"},
+        {"localidad": "Tuzantán", "codigo_postal": "30690"},
+        {"localidad": "Unión Juárez", "codigo_postal": "30900"},
+        {"localidad": "Villa Comaltitlán", "codigo_postal": "30750"}
+    ]
+    

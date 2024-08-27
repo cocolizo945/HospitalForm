@@ -12,6 +12,7 @@
 */
 use App\Http\Controllers\HojaRegistroAtencionController;
 use App\Http\Controllers\UrgenciasFormController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
   return redirect('login');
@@ -73,6 +74,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/buscar-folio', function () {
       return view('pages.forms.buscar_folio');
     })->name('buscar_folio');
+
+    Route::get('/localidades-json', function() {
+      $path = public_path('json/localidades_soconusco.json');
+      return response()->json(json_decode(file_get_contents($path), true));
+    })->name('localidades.json');
 
     Route::get('google-maps', ['as' => 'page.google_maps', 'uses' => 'MapPagesController@googleMaps']);
     Route::get('fullscreen-maps', ['as' => 'page.fullscreen_maps', 'uses' => 'MapPagesController@fullscreenMaps']);

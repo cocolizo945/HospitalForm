@@ -46,7 +46,7 @@ class CreateUrgenciasFormsTable extends Migration
             $table->boolean('traslado_transitorio');
             $table->string('nombre_unidad');
             $table->string('clues');
-            $table->timestamp('fecha_alta');
+            $table->timestamp('fecha_alta')
             $table->enum('alta_por', [
                 'Hospitalización', 'Consulta Externa', 'Traslado a otra unidad', 'Domicilio', 'Defunción', 'Fuga', 'Voluntad'
             ]);

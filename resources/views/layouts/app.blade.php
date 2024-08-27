@@ -1,19 +1,3 @@
-{{--
-
-=========================================================
-* Argon Dashboard PRO - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-laravel
-* Copyright 2018 Creative Tim (https://www.creative-tim.com) & UPDIVISION (https://www.updivision.com)
-
-* Coded by www.creative-tim.com & www.updivision.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
---}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +5,8 @@
   @if (config('app.is_demo'))
       <!-- Anti-flicker snippet (recommended)  -->
     <style>.async-hide { opacity: 0 !important} </style>
+
+
     <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
     h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
     (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
@@ -98,6 +84,7 @@
   <meta property="og:image" content="https://s3.amazonaws.com/creativetim_bucket/products/158/thumb/opt_mdp_laravel_thumbnail.jpg"/>
   <meta property="og:description" content="Download Black Dashboard PRO Laravel, a Premium Frontend Preset for Laravel developed by Creative Tim and UPDIVISION. Over 200 components, see the live demo on our website and join over 700.000 creatives!" />
   <meta property="og:site_name" content="Creative Tim" />
+  
 
   @endif
 
