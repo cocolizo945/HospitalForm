@@ -366,13 +366,22 @@
               <div class="tab-pane" id="account">
                 <h5 class="info-text">Información del Evento</h5>
                 <div class="row">
-                  <!-- Fecha y hora de Ocurrencia -->
+                  <!-- Fecha de Ocurrencia -->
                   <div class="col-md-4">
-                    <label for="fecha_ocurrencia">Fecha y hora de Ocurrencia:</label>
+                    <label for="fecha_ocurrencia">Fecha de Ocurrencia:</label>
                     <div class="form-group">
-                      <input type="text" id="fecha_ocurrencia" name="fecha_ocurrencia" class="form-control datetimepicker" placeholder="dd/mm/yyyy hh:mm AM/PM" required>
+                      <input type="text" id="fecha_ocurrencia" name="fecha_ocurrencia" class="form-control datepicker" placeholder="dd/mm/yyyy" required>
                     </div>
                   </div>
+
+                  <!-- hora de Ocurrencia -->
+                  <div class="col-md-4">
+                    <label for="hora_ocurrencia">hora de Ocurrencia:</label>
+                    <div class="form-group">
+                      <input type="text" id="hora_ocurrencia" name="hora_ocurrencia" class="form-control timepicker" placeholder="hh:mm AM/PM" required>
+                    </div>
+                  </div>
+
                   <!-- ¿Fue día festivo? -->
                   <div class="col-md-4">
                     <label for="festivo">¿Fue día festivo?</label>
@@ -727,11 +736,18 @@
               <div class="tab-pane" id="address">
                 <h5 class="info-text">Información de la Atención</h5>
                 <div class="row">
-                  <!-- Fecha y hora de Atención -->
+                  <!-- Fecha de Atención -->
                   <div class="col-md-4">
-                    <label for="fecha_atencion">Fecha y hora de Atención:</label>
+                    <label for="fecha_atencion">Fecha de Atención:</label>
                     <div class="form-group">
-                      <input type="text" id="fecha_atencion" name="fecha_atencion" class="form-control datetimepicker" placeholder="dd/mm/yyyy hh:mm AM/PM" required>
+                      <input type="text" id="fecha_atencion" name="fecha_atencion" class="form-control datepicker" placeholder="dd/mm/yyyy" required>
+                    </div>
+                  </div>
+                  <!-- Hora de Atención -->
+                  <div class="col-md-4">
+                    <label for="hora_atencion">Hora de Atención:</label>
+                    <div class="form-group">
+                      <input type="text" id="hora_atencion" name="hora_atencion" class="form-control timepicker" placeholder="hh:mm AM/PM" required>
                     </div>
                   </div>
                   <!-- Servicio que otorgó la atención -->
