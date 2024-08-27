@@ -70,17 +70,16 @@
               <h5 class="info-text" id='response-container'>Folio</h5>
                 <div class="row">
                   <!-- CLUES -->
-                  <div class="col-md-4 ml-auto mr-auto">
-                    <label for="clues_folio">CLUES:</label>
-                    <div class="form-group">
-                      <select id="clues" class="selectpicker form-control" name="clues" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. CSSSA006403</option>
-                        <option value="2">2. CSSSA006415</option>
-                        <option value="3">3. CSSSA006420</option>
-                      </select>
-                    </div>
-                  </div>
+                  <div class="col-lg-5 col-md-6 col-sm-3">
+    <label for="clues">CLUES:</label>
+    <div class="form-group">
+        <input type="text" id="clues" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
+        <ul id="clues_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        </ul>
+    </div>
+    </div>
+
+
                   <!-- Folio -->
                   <div class="col-md-4 ml-auto mr-auto">
                     <label for="folio">Folio:</label>
@@ -90,6 +89,7 @@
                   </div>
                 </div>
               </div>
+
               <!-- Paciente Afectada(o) -->
               <div class="tab-pane" id="about">
                 <h5 class="info-text">Información del Paciente</h5>
@@ -121,7 +121,8 @@
                   <div class="col-md-4">
                     <label for="curp">C.U.R.P.:</label>
                     <div class="form-group">
-                      <input type="text" id="curp" name="curp" maxLength="18" class="form-control" placeholder="Solo 18 caracteres" required>
+                      <input type="text" id="curp" name="curp" maxLength="18" oninput="validarInput(this)" class="form-control" placeholder="Solo 18 caracteres" required>
+                      <span id="curp-validacion" style="color: red; display: none;">CURP inválida</span>
                     </div>
                   </div>
                   <!-- Fecha de Nacimiento -->
@@ -132,12 +133,15 @@
                     </div>
                   </div>
                   <!-- Entidad o País de Nacimiento -->
-                  <div class="col-md-4">
-                    <label for="entidad_nacimiento">Entidad o País de Nacimiento:</label>
-                    <div class="form-group">
-                      <input type="text" id="entidad_nacimiento" name="entidad_nacimiento" minLength="3" class="form-control" placeholder="Entidad" required>
-                    </div>
-                  </div>
+               
+            <div class="col-md-4">
+                <label for="entidad_nacimiento">Entidad o País de Nacimiento:</label>
+                <div class="form-group">
+                    <input type="text" id="entidad_nacimiento" name="entidad_nacimiento" class="form-control" placeholder="País" autocomplete="off" required>
+                    <ul id="sugerencias_entidad_nacimiento" class="list-group autocomplete-suggestions"></ul>
+                </div>
+            </div>
+
 
                   <!-- Edad -->
                   <div class="col-md-4">
@@ -282,14 +286,16 @@
                         <label for="afrodescendiente_no">2. NO</label>
                     </div>
                   </div>
-                  <!-- ¿Es Migrante Retornado? -->
-                  <div class="col-md-4">
+                     <!-- Select para ¿Es Migrante Retornado? -->
+                     <div class="col-md-4">
                     <label for="migrante">¿Es Migrante Retornado?</label>
-                    <div lass="form-group">
-                        <input type="radio" id="migrante_si" name="migrante" value="1" required>
-                        <label for="migrante_si">1. SI</label>
-                        <input type="radio" id="migrante_no" name="migrante" value="2">
-                        <label for="migrante_no">2. NO</label>
+                    <div class="form-group">
+                      <select id="migrante" class="selectpicker form-control" name="migrante" data-size="7" data-style="btn btn-primary" required>
+                        <option disabled selected>Selección Única</option>
+                        <option value="1">1. SI</option>
+                        <option value="2">2. NO</option>
+                        <option value="9">3.NO APLICA</option>
+                      </select>
                     </div>
                   </div>
                   <!-- Mujer en Edad Fértil -->
@@ -314,11 +320,13 @@
                   <!-- Dificultad (Discapacidad) -->
                   <div class="col-md-4">
                     <label for="discapacidad">Dificultad (Discapacidad):</label>
-                    <div lass="form-group">
-                        <input type="radio" id="discapacidad_si" name="discapacidad" value="1" required>
-                        <label for="discapacidad_si">1. SI</label>
-                        <input type="radio" id="discapacidad_no" name="discapacidad" value="2">
-                        <label for="discapacidad_no">2. NO</label>
+                    <div class="form-group">
+                      <select id="discapacidad" class="selectpicker form-control" name="discapacidad" data-size="7" data-style="btn btn-primary" required>
+                        <option disabled selected>Selección Única</option>
+                        <option value="1">1. SI</option>
+                        <option value="2">2. NO</option>
+                        <option value="3">3. SE IGNORA</option>
+                      </select>
                     </div>
                   </div>
                   <!-- Referida(o) por -->
@@ -346,15 +354,16 @@
                     </div>
                   </div>
                   <!-- CLUES -->
-                  <div class="col-md-4">
-                    <label for="clues">Especifique su CLUES:</label>
-                    <div class="form-group">
-                      <input type="text" id="clues" name="clues" minLenght="3" class="form-control" placeholder="CLUES">
-                    </div>
-                  </div>
+                  <div class="col-md-4" id="CluesU" style="display: none;">
+    <label for="cluesU">Especifique su CLUES:</label>
+    <div class="form-group">
+        <input type="text" id="cluesU" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
+        <ul id="cluesU_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        </ul>
+    </div>
+</div>
                 </div>
               </div>
-
               <!-- Evento -->
               <div class="tab-pane" id="account">
                 <h5 class="info-text">Información del Evento</h5>
@@ -407,41 +416,49 @@
                     </div>
                   </div>
 
-                  <!-- Entidad Federativa/País -->
-                  <div class="col-md-4">
-                    <label for="entidad_pais">Entidad Federativa/País:</label>
-                    <div class="form-group">
-                      <input type="text" id="entidad_pais" name="entidad_pais" class="form-control" placeholder="Entidad Federativa o País">
-                    </div>
-                  </div>
-                  <!-- Municipio o alcaldía -->
-                  <div class="col-md-4">
-                    <label for="municipio">Municipio o alcaldía:</label>
-                    <div class="form-group">
-                      <input type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio o Alcaldía">
-                    </div>
-                  </div>
-                  <!-- Localidad -->
-                  <div class="col-md-4">
-                    <label for="localidad">Localidad:</label>
-                    <div class="form-group">
-                      <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad">
-                    </div>
-                  </div>
+                 <!-- Entidad Federativa/País -->
+<div class="col-md-4">
+  <label for="entidad_pais">Entidad Federativa/País:</label>
+  <div class="form-group">
+    <input type="text" id="entidad_pais" name="entidad_pais" class="form-control" placeholder="Entidad Federativa o País" oninput="mostrarSugerencias(this, 'entidades')" autocomplete="off" onclick="mostrarSugerencias(this, 'entidades')" onfocus="mostrarSugerencias(this, 'entidades')" onblur="ocultarSugerencias('sugerencias_entidad_pais')">
+    <div id="sugerencias_entidad_pais" class="sugerencias"style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></div>
+  </div>
+</div>
+
+<!-- Municipio o alcaldía -->
+<div class="col-md-4">
+  <label for="municipio">Municipio o alcaldía:</label>
+  <div class="form-group">
+    <input type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio o Alcaldía" oninput="mostrarSugerencias(this, 'municipios')" autocomplete="off" onclick="mostrarSugerencias(this, 'municipios')" onfocus="mostrarSugerencias(this, 'municipios')" onblur="ocultarSugerencias('sugerencias_municipio')">
+    <div id="sugerencias_municipio" class="sugerencias"style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></div>
+  </div>
+</div>
+
+<!-- Localidad -->
+<div class="col-md-4">
+  <label for="localidad">Localidad:</label>
+  <div class="form-group">
+    <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" oninput="mostrarSugerencias(this, 'localidades')" autocomplete="off" onclick="mostrarSugerencias(this, 'localidades')" onfocus="mostrarSugerencias(this, 'localidades')" onblur="ocultarSugerencias('sugerencias_localidad')">
+    <div id="sugerencias_localidad" class="sugerencias"style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></div>
+  </div>
+</div>
                   <!-- Código Postal -->
                   <div class="col-md-4">
                     <label for="codigo_postal">Código Postal:</label>
                     <div class="form-group">
-                      <input type="text" id="codigo_postal" name="codigo_postal" class="form-control" placeholder="Código Postal">
+                      <input type="text" id="codigo_postal" name="codigo_postal" class="form-control" placeholder="Código Postal" readonly />
                     </div>
                   </div>
-                  <!-- Tipo de la Vialidad -->
-                  <div class="col-md-4">
-                    <label for="tipo_vialidad">Tipo de la Vialidad:</label>
-                    <div class="form-group">
-                      <input type="text" id="tipo_vialidad" name="tipo_vialidad" class="form-control" placeholder="Tipo de Vialidad">
-                    </div>
+                  
+                  <div class="col-md-4 autocomplete-container">
+                  <label for="tipo_vialidad">Tipo de la Vialidad:</label>
+                  <div class="form-group">
+                      <input type="text" id="tipo_vialidad" name="tipo_vialidad" class="form-control autocomplete-input" placeholder="Tipo de Vialidad" autocomplete="off">
+                      <ul class="list-group autocomplete-suggestions"></ul>
+                      </div>
                   </div>
+
+
                   <!-- Nombre de la vialidad -->
                   <div class="col-md-4">
                     <label for="nombre_vialidad">Nombre de la vialidad:</label>
@@ -464,12 +481,14 @@
                     </div>
                   </div>
                   <!-- Tipo de asentamiento humano -->
-                  <div class="col-md-4">
-                    <label for="tipo_asentamiento">Tipo de asentamiento humano:</label>
-                    <div class="form-group">
-                      <input type="text" id="tipo_asentamiento" name="tipo_asentamiento" class="form-control" placeholder="Tipo de Asentamiento Humano">
-                    </div>
+                  <div class="col-md-4 autocomplete-container">
+                  <label for="tipo_asentamiento">Tipo de asentamiento humano:</label>
+                  <div class="form-group">
+                      <input type="text" id="tipo_asentamiento" name="tipo_asentamiento" class="form-control autocomplete-input" placeholder="Tipo de Asentamiento Humano" autocomplete="off">
+                      <ul class="list-group autocomplete-suggestions"></ul>
+                      </div>
                   </div>
+
                   <!-- Nombre de asentamiento humano -->
                   <div class="col-md-4">
                     <label for="nombre_asentamiento">Nombre de asentamiento humano:</label>
@@ -497,42 +516,18 @@
                       </select>
                     </div>
                   </div>
+
                   <!-- Agente de la Lesión -->
+                 
                   <div class="col-md-4">
-                    <label for="agente_lesion">Agente de la Lesión:</label>
-                    <div class="form-group">
-                    <select id="agente_lesion" class="selectpicker form-control" name="agente_lesion" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Fuego, flama, sustancia caliente/vapor">Fuego, flama, sustancia caliente/vapor</option>
-                    <option value="Intoxicación por drogas o medicamentos">Intoxicación por drogas o medicamentos</option>
-                    <option value="Pie o mano">Pie o mano</option>
-                    <option value="Caída">Caída</option>
-                    <option value="Objeto contundente">Objeto contundente</option>
-                    <option value="Objeto punzocortante">Objeto punzocortante</option>
-                    <option value="Golpe contra piso o pared">Golpe contra piso o pared</option>
-                    <option value="Cuerpo extraño">Cuerpo extraño</option>
-                    <option value="Explosión">Explosión</option>
-                    <option value="Asfixia o sofocación">Asfixia o sofocación</option>
-                    <option value="Múltiples agentes">Múltiples agentes</option>
-                    <option value="Proyectil arma de fuego">Proyectil arma de fuego</option>
-                    <option value="Ahorcamiento">Ahorcamiento</option>
-                    <option value="Radiación">Radiación</option>
-                    <option value="Sustancias químicas">Sustancias químicas</option>
-                    <option value="Corriente eléctrica">Corriente eléctrica</option>
-                    <option value="Herramienta o maquinaria">Herramienta o maquinaria</option>
-                    <option value="Sacudidas">Sacudidas</option>
-                    <option value="Desastre natural">Desastre natural</option>
-                    <option value="Vehículo de motor">Vehículo de motor</option>
-                    <option value="Ahogamiento por sumersión">Ahogamiento por sumersión</option>
-                    <option value="Piquete / mordedura de animal">Piquete / mordedura de animal</option>
-                    <option value="Fuerzas de la naturaleza">Fuerzas de la naturaleza</option>
-                    <option value="Intoxicación por plantas, hongos venenosos">Intoxicación por plantas, hongos venenosos</option>
-                    <option value="Otro (Especifique)">Otro (Especifique)</option>
-                    <option value="Se ignora">Se ignora</option>
-                    <option value="No aplica">No aplica</option>
-                    </select>
-                    </div>
+                  <label for="agente_lesion">Agente de la Lesión:</label>
+                  <div class="form-group">
+                      <input list="agente_lesion_list" id="agente_lesion_input" name="agente_lesion" class="form-control" placeholder="Agente de la Lesión" required />
+                      <ul id="sugerencias" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </ul>
+                      </div>
                   </div>
+
                   <div class="col-md-4" id="agenteEspecifique" style="display: none;">
                     <label for="agente_especifique">Especifique:</label>
                     <div class="form-group">
@@ -910,7 +905,7 @@
                     </div>
                   </div>
                   <!-- Segundo Apellido -->
-                  <div class="col-md-4">
+                  <div class="col-md=4">
                     <label for="segundo_apellido_responsable">Segundo Apellido:</label>
                     <div class="form-group">
                       <input type="text" id="segundo_apellido_responsable" name="segundo_apellido_responsable" class="form-control" placeholder="Segundo Apellido del Responsable">
@@ -923,7 +918,7 @@
                   <div class="col-md-4">
                     <label for="curp_responsable">C.U.R.P.:</label>
                     <div class="form-group">
-                      <input type="text" id="curp_responsable" name="curp_responsable" class="form-control" placeholder="CURP del Responsable" maxLenght="18" required>
+                      <input type="text" id="curp_responsable" name="curp_responsable" class="form-control" placeholder="CURP del Responsable" maxLength="18" required>
                     </div>
                   </div>
                   <!-- Cédula Profesional -->
@@ -976,7 +971,50 @@
         $('#tiempo_traslado').datetimepicker({
             format: 'HH:mm' // Solo tiempo
         });
+
+        function calcularEdad(fecha) {
+            const hoy = new Date();
+            const nacimiento = new Date(fecha);
+            let edad = hoy.getFullYear() - nacimiento.getFullYear();
+            const diferenciaMeses = hoy.getMonth() - nacimiento.getMonth();
+            if (diferenciaMeses < 0 || (diferenciaMeses === 0 && hoy.getDate() < nacimiento.getDate())) {
+                edad--;
+            }
+            return edad;
+        }
+
+        function calcularFechaNacimiento(edad) {
+            const hoy = new Date();
+            hoy.setFullYear(hoy.getFullYear() - edad);
+            return hoy.toISOString().split('T')[0];
+        }
+
+        $('#fecha_nacimiento').on('dp.change', function(e) { 
+            const fecha = e.date.format('YYYY-MM-DD');
+            if (fecha) {
+                const edad = calcularEdad(fecha);
+                $('#edad').val(edad);
+            }
+        });
+
+        $('#edad').on('change', function() {
+            const edad = $(this).val();
+            if (edad) {
+                const fechaNacimiento = calcularFechaNacimiento(edad);
+                const fechaFormateada = fechaNacimiento.split('-').reverse().join('/');
+                $('#fecha_nacimiento').val(fechaFormateada);
+            }
+        });
+
     });
+    //Autocompletar
+    document.addEventListener('keydown', function(event) {
+            // Verificar si la tecla presionada es F9
+            if (event.key === 'F9') {
+                // Rellenar el input con "X"
+                document.getElementById('curp').value = 'XXXXXXXXXXXXXXXXXX';
+            }
+        });
 
     function setFormValidation(id) {
       $(id).validate({
@@ -1016,5 +1054,154 @@
         $('.card.card-wizard').addClass('active');
       }, 600);
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const clues = document.getElementById('clues');
+    const cluesSuggestions = document.getElementById('clues_suggestions');
+    const preselectedClues = "CSSSA006403"; // CLUES del Hospital General
+    let cluesData = []; // Array para almacenar los datos del JSON
+
+    // Cargar el JSON con todas las CLUES
+    fetch('/json/clues.json')
+        .then(response => response.json())
+        .then(data => {
+            cluesData = data; // Asigna los datos cargados al array cluesData
+
+            // Preseleccionar la CLUES del Hospital General
+            clues.value = preselectedClues;
+        })
+        .catch(error => console.error('Error cargando el JSON de CLUES:', error));
+
+    // Mostrar sugerencias filtradas al escribir en el input
+    clues.addEventListener('input', function () {
+        const filtro = clues.value.toLowerCase();
+        cluesSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
+        const opcionesFiltradas = cluesData.filter(option => option.clues.toLowerCase().includes(filtro));
+
+        if (opcionesFiltradas.length > 0) {
+            cluesSuggestions.style.display = 'block';
+            opcionesFiltradas.forEach(option => {
+                const li = document.createElement('li');
+                li.textContent = option.clues;
+                li.style.padding = '10px';
+                li.style.cursor = 'pointer';
+                li.style.listStyle = 'none';
+                li.style.borderBottom = '1px solid #e9ecef';
+                li.style.fontWeight = 'bold';
+                li.style.color = '#000';
+                li.style.backgroundColor = '#fff';
+                li.addEventListener('click', function () {
+                    clues.value = option.clues;
+                    cluesSuggestions.style.display = 'none';
+                });
+                cluesSuggestions.appendChild(li);
+            });
+        } else {
+            cluesSuggestions.style.display = 'none';
+        }
+    });
+
+    // Mostrar todas las opciones al hacer focus en el input
+    clues.addEventListener('focus', function () {
+        cluesSuggestions.innerHTML = ''; // Limpia las sugerencias
+        cluesData.forEach(option => {
+            const li = document.createElement('li');
+            li.textContent = option.clues;
+            li.style.padding = '10px';
+            li.style.cursor = 'pointer';
+            li.style.listStyle = 'none';
+            li.style.borderBottom = '1px solid #e9ecef';
+            li.style.fontWeight = 'bold';
+            li.style.color = '#000';
+            li.style.backgroundColor = '#fff';
+            li.addEventListener('click', function () {
+                clues.value = option.clues;
+                cluesSuggestions.style.display = 'none';
+            });
+            cluesSuggestions.appendChild(li);
+        });
+        cluesSuggestions.style.display = 'block'; // Muestra todas las sugerencias
+    });
+
+    // Oculta la lista al hacer clic fuera del input
+    clues.addEventListener('blur', function () {
+        setTimeout(() => {
+            cluesSuggestions.style.display = 'none';
+        }, 200);
+    });
+});
+document.addEventListener('DOMContentLoaded', function () {
+    const cluesU = document.getElementById('cluesU');
+    const cluesSuggestions = document.getElementById('cluesU_suggestions');
+    let cluesData = []; // Array para almacenar los datos del JSON
+
+    // Cargar el JSON con todas las CLUES
+    fetch('/json/clues.json')
+        .then(response => response.json())
+        .then(data => {
+            cluesData = data; // Asigna los datos cargados al array cluesData
+            cluesU.value = cluesData.find(clue => clue.clues === "CSSSA006403").clues; // Preseleccionar la CLUES del Hospital General
+        })
+        .catch(error => console.error('Error cargando el JSON de CLUES:', error));
+
+    // Mostrar sugerencias filtradas al escribir en el input
+    cluesU.addEventListener('input', function () {
+        const filtro = cluesU.value.toLowerCase();
+        cluesSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
+        const opcionesFiltradas = cluesData.filter(option => option.clues.toLowerCase().includes(filtro));
+
+        if (opcionesFiltradas.length > 0) {
+            cluesSuggestions.style.display = 'block';
+            opcionesFiltradas.forEach(option => {
+                const li = document.createElement('li');
+                li.textContent = option.clues;
+                li.style.padding = '10px';
+                li.style.cursor = 'pointer';
+                li.style.listStyle = 'none';
+                li.style.borderBottom = '1px solid #e9ecef';
+                li.style.fontWeight = 'bold';
+                li.style.color = '#000';
+                li.style.backgroundColor = '#fff';
+                li.addEventListener('click', function () {
+                    cluesU.value = option.clues;
+                    cluesSuggestions.style.display = 'none';
+                });
+                cluesSuggestions.appendChild(li);
+            });
+        } else {
+            cluesSuggestions.style.display = 'none';
+        }
+    });
+
+    // Mostrar todas las opciones al hacer focus en el input
+    cluesU.addEventListener('focus', function () {
+        cluesSuggestions.innerHTML = ''; // Limpia las sugerencias
+        cluesData.forEach(option => {
+            const li = document.createElement('li');
+            li.textContent = option.clues;
+            li.style.padding = '10px';
+            li.style.cursor = 'pointer';
+            li.style.listStyle = 'none';
+            li.style.borderBottom = '1px solid #e9ecef';
+            li.style.fontWeight = 'bold';
+            li.style.color = '#000';
+            li.style.backgroundColor = '#fff';
+            li.addEventListener('click', function () {
+                cluesU.value = option.clues;
+                cluesSuggestions.style.display = 'none';
+            });
+            cluesSuggestions.appendChild(li);
+        });
+        cluesSuggestions.style.display = 'block'; // Muestra todas las sugerencias
+    });
+
+    // Oculta la lista al hacer clic fuera del input
+    cluesU.addEventListener('blur', function () {
+        setTimeout(() => {
+            cluesSuggestions.style.display = 'none';
+        }, 200);
+    });
+});
+    
   </script>
 @endpush
