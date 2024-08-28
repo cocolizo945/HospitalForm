@@ -639,6 +639,251 @@ input_pais.addEventListener('focus', function() {
   }
 });
 
+
+document.addEventListener('DOMContentLoaded', function () {
+  const clues = document.getElementById('clues');
+  const cluesSuggestions = document.getElementById('clues_suggestions');
+  const preselectedClues = "CSSSA006403"; // CLUES del Hospital General
+  let cluesData = []; // Array para almacenar los datos del JSON
+
+  // Cargar el JSON con todas las CLUES
+  fetch('/json/clues.json')
+      .then(response => response.json())
+      .then(data => {
+          cluesData = data; // Asigna los datos cargados al array cluesData
+
+          // Preseleccionar la CLUES del Hospital General
+          clues.value = preselectedClues;
+      })
+      .catch(error => console.error('Error cargando el JSON de CLUES:', error));
+
+  // Mostrar sugerencias filtradas al escribir en el input
+  clues.addEventListener('input', function () {
+      const filtro = clues.value.toLowerCase();
+      cluesSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
+      const opcionesFiltradas = cluesData.filter(option => option.clues.toLowerCase().includes(filtro));
+
+      if (opcionesFiltradas.length > 0) {
+          cluesSuggestions.style.display = 'block';
+          opcionesFiltradas.forEach(option => {
+              const li = document.createElement('li');
+              li.textContent = option.clues;
+              li.style.padding = '10px';
+              li.style.cursor = 'pointer';
+              li.style.listStyle = 'none';
+              li.style.borderBottom = '1px solid #e9ecef';
+              li.style.fontWeight = 'bold';
+              li.style.color = '#000';
+              li.style.backgroundColor = '#fff';
+              li.addEventListener('click', function () {
+                  clues.value = option.clues;
+                  cluesSuggestions.style.display = 'none';
+              });
+              cluesSuggestions.appendChild(li);
+          });
+      } else {
+          cluesSuggestions.style.display = 'none';
+      }
+  });
+
+  // Mostrar todas las opciones al hacer focus en el input
+  clues.addEventListener('focus', function () {
+      cluesSuggestions.innerHTML = ''; // Limpia las sugerencias
+      cluesData.forEach(option => {
+          const li = document.createElement('li');
+          li.textContent = option.clues;
+          li.style.padding = '10px';
+          li.style.cursor = 'pointer';
+          li.style.listStyle = 'none';
+          li.style.borderBottom = '1px solid #e9ecef';
+          li.style.fontWeight = 'bold';
+          li.style.color = '#000';
+          li.style.backgroundColor = '#fff';
+          li.addEventListener('click', function () {
+              clues.value = option.clues;
+              cluesSuggestions.style.display = 'none';
+          });
+          cluesSuggestions.appendChild(li);
+      });
+      cluesSuggestions.style.display = 'block'; // Muestra todas las sugerencias
+  });
+
+  // Oculta la lista al hacer clic fuera del input
+  clues.addEventListener('blur', function () {
+      setTimeout(() => {
+          cluesSuggestions.style.display = 'none';
+      }, 200);
+  });
+});
+document.addEventListener('DOMContentLoaded', function () {
+  const cluesU = document.getElementById('cluesU');
+  const cluesSuggestions = document.getElementById('cluesU_suggestions');
+  let cluesData = []; // Array para almacenar los datos del JSON
+
+  // Cargar el JSON con todas las CLUES
+  fetch('/json/clues.json')
+      .then(response => response.json())
+      .then(data => {
+          cluesData = data; // Asigna los datos cargados al array cluesData
+          cluesU.value = cluesData.find(clue => clue.clues === "CSSSA006403").clues; // Preseleccionar la CLUES del Hospital General
+      })
+      .catch(error => console.error('Error cargando el JSON de CLUES:', error));
+
+  // Mostrar sugerencias filtradas al escribir en el input
+  cluesU.addEventListener('input', function () {
+      const filtro = cluesU.value.toLowerCase();
+      cluesSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
+      const opcionesFiltradas = cluesData.filter(option => option.clues.toLowerCase().includes(filtro));
+
+      if (opcionesFiltradas.length > 0) {
+          cluesSuggestions.style.display = 'block';
+          opcionesFiltradas.forEach(option => {
+              const li = document.createElement('li');
+              li.textContent = option.clues;
+              li.style.padding = '10px';
+              li.style.cursor = 'pointer';
+              li.style.listStyle = 'none';
+              li.style.borderBottom = '1px solid #e9ecef';
+              li.style.fontWeight = 'bold';
+              li.style.color = '#000';
+              li.style.backgroundColor = '#fff';
+              li.addEventListener('click', function () {
+                  cluesU.value = option.clues;
+                  cluesSuggestions.style.display = 'none';
+              });
+              cluesSuggestions.appendChild(li);
+          });
+      } else {
+          cluesSuggestions.style.display = 'none';
+      }
+  });
+
+  // Mostrar todas las opciones al hacer focus en el input
+  cluesU.addEventListener('focus', function () {
+      cluesSuggestions.innerHTML = ''; // Limpia las sugerencias
+      cluesData.forEach(option => {
+          const li = document.createElement('li');
+          li.textContent = option.clues;
+          li.style.padding = '10px';
+          li.style.cursor = 'pointer';
+          li.style.listStyle = 'none';
+          li.style.borderBottom = '1px solid #e9ecef';
+          li.style.fontWeight = 'bold';
+          li.style.color = '#000';
+          li.style.backgroundColor = '#fff';
+          li.addEventListener('click', function () {
+              cluesU.value = option.clues;
+              cluesSuggestions.style.display = 'none';
+          });
+          cluesSuggestions.appendChild(li);
+      });
+      cluesSuggestions.style.display = 'block'; // Muestra todas las sugerencias
+  });
+
+  // Oculta la lista al hacer clic fuera del input
+  cluesU.addEventListener('blur', function () {
+      setTimeout(() => {
+          cluesSuggestions.style.display = 'none';
+      }, 200);
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const referidoPor = document.getElementById('referido_por');
+  const referidoPorSuggestions = document.getElementById('referido_por_suggestions');
+  const unidadMedicaEspecifique = document.getElementById('unidadMedicaEspecifique'); // Asegúrate de tener este ID en tu HTML
+  const cluesU = document.getElementById('CluesU'); // Asegúrate de tener este ID en tu HTML
+  let referidoPorData = []; // Array para almacenar los datos del JSON
+
+  // Inicialmente ocultar los bloques adicionales
+  unidadMedicaEspecifique.style.display = 'none';
+  cluesU.style.display = 'none';
+
+  // Cargar el JSON con todas las opciones
+  fetch('/json/referido(a)_por.json')
+      .then(response => response.json())
+      .then(data => {
+          referidoPorData = data; // Asigna los datos cargados al array referidoPorData
+      })
+      .catch(error => console.error('Error cargando el JSON de opciones:', error));
+
+  // Mostrar sugerencias filtradas al escribir en el input
+  referidoPor.addEventListener('input', function () {
+      const filter = referidoPor.value.toLowerCase();
+      referidoPorSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
+      const filteredOptions = referidoPorData.filter(option => option.text.toLowerCase().includes(filter));
+
+      if (filteredOptions.length > 0) {
+          referidoPorSuggestions.style.display = 'block';
+          filteredOptions.forEach(option => {
+              const li = document.createElement('li');
+              li.textContent = option.text;
+              li.style.padding = '10px';
+              li.style.cursor = 'pointer';
+              li.style.listStyle = 'none';
+              li.style.borderBottom = '1px solid #e9ecef';
+              li.style.fontWeight = 'bold';
+              li.style.color = '#000';
+              li.style.backgroundColor = '#fff';
+              li.addEventListener('click', function () {
+                  referidoPor.value = option.text;
+                  referidoPorSuggestions.style.display = 'none';
+
+                  // Mostrar las secciones basado en la selección
+                  if (option.text.toLowerCase() === 'unidad médica') {
+                      unidadMedicaEspecifique.style.display = 'block';
+                      cluesU.style.display = 'block';
+                  } else {
+                      unidadMedicaEspecifique.style.display = 'none';
+                      cluesU.style.display = 'none';
+                  }
+              });
+              referidoPorSuggestions.appendChild(li);
+          });
+      } else {
+          referidoPorSuggestions.style.display = 'none';
+      }
+  });
+
+  // Mostrar todas las opciones al hacer focus en el input
+  referidoPor.addEventListener('focus', function () {
+      referidoPorSuggestions.innerHTML = ''; // Limpia las sugerencias
+      referidoPorData.forEach(option => {
+          const li = document.createElement('li');
+          li.textContent = option.text;
+          li.style.padding = '10px';
+          li.style.cursor = 'pointer';
+          li.style.listStyle = 'none';
+          li.style.borderBottom = '1px solid #e9ecef';
+          li.style.fontWeight = 'bold';
+          li.style.color = '#000';
+          li.style.backgroundColor = '#fff';
+          li.addEventListener('click', function () {
+              referidoPor.value = option.text;
+              referidoPorSuggestions.style.display = 'none';
+
+              // Mostrar las secciones basado en la selección
+              if (option.text.toLowerCase() === 'unidad médica') {
+                  unidadMedicaEspecifique.style.display = 'block';
+                  cluesU.style.display = 'block';
+              } else {
+                  unidadMedicaEspecifique.style.display = 'none';
+                  cluesU.style.display = 'none';
+              }
+          });
+          referidoPorSuggestions.appendChild(li);
+      });
+      referidoPorSuggestions.style.display = 'block';
+  });
+
+  // Oculta la lista al hacer clic fuera del input
+  referidoPor.addEventListener('blur', function () {
+      setTimeout(() => {
+          referidoPorSuggestions.style.display = 'none';
+      }, 200);
+  });
+});
  
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //URGENCIAS 

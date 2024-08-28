@@ -329,21 +329,13 @@
                   </div>
                   <!-- Referida(o) por -->
                   <div class="col-md-4">
-                    <label for="referido_por">Referida(o) por:</label>
-                    <div class="form-group">
-                      <select id="referido_por" class="selectpicker form-control" name="referido_por" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. Unidad médica</option>
-                        <option value="2">2. Procuración de Justicia</option>
-                        <option value="3">3. Secretaría de Educación Pública</option>
-                        <option value="4">4. Desarrollo Social</option>
-                        <option value="5">5. DIF</option>
-                        <option value="6">6. Otras instituciones gubernamentales</option>
-                        <option value="7">7. Instituciones No gubernamentales</option>
-                        <option value="8">8. Sin referencia (iniciativa propia)</option>
-                      </select>
-                    </div>
-                  </div>
+    <label for="referido_por">Referida(o) por:</label>
+    <div class="form-group">
+        <input type="text" id="referido_por" class="form-control" placeholder="Selecciona una opcion" autocomplete="off" />
+        <ul id="referido_por_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        </ul>
+    </div>
+    </div>
                   <!-- Unidad Médica Especifique Nombre -->
                   <div class="col-md-4" id="unidadMedicaEspecifique" style="display: none;">
                     <label for="unidad_medica">Nombre (Unidad Médica):</label>
@@ -1008,153 +1000,7 @@
       }, 600);
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-    const clues = document.getElementById('clues');
-    const cluesSuggestions = document.getElementById('clues_suggestions');
-    const preselectedClues = "CSSSA006403"; // CLUES del Hospital General
-    let cluesData = []; // Array para almacenar los datos del JSON
-
-    // Cargar el JSON con todas las CLUES
-    fetch('/json/clues.json')
-        .then(response => response.json())
-        .then(data => {
-            cluesData = data; // Asigna los datos cargados al array cluesData
-
-            // Preseleccionar la CLUES del Hospital General
-            clues.value = preselectedClues;
-        })
-        .catch(error => console.error('Error cargando el JSON de CLUES:', error));
-
-    // Mostrar sugerencias filtradas al escribir en el input
-    clues.addEventListener('input', function () {
-        const filtro = clues.value.toLowerCase();
-        cluesSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
-        const opcionesFiltradas = cluesData.filter(option => option.clues.toLowerCase().includes(filtro));
-
-        if (opcionesFiltradas.length > 0) {
-            cluesSuggestions.style.display = 'block';
-            opcionesFiltradas.forEach(option => {
-                const li = document.createElement('li');
-                li.textContent = option.clues;
-                li.style.padding = '10px';
-                li.style.cursor = 'pointer';
-                li.style.listStyle = 'none';
-                li.style.borderBottom = '1px solid #e9ecef';
-                li.style.fontWeight = 'bold';
-                li.style.color = '#000';
-                li.style.backgroundColor = '#fff';
-                li.addEventListener('click', function () {
-                    clues.value = option.clues;
-                    cluesSuggestions.style.display = 'none';
-                });
-                cluesSuggestions.appendChild(li);
-            });
-        } else {
-            cluesSuggestions.style.display = 'none';
-        }
-    });
-
-    // Mostrar todas las opciones al hacer focus en el input
-    clues.addEventListener('focus', function () {
-        cluesSuggestions.innerHTML = ''; // Limpia las sugerencias
-        cluesData.forEach(option => {
-            const li = document.createElement('li');
-            li.textContent = option.clues;
-            li.style.padding = '10px';
-            li.style.cursor = 'pointer';
-            li.style.listStyle = 'none';
-            li.style.borderBottom = '1px solid #e9ecef';
-            li.style.fontWeight = 'bold';
-            li.style.color = '#000';
-            li.style.backgroundColor = '#fff';
-            li.addEventListener('click', function () {
-                clues.value = option.clues;
-                cluesSuggestions.style.display = 'none';
-            });
-            cluesSuggestions.appendChild(li);
-        });
-        cluesSuggestions.style.display = 'block'; // Muestra todas las sugerencias
-    });
-
-    // Oculta la lista al hacer clic fuera del input
-    clues.addEventListener('blur', function () {
-        setTimeout(() => {
-            cluesSuggestions.style.display = 'none';
-        }, 200);
-    });
-});
-document.addEventListener('DOMContentLoaded', function () {
-    const cluesU = document.getElementById('cluesU');
-    const cluesSuggestions = document.getElementById('cluesU_suggestions');
-    let cluesData = []; // Array para almacenar los datos del JSON
-
-    // Cargar el JSON con todas las CLUES
-    fetch('/json/clues.json')
-        .then(response => response.json())
-        .then(data => {
-            cluesData = data; // Asigna los datos cargados al array cluesData
-            cluesU.value = cluesData.find(clue => clue.clues === "CSSSA006403").clues; // Preseleccionar la CLUES del Hospital General
-        })
-        .catch(error => console.error('Error cargando el JSON de CLUES:', error));
-
-    // Mostrar sugerencias filtradas al escribir en el input
-    cluesU.addEventListener('input', function () {
-        const filtro = cluesU.value.toLowerCase();
-        cluesSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
-        const opcionesFiltradas = cluesData.filter(option => option.clues.toLowerCase().includes(filtro));
-
-        if (opcionesFiltradas.length > 0) {
-            cluesSuggestions.style.display = 'block';
-            opcionesFiltradas.forEach(option => {
-                const li = document.createElement('li');
-                li.textContent = option.clues;
-                li.style.padding = '10px';
-                li.style.cursor = 'pointer';
-                li.style.listStyle = 'none';
-                li.style.borderBottom = '1px solid #e9ecef';
-                li.style.fontWeight = 'bold';
-                li.style.color = '#000';
-                li.style.backgroundColor = '#fff';
-                li.addEventListener('click', function () {
-                    cluesU.value = option.clues;
-                    cluesSuggestions.style.display = 'none';
-                });
-                cluesSuggestions.appendChild(li);
-            });
-        } else {
-            cluesSuggestions.style.display = 'none';
-        }
-    });
-
-    // Mostrar todas las opciones al hacer focus en el input
-    cluesU.addEventListener('focus', function () {
-        cluesSuggestions.innerHTML = ''; // Limpia las sugerencias
-        cluesData.forEach(option => {
-            const li = document.createElement('li');
-            li.textContent = option.clues;
-            li.style.padding = '10px';
-            li.style.cursor = 'pointer';
-            li.style.listStyle = 'none';
-            li.style.borderBottom = '1px solid #e9ecef';
-            li.style.fontWeight = 'bold';
-            li.style.color = '#000';
-            li.style.backgroundColor = '#fff';
-            li.addEventListener('click', function () {
-                cluesU.value = option.clues;
-                cluesSuggestions.style.display = 'none';
-            });
-            cluesSuggestions.appendChild(li);
-        });
-        cluesSuggestions.style.display = 'block'; // Muestra todas las sugerencias
-    });
-
-    // Oculta la lista al hacer clic fuera del input
-    cluesU.addEventListener('blur', function () {
-        setTimeout(() => {
-            cluesSuggestions.style.display = 'none';
-        }, 200);
-    });
-});
+  
     
   </script>
 @endpush
