@@ -133,7 +133,8 @@
               <div class="col-md-4">
                 <label for="entidad_nacimiento">Entidad o País de Nacimiento:</label>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="entidad_nacimiento" name="entidad_nacimiento" placeholder="Chiapas" minlength="3" required>
+                <input type="text" id="entidad_nacimiento" name="entidad_nacimiento" class="form-control" placeholder="País" autocomplete="off" required>
+                <ul id="sugerencias_entidad_nacimiento" class="list-group autocomplete-suggestions"></ul>
                 </div>
               </div>
             </div>
@@ -750,7 +751,7 @@
 @endsection
 
 @push('js')
-
+<script src="{{ asset('black/js/urgencias.js') }}"></script>
   <script>
     $(document).ready(function() {
       $('.datetimepicker').datetimepicker({
@@ -826,4 +827,6 @@
       }, 600);
     });
   </script>
+ 
+
 @endpush
