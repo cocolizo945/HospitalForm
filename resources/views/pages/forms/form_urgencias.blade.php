@@ -447,18 +447,11 @@
 
             <div class="row" id="estanciaRow4">
               <!-- Alta Por(Enviado A): -->
-              <div class="col-md-6">
+              <div class="col-md-6 autocomplete-container">
                 <label for="alta_por">Alta Por(Enviado A):</label>
                 <div class="form-group">
-                  <select id="alta_por" class="selectpicker form-control" name="alta_por" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
-                    <option value="0">Hospitalización</option>
-                    <option value="1">Consulta Externa</option>
-                    <option value="2">Traslado a otra unidad</option>
-                    <option value="3">Domicilio</option>
-                    <option value="4">Defunción</option>
-                    <option value="5">Fuga</option>
-                    <option value="6">Voluntad</option>
-                  </select>
+                  <input type="text" id="alta_por" name="alta_por" class="form-control autocomplete-input" placeholder="Tipo de Vialidad" autocomplete="off">
+                  <ul class="list-group autocomplete-suggestions"></ul>
                 </div>
               </div>
 
