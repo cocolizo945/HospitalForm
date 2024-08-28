@@ -847,7 +847,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Mostrar todas las opciones al hacer focus en el input
-  referidoPor.addEventListener('focus', function () {
+  /**referidoPor.addEventListener('focus', function () {
       referidoPorSuggestions.innerHTML = ''; // Limpia las sugerencias
       referidoPorData.forEach(option => {
           const li = document.createElement('li');
@@ -875,7 +875,7 @@ document.addEventListener('DOMContentLoaded', function () {
           referidoPorSuggestions.appendChild(li);
       });
       referidoPorSuggestions.style.display = 'block';
-  });
+  }); **/
 
   // Oculta la lista al hacer clic fuera del input
   referidoPor.addEventListener('blur', function () {
@@ -884,8 +884,109 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 200);
   });
 });
+
+const afiliaciones = [
+  "No especificado", 
+  "Ninguna", 
+  "IMSS", 
+  "ISSSTE", 
+  "PEMEX", 
+  "SEDENA", 
+  "SEMAR", 
+  "OTRA", 
+  "IMSS Bienestar", 
+  "ISSFAM", 
+  "OPD IMSS Bienestar", 
+  "Se ignora", 
+  "Especifique"
+];
+
+let sugerencias_afiliacion = document.getElementById('sugerencias_afiliacion');
+let input_afiliacion = document.getElementById('afiliacion_input');
+let especificarCampo = document.getElementById('afiliacionEspecifique'); // Campo que se va a mostrar
+let numeroAfiliacion = document.getElementById('numero_afiliacion'); // Campo de Número de Afiliación
+
+// Función para mostrar sugerencias
+input_afiliacion.addEventListener('input', function() {
+  let valor = input_afiliacion.value.toLowerCase();
+  sugerencias_afiliacion.innerHTML = '';
+
+  const opcionesFiltradas = afiliaciones.filter(afiliacion => afiliacion.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+      sugerencias_afiliacion.style.display = 'block';
+      opcionesFiltradas.forEach(opcion => {
+          const li = document.createElement('li');
+          li.textContent = opcion;
+          li.classList.add('list-group-item');
+          li.style.cursor = 'pointer';
+          li.addEventListener('click', function() {
+              input_afiliacion.value = opcion;
+              sugerencias_afiliacion.style.display = 'none';
+              
+              // Mostrar el campo adicional si se selecciona 'Especifique'
+              if (opcion === 'Especifique') {
+                  especificarCampo.style.display = 'block';
+              } else {
+                  especificarCampo.style.display = 'none';
+              }
+              // Deshabilitar el campo Número de Afiliación si se selecciona 'No especificado', 'Ninguna' o 'Se ignora'
+              if (opcion === 'No especificado' || opcion === 'Ninguna' || opcion === 'Se ignora') {
+                numeroAfiliacion.disabled = true;
+                numeroAfiliacion.value = ''; // Limpia el campo
+            } else {
+                numeroAfiliacion.disabled = false;
+            }
+          });
+          sugerencias_afiliacion.appendChild(li);
+      });
+  } else {
+      sugerencias_afiliacion.style.display = 'none';
+  }
+});
+
+numeroAfiliacion.addEventListener('input', function() {
+  let valor = numeroAfiliacion.value;
+  
+  // Limitar a 11 dígitos
+  if (valor.length > 11) {
+      numeroAfiliacion.value = valor.slice(0, 11);
+  }
+});
+
+input_afiliacion.addEventListener('blur', function() {
+  setTimeout(() => {
+      sugerencias_afiliacion.style.display = 'none';
+  }, 200);
+});
+
+/**input_afiliacion.addEventListener('focus', function() {
+  if (input_afiliacion.value === '') {
+      sugerencias_afiliacion.innerHTML = '';
+      afiliaciones.forEach(opcion => {
+          const li = document.createElement('li');
+          li.textContent = opcion;
+          li.classList.add('list-group-item');
+          li.style.cursor = 'pointer';
+          li.addEventListener('click', function() {
+              input_afiliacion.value = opcion;
+              sugerencias_afiliacion.style.display = 'none';
+              
+              // Mostrar el campo adicional si se selecciona 'Especifique'
+              if (opcion === 'Especifique') {
+                  especificarCampo.style.display = 'block';
+              } else {
+                  especificarCampo.style.display = 'none';
+              }
+          });
+          sugerencias_afiliacion.appendChild(li);
+      });
+      sugerencias_afiliacion.style.display = 'block';
+  }
+});
+
  
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //URGENCIAS 
 /////////////////////////////////////////////////////////
-
+**/
