@@ -114,9 +114,7 @@ function validarCURP(curp) {
         {selectId: 'escolaridad', targetSection: 'escolaridad_seleccionada', showValues: ['Primaria', 'Secundaria', 'Bachillerato o preparatoria', 'Profesional', 'Posgrado']},
         {selectId: 'sexo', targetSection: 'mujerFertilSection', showValues: ['Mujer', 'Intersexual']},
         {selectId: 'mujer_fertil', targetSection: 'semanasGestacionSection', showValues: ['1']},
-        {selectId: 'lengua_indigena', targetSection: 'cualLenguaSection', showValues: ['1']},
-        {selectId: 'referido_por', targetSection: 'unidadMedicaEspecifique', showValues: ['1']},
-        {selectId: 'referido_por', targetSection: 'CluesU', showValues: ['1']}
+        {selectId: 'lengua_indigena', targetSection: 'cualLenguaSection', showValues: ['1']}
     ];
 
     // Add event listeners to select elements to toggle visibility of sections

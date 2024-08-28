@@ -282,3 +282,19 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   });
 });
+
+// INTERCONSULTA
+ 
+  document.addEventListener('DOMContentLoaded', function () {
+  const interconsultaSelect = document.getElementById('interconsulta_select');
+  const additionalFields = document.getElementById('interconsultaRow2');
+
+  // Event listener para el cambio de selección en el dropdown de interconsulta
+  interconsultaSelect.addEventListener('change', function () {
+      if (interconsultaSelect.value === "1") { // Si la opción es "SI"
+          additionalFields.style.display = ''; // Muestra los campos
+      } else { // Si la opción es "NO"
+          additionalFields.style.display = 'none'; // Oculta los campos
+      }
+  });
+});

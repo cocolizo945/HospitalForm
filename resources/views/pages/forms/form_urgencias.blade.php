@@ -522,48 +522,49 @@
           </div>
 
           <!-- Interconsulta -->
-          <div class="tab-pane" id="form4">
-            <h5 class="info-text" id="interconsulta">Interconsulta</h5>
-            <div class="row" id="interconsultaRow1">
-              <!-- Interconsulta -->
-              <div class="col-md-4">
-                <label for="interconsulta_select">Interconsulta:</label>
-                <div class="form-group">
-                  <select class="selectpicker form-control" id="interconsulta_select" name="interconsulta_select" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+<div class="tab-pane" id="form4">
+    <h5 class="info-text" id="interconsulta">Interconsulta</h5>
+    <div class="row" id="interconsultaRow1">
+        <!-- Interconsulta -->
+        <div class="col-md-4">
+            <label for="interconsulta_select">Interconsulta:</label>
+            <div class="form-group">
+                <select class="selectpicker form-control" id="interconsulta_select" name="interconsulta_select" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
                     <option disabled selected>Selección Única</option>
                     <option value="1">SI</option>
                     <option value="0">NO</option>
-                  </select>
-                </div>
-              </div>
+                </select>
             </div>
+        </div>
+    </div>
 
-            <div class="row" id="interconsultaRow2">
-              <!-- Especialidad -->
-              <div class="col-md-4">
-                <label for="especialidad">Especialidad:</label>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="especialidad" name="especialidad" placeholder="Traumatología" minlength="3" required>
-                </div>
-              </div>
-
-              <!-- Médica(o) Interconsultante -->
-              <div class="col-md-4">
-                <label for="medico_interconsultante">Médica(o) Interconsultante:</label>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="medico_interconsultante" name="medico_interconsultante" placeholder="Dr. Juan Pérez Gómez" minlength="3" required>
-                </div>
-              </div>
-
-              <!-- Cédula o C.U.R.P -->
-              <div class="col-md-4">
-                <label for="cedula_curp">Cédula o C.U.R.P:</label>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="cedula_curp" name="cedula_curp" placeholder="1234567890" minlength="10" required>
-                </div>
-              </div>
+    <!-- Campos ocultos inicialmente -->
+    <div class="row" id="interconsultaRow2" style="display: none;">
+        <!-- Especialidad -->
+        <div class="col-md-4">
+            <label for="especialidad">Especialidad:</label>
+            <div class="form-group">
+                <input type="text" class="form-control" id="especialidad" name="especialidad" placeholder="Traumatología" minlength="3" required>
             </div>
-          </div>
+        </div>
+
+        <!-- Médica(o) Interconsultante -->
+        <div class="col-md-4">
+            <label for="medico_interconsultante">Médica(o) Interconsultante:</label>
+            <div class="form-group">
+                <input type="text" class="form-control" id="medico_interconsultante" name="medico_interconsultante" placeholder="Dr. Juan Pérez Gómez" minlength="3" required>
+            </div>
+        </div>
+
+        <!-- Cédula o C.U.R.P -->
+        <div class="col-md-4">
+            <label for="cedula_curp">Cédula o C.U.R.P:</label>
+            <div class="form-group">
+                <input type="text" class="form-control" id="cedula_curp" name="cedula_curp" placeholder="1234567890" minlength="10" required>
+            </div>
+        </div>
+    </div>
+</div>
 
           <!-- Procedimientos -->
           <div class="tab-pane" id="form5">
