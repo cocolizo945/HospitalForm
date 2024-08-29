@@ -486,4 +486,137 @@ const data = {
       document.getElementById('sugerencias_clues').style.display = "none";
     }, 200);
   }
+  //--------------------------------------------------
+  const afeccionesPrincipales = [
+    "Fractura de fémur", "Infarto agudo de miocardio", "Accidente cerebrovascular", 
+    "Neumonía", "Apendicitis aguda", "Insuficiencia renal", "Diabetes mellitus",
+    "Hipertensión arterial", "Asma", "Enfermedad pulmonar obstructiva crónica",
+    // Agrega más afecciones principales aquí
+];
+
+const opcionesComorbilidades = [
+    "Diabetes", "Hipertensión", "Obesidad", "Enfermedad renal crónica",
+    "EPOC", "Asma", "Insuficiencia cardíaca", "Artritis reumatoide", 
+    "Cáncer", "Hepatitis", "Anemia", "Enfermedad hepática", 
+    // Agrega más comorbilidades aquí
+];
+
+const inputAfeccionPrincipal = document.getElementById('afeccion_principal_input');
+const listaSugerenciasAfeccion = document.getElementById('sugerencias_afeccion');
+
+const inputComorbilidades = document.getElementById('comorbilidades_input');
+const listaSugerenciasComorbilidades = document.getElementById('sugerencias_comorbilidades');
+const divSeleccionesComorbilidades = document.getElementById('selecciones_comorbilidades');
+let listaComorbilidadesSeleccionadas = [];
+
+// Mostrar todas las opciones al hacer clic (focus) en el input de afección principal
+inputAfeccionPrincipal.addEventListener('focus', function () {
+    mostrarOpcionesFiltradas(afeccionesPrincipales, listaSugerenciasAfeccion, inputAfeccionPrincipal);
+});
+
+// Mostrar todas las opciones al hacer clic (focus) en el input de comorbilidades
+inputComorbilidades.addEventListener('focus', function () {
+    mostrarOpcionesFiltradas(opcionesComorbilidades, listaSugerenciasComorbilidades, inputComorbilidades);
+});
+
+// Ocultar sugerencias cuando se hace clic fuera del input
+document.addEventListener('click', function(event) {
+    if (!inputAfeccionPrincipal.contains(event.target) && !listaSugerenciasAfeccion.contains(event.target)) {
+        listaSugerenciasAfeccion.style.display = 'none';
+    }
+    if (!inputComorbilidades.contains(event.target) && !listaSugerenciasComorbilidades.contains(event.target)) {
+        listaSugerenciasComorbilidades.style.display = 'none';
+    }
+});
+
+function mostrarOpcionesFiltradas(opciones, listaSugerencias, input) {
+    listaSugerencias.innerHTML = ''; 
+    opciones.forEach(opcion => {
+        const elementoLista = document.createElement('li');
+        elementoLista.textContent = opcion;
+        elementoLista.style.padding = '10px';
+        elementoLista.style.cursor = 'pointer';
+        elementoLista.style.listStyle = 'none';
+        elementoLista.style.borderBottom = '1px solid #e9ecef';
+        elementoLista.style.fontWeight = 'bold';
+        elementoLista.style.color = '#000';
+        elementoLista.style.backgroundColor = '#fff';
+        elementoLista.addEventListener('click', function () {
+            if (input === inputAfeccionPrincipal) {
+                inputAfeccionPrincipal.value = opcion;
+                listaSugerenciasAfeccion.style.display = 'none';
+            } else if (input === inputComorbilidades) {
+                agregarComorbilidadSeleccionada(opcion);
+                listaSugerenciasComorbilidades.style.display = 'none';
+            }
+        });
+        listaSugerencias.appendChild(elementoLista);
+    });
+    listaSugerencias.style.display = 'block';
+}
+
+// Autocompletado para Afección Principal
+inputAfeccionPrincipal.addEventListener('input', function () {
+    const filtro = inputAfeccionPrincipal.value.toLowerCase();
+    const opcionesFiltradas = afeccionesPrincipales.filter(opcion => opcion.toLowerCase().includes(filtro));
+    mostrarOpcionesFiltradas(opcionesFiltradas, listaSugerenciasAfeccion, inputAfeccionPrincipal);
+});
+
+// Autocompletado para Comorbilidades
+inputComorbilidades.addEventListener('input', function () {
+    const filtro = inputComorbilidades.value.toLowerCase();
+    const opcionesFiltradas = opcionesComorbilidades.filter(opcion => opcion.toLowerCase().includes(filtro));
+    mostrarOpcionesFiltradas(opcionesFiltradas, listaSugerenciasComorbilidades, inputComorbilidades);
+});
+
+// Función para agregar comorbilidades seleccionadas
+function agregarComorbilidadSeleccionada(opcion) {
+    if (listaComorbilidadesSeleccionadas.length >= 5) {
+        alert('Solo puedes seleccionar hasta 5 comorbilidades.');
+        return;
+    }
+
+    if (!listaComorbilidadesSeleccionadas.includes(opcion)) {
+        listaComorbilidadesSeleccionadas.push(opcion);
+        actualizarListaComorbilidadesSeleccionadas();
+    }
+
+    inputComorbilidades.value = ''; // Limpiar el input después de seleccionar
+}
+
+// Función para eliminar comorbilidad seleccionada
+function eliminarComorbilidadSeleccionada(opcion) {
+    listaComorbilidadesSeleccionadas = listaComorbilidadesSeleccionadas.filter(sel => sel !== opcion);
+    actualizarListaComorbilidadesSeleccionadas();
+}
+
+// Función para actualizar la lista de comorbilidades seleccionadas
+function actualizarListaComorbilidadesSeleccionadas() {
+    divSeleccionesComorbilidades.innerHTML = '';
+    listaComorbilidadesSeleccionadas.forEach(opcion => {
+        const divComorbilidad = document.createElement('div');
+        divComorbilidad.textContent = opcion;
+        divComorbilidad.style.padding = '5px';
+        divComorbilidad.style.backgroundColor = '#e9ecef';
+        divComorbilidad.style.marginBottom = '5px';
+        divComorbilidad.style.display = 'inline-block';
+        divComorbilidad.style.fontWeight = 'bold';
+        divComorbilidad.style.marginRight = '5px';
+
+        const botonEliminar = document.createElement('button');
+        botonEliminar.textContent = 'X';
+        botonEliminar.style.marginLeft = '10px';
+        botonEliminar.style.color = 'red';
+        botonEliminar.style.border = 'none';
+        botonEliminar.style.backgroundColor = 'transparent';
+        botonEliminar.style.cursor = 'pointer';
+        botonEliminar.addEventListener('click', function () {
+            eliminarComorbilidadSeleccionada(opcion);
+        });
+
+        divComorbilidad.appendChild(botonEliminar);
+        divSeleccionesComorbilidades.appendChild(divComorbilidad);
+    });
+}
+
   

@@ -501,19 +501,24 @@
             <div class="row" id="afeccionesTratadasRow1">
               <!-- Afección Principal -->
               <div class="col-md-4">
-                <label for="afeccion_principal">Afección Principal:</label>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="afeccion_principal" name="afeccion_principal" placeholder="Fractura de fémur" minlength="3" required>
-                </div>
-              </div>
+    <label for="afeccion_principal">Afección Principal:</label>
+    <div class="form-group">
+        <input type="text" id="afeccion_principal_input" class="form-control" placeholder="Escribe para seleccionar" />
+        <ul id="sugerencias_afeccion" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        </ul>
+    </div>
+</div>
 
               <!-- Comorbilidades -->
               <div class="col-md-4">
-                <label for="comorbilidades">Comorbilidades:</label>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="comorbilidades" name="comorbilidades" placeholder="Diabetes" minlength="3" required>
-                </div>
-              </div>
+    <label for="comorbilidades">Comorbilidades:</label>
+    <div class="form-group">
+        <input type="text" id="comorbilidades_input" class="form-control" placeholder="Escribe para seleccionar" />
+        <ul id="sugerencias_comorbilidades" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        </ul>
+        <div id="selecciones_comorbilidades" class="mt-2"></div>
+    </div>
+</div>
 
               <!-- Causa Externa -->
               <div class="col-md=4">
