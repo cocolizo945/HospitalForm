@@ -162,37 +162,26 @@
                   <div class="col-md-4">
                     <label for="afiliacion">Afiliación a los Servicios de Salud:</label>
                     <div class="form-group">
-                      <select id="afiliacion" class="selectpicker form-control" name="afiliacion" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="0">1. No especificado</option>
-                        <option value="1">2. Ninguna</option>
-                        <option value="2">3. IMSS</option>
-                        <option value="3">4. ISSSTE</option>
-                        <option value="4">5. PEMEX</option>
-                        <option value="5">6. SEDENA</option>
-                        <option value="6">7. SEMAR</option>
-                        <option value="7">8. OTRA</option>
-                        <option value="8">9. IMSS Bienestar</option>
-                        <option value="9">10. ISSFAM</option>
-                        <option value="10">11. OPD IMSS Bienestar</option>
-                        <option value="99">12. Se ignora</option>
-                        <option value="12">13. Especifique</option>
-                      </select>
+                      <input type="text" id="afiliacion_input" name="afiliacion_input" class="form-control"
+                        placeholder="Seleccione su afiliación" autocomplete="off" required>
+                      <ul id="sugerencias_afiliacion" class="list-group autocomplete-suggestions"></ul>
+                    </div>
+                  </div>
+                  <!--Especifique el otro lugar-->
+                  <div class="col-md-4" id="afiliacionEspecifique" style="display: none;">
+                    <label for="afiliacion_especifique">Especifique el otro lugar:</label>
+                    <div class="form-group">
+                      <input type="text" id="afiliacion_especifique" name="afiliacion_especifique" class="form-control"
+                        placeholder="Especifique el lugar">
                     </div>
                   </div>
                 
-                <div class="col-md-4" id="afiliacionEspecifique" style="display: none;">
-                  <label for="afiliacion_especifique">Especifique el otro lugar:</label>
-                  <div class="form-group">
-                    <input type="text" id="afiliacion_especifique" name="afiliacion_especifique" class="form-control" placeholder="Especifique el lugar">
-                  </div>
-                </div>
-              
                   <!-- Número de Afiliación -->
                   <div class="col-md-4">
                     <label for="numero_afiliacion">Número de Afiliación:</label>
                     <div class="form-group">
-                      <input class="form-control" type="number" id="numero_afiliacion" name="numero_afiliacion" min="0" placeholder="Número de Afiliación" required>
+                      <input class="form-control" type="number" id="numero_afiliacion" name="numero_afiliacion" min="0"
+                        placeholder="Número de Afiliación" required maxlength="11">
                     </div>
                   </div>
                   <!-- Gratuidad -->
@@ -331,17 +320,9 @@
                   <div class="col-md-4">
                     <label for="referido_por">Referida(o) por:</label>
                     <div class="form-group">
-                      <select id="referido_por" class="selectpicker form-control" name="referido_por" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. Unidad médica</option>
-                        <option value="2">2. Procuración de Justicia</option>
-                        <option value="3">3. Secretaría de Educación Pública</option>
-                        <option value="4">4. Desarrollo Social</option>
-                        <option value="5">5. DIF</option>
-                        <option value="6">6. Otras instituciones gubernamentales</option>
-                        <option value="7">7. Instituciones No gubernamentales</option>
-                        <option value="8">8. Sin referencia (iniciativa propia)</option>
-                      </select>
+                      <input type="text" id="referido_por" name="referido_por" class="form-control"
+                        placeholder="Seleccion unica" autocomplete="off" required>
+                      <ul id="referido_sugg" class="list-group autocomplete-suggestions"></ul>
                     </div>
                   </div>
                   <!-- Unidad Médica Especifique Nombre -->
@@ -909,6 +890,7 @@
 @push('js')
 <!-- Tu script personalizado -->
 <script src="{{ asset('black/js/hospital.js') }}"></script>
+<script src="{{ asset('black/js/autocomplete.js')}}"></script>
  
   <script>
     $(document).ready(function() {
