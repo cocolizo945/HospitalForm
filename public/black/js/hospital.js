@@ -114,7 +114,9 @@ function validarCURP(curp) {
         {selectId: 'escolaridad', targetSection: 'escolaridad_seleccionada', showValues: ['Primaria', 'Secundaria', 'Bachillerato o preparatoria', 'Profesional', 'Posgrado']},
         {selectId: 'sexo', targetSection: 'mujerFertilSection', showValues: ['Mujer', 'Intersexual']},
         {selectId: 'mujer_fertil', targetSection: 'semanasGestacionSection', showValues: ['1']},
-        {selectId: 'lengua_indigena', targetSection: 'cualLenguaSection', showValues: ['1']}
+        {selectId: 'lengua_indigena', targetSection: 'cualLenguaSection', showValues: ['1']},
+        {selectId: 'referido_por', targetSection: 'unidadMedicaEspecifique', showValues: ['1']},
+        {selectId: 'referido_por', targetSection: 'CluesU', showValues: ['1']}
     ];
 
     // Add event listeners to select elements to toggle visibility of sections
@@ -323,10 +325,23 @@ const data = {
 };
 
 
+const localidades = {
+  "Tapachula": [
+    { localidad: "Centro", codigo_postal: "30700" },
+    { localidad: "San Sebastián", codigo_postal: "30705" }
+    // Agregar el rssto de localidades que falten
+  ],
+  "Cacahoatan": [
+    { localidad: "Cacahoatan Centro", codigo_postal: "30890" }
+    // Agrega r
+    //tratar de manejar esta misma estructura
+  ],
+  
+};
+
 let entidades = Object.keys(data);
 let municipios = [];
-let localidades = [];
-
+let localidadesSeleccionadas = [];
 
 function mostrarSugerencias(input, tipo) {
   let valor = input.value.toLowerCase();
@@ -336,10 +351,16 @@ function mostrarSugerencias(input, tipo) {
   if (tipo === 'entidades') {
     opciones = entidades;
   } else if (tipo === 'municipios') {
-    let entidadSeleccionada = document.getElementById('entidad_pais').value;
+    let entidadSeleccionada = document.getElementById('entidad_pais').value.toLowerCase().replace(/\s+/g, '');
     if (data[entidadSeleccionada]) {
       municipios = data[entidadSeleccionada];
       opciones = municipios;
+    }
+  } else if (tipo === 'localidades') {
+    let municipioSeleccionado = document.getElementById('municipio').value;
+    if (localidades[municipioSeleccionado]) {
+      localidadesSeleccionadas = localidades[municipioSeleccionado];
+      opciones = localidadesSeleccionadas.map(loc => loc.localidad);
     }
   }
 
@@ -359,7 +380,14 @@ function mostrarSugerencias(input, tipo) {
       li.style.backgroundColor = '#fff'; 
       li.addEventListener('click', function() {
         input.value = option;
-        listaSugerencias.style.display = 'none'; 
+        listaSugerencias.style.display = 'none';
+        if (tipo === 'localidades') {
+          const codigoPostalInput = document.getElementById('codigo_postal');
+          const localidadSeleccionada = localidadesSeleccionadas.find(loc => loc.localidad === option);
+          if (localidadSeleccionada) {
+            codigoPostalInput.value = localidadSeleccionada.codigo_postal;
+          }
+        }
       });
       listaSugerencias.appendChild(li);
     });
@@ -368,70 +396,22 @@ function mostrarSugerencias(input, tipo) {
   }
 }
 
-
 function ocultarSugerencias(id) {
   setTimeout(() => {
     document.getElementById(id).style.display = "none";
   }, 200); 
 }
 
-
 document.getElementById('entidad_pais').addEventListener('input', function() {
   document.getElementById('municipio').value = '';
   document.getElementById('localidad').value = '';
+  document.getElementById('codigo_postal').value = '';
   document.getElementById('sugerencias_municipio').innerHTML = '';
   document.getElementById('sugerencias_localidad').innerHTML = '';
 });
 
 
-    //Autocompletar C.P responsivo de localidad
-  document.addEventListener('DOMContentLoaded', function() {
-    const localidades = [
-        { localidad: "Acacoyagua", codigo_postal: "30500" },
-        { localidad: "Acapetahua", codigo_postal: "30510" },
-        { localidad: "Cacahoatan", codigo_postal: "30890" },
-        { localidad: "Escuintla", codigo_postal: "30470" },
-        { localidad: "Frontera Hidalgo", codigo_postal: "30860" },
-        { localidad: "Huehuetan", codigo_postal: "30660" },
-        { localidad: "Huixtla", codigo_postal: "30640" },
-        { localidad: "Mazatan", codigo_postal: "30650" },
-        { localidad: "Metapa", codigo_postal: "30870" },
-        { localidad: "Suchiate", codigo_postal: "30840" },
-        { localidad: "Tapachula", codigo_postal: "30700" },
-        { localidad: "Tuxtla Chico", codigo_postal: "30880" },
-        { localidad: "Tuzantán", codigo_postal: "30690" },
-        { localidad: "Unión Juarez", codigo_postal: "30900" },
-        { localidad: "Villa Comaltitlan", codigo_postal: "30620" }
-    ];
-
-    const localidadInput = document.getElementById('localidad2');
-    const codigoPostalInput = document.getElementById('codigo_postal');
-    const localidadList = document.getElementById('localidadesList');
-
-    // Agregar opciones al datalist
-    localidades.forEach(function(item) {
-        const opcion = document.createElement('option');
-        opcion.value = item.localidad;
-        opcion.dataset.cp = item.codigo_postal;
-        localidadList.appendChild(opcion);
-    });
-
-    localidadInput.addEventListener('input', function() {
-        const valorInput = this.value.toLowerCase();
-
-        // Encuentra la localidad correspondiente
-        const localidadSeleccionada = localidades.find(function(item) {
-            return item.localidad.toLowerCase() === valorInput;
-        });
-
-        if (localidadSeleccionada) {
-            codigoPostalInput.value = localidadSeleccionada.codigo_postal;
-        } else {
-            codigoPostalInput.value = ''; // Limpiar el código postal si no hay coincidencias
-        }
-    });
-});
-
+   
 
 // Lógica para AC en input's select's (VIALIDAD, ASENTAMIENTO)
 document.addEventListener('DOMContentLoaded', function() {
@@ -637,354 +617,8 @@ input_pais.addEventListener('focus', function() {
   }
 });
 
-
-document.addEventListener('DOMContentLoaded', function () {
-  const clues = document.getElementById('clues');
-  const cluesSuggestions = document.getElementById('clues_suggestions');
-  const preselectedClues = "CSSSA006403"; // CLUES del Hospital General
-  let cluesData = []; // Array para almacenar los datos del JSON
-
-  // Cargar el JSON con todas las CLUES
-  fetch('/json/clues.json')
-      .then(response => response.json())
-      .then(data => {
-          cluesData = data; // Asigna los datos cargados al array cluesData
-
-          // Preseleccionar la CLUES del Hospital General
-          clues.value = preselectedClues;
-      })
-      .catch(error => console.error('Error cargando el JSON de CLUES:', error));
-
-  // Mostrar sugerencias filtradas al escribir en el input
-  clues.addEventListener('input', function () {
-      const filtro = clues.value.toLowerCase();
-      cluesSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
-      const opcionesFiltradas = cluesData.filter(option => option.clues.toLowerCase().includes(filtro));
-
-      if (opcionesFiltradas.length > 0) {
-          cluesSuggestions.style.display = 'block';
-          opcionesFiltradas.forEach(option => {
-              const li = document.createElement('li');
-              li.textContent = option.clues;
-              li.style.padding = '10px';
-              li.style.cursor = 'pointer';
-              li.style.listStyle = 'none';
-              li.style.borderBottom = '1px solid #e9ecef';
-              li.style.fontWeight = 'bold';
-              li.style.color = '#000';
-              li.style.backgroundColor = '#fff';
-              li.addEventListener('click', function () {
-                  clues.value = option.clues;
-                  cluesSuggestions.style.display = 'none';
-              });
-              cluesSuggestions.appendChild(li);
-          });
-      } else {
-          cluesSuggestions.style.display = 'none';
-      }
-  });
-
-  // Mostrar todas las opciones al hacer focus en el input
-  clues.addEventListener('focus', function () {
-      cluesSuggestions.innerHTML = ''; // Limpia las sugerencias
-      cluesData.forEach(option => {
-          const li = document.createElement('li');
-          li.textContent = option.clues;
-          li.style.padding = '10px';
-          li.style.cursor = 'pointer';
-          li.style.listStyle = 'none';
-          li.style.borderBottom = '1px solid #e9ecef';
-          li.style.fontWeight = 'bold';
-          li.style.color = '#000';
-          li.style.backgroundColor = '#fff';
-          li.addEventListener('click', function () {
-              clues.value = option.clues;
-              cluesSuggestions.style.display = 'none';
-          });
-          cluesSuggestions.appendChild(li);
-      });
-      cluesSuggestions.style.display = 'block'; // Muestra todas las sugerencias
-  });
-
-  // Oculta la lista al hacer clic fuera del input
-  clues.addEventListener('blur', function () {
-      setTimeout(() => {
-          cluesSuggestions.style.display = 'none';
-      }, 200);
-  });
-});
-document.addEventListener('DOMContentLoaded', function () {
-  const cluesU = document.getElementById('cluesU');
-  const cluesSuggestions = document.getElementById('cluesU_suggestions');
-  let cluesData = []; // Array para almacenar los datos del JSON
-
-  // Cargar el JSON con todas las CLUES
-  fetch('/json/clues.json')
-      .then(response => response.json())
-      .then(data => {
-          cluesData = data; // Asigna los datos cargados al array cluesData
-          cluesU.value = cluesData.find(clue => clue.clues === "CSSSA006403").clues; // Preseleccionar la CLUES del Hospital General
-      })
-      .catch(error => console.error('Error cargando el JSON de CLUES:', error));
-
-  // Mostrar sugerencias filtradas al escribir en el input
-  cluesU.addEventListener('input', function () {
-      const filtro = cluesU.value.toLowerCase();
-      cluesSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
-      const opcionesFiltradas = cluesData.filter(option => option.clues.toLowerCase().includes(filtro));
-
-      if (opcionesFiltradas.length > 0) {
-          cluesSuggestions.style.display = 'block';
-          opcionesFiltradas.forEach(option => {
-              const li = document.createElement('li');
-              li.textContent = option.clues;
-              li.style.padding = '10px';
-              li.style.cursor = 'pointer';
-              li.style.listStyle = 'none';
-              li.style.borderBottom = '1px solid #e9ecef';
-              li.style.fontWeight = 'bold';
-              li.style.color = '#000';
-              li.style.backgroundColor = '#fff';
-              li.addEventListener('click', function () {
-                  cluesU.value = option.clues;
-                  cluesSuggestions.style.display = 'none';
-              });
-              cluesSuggestions.appendChild(li);
-          });
-      } else {
-          cluesSuggestions.style.display = 'none';
-      }
-  });
-
-  // Mostrar todas las opciones al hacer focus en el input
-  cluesU.addEventListener('focus', function () {
-      cluesSuggestions.innerHTML = ''; // Limpia las sugerencias
-      cluesData.forEach(option => {
-          const li = document.createElement('li');
-          li.textContent = option.clues;
-          li.style.padding = '10px';
-          li.style.cursor = 'pointer';
-          li.style.listStyle = 'none';
-          li.style.borderBottom = '1px solid #e9ecef';
-          li.style.fontWeight = 'bold';
-          li.style.color = '#000';
-          li.style.backgroundColor = '#fff';
-          li.addEventListener('click', function () {
-              cluesU.value = option.clues;
-              cluesSuggestions.style.display = 'none';
-          });
-          cluesSuggestions.appendChild(li);
-      });
-      cluesSuggestions.style.display = 'block'; // Muestra todas las sugerencias
-  });
-
-  // Oculta la lista al hacer clic fuera del input
-  cluesU.addEventListener('blur', function () {
-      setTimeout(() => {
-          cluesSuggestions.style.display = 'none';
-      }, 200);
-  });
-});
-
-
-document.addEventListener('DOMContentLoaded', function () {
-  const referidoPor = document.getElementById('referido_por');
-  const referidoPorSuggestions = document.getElementById('referido_por_suggestions');
-  const unidadMedicaEspecifique = document.getElementById('unidadMedicaEspecifique'); // Asegúrate de tener este ID en tu HTML
-  const cluesU = document.getElementById('CluesU'); // Asegúrate de tener este ID en tu HTML
-  let referidoPorData = []; // Array para almacenar los datos del JSON
-
-  // Inicialmente ocultar los bloques adicionales
-  unidadMedicaEspecifique.style.display = 'none';
-  cluesU.style.display = 'none';
-
-  // Cargar el JSON con todas las opciones
-  fetch('/json/referido(a)_por.json')
-      .then(response => response.json())
-      .then(data => {
-          referidoPorData = data; // Asigna los datos cargados al array referidoPorData
-      })
-      .catch(error => console.error('Error cargando el JSON de opciones:', error));
-
-  // Mostrar sugerencias filtradas al escribir en el input
-  referidoPor.addEventListener('input', function () {
-      const filter = referidoPor.value.toLowerCase();
-      referidoPorSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
-      const filteredOptions = referidoPorData.filter(option => option.text.toLowerCase().includes(filter));
-
-      if (filteredOptions.length > 0) {
-          referidoPorSuggestions.style.display = 'block';
-          filteredOptions.forEach(option => {
-              const li = document.createElement('li');
-              li.textContent = option.text;
-              li.style.padding = '10px';
-              li.style.cursor = 'pointer';
-              li.style.listStyle = 'none';
-              li.style.borderBottom = '1px solid #e9ecef';
-              li.style.fontWeight = 'bold';
-              li.style.color = '#000';
-              li.style.backgroundColor = '#fff';
-              li.addEventListener('click', function () {
-                  referidoPor.value = option.text;
-                  referidoPorSuggestions.style.display = 'none';
-
-                  // Mostrar las secciones basado en la selección
-                  if (option.text.toLowerCase() === 'unidad médica') {
-                      unidadMedicaEspecifique.style.display = 'block';
-                      cluesU.style.display = 'block';
-                  } else {
-                      unidadMedicaEspecifique.style.display = 'none';
-                      cluesU.style.display = 'none';
-                  }
-              });
-              referidoPorSuggestions.appendChild(li);
-          });
-      } else {
-          referidoPorSuggestions.style.display = 'none';
-      }
-  });
-
-  // Mostrar todas las opciones al hacer focus en el input
-  /**referidoPor.addEventListener('focus', function () {
-      referidoPorSuggestions.innerHTML = ''; // Limpia las sugerencias
-      referidoPorData.forEach(option => {
-          const li = document.createElement('li');
-          li.textContent = option.text;
-          li.style.padding = '10px';
-          li.style.cursor = 'pointer';
-          li.style.listStyle = 'none';
-          li.style.borderBottom = '1px solid #e9ecef';
-          li.style.fontWeight = 'bold';
-          li.style.color = '#000';
-          li.style.backgroundColor = '#fff';
-          li.addEventListener('click', function () {
-              referidoPor.value = option.text;
-              referidoPorSuggestions.style.display = 'none';
-
-              // Mostrar las secciones basado en la selección
-              if (option.text.toLowerCase() === 'unidad médica') {
-                  unidadMedicaEspecifique.style.display = 'block';
-                  cluesU.style.display = 'block';
-              } else {
-                  unidadMedicaEspecifique.style.display = 'none';
-                  cluesU.style.display = 'none';
-              }
-          });
-          referidoPorSuggestions.appendChild(li);
-      });
-      referidoPorSuggestions.style.display = 'block';
-  }); **/
-
-  // Oculta la lista al hacer clic fuera del input
-  referidoPor.addEventListener('blur', function () {
-      setTimeout(() => {
-          referidoPorSuggestions.style.display = 'none';
-      }, 200);
-  });
-});
-
-const afiliaciones = [
-  "No especificado", 
-  "Ninguna", 
-  "IMSS", 
-  "ISSSTE", 
-  "PEMEX", 
-  "SEDENA", 
-  "SEMAR", 
-  "OTRA", 
-  "IMSS Bienestar", 
-  "ISSFAM", 
-  "OPD IMSS Bienestar", 
-  "Se ignora", 
-  "Especifique"
-];
-
-let sugerencias_afiliacion = document.getElementById('sugerencias_afiliacion');
-let input_afiliacion = document.getElementById('afiliacion_input');
-let especificarCampo = document.getElementById('afiliacionEspecifique'); // Campo que se va a mostrar
-let numeroAfiliacion = document.getElementById('numero_afiliacion'); // Campo de Número de Afiliación
-
-// Función para mostrar sugerencias
-input_afiliacion.addEventListener('input', function() {
-  let valor = input_afiliacion.value.toLowerCase();
-  sugerencias_afiliacion.innerHTML = '';
-
-  const opcionesFiltradas = afiliaciones.filter(afiliacion => afiliacion.toLowerCase().includes(valor));
-
-  if (opcionesFiltradas.length > 0) {
-      sugerencias_afiliacion.style.display = 'block';
-      opcionesFiltradas.forEach(opcion => {
-          const li = document.createElement('li');
-          li.textContent = opcion;
-          li.classList.add('list-group-item');
-          li.style.cursor = 'pointer';
-          li.addEventListener('click', function() {
-              input_afiliacion.value = opcion;
-              sugerencias_afiliacion.style.display = 'none';
-              
-              // Mostrar el campo adicional si se selecciona 'Especifique'
-              if (opcion === 'Especifique') {
-                  especificarCampo.style.display = 'block';
-              } else {
-                  especificarCampo.style.display = 'none';
-              }
-              // Deshabilitar el campo Número de Afiliación si se selecciona 'No especificado', 'Ninguna' o 'Se ignora'
-              if (opcion === 'No especificado' || opcion === 'Ninguna' || opcion === 'Se ignora') {
-                numeroAfiliacion.disabled = true;
-                numeroAfiliacion.value = ''; // Limpia el campo
-            } else {
-                numeroAfiliacion.disabled = false;
-            }
-          });
-          sugerencias_afiliacion.appendChild(li);
-      });
-  } else {
-      sugerencias_afiliacion.style.display = 'none';
-  }
-});
-
-numeroAfiliacion.addEventListener('input', function() {
-  let valor = numeroAfiliacion.value;
-  
-  // Limitar a 11 dígitos
-  if (valor.length > 11) {
-      numeroAfiliacion.value = valor.slice(0, 11);
-  }
-});
-
-input_afiliacion.addEventListener('blur', function() {
-  setTimeout(() => {
-      sugerencias_afiliacion.style.display = 'none';
-  }, 200);
-});
-
-/**input_afiliacion.addEventListener('focus', function() {
-  if (input_afiliacion.value === '') {
-      sugerencias_afiliacion.innerHTML = '';
-      afiliaciones.forEach(opcion => {
-          const li = document.createElement('li');
-          li.textContent = opcion;
-          li.classList.add('list-group-item');
-          li.style.cursor = 'pointer';
-          li.addEventListener('click', function() {
-              input_afiliacion.value = opcion;
-              sugerencias_afiliacion.style.display = 'none';
-              
-              // Mostrar el campo adicional si se selecciona 'Especifique'
-              if (opcion === 'Especifique') {
-                  especificarCampo.style.display = 'block';
-              } else {
-                  especificarCampo.style.display = 'none';
-              }
-          });
-          sugerencias_afiliacion.appendChild(li);
-      });
-      sugerencias_afiliacion.style.display = 'block';
-  }
-});
-
  
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //URGENCIAS 
 /////////////////////////////////////////////////////////
-**/
+
