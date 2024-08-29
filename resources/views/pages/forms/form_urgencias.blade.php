@@ -99,7 +99,7 @@
               <div class="col-md=4">
                 <label for="primer_apellido">Primer apellido:</label>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="primer_apellido" name="primer_apellido" placeholder="Pérez" minlength="3" required>
+                  <input type="text" class="form-control" id="primer_apellido" name="primer_apellido" placeholder="Pérez" minlength="2" required>
                 </div>
               </div>
 
@@ -107,7 +107,7 @@
               <div class="col-md-4">
                 <label for="segundo_apellido">Segundo apellido:</label>
                 <div class="form-group">
-                  <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido" placeholder="Gómez" minlength="3" required>
+                  <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido" placeholder="Gómez" minlength="2">
                 </div>
               </div>
             </div>
@@ -378,11 +378,18 @@
                 </div>
               </div>
 
-              <!-- Fecha y hora de ingreso -->
+              <!-- Fecha de ingreso -->
               <div class="col-md-4">
-                <label for="fecha_ingreso">Fecha y hora de ingreso:</label>
+                <label for="fecha_ingreso">Fecha de ingreso:</label>
                 <div class="form-group">
-                  <input type="text" class="form-control datetimepicker" id="fecha_ingreso" name="fecha_ingreso" placeholder="07/12/2024 14:30 PM" required>
+                  <input type="text" class="form-control datepicker" id="fecha_ingreso" name="fecha_ingreso" placeholder="DD/MM/YYYY" required>
+                </div>
+              </div>
+              <!-- hora de ingreso -->
+              <div class="col-md-4">
+                <label for="fecha_ingreso">hora de ingreso:</label>
+                <div class="hora-group">
+                  <input type="text" class="form-control timepicker" id="hora_ingreso" name="hora_ingreso" placeholder="HH:MM AM/PM" required>
                 </div>
               </div>
 
@@ -462,11 +469,19 @@
 </div>
 
 
-              <!-- Fecha y hora de alta -->
+              <!-- Fecha de alta -->
               <div class="col-md-4">
-                <label for="fecha_alta">Fecha y hora de alta:</label>
+                <label for="fecha_alta">Fecha de alta:</label>
                 <div class="form-group">
-                  <input type="text" class="form-control datetimepicker" id="fecha_alta" name="fecha_alta" placeholder="08/12/2024 10:00 AM" required>
+                  <input type="text" class="form-control datetimepicker" id="fecha_alta" name="fecha_alta" placeholder="DD/MM/YYYY" required>
+                </div>
+              </div>
+
+            <!-- hora de alta -->
+            <div class="col-md-4">
+                <label for="hora_alta">hora de alta:</label>
+                <div class="form-group">
+                  <input type="text" class="form-control timepicker" id="hora_alta" name="hora_alta" placeholder="HH:MM AM/PM" required>
                 </div>
               </div>
             </div>
