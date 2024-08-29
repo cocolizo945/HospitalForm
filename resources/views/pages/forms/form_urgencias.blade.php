@@ -449,11 +449,18 @@
 
               <!-- CLUES -->
               <div class="col-md-4">
-                <label for="clues">CLUES:</label>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="clues" name="clues" placeholder="CSSSA006403" minlength="10" required>
-                </div>
-              </div>
+  <label for="clues">CLUES:</label>
+  <div class="form-group">
+    <input type="text" class="form-control" id="clues" name="clues" placeholder="CSSSA006403"
+      oninput="mostrarSugerenciasClues(this)" autocomplete="off" 
+      onclick="mostrarSugerenciasClues(this)" onfocus="mostrarSugerenciasClues(this)"
+      onblur="ocultarSugerenciasClues()">
+    <div id="sugerencias_clues" class="sugerencias"
+      style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    </div>
+  </div>
+</div>
+
 
               <!-- Fecha y hora de alta -->
               <div class="col-md-4">

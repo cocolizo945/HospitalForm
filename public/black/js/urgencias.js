@@ -421,3 +421,69 @@ const data = {
     document.getElementById('sugerencias_municipio').innerHTML = '';
     document.getElementById('sugerencias_localidad').innerHTML = '';
   });
+
+  //----------------------------------------------------------
+  const cluesData = [
+    { "clues": "CSSSA000453", "nombre": "Hospital General Juárez Arriaga" },
+    { "clues": "CSSSA002611", "nombre": "Hospital General Huixtla" },
+    { "clues": "CSSSA004595", "nombre": "Hospital General Palenque" },
+    { "clues": "CSSSA004945", "nombre": "Hospital General Pichucalco" },
+    { "clues": "CSSSA005773", "nombre": "Hospital de la Mujer San Cristóbal de las Casas" },
+    { "clues": "CSSSA006403", "nombre": "Hospital General Tapachula" },
+    { "clues": "CSSSA007074", "nombre": "Hospital General Dr. Juan C. Corzo Tonalá" },
+    { "clues": "CSSSA007540", "nombre": "Hospital Regional Dr. Rafael Pascasio Gamboa Tuxtla" },
+    { "clues": "CSSSA008264", "nombre": "Hospital General Yajalón" },
+    { "clues": "CSSSA018776", "nombre": "Hospital de la Mujer Comitán" },
+    { "clues": "CSSSA018875", "nombre": "Hospital General Bicentenario Villaflores" },
+    { "clues": "CSIMS000251", "nombre": "HGZ 2 Tuxtla Gutiérrez" },
+    { "clues": "CSIMS000205", "nombre": "HGZMF 1 Tapachula" },
+    { "clues": "CSIMO000433", "nombre": "Hospital Bochil" },
+    { "clues": "CSIMO003863", "nombre": "San Felipe Ecatepec" },
+    { "clues": "CSIMO003081", "nombre": "Hospital Ocozocoautla de Espinoza" },
+    { "clues": "CSIMO000170", "nombre": "Hospital Altamirano" },
+    { "clues": "CSIMO005210", "nombre": "Hospital Venustiano Carranza" },
+    { "clues": "CSIMO002620", "nombre": "Hospital Motozintla de Mendoza" },
+    { "clues": "CSIMO002125", "nombre": "Hospital Mapastepec" },
+    { "clues": "CSIMO002784", "nombre": "Hospital Ocosingo" },
+    { "clues": "CSIMO002270", "nombre": "Hospital Guadalupe Tepeyac" },
+    { "clues": "CSIMO002924", "nombre": "Hospital Benemérito de las Américas" }
+  ];
+  
+
+  
+  function mostrarSugerenciasClues(input) {
+    let valor = input.value.toLowerCase();
+    let listaSugerencias = document.getElementById('sugerencias_clues');
+    listaSugerencias.innerHTML = ""; 
+  
+    const opcionesFiltradas = cluesData.filter(clues => clues.clues.toLowerCase().includes(valor) || clues.nombre.toLowerCase().includes(valor));
+  
+    if (opcionesFiltradas.length > 0) {
+      listaSugerencias.style.display = 'block';
+      opcionesFiltradas.forEach(option => {
+        const li = document.createElement('li');
+        li.textContent = `${option.clues} - ${option.nombre}`;
+        li.style.padding = '10px';
+        li.style.cursor = 'pointer'; 
+        li.style.listStyle = 'none'; 
+        li.style.borderBottom = '1px solid #e9ecef'; 
+        li.style.fontWeight = 'bold'; 
+        li.style.color = '#000'; 
+        li.style.backgroundColor = '#fff'; 
+        li.addEventListener('click', function() {
+          input.value = option.clues;
+          listaSugerencias.style.display = 'none';
+        });
+        listaSugerencias.appendChild(li);
+      });
+    } else {
+      listaSugerencias.style.display = 'none';
+    }
+  }
+  
+  function ocultarSugerenciasClues() {
+    setTimeout(() => {
+      document.getElementById('sugerencias_clues').style.display = "none";
+    }, 200);
+  }
+  
