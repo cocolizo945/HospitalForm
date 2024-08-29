@@ -868,4 +868,75 @@ function actualizarListaComorbilidadesSeleccionadas() {
     });
 }
 
-  
+//validacion de validar input
+function manejarValidacionCURP() {
+  const inputCurp = document.getElementById('curp');
+  const mensajeValidacion = document.getElementById('curp-validacion');
+  inputCurp.addEventListener('input', function() {
+      const curp = inputCurp.value.toUpperCase();
+
+      if (validarCURP(curp)) {
+          mensajeValidacion.style.display = 'none';
+      } else {
+          mensajeValidacion.style.display = 'inline';
+      }
+  });
+}
+manejarValidacionCURP();
+// Función de validación de estructura de la curp
+function validarCURP(curp) {
+  const regexCURP = /^[A-Z]{4}(\d{6}|X{6})[HMX](?:[A-Z]{2}|XX)(?:[A-Z\d]{3}|XXX)[A-Z\d]|x$/;
+  return regexCURP.test(curp);
+}
+
+
+//agregar clases
+const inputsC = document.querySelectorAll('.form-control');
+// Añadir una o más clases a cada input
+inputsC.forEach(input => {
+    input.classList.add('autocompletar');  // Añadir una nueva clase
+    // input.classList.add('nueva-clase1', 'nueva-clase2'); // Para añadir múltiples clases
+});
+
+
+// -- AutorrellenadoInputs -- Inicio
+
+// Definir la cantidad de "X" para cada input
+const fillValues = {
+    curp: 'XXXXXXXXXXXXXXXXXX',
+    nombre: 'XXXXX',
+    primer_apellido: 'XX',
+    segundo_apellido: 'XX',
+    nombre_vialidad: 'XXXXX',
+    localidad: 'XXXXX',
+    nombre_vialidad: 'XXXXX',
+    num_ext: 'XXXXX',
+    num_int: 'XXXXX',
+    nombre_asentamiento: 'XXXXX',
+    afeccion_principal: 'XXXXX',
+    causa_externa: 'XXXXX',
+    telefono: 'XXXXXXXXXX'
+};
+
+// Seleccionar todos los inputs con la clase 'autocompletar'
+const inputsAutocompletar = document.querySelectorAll('.autocompletar');
+
+// Añadir un event listener a cada input
+inputsAutocompletar.forEach(input => {
+    input.addEventListener('keydown', function(event) {
+        // Verificar si la tecla presionada es F9
+        if (event.key === 'F9') {
+            // Obtener el id del input
+            const inputId = input.id;
+            // Obtener el valor de relleno correspondiente desde el objeto fillValues
+            const fillValue = fillValues[inputId];
+            if (fillValue) {
+                // Rellenar el input con el valor especificado
+                input.value = fillValue;
+                event.preventDefault(); // Prevenir el comportamiento por defecto de la tecla F9
+            }
+        }
+    });
+});
+
+// -- AutorrellenadoIntpus -- Fin
