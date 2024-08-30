@@ -11485,7 +11485,7 @@ button.section-darker:hover {
     border-radius: .4285rem;
     cursor: pointer;
     background: #bc204b;
-    background-image: linear-gradient(to bottom left, #bc204b, #bc203b, #bc204b);
+    background-image: linear-gradient(to bottom left, #bc204b, #bc204b, #bc204b);
     background-size: 210% 210%;
     background-position: 100% 0;
     background-color: #bc204b;
@@ -11514,11 +11514,10 @@ button.section-darker:hover {
 .navbar .navbar-nav>a.btn:active,
 .navbar .navbar-nav>a.btn:active:focus,
 .navbar .navbar-nav>a.btn:active:hover,
-.navbar .navbar-nav>a.btn:focus,
-.navbar .navbar-nav>a.btn:hover {
+.navbar .navbar-nav>a.btn:focus {
     background-color: #bc204b !important;
-    background-image: linear-gradient(to bottom left, #bc204b, #ff4c4f, #bc204b) !important;
-    background-image: -moz-linear-gradient(to bottom left, #bc204b, #ff4c4f, #bc204b) !important;
+    background-image: linear-gradient(to bottom left, #bc204b, #bc204b, #bc204b) !important;
+    background-image: -moz-linear-gradient(to bottom left, #bc204b, #bc204b, #bc204b) !important;
     color: #fff;
     box-shadow: none
 }
@@ -11811,8 +11810,8 @@ fieldset[disabled] .navbar .navbar-nav>a.btn:hover {
 .btn-primary:focus,
 .btn-primary:hover {
     background-color: #bc204b !important;
-    background-image: linear-gradient(to bottom left, #bc204b, #ff4c4f, #bc204b) !important;
-    background-image: -moz-linear-gradient(to bottom left, #bc204b, #ff4c4f, #bc204b) !important;
+    background-image: linear-gradient(to bottom left, #bc204b, #bc204b, #bc204b) !important;
+    background-image: -moz-linear-gradient(to bottom left, #bc204b, #bc204b, #bc204b) !important;
     color: #fff;
     box-shadow: none
 }
