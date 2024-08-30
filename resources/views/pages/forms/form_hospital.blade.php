@@ -869,6 +869,7 @@
 
           <div class="card-footer"> 
             <div class="pull-right">
+                 <button type="button" id="SaveData" class="btn btn-primary">Guardar datos</button>
               <button type="button" id="darDeAlta" class="btn btn-primary">N. Paciente</button>
               <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' name='next' value='Siguiente' />
               <button type="submit" class="btn btn-finish btn-fill btn-primary btn-wd" name="finish">Guardar</button>
