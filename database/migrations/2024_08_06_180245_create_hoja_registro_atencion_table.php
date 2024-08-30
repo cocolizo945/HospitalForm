@@ -42,6 +42,7 @@ class CreateHojaRegistroAtencionTable extends Migration
             ]);
             $table->string('unidad_medica')->nullable();
             $table->timestamp('fecha_ocurrencia')->nullable();
+            $table->time('hora_ocurrencia')->nullable();
             $table->boolean('festivo');
             $table->enum('sitio_ocurrencia', [
                 'Vivienda', 'Institución residencial', 'Escuela', 'Área de deporte y atletismo', 'Vía pública (peatón)', 'Comercio y áreas de servicio', 'Trabajo', 'Granja', 'Club, cantina, bar', 'Vehículo automotor público', 'Vehículo automotor privado', 'Otro lugar (Especifique)', 'Lugar no especificado'
@@ -50,7 +51,7 @@ class CreateHojaRegistroAtencionTable extends Migration
             $table->string('entidad_pais');
             $table->string('municipio');
             $table->string('localidad');
-            $table->string('codigo_postal');
+            $table->string('codigo_postal')->nullable()->change();
             $table->string('tipo_vialidad');
             $table->string('nombre_vialidad');
             $table->string('num_ext');
@@ -80,18 +81,11 @@ class CreateHojaRegistroAtencionTable extends Migration
             $table->enum('efectos_agresor', ['Alcohol', 'Droga por indicación médica', 'Drogas ilegales', 'Se ignora', 'Ninguna'])->nullable();
             $table->enum('evento_autoinfligido', ['Única vez', 'Repetido'])->nullable();
             $table->timestamp('fecha_atencion')->nullable();
-            $table->enum('servicio_atencion', [
-                'Consulta externa', 'Hospitalización', 'Urgencias', 'Servicio especializado de atención a la violencia', 'Otro servicio (Especifique)'
-            ]);
-            $table->enum('tipo_atencion', [
-                'Médica', 'Psicológica', 'Quirúrgica', 'Psiquiátrica', 'Consejería', 'Otro', 'Píldora anticonceptiva de emergencia', 'Profilaxis VIH', 'Profilaxis otras ITS', 'IVE(Interrupción Voluntaria del Embarazo)', 'Vacuna VPH'
-            ]);
-            $table->enum('area_gravedad', [
-                'Cabeza', 'Cara', 'Región ocular', 'Cuello', 'Columna vertebral', 'Extremidades superiores', 'Mano', 'Tórax', 'Espalda y/o glúteos', 'Abdomen', 'Pelvis', 'Región genital', 'Extremidades inferiores', 'Pies', 'Múltiples', 'Otro (Especifique)'
-            ]);
-            $table->enum('consecuencia_gravedad', [
-                'Laceración/abrasión', 'Aplastamiento', 'Cicatrices', 'Depresión', 'Contusión/mallugamiento', 'Congelamiento', 'Aborto', 'Trastornos de ansiedad/estrés postraumático', 'Quemadura/corrosión', 'Asfixia', 'Embarazo', 'Trastornos psiquiátricos', 'Luxación/esguince', 'Herida', 'Infección de transmisión sexual', 'Múltiple', 'Amputación/avulsión', 'Fractura', 'Defunción', 'Malestar emocional', 'Trastorno del estado de ánimo', 'Otro (Especifique)'
-            ]);
+            $table->time('hora_atencion')->nullable();
+            $table->string('servicio_atencion');
+            $table->string('tipo_atencion');
+            $table->string('area_gravedad');
+            $table->string('consecuencia_gravedad');
             $table->string('afeccion_principal');
             $table->string('causa_externa');
             $table->boolean('aviso_ministerio');
