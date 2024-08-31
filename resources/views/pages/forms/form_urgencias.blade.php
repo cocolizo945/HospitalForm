@@ -152,11 +152,11 @@
               <div class="col-md-2">
                 <label for="sexo">Sexo:</label>
                 <div class="form-group">
-                  <select class="selectpicker form-control" id="sexo" name="sexo" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
-                    <option value="1">Hombre</option>
-                    <option value="2">Mujer</option>
-                    <option value="3">Intersexual</option>
-                  </select>
+                <select class="selectpicker form-control" id="sexo" name="sexo" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+                <option value="1">Hombre</option>
+                <option value="2">Mujer</option>
+                <option value="3">Intersexual</option>
+                </select>
                 </div>
               </div>
 
@@ -496,19 +496,17 @@
                 </div>
               </div>
 
-              <!-- Mujer en edad fértil: -->
-              <div class="col-md-6">
+              <!-- Mujer en edad fértil -->
+              <div class="col-md-6" id="mujer_edad_fertil_container">
                 <label for="mujer_edad_fertil">Mujer en edad fértil:</label>
                 <div class="form-group">
-                  <select id="mujer_edad_fertil" class="selectpicker form-control" name="mujer_edad_fertil" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
-                    <option value="0">Embarazo</option>
-                    <option value="1">Puerperio (de 0 a 42 días después del evento obstétrico)</option>
-                    <option value="2">No estaba embarazada ni en puerperio</option>
-                  </select>
+                <select id="mujer_edad_fertil" class="selectpicker form-control" name="mujer_edad_fertil" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+                <option value="0">Embarazo</option>
+                <option value="1">Puerperio (de 0 a 42 días después del evento obstétrico)</option>
+                <option value="2">No estaba embarazada ni en puerperio</option>
+                </select>
                 </div>
               </div>
-            </div>
-          </div>
 
           <!-- Afecciones Tratadas -->
           <div class="tab-pane" id="form3">

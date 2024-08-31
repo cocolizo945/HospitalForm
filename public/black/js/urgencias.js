@@ -691,3 +691,26 @@ inputsAutocompletar.forEach(input => {
 });
 
 // -- AutorrellenadoIntpus -- Fin
+
+//DESAPARECE FUNCION DE MUJER FERTIL CUANDO SE SELECCIONA HOMBRE O EDAD MAYOR A 50 AÑOS
+
+document.addEventListener('DOMContentLoaded', function () {
+  const sexoSelect = document.getElementById('sexo');
+  const edadInput = document.getElementById('edad');
+  const mujerEdadFertilContainer = document.getElementById('mujer_edad_fertil_container');
+
+  function toggleMujerEdadFertil() {
+    const sexo = sexoSelect.value;
+    const edad = parseInt(edadInput.value);
+
+    if (sexo === '1' || (edad > 50 && sexo === '2')) {
+      mujerEdadFertilContainer.style.display = 'none';
+      mujerEdadFertilContainer.querySelector('select').value = '';
+    } else {
+      mujerEdadFertilContainer.style.display = 'block';
+    }
+  }
+
+  sexoSelect.addEventListener('change', toggleMujerEdadFertil);
+  edadInput.addEventListener('input', toggleMujerEdadFertil);
+});

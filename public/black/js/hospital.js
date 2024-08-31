@@ -666,6 +666,20 @@ input_pais.addEventListener('focus', function() {
       sugerencias_pais.style.display = 'block';
   }
 });
+//Para poder escribir en sitio de ocurrencia
+document.addEventListener('DOMContentLoaded', function() {
+  const input = document.getElementById('sitio_ocurrencia_input');
+  const datalist = document.getElementById('sitio_ocurrencia_list');
+
+  input.setAttribute('list', 'sitio_ocurrencia_list');
+
+  input.addEventListener('input', function() {
+      let selectedOption = Array.from(datalist.options).find(option => option.value === input.value);
+      if (selectedOption) {
+          console.log('Opción seleccionada:', selectedOption.value);
+      }
+  });
+});
 
  
 //------------------------------------------------------------------------------------------------------------------------------------------------------------

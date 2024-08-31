@@ -378,24 +378,25 @@
                   <div class="col-md-4">
                     <label for="sitio_ocurrencia">Sitio de Ocurrencia:</label>
                     <div class="form-group">
-                      <select id="sitio_ocurrencia" class="selectpicker form-control form-control" name="sitio_ocurrencia" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="0">1. Vivienda</option>
-                        <option value="1">2. Institución residencial</option>
-                        <option value="2">3. Escuela</option>
-                        <option value="3">4. Área de deporte y atletismo</option>
-                        <option value="4">5. Vía pública (peatón)</option>
-                        <option value="5">6. Comercio y áreas de servicio</option>
-                        <option value="6">7. Trabajo</option>
-                        <option value="7">8. Granja</option>
-                        <option value="8">9. Club, cantina, bar</option>
-                        <option value="9">10. Vehículo automotor público</option>
-                        <option value="10">11. Vehículo automotor privado</option>
-                        <option value="11">12. Otro lugar (Especifique)</option>
-                        <option value="12">13. Lugar no especificado</option>
-                      </select>
+                      <input id="sitio_ocurrencia_input" type="text" class="form-control" placeholder="Escriba para buscar..." required>
+                      <datalist id="sitio_ocurrencia_list">
+                    <option value="Vivienda">
+                    <option value="Institución residencial">
+                    <option value="Escuela">
+                    <option value="Área de deporte y atletismo">
+                    <option value="Vía pública (peatón)">
+                    <option value="Comercio y áreas de servicio">
+                    <option value="Trabajo">
+                    <option value="Granja">
+                    <option value="Club, cantina, bar">
+                    <option value="Vehículo automotor público">
+                    <option value="Vehículo automotor privado">
+                    <option value="Otro lugar (Especifique)">
+                    <option value="Lugar no especificado">
+                    </datalist>
                     </div>
                   </div>
+
 
                   <!-- Campo de texto para especificar otro lugar -->
                   <div class="col-md-4" id="otroLugarEspecifique" style="display: none;">
