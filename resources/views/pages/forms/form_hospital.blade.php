@@ -69,14 +69,13 @@
                 <div class="row">
                   <!-- CLUES -->
                   <div class="col-lg-5 col-md-6 col-sm-3">
-    <label for="clues">CLUES:</label>
-    <div class="form-group">
-        <input type="text" id="clues" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
-        <ul id="clues_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        </ul>
-    </div>
-    </div>
-
+                  <label for="clues">CLUES:</label>
+                  <div class="form-group">
+                  <input type="text" id="clues" name="clues" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
+                      <ul id="clues_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </ul>
+                  </div>
+                  </div>
 
                   <!-- Folio -->
                   <div class="col-md-4 ml-auto mr-auto">
@@ -333,14 +332,14 @@
                     </div>
                   </div>
                   <!-- CLUES -->
-                  <div class="col-md-4" id="CluesU" style="display: none;">
-    <label for="cluesU">Especifique su CLUES:</label>
-    <div class="form-group">
-        <input type="text" id="cluesU" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
-        <ul id="cluesU_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        </ul>
-    </div>
-</div>
+                  <div class="col-md-4" id="cluesU" style="display: none;">
+                  <label for="cluesU">Especifique su CLUES:</label>
+                  <div class="form-group">
+                      <input type="text" id="cluesU" name="cluesU" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
+                      <ul id="cluesU_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </ul>
+                  </div>
+              </div>
                 </div>
               </div>
               <!-- Evento -->
@@ -871,6 +870,7 @@
 
           <div class="card-footer"> 
             <div class="pull-right">
+                 <button type="button" id="SaveData" class="btn btn-primary">Guardar datos</button>
               <button type="button" id="darDeAlta" class="btn btn-primary">N. Paciente</button>
               <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' name='next' value='Siguiente' />
               <button type="submit" class="btn btn-finish btn-fill btn-primary btn-wd" name="finish">Guardar</button>
@@ -892,9 +892,11 @@
 <!-- Tu script personalizado -->
 <script src="{{ asset('black/js/hospital.js') }}"></script>
 <script src="{{ asset('black/js/autocomplete.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  
   <script>
     $(document).ready(function() {
+
         $('.datepicker').datetimepicker({
             format: 'DD/MM/YYYY', // Asegúrate de que este es el formato que se está enviando al backend
         });
@@ -1129,7 +1131,32 @@ document.addEventListener('DOMContentLoaded', function () {
             cluesSuggestions.style.display = 'none';
         }, 200);
     });
-});
-    
+}); 
   </script>
+  
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: '{{ session('success') }}',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        @endif
+
+        @if(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '{{ session('error') }}',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        @endif
+    });
+</script>
+
 @endpush
