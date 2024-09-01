@@ -939,6 +939,133 @@ inputsAutocompletar.forEach(input => {
     });
 });
 
+
+//llenado de hoja de lesiones si/no
+document.addEventListener('DOMContentLoaded', function () {
+  const llenadoHojaLesionSelect = document.getElementById('llenado_hoja_lesion');
+  const folioHojaLesionInput = document.getElementById('folio_hoja_lesion');
+
+  // Añadir evento change al select
+  llenadoHojaLesionSelect.addEventListener('change', function () {
+      if (this.value === '0') {  // '0' corresponde a la opción "NO"
+          folioHojaLesionInput.disabled = true;
+          folioHojaLesionInput.value = '';  // Limpia el campo si se deshabilita
+      } else {
+          folioHojaLesionInput.disabled = false;
+      }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const afiliacion = document.getElementById('afiliacion');
+  const afiliacionSuggestions = document.getElementById('afiliacion_suggestions');
+  const numeroAfiliacion = document.getElementById('numero_afiliacion');
+
+  const afiliacionOptions = [
+      { value: "0", text: "No especificado" },
+      { value: "1", text: "Ninguna" },
+      { value: "2", text: "IMSS" },
+      { value: "3", text: "ISSSTE" },
+      { value: "4", text: "PEMEX" },
+      { value: "5", text: "SEDENA" },
+      { value: "6", text: "SEMAR" },
+      { value: "7", text: "OTRA" },
+      { value: "8", text: "IMSS Bienestar" },
+      { value: "9", text: "ISSFAM" },
+      { value: "10", text: "OPD IMSS Bienestar" },
+      { value: "99", text: "Se ignora" }
+  ];
+
+  // Mostrar sugerencias filtradas al escribir en el input
+  afiliacion.addEventListener('input', function () {
+      const filtro = afiliacion.value.toLowerCase();
+      afiliacionSuggestions.innerHTML = ''; // Limpiar las sugerencias anteriores
+      const opcionesFiltradas = afiliacionOptions.filter(option => option.text.toLowerCase().includes(filtro));
+
+      if (opcionesFiltradas.length > 0) {
+          afiliacionSuggestions.style.display = 'block';
+          opcionesFiltradas.forEach(option => {
+              const li = document.createElement('li');
+              li.textContent = option.text;
+              li.style.padding = '10px';
+              li.style.cursor = 'pointer';
+              li.style.listStyle = 'none';
+              li.style.borderBottom = '1px solid #e9ecef';
+              li.style.fontWeight = 'bold';
+              li.style.color = '#000';
+              li.style.backgroundColor = '#fff';
+              li.addEventListener('click', function () {
+                  afiliacion.value = option.text;
+                  afiliacionSuggestions.style.display = 'none';
+
+                  // Bloquear número de afiliación si se selecciona "Ninguna"
+                  if (option.value === "1") {
+                      numeroAfiliacion.disabled = true;
+                      numeroAfiliacion.value = ''; // Limpiar el campo si se deshabilita
+                  } else {
+                      numeroAfiliacion.disabled = false;
+                  }
+              });
+              afiliacionSuggestions.appendChild(li);
+          });
+      } else {
+          afiliacionSuggestions.style.display = 'none';
+      }
+  });
+
+  // Mostrar todas las opciones al hacer focus en el input
+  afiliacion.addEventListener('focus', function () {
+      afiliacionSuggestions.innerHTML = ''; // Limpiar las sugerencias
+      afiliacionOptions.forEach(option => {
+          const li = document.createElement('li');
+          li.textContent = option.text;
+          li.style.padding = '10px';
+          li.style.cursor = 'pointer';
+          li.style.listStyle = 'none';
+          li.style.borderBottom = '1px solid #e9ecef';
+          li.style.fontWeight = 'bold';
+          li.style.color = '#000';
+          li.style.backgroundColor = '#fff';
+          li.addEventListener('click', function () {
+              afiliacion.value = option.text;
+              afiliacionSuggestions.style.display = 'none';
+
+              // Bloquear número de afiliación si se selecciona "Ninguna"
+              if (option.value === "1") {
+                  numeroAfiliacion.disabled = true;
+                  numeroAfiliacion.value = ''; // Limpiar el campo si se deshabilita
+              } else {
+                  numeroAfiliacion.disabled = false;
+              }
+          });
+          afiliacionSuggestions.appendChild(li);
+      });
+      afiliacionSuggestions.style.display = 'block'; // Muestra todas las sugerencias
+  });
+
+  // Ocultar la lista al hacer clic fuera del input
+  afiliacion.addEventListener('blur', function () {
+      setTimeout(() => {
+          afiliacionSuggestions.style.display = 'none';
+      }, 200);
+  });
+});
+  
+document.getElementById('sexo').addEventListener('change', function () {
+  var sexoValue = this.value;
+  var mujerEdadFertilContainer = document.getElementById('mujer_edad_fertil_container');
+
+  if (sexoValue === '1') { // Hombre seleccionado
+      // Ocultar y deshabilitar el campo "Mujer en edad fértil"
+      mujerEdadFertilContainer.style.display = 'none';
+      document.getElementById('mujer_edad_fertil').disabled = true;
+  } else {
+      // Mostrar y habilitar el campo "Mujer en edad fértil"
+      mujerEdadFertilContainer.style.display = 'block';
+      document.getElementById('mujer_edad_fertil').disabled = false;
+  }
+});
+
 // -- AutorrellenadoIntpus -- Fin
 
 //DESAPARECE FUNCION DE MUJER FERTIL CUANDO SE SELECCIONA HOMBRE O EDAD MAYOR A 50 AÑOS
