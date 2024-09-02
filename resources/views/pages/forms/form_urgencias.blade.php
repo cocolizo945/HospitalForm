@@ -38,8 +38,14 @@
                   style="width: 21%;" id="progressBar"></div>
               </div>
               <ul id="wizardSteps">
+                <li class="nav-item" id="step0">
+                  <a class="nav-link active" href="#formFolio" data-toggle="tab">
+                    <i class="tim-icons icon-single-copy-04"></i>
+                    <p>FOLIO</p>
+                  </a>
+                </li>
                 <li class="nav-item" id="step1">
-                  <a class="nav-link active" href="#form1" data-toggle="tab">
+                  <a class="nav-link" href="#form1" data-toggle="tab">
                     <i class="tim-icons icon-single-02"></i>
                     <p>DATOS DEL PACIENTE</p>
                   </a>
@@ -84,10 +90,36 @@
             </div>
           </div>
           <div class="card-body" id="cardBody">
-            <div class="tab-content" id="tabContent">
+          <div class="tab-content" id="tabContent">
+
+          <!-- Folio -->
+          <div class="tab-pane show active" id="formFolio">
+           <h5 class="info-text">Folio</h5>
+            <div class="row">
+              <!-- CLUES -->
+              <div class="col-md-4 ml-auto mr-auto">
+              <label for="clues_folio">CLUES:</label>
+                <div class="form-group">
+                  <select id="clues" class="selectpicker form-control" name="clues" data-size="7" data-style="btn btn-primary" required>
+                    <option disabled selected>Selección Única</option>
+                    <option value="1">1. CSSSA006403</option>
+                    <option value="2">2. CSSSA006415</option>
+                    <option value="3">3. CSSSA006420</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Folio -->
+              <div class="col-md-4 ml-auto mr-auto">
+              <label for="folio">Folio:</label>
+                <div class="form-group">
+                  <input type='button' id='btnMakeFolio' class='btn btn-fill btn-primary btn-wd' name='makefolio' value='Crear Folio' />
+                </div>
+              </div>
+            </div>
+          </div>
 
               <!-- Datos del Paciente -->
-              <div class="tab-pane show active" id="form1">
+              <div class="tab-pane" id="form1">
                 <h5 class="info-text" id="datosPaciente">Datos del paciente</h5>
                 <div class="row" id="datosPacienteRow1">
                   <!-- Nombre -->

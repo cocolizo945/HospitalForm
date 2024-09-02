@@ -64,8 +64,9 @@
           </div>
           <div class="card-body">
             <div class="tab-content">
+
               <div class="tab-pane show active" id="folio">
-              <h5 class="info-text">Folio</h5>
+                <h5 class="info-text">Folio</h5>
                 <div class="row">
                   <!-- CLUES -->
                   <div class="col-lg-5 col-md-6 col-sm-3">
@@ -81,7 +82,7 @@
                   <div class="col-md-4 ml-auto mr-auto">
                     <label for="folio">Folio:</label>
                     <div class="form-group">
-                      <input type="text" id="folio" name="folio" minLength="8" class="form-control" placeholder="Folio" required>
+                    <input type='button' id='btnMakeFolio' class='btn btn-fill btn-primary btn-wd' name='makefolio' value='Crear Folio' />
                     </div>
                   </div>
                 </div>
