@@ -157,37 +157,49 @@
                     </div>
                   </div>
 
-              <!-- Sexo -->
-              <div class="col-md-2">
-                <label for="sexo">Sexo:</label>
-                <div class="form-group">
-                  <select class="selectpicker form-control" id="sexo" name="sexo" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
-                    <option value="1">Hombre</option>
-                    <option value="2">Mujer</option>
-                    <option value="3">Intersexual</option>
-                  </select>
-                </div>
-              </div>
+                  <!-- Sexo -->
+                  <div class="col-md-2">
+                    <label for="sexo">Sexo:</label>
+                    <div class="form-group">
+                      <select class="selectpicker form-control" id="sexo" name="sexo" data-size="7"
+                        data-style="btn btn-primary" title="Selección Única" required>
+                        <option value="1">Hombre</option>
+                        <option value="2">Mujer</option>
+                        <option value="3">Intersexual</option>
+                      </select>
+                    </div>
+                  </div>
 
                   <!-- Afiliación a los Servicios de Salud -->
-<div class="col-md-4">
-    <label for="afiliacion">Afiliación a los Servicios de Salud:</label>
-    <div class="form-group">
-        <input type="text" id="afiliacion" class="form-control" placeholder="Selecciona una opción" autocomplete="off" />
-        <ul id="afiliacion_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        </ul>
-    </div>
-</div>
+                  <div class="col-md-4">
+                    <label for="afiliacion">Afiliación a los Servicios de Salud:</label>
+                    <div class="form-group">
+                      <select id="afiliacion" class="selectpicker form-control" name="afiliacion" data-size="7"
+                        data-style="btn btn-primary" title="Selección Única" required>
+                        <option value="0">No especificado</option>
+                        <option value="1">Ninguna</option>
+                        <option value="2">IMSS</option>
+                        <option value="3">ISSSTE</option>
+                        <option value="4">PEMEX</option>
+                        <option value="5">SEDENA</option>
+                        <option value="6">SEMAR</option>
+                        <option value="7">OTRA</option>
+                        <option value="8">IMSS Bienestar</option>
+                        <option value="9">ISSFAM</option>
+                        <option value="10">OPD IMSS Bienestar</option>
+                        <option value="99">Se ignora</option>
+                      </select>
+                    </div>
+                  </div>
 
-
-        
-<!-- Número de Afiliación -->
-<div class="col-md-4">
-    <label for="numero_afiliacion">Número de Afiliación:</label>
-    <div class="form-group">
-        <input type="text" class="form-control" id="numero_afiliacion" name="numero_afiliacion" placeholder="Número de afiliación" minlength="8" maxlength="11" required>
-    </div>
-</div>
+                  <!-- Número de Afiliación -->
+                  <div class="col-md-4">
+                    <label for="numero_afiliacion">Número de Afiliación:</label>
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="numero_afiliacion" name="numero_afiliacion"
+                        placeholder="12345678" minlength="8" required>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="row" id="datosPacienteRow4">
@@ -484,47 +496,46 @@
                   </div>
                 </div>
 
-
-              <!-- Fecha de alta -->
-              <div class="col-md-4">
-                <label for="fecha_alta">Fecha de alta:</label>
-                <div class="form-group">
-                  <input type="text" class="form-control datetimepicker" id="fecha_alta" name="fecha_alta" placeholder="DD/MM/YYYY" required>
+                <div class="row" id="estanciaRow4">
+                  <!-- Fecha de alta -->
+                  <div class="col-md-4">
+                    <label for="fecha_alta">Fecha de alta:</label>
+                    <div class="form-group">
+                      <input type="text" class="form-control datetimepicker" id="fecha_alta" name="fecha_alta"
+                        placeholder="DD/MM/YYYY" required>
+                    </div>
+                  </div>
+                  <!-- hora de alta -->
+                  <div class="col-md-4">
+                    <label for="hora_alta">hora de alta:</label>
+                    <div class="form-group">
+                      <input type="text" class="form-control timepicker" id="hora_alta" name="hora_alta"
+                        placeholder="HH:MM AM/PM" required>
+                    </div>
+                  </div>
+                  <!-- Alta Por(Enviado A): -->
+                  <div class="col-md-4 autocomplete-container">
+                    <label for="alta_por">Alta Por(Enviado A):</label>
+                    <div class="form-group">
+                      <input type="text" id="alta_por" name="alta_por" class="form-control autocomplete-input"
+                        placeholder="Tipo de Vialidad" autocomplete="off">
+                      <ul class="list-group autocomplete-suggestions"></ul>
+                    </div>
+                  </div>
+                  <!-- Mujer en edad fértil: -->
+                  <div class="col-md-4">
+                    <label for="mujer_edad_fertil">Mujer en edad fértil:</label>
+                    <div class="form-group">
+                      <select id="mujer_edad_fertil" class="selectpicker form-control" name="mujer_edad_fertil"
+                        data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+                        <option value="0">Embarazo</option>
+                        <option value="1">Puerperio (de 0 a 42 días después del evento obstétrico)</option>
+                        <option value="2">No estaba embarazada ni en puerperio</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-            <!-- hora de alta -->
-            <div class="col-md-4">
-                <label for="hora_alta">hora de alta:</label>
-                <div class="form-group">
-                  <input type="text" class="form-control timepicker" id="hora_alta" name="hora_alta" placeholder="HH:MM AM/PM" required>
-                </div>
-              </div>
-            </div>
-
-            <div class="row" id="estanciaRow4">
-              <!-- Alta Por(Enviado A): -->
-              <div class="col-md-6 autocomplete-container">
-                <label for="alta_por">Alta Por(Enviado A):</label>
-                <div class="form-group">
-                  <input type="text" id="alta_por" name="alta_por" class="form-control autocomplete-input" placeholder="Tipo de Vialidad" autocomplete="off">
-                  <ul class="list-group autocomplete-suggestions"></ul>
-                </div>
-              </div>
-
-              <!-- Mujer en edad fértil: -->
-              <div class="col-md-6">
-                <label for="mujer_edad_fertil">Mujer en edad fértil:</label>
-                <div class="form-group">
-                  <select id="mujer_edad_fertil" class="selectpicker form-control" name="mujer_edad_fertil" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
-                    <option value="0">Embarazo</option>
-                    <option value="1">Puerperio (de 0 a 42 días después del evento obstétrico)</option>
-                    <option value="2">No estaba embarazada ni en puerperio</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
 
                 <!-- Afecciones Tratadas -->
                 <div class="tab-pane" id="form3">
