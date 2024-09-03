@@ -158,15 +158,14 @@ inputsAutocompletar.forEach(input => {
     // Define sections to toggle visibility based on select values
     const sectionsToToggle = [
         {selectId: 'afiliacion', targetSection: 'afiliacionEspecifique', showValues: ['12']},
-        {selectId: 'sitio_ocurrencia', targetSection: 'otroLugarEspecifique', showValues: ['11']},
-        {selectId: 'agente_lesion', targetSection: 'agenteEspecifique', showValues: ['Otro (Especifique)']},
         {selectId: 'tipo_seguridad', targetSection: 'seguridadEspecifique', showValues: ['Otro (Especifique)']},
         {selectId: 'escolaridad', targetSection: 'escolaridad_seleccionada', showValues: ['Primaria', 'Secundaria', 'Bachillerato o preparatoria', 'Profesional', 'Posgrado']},
         {selectId: 'sexo', targetSection: 'mujerFertilSection', showValues: ['Mujer', 'Intersexual']},
         {selectId: 'mujer_fertil', targetSection: 'semanasGestacionSection', showValues: ['1']},
         {selectId: 'lengua_indigena', targetSection: 'cualLenguaSection', showValues: ['1']},
         {selectId: 'referido_por', targetSection: 'unidadMedicaEspecifique', showValues: ['1']},
-        {selectId: 'referido_por', targetSection: 'CluesU', showValues: ['1']}
+        {selectId: 'referido_por', targetSection: 'CluesU', showValues: ['1']},
+        {selectId: 'destino_atencion', targetSection: 'destinoEspecifique', showValues: ['11']}
     ];
 
     // Add event listeners to select elements to toggle visibility of sections
@@ -186,6 +185,28 @@ inputsAutocompletar.forEach(input => {
             });
         }
     });
+
+    //MUJER EDAD MENOR A 9 O MAYOR A 59 BLOQUEA EL CAMPO MUJER_FERTIL
+    const edadInput = document.getElementById('edad');
+    const sexoInput = document.getElementById('sexo');
+    const mujerFertilSection = document.getElementById('mujerFertilSection');
+
+    function checkEdadYSexo() {
+        const edad = parseInt(edadInput.value, 10);
+        const sexo = sexoInput.value;
+
+        if (sexo === 'Mujer' && edad >= 9 && edad <= 59) {
+            mujerFertilSection.style.display = 'block';
+        } else {
+            mujerFertilSection.style.display = 'none';
+        }
+    }
+
+    edadInput.addEventListener('input', checkEdadYSexo);
+    sexoInput.addEventListener('change', checkEdadYSexo);
+
+    // Ejecutar al cargar la página para verificar el estado inicial
+    checkEdadYSexo();
 });
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -463,7 +484,6 @@ document.getElementById('entidad_pais').addEventListener('input', function() {
 
    
 
-// Lógica para AC en input's select's (VIALIDAD, ASENTAMIENTO)
 document.addEventListener('DOMContentLoaded', function() {
   const opcionesPorInput = {
       'tipo_vialidad': [
@@ -489,14 +509,23 @@ document.addEventListener('DOMContentLoaded', function() {
           "CONSULTA EXTERNA", "HOSPITALIZACIÓN", "URGENCIAS", "SERVICIO ESPECIALIZADO DE ATENCIÓN A LA VIOLENCIA", "OTRO SERVICIO (ESPECIFIQUE)"
       ],
       'tipo_atencion': [
-          "MÉDICA", "PSICOLÓGICA", "QUIRÚRGICA", "PSIQUIÁTRICA", "CONSEJERÍA", "OTRO", "PÍLDORA ANTICONCEPTIVA DE EMERGENCIA", "PROFILAXIS VIH", "PROFILAXIS OTRAS ITS", "IVE(INTERRUPCIÓN VOLUNTARIA DEL EMBARAZO)", "VACUNA VPH"
+          "MÉDICA", "PSICOLÓGICA", "QUIRÚRGICA", "PSIQUIÁTRICA", "CONSEJERÍA", "OTRO", 
+          "PÍLDORA ANTICONCEPTIVA DE EMERGENCIA", "PROFILAXIS VIH", "PROFILAXIS OTRAS ITS", 
+          "IVE(INTERRUPCIÓN VOLUNTARIA DEL EMBARAZO)", "VACUNA VPH"
       ],
       'area_gravedad': [
-          "CABEZA", "CARA", "REGIÓN OCULAR", "CUELLO", "COLUMNA VERTEBRAL", "EXTREMIDADES SUPERIORES", "MANO", "TÓRAX", "ESPALDA Y/O GLÚTEOS", "ABDOMEN", "PELVIS", "REGIÓN GENITAL", "EXTREMIDADES INFERIORES", "PIES", "MÚLTIPLES", "OTRO (ESPECIFIQUE)"
+          "CABEZA", "CARA", "REGIÓN OCULAR", "CUELLO", "COLUMNA VERTEBRAL", "EXTREMIDADES SUPERIORES", 
+          "MANO", "TÓRAX", "ESPALDA Y/O GLÚTEOS", "ABDOMEN", "PELVIS", "REGIÓN GENITAL", 
+          "EXTREMIDADES INFERIORES", "PIES", "MÚLTIPLES", "OTRO (ESPECIFIQUE)"
       ],
       'consecuencia_gravedad': [
-          "LACERACIÓN/ABRASIÓN", "APLASTAMIENTO", "CICATRICES", "DEPRESIÓN", "CONTUSIÓN/MALLUGAMIENTO", "CONGELAMIENTO", "ABORTO", "TRASTORNOS DE ANSIEDAD/ESTRÉS POSTRAUMÁTICO", "QUEMADURA/CORROSIÓN", "ASFIXIA", "EMBARAZO", "TRASTORNOS PSIQUIÁTRICOS", "LUXACIÓN/ESGUINCE", "HERIDA", "INFECCIÓN DE TRANSMISIÓN SEXUAL", "MÚLTIPLE", "AMPUTACIÓN/AVULSIÓN", "FRACTURA", "DEFUNCIÓN", "MALESTAR EMOCIONAL", "TRASTORNO DEL ESTADO DE ÁNIMO", "OTRO (ESPECIFIQUE)"]
-      // Puedes agregar más opciones para otros inputs si es necesario
+          "LACERACIÓN/ABRASIÓN", "APLASTAMIENTO", "CICATRICES", "DEPRESIÓN", "CONTUSIÓN/MALLUGAMIENTO", 
+          "CONGELAMIENTO", "ABORTO", "TRASTORNOS DE ANSIEDAD/ESTRÉS POSTRAUMÁTICO", 
+          "QUEMADURA/CORROSIÓN", "ASFIXIA", "EMBARAZO", "TRASTORNOS PSIQUIÁTRICOS", 
+          "LUXACIÓN/ESGUINCE", "HERIDA", "INFECCIÓN DE TRANSMISIÓN SEXUAL", "MÚLTIPLE", 
+          "AMPUTACIÓN/AVULSIÓN", "FRACTURA", "DEFUNCIÓN", "MALESTAR EMOCIONAL", 
+          "TRASTORNO DEL ESTADO DE ÁNIMO", "OTRO (ESPECIFIQUE)"
+      ]
   };
 
   document.querySelectorAll('.autocomplete-container').forEach(function(container) {
@@ -569,6 +598,15 @@ document.addEventListener('DOMContentLoaded', function() {
           input.value = option;
           input.placeholder = option;
           sugerencias.style.display = 'none';
+
+          // Mostrar/ocultar campos "Especifique" según la opción seleccionada
+          if (input.id === 'servicio_atencion') {
+              document.getElementById('servicioEspecifique').style.display = option === 'OTRO SERVICIO (ESPECIFIQUE)' ? 'block' : 'none';
+          } else if (input.id === 'area_gravedad') {
+              document.getElementById('areaGravedadEspecifique').style.display = option === 'OTRO (ESPECIFIQUE)' ? 'block' : 'none';
+          } else if (input.id === 'consecuencia_gravedad') {
+              document.getElementById('consecuenciaGravedadEspecifique').style.display = option === 'OTRO (ESPECIFIQUE)' ? 'block' : 'none';
+          }
       }
   });
 });
@@ -681,8 +719,50 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
- 
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
-//URGENCIAS 
-/////////////////////////////////////////////////////////
+// LOGICA PARA APLICAR ESPECIFIQUE EN AC
+document.addEventListener('DOMContentLoaded', function () {
+  // Referencias a los elementos de entrada y sus respectivos campos "Especifique"
+  const sitioOcurrenciaInput = document.getElementById('sitio_ocurrencia_input');
+  const sitioOcurrenciaEspecifique = document.getElementById('otroLugarEspecifique');
 
+  const agenteLesionInput = document.getElementById('agente_lesion_input');
+  const agenteLesionEspecifique = document.getElementById('agenteEspecifique');
+  const agenteLesionSuggestions = document.getElementById('sugerencias'); // El ul donde se muestran las sugerencias
+
+  // Función para mostrar/ocultar campos "Especifique"
+  function toggleEspecifiqueField(input, especifiqueField, triggerValue) {
+      input.addEventListener('input', function () {
+          if (input.value.trim().toUpperCase() === triggerValue.toUpperCase()) {
+              especifiqueField.style.display = 'block';
+          } else {
+              especifiqueField.style.display = 'none';
+          }
+      });
+
+      // Ocultar "Especifique" cuando se pierde el foco si el valor no coincide
+      input.addEventListener('blur', function () {
+          setTimeout(() => {
+              if (input.value.trim().toUpperCase() !== triggerValue.toUpperCase()) {
+                  especifiqueField.style.display = 'none';
+              }
+          }, 200);
+      });
+  }
+
+  // Aplicar la lógica para "Sitio de Ocurrencia" y "Agente de Lesión"
+  toggleEspecifiqueField(sitioOcurrenciaInput, sitioOcurrenciaEspecifique, 'Otro lugar (Especifique)');
+  toggleEspecifiqueField(agenteLesionInput, agenteLesionEspecifique, 'Otro (Especifique)');
+  
+  // Lógica adicional para seleccionar una sugerencia del ul (solo para agente de lesión)
+  agenteLesionSuggestions.addEventListener('click', function (event) {
+      if (event.target.tagName === 'LI') {
+          agenteLesionInput.value = event.target.textContent.trim();
+          agenteLesionSuggestions.style.display = 'none';
+          if (event.target.textContent.trim().toUpperCase() === 'Otro (Especifique)'.toUpperCase()) {
+              agenteLesionEspecifique.style.display = 'block';
+          } else {
+              agenteLesionEspecifique.style.display = 'none';
+          }
+      }
+  });
+});

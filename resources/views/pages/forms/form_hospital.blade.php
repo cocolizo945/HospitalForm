@@ -379,23 +379,22 @@
                     <div class="form-group">
                       <input id="sitio_ocurrencia_input" type="text" class="form-control" placeholder="Escriba para buscar..." required>
                       <datalist id="sitio_ocurrencia_list">
-                    <option value="Vivienda">
-                    <option value="Institución residencial">
-                    <option value="Escuela">
-                    <option value="Área de deporte y atletismo">
-                    <option value="Vía pública (peatón)">
-                    <option value="Comercio y áreas de servicio">
-                    <option value="Trabajo">
-                    <option value="Granja">
-                    <option value="Club, cantina, bar">
-                    <option value="Vehículo automotor público">
-                    <option value="Vehículo automotor privado">
-                    <option value="Otro lugar (Especifique)">
-                    <option value="Lugar no especificado">
-                    </datalist>
+                      <option value="Vivienda">
+                      <option value="Institución residencial">
+                      <option value="Escuela">
+                      <option value="Área de deporte y atletismo">
+                      <option value="Vía pública (peatón)">
+                      <option value="Comercio y áreas de servicio">
+                      <option value="Trabajo">
+                      <option value="Granja">
+                      <option value="Club, cantina, bar">
+                      <option value="Vehículo automotor público">
+                      <option value="Vehículo automotor privado">
+                      <option value="Otro lugar (Especifique)">
+                      <option value="Lugar no especificado">
+                      </datalist>
                     </div>
                   </div>
-
 
                   <!-- Campo de texto para especificar otro lugar -->
                   <div class="col-md-4" id="otroLugarEspecifique" style="display: none;">
@@ -737,6 +736,14 @@
                       <ul class="list-group autocomplete-suggestions"></ul>
                       </div>
                   </div>
+
+                  <div class="col-md-4" id="servicioEspecifique" style="display: none;">
+                      <label for="servicio_especifique">Especifique:</label>
+                      <div class="form-group">
+                          <input type="text" id="servicio_especifique" name="servicio_especifique" class="form-control" placeholder="Servicio que otorgó la atención">
+                      </div>
+                  </div>
+
                   <!-- Tipo de atención -->
                   <div class="col-md-4 autocomplete-container">
                     <label for="tipo_atencion">Tipo de atención:</label>
@@ -753,6 +760,14 @@
                       <ul class="list-group autocomplete-suggestions"></ul>
                     </div>
                   </div>
+
+                  <div class="col-md-4" id="areaGravedadEspecifique" style="display: none;">
+                      <label for="area_gravedad_especifique">Especifique:</label>
+                      <div class="form-group">
+                          <input type="text" id="area_gravedad_especifique" name="area_gravedad_especifique" class="form-control" placeholder="Área Anatómica de Mayor Gravedad">
+                      </div>
+                  </div> 
+
                   <!-- Consecuencia Resultante de Mayor Gravedad -->
                   <div class="col-md-4 autocomplete-container">
                     <label for="consecuencia_gravedad">Consecuencia Resultante de Mayor Gravedad:</label>
@@ -760,6 +775,13 @@
                       <input type="text" id="consecuencia_gravedad" name="consecuencia_gravedad" class="form-control autocomplete-input" placeholder="Areá de gravedad" autocomplete="off" required>
                       <ul class="list-group autocomplete-suggestions"></ul>
                     </div>
+                  </div>
+
+                  <div class="col-md-4" id="consecuenciaGravedadEspecifique" style="display: none;">
+                      <label for="consecuencia_gravedad_especifique">Especifique:</label>
+                      <div class="form-group">
+                          <input type="text" id="consecuencia_gravedad_especifique" name="consecuencia_gravedad_especifique" class="form-control" placeholder="Consecuencia Resultante de Mayor Gravedad">
+                      </div>
                   </div>
 
                   <!-- Afección principal -->
@@ -806,6 +828,14 @@
                         <option value="10">10. Grupo de ayuda mutua</option>
                         <option value="11">11. Otro (Especifique)</option>
                       </select>
+                    </div>
+                  </div>
+                  <!--Especifique Destino-->
+                  <div class="col-md-4" id="destinoEspecifique" style="display: none;">
+                    <label for="destino_especifique">Especifique el Destino:</label>
+                    <div class="form-group">
+                      <input type="text" id="destino_especifique" name="destino_especifique" class="form-control"
+                        placeholder="Especifique Destino">
                     </div>
                   </div>
                   <!-- Responsable de la atención -->
