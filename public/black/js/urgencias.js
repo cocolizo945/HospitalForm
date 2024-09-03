@@ -899,6 +899,61 @@ inputsC.forEach(input => {
 });
 
 
+//ocula o muestra el campo 'Número de Afiliación' en el formulario dependiendo de la opción seleccionada en el campo 'Afiliación a los Servicios de Salud'
+$(document).ready(function() {
+  // Funcionalidad para ocultar/mostrar el campo 'Número de Afiliación'
+  $('#afiliacion').on('change', function() {
+      var selectedValue = $(this).val();
+      var numeroAfiliacionContainer = $('#numero_afiliacion').closest('.col-md-4');
+      
+      if (selectedValue === '0' || selectedValue === '1' || selectedValue === '99') {
+          numeroAfiliacionContainer.hide();
+          $('#numero_afiliacion').val(''); // Limpia el campo al ocultarlo
+      } else {
+          numeroAfiliacionContainer.show();
+      }
+  });
+
+  $('#afiliacion').trigger('change');
+
+  // Funcionalidad para ocultar/mostrar el campo 'Tiempo de traslado'
+  $('#prehospitalaria').on('change', function() {
+      var selectedValue = $(this).val();
+      var tiempoTrasladoContainer = $('#tiempo_traslado').closest('.col-md-2');
+      
+      if (selectedValue === '0') { // Si se selecciona 'No'
+          tiempoTrasladoContainer.hide();
+          $('#tiempo_traslado').val(''); // Limpia el campo al ocultarlo
+      } else {
+          tiempoTrasladoContainer.show();
+      }
+  });
+
+  $('#prehospitalaria').trigger('change');
+
+  // Funcionalidad para ocultar/mostrar 'Nombre de la unidad' y 'CLUES' basado en 'Traslado transitorio'
+  $('#traslado_transitorio').on('change', function() {
+      var selectedValue = $(this).val();
+      var nombreUnidadContainer = $('#nombre_unidad').closest('.col-md-4');
+      var cluesContainer = $('#clues').closest('.col-md-4');
+      
+      if (selectedValue === '1') { // Si se selecciona 'Sí'
+          nombreUnidadContainer.show(); // Muestra 'Nombre de la unidad'
+          cluesContainer.show(); // Muestra 'CLUES'
+      } else {
+          nombreUnidadContainer.hide(); // Oculta 'Nombre de la unidad'
+          cluesContainer.hide(); // Oculta 'CLUES'
+          $('#nombre_unidad').val(''); // Limpia el campo al ocultarlo
+          $('#clues').val(''); // Limpia el campo al ocultarlo
+      }
+  });
+
+  // Ocultar por defecto al cargar la página
+  $('#traslado_transitorio').trigger('change');
+});
+
+
+
 // -- AutorrellenadoInputs -- Inicio
 
 // Definir la cantidad de "X" para cada input
