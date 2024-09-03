@@ -76,16 +76,15 @@
                       </ul>
                   </div>
                   </div>
-
                   <!-- Folio -->
                   <div class="col-md-4 ml-auto mr-auto">
                     <label for="folio">Folio:</label>
                     <div class="form-group">
-                      <input type="text" id="folio" name="folio" minLength="8" class="form-control" placeholder="Folio" required>
+                    <input type='button' id='btnMakeFolio' class='btn btn-fill btn-primary btn-wd' name='makefolio' value='Crear Folio' />
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>
 
               <!-- Paciente Afectada(o) -->
               <div class="tab-pane" id="about">
