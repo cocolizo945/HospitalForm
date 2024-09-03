@@ -20,82 +20,80 @@
         </ul>
     </div>
   @endif
-
-    <!-- Wizard container -->
-    <div class="wizard-container">
-      <div class="card card-wizard" data-color="red" id="wizardProfile">
-        <form action="{{ route('form_urgencias.store') }}" method="POST" id="RangeValidation">
-          @csrf
-          <div class="card-header text-center">
-            <h3 id="tituloPrincipal" class="Montserrat-Bold">
-              HOJA DIARIA DEL SERVICIO DE URGENCIAS
-            </h3>
-            <div class="wizard-navigation" id="wizardNavigation">
-              <div class="progress-with-circle" id="progressWithCircle">
-                <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="7"
-                  style="width: 21%;" id="progressBar"></div>
-              </div>
-              <ul id="wizardSteps">
-                <li class="nav-item" id="step1">
-                  <a class="nav-link active" href="#form1" data-toggle="tab">
-                    <i class="tim-icons icon-single-02"></i>
-                    <p>DATOS DEL PACIENTE</p>
-                  </a>
-                </li>
-                <li class="nav-item" id="step2">
-                  <a class="nav-link" href="#form2" data-toggle="tab">
-                    <i class="tim-icons icon-satisfied"></i>
-                    <p>ESTANCIA Y AFECCIONES TRATADAS</p>
-                  </a>
-                </li>
-                <!--<li class="nav-item" id="step3">
-                  <a class="nav-link" href="#form3" data-toggle="tab">
-                    <i class="tim-icons icon-sound-wave"></i>
-                    <p>AFECCIONES TRATADAS</p>
-                  </a>
-                </li>-->
-                <li class="nav-item" id="step4">
-                  <a class="nav-link" href="#form4" data-toggle="tab">
-                    <i class="tim-icons icon-notes"></i>
-                    <p>INTERCONSULTA Y PROCEDIMIENTOS</p>
-                  </a>
-                </li>
-                <!--<li class="nav-item" id="step5">
-                  <a class="nav-link" href="#form5" data-toggle="tab">
-                    <i class="tim-icons icon-settings-gear-63"></i>
-                    <p>PROCEDIMIENTOS</p>
-                  </a>
-                </li>-->
-                <li class="nav-item" id="step6">
-                  <a class="nav-link" href="#form6" data-toggle="tab">
-                    <i class="tim-icons icon-attach-87"></i>
-                    <p>MEDICAMENTOS SUMINISTRADOS</p>
-                  </a>
-                </li>
-                <li class="nav-item" id="step7">
-                  <a class="nav-link" href="#form7" data-toggle="tab">
-                    <i class="tim-icons icon-heart-2"></i>
-                    <p>PROFESIONAL DE LA SALUD RESPONSABLE:</p>
-                  </a>
-                </li>
-              </ul>
-            </div>
+    
+<!-- Wizard container -->
+<div class="wizard-container">
+  <div class="card card-wizard" data-color="red" id="wizardProfile">
+    <form action="{{ route('form_urgencias.store') }}" method="POST" id="RangeValidation">
+     @csrf
+      <div class="card-header text-center">
+        <h3 id="tituloPrincipal" class="Montserrat-Bold">
+          HOJA DIARIA DEL SERVICIO DE URGENCIAS 
+        </h3>
+        <div class="wizard-navigation" id="wizardNavigation">
+          <div class="progress-with-circle" id="progressWithCircle">
+            <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="7" style="width: 21%;" id="progressBar"></div>
           </div>
-          <div class="card-body" id="cardBody">
-            <div class="tab-content" id="tabContent">
+          <ul id="wizardSteps">
+            <li class="nav-item" id="step1">
+              <a class="nav-link active" href="#form1" data-toggle="tab">
+                <i class="tim-icons icon-single-02"></i>
+                <p>DATOS DEL PACIENTE</p>
+              </a>
+            </li>
+            <li class="nav-item" id="step2">
+              <a class="nav-link" href="#form2" data-toggle="tab">
+                <i class="tim-icons icon-satisfied"></i>
+                <p>ESTANCIA</p>
+              </a>
+            </li>
+            <li class="nav-item" id="step3">
+              <a class="nav-link" href="#form3" data-toggle="tab">
+                <i class="tim-icons icon-sound-wave"></i>
+                <p>AFECCIONES TRATADAS</p>
+              </a>
+            </li>
+            <li class="nav-item" id="step4">
+              <a class="nav-link" href="#form4" data-toggle="tab">
+                <i class="tim-icons icon-notes"></i>
+                <p>INTERCONSULTA</p>
+              </a>
+            </li>
+            <li class="nav-item" id="step5">
+              <a class="nav-link" href="#form5" data-toggle="tab">
+                <i class="tim-icons icon-settings-gear-63"></i>
+                <p>PROCEDIMIENTOS</p>
+              </a>
+            </li>
+            <li class="nav-item" id="step6">
+              <a class="nav-link" href="#form6" data-toggle="tab">
+                <i class="tim-icons icon-attach-87"></i>
+                <p>MEDICAMENTOS SUMINISTRADOS</p>
+              </a>
+            </li>
+            <li class="nav-item" id="step7">
+              <a class="nav-link" href="#form7" data-toggle="tab">
+                <i class="tim-icons icon-heart-2"></i>
+                <p>PROFESIONAL DE LA SALUD RESPONSABLE:</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-body" id="cardBody">
+        <div class="tab-content" id="tabContent">
 
-              <!-- Datos del Paciente -->
-              <div class="tab-pane show active" id="form1">
-                <h5 class="info-text" id="datosPaciente">Datos del paciente</h5>
-                <div class="row" id="datosPacienteRow1">
-                  <!-- Nombre -->
-                  <div class="col-md-4">
-                    <label for="nombre">Nombre:</label>
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Juan" minlength="3"
-                        required>
-                    </div>
-                  </div>
+          <!-- Datos del Paciente -->
+          <div class="tab-pane show active" id="form1">
+            <h5 class="info-text" id="datosPaciente">Datos del paciente</h5>
+            <div class="row" id="datosPacienteRow1">
+              <!-- Nombre -->
+              <div class="col-md-4">
+                <label for="nombre">Nombre:</label>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Juan" minlength="3" required>
+                </div>
+              </div>
 
               <!-- Primer apellido -->
               <div class="col-md=4">
@@ -141,47 +139,56 @@
               </div>
             </div>
 
-                <div class="row" id="datosPacienteRow3">
-                  <!-- Edad -->
-                  <div class="col-md-2">
-                    <label for="edad">Edad cumplida:</label>
-                    <div class="form-group">
-                      <input class="form-control" type="number" id="edad" name="edad" placeholder="35" required>
-                    </div>
-                  </div>
+            <div class="row" id="datosPacienteRow3">
+              <!-- Edad -->
+              <div class="col-md-2">
+                <label for="edad">Edad cumplida:</label>
+                <div class="form-group">
+                  <input class="form-control" type="number" id="edad" name="edad" placeholder="35" required>
+                </div>
+              </div>
 
               <!-- Sexo -->
               <div class="col-md-2">
                 <label for="sexo">Sexo:</label>
                 <div class="form-group">
-                  <select class="selectpicker form-control" id="sexo" name="sexo" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
-                    <option value="1">Hombre</option>
-                    <option value="2">Mujer</option>
-                    <option value="3">Intersexual</option>
+                <select class="selectpicker form-control" id="sexo" name="sexo" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+                <option value="1">Hombre</option>
+                <option value="2">Mujer</option>
+                <option value="3">Intersexual</option>
+                </select>
+                </div>
+              </div>
+
+              <!-- Afiliación a los Servicios de Salud -->
+              <div class="col-md-4">
+                <label for="afiliacion">Afiliación a los Servicios de Salud:</label>
+                <div class="form-group">
+                  <select id="afiliacion" class="selectpicker form-control" name="afiliacion" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+                    <option value="0">No especificado</option>
+                    <option value="1">Ninguna</option>
+                    <option value="2">IMSS</option>
+                    <option value="3">ISSSTE</option>
+                    <option value="4">PEMEX</option>
+                    <option value="5">SEDENA</option>
+                    <option value="6">SEMAR</option>
+                    <option value="7">OTRA</option>
+                    <option value="8">IMSS Bienestar</option>
+                    <option value="9">ISSFAM</option>
+                    <option value="10">OPD IMSS Bienestar</option>
+                    <option value="99">Se ignora</option>
                   </select>
                 </div>
               </div>
 
-                  <!-- Afiliación a los Servicios de Salud -->
-<div class="col-md-4">
-    <label for="afiliacion">Afiliación a los Servicios de Salud:</label>
-    <div class="form-group">
-        <input type="text" id="afiliacion" class="form-control" placeholder="Selecciona una opción" autocomplete="off" />
-        <ul id="afiliacion_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        </ul>
-    </div>
-</div>
-
-
-        
-<!-- Número de Afiliación -->
-<div class="col-md-4">
-    <label for="numero_afiliacion">Número de Afiliación:</label>
-    <div class="form-group">
-        <input type="text" class="form-control" id="numero_afiliacion" name="numero_afiliacion" placeholder="Número de afiliación" minlength="8" maxlength="11" required>
-    </div>
-</div>
+              <!-- Número de Afiliación -->
+              <div class="col-md-4">
+                <label for="numero_afiliacion">Número de Afiliación:</label>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="numero_afiliacion" name="numero_afiliacion" placeholder="12345678" minlength="8" required>
                 </div>
+              </div>
+            </div>
 
             <div class="row" id="datosPacienteRow4">
               <!-- Gratuidad -->
@@ -489,19 +496,17 @@
                 </div>
               </div>
 
-              <!-- Mujer en edad fértil: -->
-              <div class="col-md-6">
+              <!-- Mujer en edad fértil -->
+              <div class="col-md-6" id="mujer_edad_fertil_container">
                 <label for="mujer_edad_fertil">Mujer en edad fértil:</label>
                 <div class="form-group">
-                  <select id="mujer_edad_fertil" class="selectpicker form-control" name="mujer_edad_fertil" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
-                    <option value="0">Embarazo</option>
-                    <option value="1">Puerperio (de 0 a 42 días después del evento obstétrico)</option>
-                    <option value="2">No estaba embarazada ni en puerperio</option>
-                  </select>
+                <select id="mujer_edad_fertil" class="selectpicker form-control" name="mujer_edad_fertil" data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+                <option value="0">Embarazo</option>
+                <option value="1">Puerperio (de 0 a 42 días después del evento obstétrico)</option>
+                <option value="2">No estaba embarazada ni en puerperio</option>
+                </select>
                 </div>
               </div>
-            </div>
-          </div>
 
           <!-- Afecciones Tratadas -->
           <div class="tab-pane" id="form3">
@@ -550,17 +555,15 @@
                 </div>
               </div>
 
-                    <!-- Folio de la hoja de lesiones -->
-                    <div class="col-md-6">
-                      <label for="folio_hoja_lesion">Folio de la hoja de lesiones:</label>
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="folio_hoja_lesion" name="folio_hoja_lesion"
-                          placeholder="123456" minlength="6" required>
-                      </div>
-                    </div>
-                  </div>
+              <!-- Folio de la hoja de lesiones -->
+              <div class="col-md-6">
+                <label for="folio_hoja_lesion">Folio de la hoja de lesiones:</label>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="folio_hoja_lesion" name="folio_hoja_lesion" placeholder="123456" minlength="6" required>
                 </div>
-                </div>
+              </div>
+            </div>
+          </div>
 
           <!-- Interconsulta -->
 <div class="tab-pane" id="form4">
