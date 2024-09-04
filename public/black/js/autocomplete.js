@@ -105,7 +105,7 @@ const cluesOpciones = [
 let referidoPorInput = document.getElementById('referido_por');
 let referidoPorSuggestions = document.getElementById('referido_sugg');
 let unidadMedicaEspecifique = document.getElementById('unidadMedicaEspecifique');
-let cluesU = document.getElementById('CluesU');
+let cluesU = document.getElementById('cluesU');
 let cluesUInput = document.getElementById('cluesU');
 let cluesUSuggestions = document.getElementById('cluesU_suggestions');
 
