@@ -224,11 +224,10 @@
                   <div class="col-md-4">
                     <label for="leer_escribir">Sabe Leer y Escribir:</label>
                     <div class="form-group">
-                      <select id="leer_escribir" class="selectpicker form-control" name="leer_escribir" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. SI</option>
-                        <option value="2">2. NO</option>
-                      </select>
+                      <input type="text" id="leer_escribir" name="leer_escribir" class="form-control"
+                        placeholder="Selecciona una opción" autocomplete="off" required>
+                      <ul id="leer_escribir_suggestions" class="list-group autocomplete-suggestions"
+                        style="display: none;"></ul>
                     </div>
                   </div>
                   <!-- ¿Se Considera Indígena? -->
@@ -551,6 +550,18 @@
                     </select>
                     </div>
                   </div>
+                  <!-- En caso de evento autoinfligido, el evento ocurrió -->
+                  <div class="col-md-4">
+                      <label for="evento_autoinfligido">El evento ocurrió:</label>
+                      <div class="form-group">
+                        <select id="evento_autoinfligido" class="selectpicker form-control" name="evento_autoinfligido"
+                          required>
+                          <option disabled selected>Selección Única</option>
+                          <option value="Única vez">Única vez</option>
+                          <option value="Repetido">Repetido</option>
+                        </select>
+                      </div>
+                    </div>
                 </div>
                 
               <div id="accidenteSection" style="display: none;">
@@ -691,17 +702,6 @@
                     <option value="Drogas ilegales">Drogas ilegales</option>
                     <option value="Se ignora">Se ignora</option>
                     <option value="Ninguna">Ninguna</option>
-                    </select>
-                    </div>
-                  </div>
-                  <!-- En caso de evento autoinfligido, el evento ocurrió -->
-                  <div class="col-md-4">
-                    <label for="evento_autoinfligido">En caso de evento autoinfligido, el evento ocurrió:</label>
-                    <div class="form-group">
-                    <select id="evento_autoinfligido" class="selectpicker form-control" name="evento_autoinfligido" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Única vez">Única vez</option>
-                    <option value="Repetido">Repetido</option>
                     </select>
                     </div>
                   </div>

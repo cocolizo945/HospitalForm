@@ -214,6 +214,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const intencionalidadSelect = document.getElementById('intencionalidad_evento');
     const accidenteSection = document.getElementById('accidenteSection');
     const violenciaSection = document.getElementById('violenciaSection');
+    const eventoAutoinfligidoDiv = document.getElementById('evento_autoinfligido').closest('.col-md-4');
+
+    // Ocultar inicialmente el campo "evento_autoinfligido"
+    eventoAutoinfligidoDiv.style.display = 'none';
 
     intencionalidadSelect.addEventListener('change', (event) => {
       const value = event.target.value;
@@ -227,6 +231,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         accidenteSection.style.display = 'block';
       } else if (value === '2' || value === '3') {
         violenciaSection.style.display = 'block';
+      } else if(value === '4'){
+        eventoAutoinfligidoDiv.style.display = 'block'; // Mostrar el campo "evento_autoinfligido"
       }
     });
   });
@@ -763,6 +769,63 @@ document.addEventListener('DOMContentLoaded', function () {
           } else {
               agenteLesionEspecifique.style.display = 'none';
           }
+      }
+  });
+});
+
+//ESCOLARIDAD SELECCIONADA
+document.addEventListener('DOMContentLoaded', function () {
+  const escolaridadSelect = document.getElementById('escolaridad');
+  const leerEscribirInput = document.getElementById('leer_escribir');
+  const leerEscribirSuggestions = document.getElementById('leer_escribir_suggestions');
+
+  const opcionesLeerEscribir = ["SI", "NO"];
+
+  // Manejar la selección en el campo escolaridad
+  escolaridadSelect.addEventListener('change', function () {
+      const selectedOption = escolaridadSelect.value;
+
+      if (selectedOption !== 'Ninguna' && selectedOption !== 'Se ignora') {
+          leerEscribirInput.value = "SI"; // Selecciona "SI" automáticamente
+          leerEscribirInput.disabled = true; // No permitir cambios
+          leerEscribirSuggestions.style.display = 'none'; // Ocultar las sugerencias
+      } else {
+          leerEscribirInput.value = ""; // Resetea la selección
+          leerEscribirInput.disabled = false; // Habilita el campo para permitir selección manual
+      }
+  });
+
+  // Manejar el autocompletado
+  leerEscribirInput.addEventListener('input', function () {
+      const valor = leerEscribirInput.value.toLowerCase();
+      leerEscribirSuggestions.innerHTML = '';
+
+      const opcionesFiltradas = opcionesLeerEscribir.filter(opcion => opcion.toLowerCase().includes(valor));
+
+      if (opcionesFiltradas.length > 0) {
+          leerEscribirSuggestions.style.display = 'block';
+          opcionesFiltradas.forEach(opcion => {
+              const li = document.createElement('li');
+              li.textContent = opcion;
+              li.classList.add('list-group-item');
+              li.style.cursor = 'pointer';
+
+              li.addEventListener('click', function () {
+                  leerEscribirInput.value = opcion; // Establece el valor seleccionado
+                  leerEscribirSuggestions.style.display = 'none'; // Oculta las sugerencias
+              });
+
+              leerEscribirSuggestions.appendChild(li);
+          });
+      } else {
+          leerEscribirSuggestions.style.display = 'none';
+      }
+  });
+
+  // Ocultar sugerencias cuando el usuario hace clic fuera
+  document.addEventListener('click', function(event) {
+      if (!leerEscribirInput.contains(event.target) && !leerEscribirSuggestions.contains(event.target)) {
+          leerEscribirSuggestions.style.display = 'none';
       }
   });
 });
