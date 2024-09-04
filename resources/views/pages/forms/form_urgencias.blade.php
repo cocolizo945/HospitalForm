@@ -96,17 +96,14 @@
             <div class="tab-pane show active" id="formFolio">
                 <h5 class="info-text">Folio</h5>
                 <div class="row">
-                  <!-- CLUES -->
-                  <div class="col-md-4 ml-auto mr-auto">
-                    <label for="clues_folio">CLUES:</label>
-                    <div class="form-group">
-                      <select id="clues-folio" class="selectpicker form-control" name="clues-folio" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. CSSSA006403</option>
-                        <option value="2">2. CSSSA006415</option>
-                        <option value="3">3. CSSSA006420</option>
-                      </select>
-                    </div>
+                  <!-- CLUES (cambio1) -->
+                 <div class="col-lg-5 col-md-6 col-sm-3">
+                  <label for="clues">CLUES:</label>
+                  <div class="form-group">
+                  <input type="text" id="clues" name="clues" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
+                      <ul id="clues_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </ul>
+                  </div>
                   </div>
                   <!-- Folio -->
                   <div class="col-md-4 ml-auto mr-auto">
@@ -170,8 +167,9 @@
                     </div>
                   </div>
 
-                  <!-- Entidad o País de Nacimiento -->
-                  <div class="col-md-4">
+                  
+                <!-- Entidad o País de Nacimiento -->
+                <div class="col-md-4">
                     <label for="entidad_nacimiento">Entidad o País de Nacimiento:</label>
                     <div class="form-group">
                       <input type="text" id="entidad_nacimiento" name="entidad_nacimiento" class="form-control"
@@ -203,34 +201,30 @@
                     </div>
                   </div>
 
-                  <!-- Afiliación a los Servicios de Salud -->
-                  <div class="col-md-4">
+<!-- Afiliación a los Servicios de Salud /cambio2 -->
+<div class="col-md-4">
                     <label for="afiliacion">Afiliación a los Servicios de Salud:</label>
                     <div class="form-group">
-                      <select id="afiliacion" class="selectpicker form-control" name="afiliacion" data-size="7"
-                        data-style="btn btn-primary" title="Selección Única" required>
-                        <option value="0">No especificado</option>
-                        <option value="1">Ninguna</option>
-                        <option value="2">IMSS</option>
-                        <option value="3">ISSSTE</option>
-                        <option value="4">PEMEX</option>
-                        <option value="5">SEDENA</option>
-                        <option value="6">SEMAR</option>
-                        <option value="7">OTRA</option>
-                        <option value="8">IMSS Bienestar</option>
-                        <option value="9">ISSFAM</option>
-                        <option value="10">OPD IMSS Bienestar</option>
-                        <option value="99">Se ignora</option>
-                      </select>
+                      <input type="text" id="afiliacion_input" name="afiliacion_input" class="form-control"
+                        placeholder="Seleccione su afiliación" autocomplete="off" required>
+                      <ul id="sugerencias_afiliacion" class="list-group autocomplete-suggestions"></ul>
                     </div>
                   </div>
-
+                  <!--Especifique el otro lugar-->
+                  <div class="col-md-4" id="afiliacionEspecifique" style="display: none;">
+                    <label for="afiliacion_especifique">Especifique el otro lugar:</label>
+                    <div class="form-group">
+                      <input type="text" id="afiliacion_especifique" name="afiliacion_especifique" class="form-control"
+                        placeholder="Especifique el lugar">
+                    </div>
+                  </div>
+                
                   <!-- Número de Afiliación -->
                   <div class="col-md-4">
                     <label for="numero_afiliacion">Número de Afiliación:</label>
                     <div class="form-group">
-                      <input type="text" class="form-control" id="numero_afiliacion" name="numero_afiliacion"
-                        placeholder="12345678" minlength="8" required>
+                      <input class="form-control" type="number" id="numero_afiliacion" name="numero_afiliacion" min="0"
+                        placeholder="Número de Afiliación" required maxlength="11">
                     </div>
                   </div>
                 </div>
@@ -288,70 +282,51 @@
                     </div>
                   </div>
 
-                  <!-- Entidad Federativa/País -->
-                  <div class="col-md-4">
-                    <label for="entidad_pais">Entidad Federativa/País:</label>
-                    <div class="form-group">
-                      <input type="text" id="entidad_pais" name="entidad_pais" class="form-control"
-                        placeholder="Entidad Federativa o País" oninput="mostrarSugerencias(this, 'entidades')"
-                        autocomplete="off" onclick="mostrarSugerencias(this, 'entidades')"
-                        onfocus="mostrarSugerencias(this, 'entidades')"
-                        onblur="ocultarSugerencias('sugerencias_entidad_pais')">
-                      <div id="sugerencias_entidad_pais" class="sugerencias"
-                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                      </div>
-                    </div>
-                  </div>
+                 <!-- Entidad Federativa/País -->
+<div class="col-md-4" id="div_entidad_pais">
+  <label for="entidad_pais">Entidad Federativa/País:</label>
+  <div class="form-group">
+    <input type="text" id="entidad_pais" name="entidad_pais" class="form-control"
+      placeholder="Entidad Federativa o País" autocomplete="off">
+    <ul id="sugerencias_entidad_pais" class="list-group autocomplete-suggestions"></ul>
+  </div>
+</div>
 
-                  <!-- Municipio o alcaldía -->
-                  <div class="col-md-4">
-                    <label for="municipio">Municipio o alcaldía:</label>
-                    <div class="form-group">
-                      <input type="text" id="municipio" name="municipio" class="form-control"
-                        placeholder="Municipio o Alcaldía" oninput="mostrarSugerencias(this, 'municipios')"
-                        autocomplete="off" onclick="mostrarSugerencias(this, 'municipios')"
-                        onfocus="mostrarSugerencias(this, 'municipios')"
-                        onblur="ocultarSugerencias('sugerencias_municipio')">
-                      <div id="sugerencias_municipio" class="sugerencias"
-                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                      </div>
-                    </div>
-                  </div>
+<!-- Municipio o alcaldía -->
+<div class="col-md-4" id="div_municipio">
+  <label for="municipio">Municipio o Alcaldía:</label>
+  <div class="form-group">
+    <input type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio o Alcaldía" autocomplete="off">
+  </div>
+</div>
 
-                  <!-- Localidad -->
-                  <div class="col-md-4">
-                    <label for="localidad">Localidad:</label>
-                    <div class="form-group">
-                      <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad"
-                        oninput="mostrarSugerencias(this, 'localidades')" autocomplete="off"
-                        onclick="mostrarSugerencias(this, 'localidades')"
-                        onfocus="mostrarSugerencias(this, 'localidades')"
-                        onblur="ocultarSugerencias('sugerencias_localidad')">
-                      <div id="sugerencias_localidad" class="sugerencias"
-                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                      </div>
-                    </div>
-                  </div>
+<!-- Localidad -->
+<div class="col-md-4" id="div_localidad">
+  <label for="localidad">Localidad:</label>
+  <div class="form-group">
+    <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" autocomplete="off">
+  </div>
+</div>
 
-                  <!-- Código Postal -->
-                  <div class="col-md-4">
-                    <label for="codigo_postal">Código Postal:</label>
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="codigo_postal" name="codigo_postal"
-                        placeholder="30700" minlength="5" required>
-                    </div>
-                  </div>
-                </div>
+<!-- Código Postal -->
+<div class="col-md-4" id="div_codigo_postal">
+  <label for="codigo_postal">Código Postal:</label>
+  <div class="form-group">
+    <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" placeholder="30700" minlength="5" required>
+  </div>
+</div>
+</div>
 
                 <div class="row" id="datosPacienteRow6">
-                  <!-- Tipo de la Vialidad -->
-                  <div class="col-md-4">
-                    <label for="tipo_vialidad">Tipo de la Vialidad:</label>
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="tipo_vialidad" name="tipo_vialidad"
-                        placeholder="Calle" minlength="3" required>
-                    </div>
-                  </div>
+                 <!-- Tipo de la Vialidad -->
+<div class="col-md-4 autocomplete-container">
+    <label for="tipo_vialidad">Tipo de la Vialidad:</label>
+    <div class="form-group">
+        <input type="text" id="tipo_vialidad" name="tipo_vialidad" class="form-control autocomplete-input" placeholder="Tipo de Vialidad" autocomplete="off">
+        <ul class="list-group autocomplete-suggestions"></ul>
+    </div>
+</div>
+
 
                   <!-- Nombre de la vialidad -->
                   <div class="col-md-4">
@@ -380,14 +355,14 @@
                 </div>
 
                 <div class="row" id="datosPacienteRow7">
-                  <!-- Tipo de asentamiento humano -->
-                  <div class="col-md-4">
-                    <label for="tipo_asentamiento">Tipo de asentamiento humano:</label>
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="tipo_asentamiento" name="tipo_asentamiento"
-                        placeholder="Colonia" minlength="3" required>
-                    </div>
-                  </div>
+                 <!-- Tipo de Asentamiento Humano -->
+<div class="col-md-4 autocomplete-container">
+    <label for="tipo_asentamiento">Tipo de Asentamiento Humano:</label>
+    <div class="form-group">
+        <input type="text" id="tipo_asentamiento" name="tipo_asentamiento" class="form-control autocomplete-input" placeholder="Tipo de Asentamiento" autocomplete="off">
+        <ul class="list-group autocomplete-suggestions"></ul>
+    </div>
+</div>
 
                   <!-- Nombre de asentamiento humano -->
                   <div class="col-md-4">

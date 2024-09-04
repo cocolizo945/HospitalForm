@@ -7,12 +7,11 @@ const afiliaciones = [
     "PEMEX", 
     "SEDENA", 
     "SEMAR", 
-    "OTRA", 
+    "Otra", 
     "IMSS Bienestar", 
     "ISSFAM", 
     "OPD IMSS Bienestar", 
-    "Se ignora", 
-    "Especifique"
+    "Se ignora"
 ];
 
 // Referencias a los elementos del DOM
@@ -40,8 +39,8 @@ function manejarAutocompletado() {
                     input_afiliacion.value = opcion;
                     sugerencias_afiliacion.style.display = 'none';
                     
-                    // Mostrar el campo adicional si se selecciona 'Especifique'
-                    if (opcion === 'Especifique') {
+                    // Mostrar el campo adicional si se selecciona 'otra'
+                    if (opcion === 'Otra') {
                         especificarCampo.style.display = 'block';
                     } else {
                         especificarCampo.style.display = 'none';

@@ -35,9 +35,15 @@ const paises = [
   "Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue"
 ];
 
-
+// Referencias a los elementos del DOM
 let sugerencias_pais = document.getElementById('sugerencias_entidad_nacimiento');
 let input_pais = document.getElementById('entidad_nacimiento');
+
+// Referencias a los campos que deben ocultarse y bloquearse
+let divEntidadPais = document.getElementById('div_entidad_pais');
+let divMunicipio = document.getElementById('div_municipio');
+let divLocalidad = document.getElementById('div_localidad');
+let divCodigoPostal = document.getElementById('div_codigo_postal');
 
 // Función para mostrar sugerencias
 input_pais.addEventListener('input', function() {
@@ -56,7 +62,21 @@ input_pais.addEventListener('input', function() {
           li.addEventListener('click', function() {
               input_pais.value = opcion;
               sugerencias_pais.style.display = 'none';
-          });
+        
+        // Si se selecciona un país distinto a México, ocultar y deshabilitar campos
+if (opcion !== 'Mexico') {
+  divEntidadPais.style.display = 'none';
+  divMunicipio.style.display = 'none';
+  divLocalidad.style.display = 'none';
+  divCodigoPostal.style.display = 'none';
+} else {
+  divEntidadPais.style.display = 'block';
+  divMunicipio.style.display = 'block';
+  divLocalidad.style.display = 'block';
+  divCodigoPostal.style.display = 'block';
+}
+
+            });
           sugerencias_pais.appendChild(li);
       });
   } else {
@@ -994,4 +1014,264 @@ inputsAutocompletar.forEach(input => {
   });
 });
 
+//cambio1
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const clues = document.getElementById('clues');
+  const cluesSuggestions = document.getElementById('clues_suggestions');
+  const preselectedClues = "CSSSA006403"; // CLUES del Hospital General
+  let cluesData = []; // Array para almacenar los datos del JSON
+
+  // Cargar el JSON con todas las CLUES
+  fetch('/json/clues.json')
+      .then(response => response.json())
+      .then(data => {
+          cluesData = data; // Asigna los datos cargados al array cluesData
+
+          // Preseleccionar la CLUES del Hospital General
+          clues.value = preselectedClues;
+      })
+      .catch(error => console.error('Error cargando el JSON de CLUES:', error));
+
+  // Mostrar sugerencias filtradas al escribir en el input
+  clues.addEventListener('input', function () {
+      const filtro = clues.value.toLowerCase();
+      cluesSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
+      const opcionesFiltradas = cluesData.filter(option => option.clues.toLowerCase().includes(filtro));
+
+      if (opcionesFiltradas.length > 0) {
+          cluesSuggestions.style.display = 'block';
+          opcionesFiltradas.forEach(option => {
+              const li = document.createElement('li');
+              li.textContent = option.clues;
+              li.style.padding = '10px';
+              li.style.cursor = 'pointer';
+              li.style.listStyle = 'none';
+              li.style.borderBottom = '1px solid #e9ecef';
+              li.style.fontWeight = 'bold';
+              li.style.color = '#000';
+              li.style.backgroundColor = '#fff';
+              li.addEventListener('click', function () {
+                  clues.value = option.clues;
+                  cluesSuggestions.style.display = 'none';
+              });
+              cluesSuggestions.appendChild(li);
+          });
+      } else {
+          cluesSuggestions.style.display = 'none';
+      }
+  });
+
+
+  // Mostrar todas las opciones al hacer focus en el input
+  clues.addEventListener('focus', function () {
+      cluesSuggestions.innerHTML = ''; // Limpia las sugerencias
+      cluesData.forEach(option => {
+          const li = document.createElement('li');
+          li.textContent = option.clues;
+          li.style.padding = '10px';
+          li.style.cursor = 'pointer';
+          li.style.listStyle = 'none';
+          li.style.borderBottom = '1px solid #e9ecef';
+          li.style.fontWeight = 'bold';
+          li.style.color = '#000';
+          li.style.backgroundColor = '#fff';
+          li.addEventListener('click', function () {
+              clues.value = option.clues;
+              cluesSuggestions.style.display = 'none';
+          });
+          cluesSuggestions.appendChild(li);
+      });
+      cluesSuggestions.style.display = 'block'; // Muestra todas las sugerencias
+  });
+
+  // Oculta la lista al hacer clic fuera del input
+  clues.addEventListener('blur', function () {
+      setTimeout(() => {
+          cluesSuggestions.style.display = 'none';
+      }, 200);
+  });
+});
+
+//cambio2
+// Lista de afiliaciones
+const afiliaciones = [
+  "No especificado", 
+  "Ninguna", 
+  "IMSS", 
+  "ISSSTE", 
+  "PEMEX", 
+  "SEDENA", 
+  "SEMAR", 
+  "Otra", 
+  "IMSS Bienestar", 
+  "ISSFAM", 
+  "OPD IMSS Bienestar", 
+  "Se ignora"
+];
+
+// Referencias a los elementos del DOM
+let sugerencias_afiliacion = document.getElementById('sugerencias_afiliacion');
+let input_afiliacion = document.getElementById('afiliacion_input');
+let especificarCampo = document.getElementById('afiliacionEspecifique');
+let numeroAfiliacion = document.getElementById('numero_afiliacion'); // Campo de Número de Afiliación
+
+// Función para manejar el autocompletado y otras funcionalidades
+function manejarAutocompletado() {
+  input_afiliacion.addEventListener('input', function() {
+      let valor = input_afiliacion.value.toLowerCase();
+      sugerencias_afiliacion.innerHTML = '';
+
+      const opcionesFiltradas = afiliaciones.filter(afiliacion => afiliacion.toLowerCase().includes(valor));
+
+      if (opcionesFiltradas.length > 0) {
+          sugerencias_afiliacion.style.display = 'block';
+          opcionesFiltradas.forEach(opcion => {
+              const li = document.createElement('li');
+              li.textContent = opcion;
+              li.classList.add('list-group-item');
+              li.style.cursor = 'pointer';
+              li.addEventListener('click', function() {
+                  input_afiliacion.value = opcion;
+                  sugerencias_afiliacion.style.display = 'none';
+                  
+                  // Mostrar el campo adicional si se selecciona 'OTRA'
+                  if (opcion === 'Otra') {
+                      especificarCampo.style.display = 'block';
+                  } else {
+                      especificarCampo.style.display = 'none';
+                  }
+                  
+                  // Deshabilitar el campo Número de Afiliación si se selecciona 'No especificado', 'Ninguna' o 'Se ignora'
+                  if (opcion === 'No especificado' || opcion === 'Ninguna' || opcion === 'Se ignora') {
+                      numeroAfiliacion.disabled = true;
+                      numeroAfiliacion.value = ''; // Limpia el campo
+                  } else {
+                      numeroAfiliacion.disabled = false;
+                  }
+              });
+              sugerencias_afiliacion.appendChild(li);
+          });
+      } else {
+          sugerencias_afiliacion.style.display = 'none';
+      }
+  });
+
+  numeroAfiliacion.addEventListener('input', function() {
+      let valor = numeroAfiliacion.value;
+      
+      // Limitar a 11 dígitos
+      if (valor.length > 11) {
+          numeroAfiliacion.value = valor.slice(0, 11);
+      }
+  });
+
+  input_afiliacion.addEventListener('blur', function() {
+      setTimeout(() => {
+          sugerencias_afiliacion.style.display = 'none';
+      }, 200);
+  });
+}
+
+// Ejecutar la función de manejo del autocompletado
+document.addEventListener('DOMContentLoaded', manejarAutocompletado);
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const opcionesPorInput = {
+      'tipo_vialidad': [
+          "AMPLIACIÓN", "ANDADOR", "AVENIDA", "BOULEVARD", "CALLE", "CALLEJON", 
+          "CALZADA", "CERRADA", "CIRCUITO", "CIRCUNVALACIÓN", "CONTINUACIÓN", 
+          "CORREDOR", "DIAGONAL", "EJE VIAJAL", "PASAJE", "PEATONAL", "PERIFÉRICO", 
+          "PRIVADA", "PROLONGACIÓN", "RETORNO", "VIADUCTO", "NINGUNO", "CAMINO", 
+          "CARRETERA", "LIBRAMIENTO", "PASEO", "NO APLICA", "SIN INFORMACIÓN", 
+          "NO ESPECIFICADO"
+      ],
+      'tipo_asentamiento': [
+          "AEROPUERTO", "AMPLIACIÓN", "BARRIO", "CANTÓN", "CIUDAD", "CIUDAD INDUSTRIAL", 
+          "COLONIA", "CONDOMINIO", "CONJUNTO HABITACIONAL", "CORREDOR INDUSTRIAL", 
+          "COTO", "CUARTEL", "EJIDO", "EXHACIENDA", "FRACCIÓN", "FRACCIONAMIENTO", 
+          "GRANJA", "HACIENDA", "INGENIO", "MANZANA", "PARAJE", "PARQUE INDUSTRIAL", 
+          "PRIVADA", "PROLONGACIÓN", "PUEBLO", "PUERTO", "RANCHERÍA", "RANCHO", 
+          "REGIÓN", "RESIDENCIAL", "RINCONADA", "SECCIÓN", "SECTOR", "SUPERMANZANA", 
+          "UNIDAD", "UNIDAD HABITACIONAL", "VILLA", "ZONA FEDERAL", "ZONA INDUSTRIAL", 
+          "ZONA MILITAR", "ZONA NAVAL", "NINGUNO", "CARRETERA", "NO APLICA", 
+          "SE IGNORA", "NO ESPECIFICADO", "ZONA COMERCIAL", "LOCALIDAD"
+      ]
+  };
+
+  document.querySelectorAll('.autocomplete-container').forEach(function(container) {
+      const input = container.querySelector('.autocomplete-input');
+      const sugerencias = container.querySelector('.autocomplete-suggestions');
+      let seleccionAnterior = '';
+
+      const opciones = opcionesPorInput[input.id] || [];
+
+      input.addEventListener('input', function () {
+          const filtro = input.value.toLowerCase();
+          sugerencias.innerHTML = '';
+          const opcionesFiltradas = opciones.filter(option => option.toLowerCase().includes(filtro));
+
+          if (opcionesFiltradas.length > 0) {
+              sugerencias.style.display = 'block';
+              opcionesFiltradas.forEach(option => {
+                  const li = document.createElement('li');
+                  li.textContent = option;
+                  li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
+                  li.addEventListener('mousedown', function () {
+                      seleccionarOpcion(input, sugerencias, option);
+                  });
+                  sugerencias.appendChild(li);
+              });
+          } else {
+              sugerencias.style.display = 'none';
+          }
+      });
+
+      input.addEventListener('focus', function () {
+          if (input.value === seleccionAnterior) {
+              input.value = '';
+          }
+          sugerencias.innerHTML = '';
+          opciones.forEach(option => {
+              const li = document.createElement('li');
+              li.textContent = option;
+              li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
+              li.addEventListener('mousedown', function () {
+                  seleccionarOpcion(input, sugerencias, option);
+              });
+              sugerencias.appendChild(li);
+          });
+          sugerencias.style.display = 'block';
+      });
+
+      input.addEventListener('blur', function () {
+          setTimeout(() => {
+              const filtro = input.value.toLowerCase();
+              const opcionCercana = opciones.find(option => option.toLowerCase().includes(filtro));
+
+              if (opcionCercana) {
+                  seleccionarOpcion(input, sugerencias, opcionCercana);
+              } else if (!input.value) {
+                  input.value = '';
+              }
+
+              sugerencias.style.transition = 'opacity 0.3s';
+              sugerencias.style.opacity = '0';
+              setTimeout(() => {
+                  sugerencias.style.display = 'none';
+                  sugerencias.style.opacity = '1';
+              }, 300);
+          }, 200);
+      });
+
+      function seleccionarOpcion(input, sugerencias, option) {
+          seleccionAnterior = option;
+          input.value = option;
+          input.placeholder = option;
+          sugerencias.style.display = 'none';
+      }
+  });
+});
 // PRUEBA COMMIT 123
