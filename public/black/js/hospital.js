@@ -225,6 +225,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       // Hide all sections initially
       accidenteSection.style.display = 'none';
       violenciaSection.style.display = 'none';
+      eventoAutoinfligidoDiv.style.display = 'none'; // Ocultar el campo "evento_autoinfligido"
 
       // Show the relevant section based on the selected value
       if (value === '1') {
