@@ -238,6 +238,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
   });
 
+  //Folio defuncion
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const destinoSelect = document.getElementById('destino_atencion')
+    const folioDefun = document.getElementById('folio_defuncion').closest('.col-md-4'); //Ocultar todo el contenedor
+
+    //Ocultar campo Folio defuncion
+    folioDefun.style.display = 'none';
+
+    destinoSelect.addEventListener('change', (event) => {
+      const value = event.target.value;
+      folioDefun.style.display = 'none';
+
+      if(value == '5'){
+        folioDefun.style.display = 'block'; //Mostrar Campo al elegir opcion
+      }
+    });
+  });
+
   document.addEventListener('DOMContentLoaded', (event) => {
     // Toggle sections based on the selected option in "responsable_evento"
     const responsableSelect = document.getElementById('responsable_atencion');

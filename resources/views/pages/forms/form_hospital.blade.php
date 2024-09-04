@@ -829,6 +829,14 @@
                       </select>
                     </div>
                   </div>
+                  <!--Folio de Defunción-->
+                  <div class="col-md-4">
+                    <label for="folio_defuncion">Folio de Defuncion</label>
+                    <div class="form-group">
+                    <input type="text" id="folio_defuncion" name="folio_defuncion" class="form-control"
+                    placeholder="Por favor escribe el folio"required>
+                    </div>
+                  </div>
                   <!--Especifique Destino-->
                   <div class="col-md-4" id="destinoEspecifique" style="display: none;">
                     <label for="destino_especifique">Especifique el Destino:</label>
