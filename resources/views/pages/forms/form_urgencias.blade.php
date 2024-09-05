@@ -667,8 +667,14 @@
                     <div class="col-md-12">
                       <label for="procedimiento1">Procedimiento 1:</label>
                       <div class="form-group">
-                        <input type="text" class="form-control" id="procedimiento1" name="procedimiento1"
-                          placeholder="Reducción cerrada de fractura" minlength="3" required>
+                        <input type="text" class="form-control " id="procedimiento1" name="procedimiento1"
+                          placeholder="Reducción cerrada de fractura" minlength="3" required
+                          oninput="mostrarSugerenciasProcedi1(this)" autocomplete="off"
+                          onclick="mostrarSugerenciasProcedi1(this)" onfocus="mostrarSugerenciasProcedi1(this)"
+                          onblur="ocultarSugerenciasProcedi1()">
+                          <div id="procedi_sug1" class="sugerencias"
+                          style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                          </div>
                       </div>
                     </div>
                   </div>
@@ -679,7 +685,13 @@
                       <label for="procedimiento2">Procedimiento 2:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento2" name="procedimiento2"
-                          placeholder="Inmovilización con yeso" minlength="3" required>
+                          placeholder="Inmovilización con yeso" minlength="3"
+                          oninput="mostrarSugerenciasProcedi2(this)" autocomplete="off"
+                          onclick="mostrarSugerenciasProcedi2(this)" onfocus="mostrarSugerenciasProcedi2(this)"
+                          onblur="ocultarSugerenciasProcedi2()">
+                          <div id="procedi_sug2" class="sugerencias"
+                          style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                          </div>
                       </div>
                     </div>
                   </div>
@@ -690,7 +702,13 @@
                       <label for="procedimiento3">Procedimiento 3:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento3" name="procedimiento3"
-                          placeholder="Procedimiento 3" minlength="3">
+                          placeholder="Procedimiento 3" minlength="3"
+                          oninput="mostrarSugerenciasProcedi(this)" autocomplete="off"
+                          onclick="mostrarSugerenciasProcedi(this)" onfocus="mostrarSugerenciasProcedi(this)"
+                          onblur="ocultarSugerenciasProcedi()">
+                          <div id="procedi_sug3" class="sugerencias"
+                          style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                          </div>
                       </div>
                     </div>
                   </div>
@@ -701,7 +719,13 @@
                       <label for="procedimiento4">Procedimiento 4:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento4" name="procedimiento4"
-                          placeholder="Procedimiento 4" minlength="3">
+                          placeholder="Procedimiento 4" minlength="3"
+                          oninput="mostrarSugerenciasProcedi(this)" autocomplete="off"
+                          onclick="mostrarSugerenciasProcedi(this)" onfocus="mostrarSugerenciasProcedi(this)"
+                          onblur="ocultarSugerenciasProcedi()">
+                          <div id="procedi_sug4" class="sugerencias"
+                            style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                          </div>
                       </div>
                     </div>
                   </div>
@@ -712,7 +736,13 @@
                       <label for="procedimiento5">Procedimiento 5:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento5" name="procedimiento5"
-                          placeholder="Procedimiento 5" minlength="3">
+                          placeholder="Procedimiento 5" minlength="3"
+                          oninput="mostrarSugerenciasProcedi(this)" autocomplete="off"
+                          onclick="mostrarSugerenciasProcedi(this)" onfocus="mostrarSugerenciasProcedi(this)"
+                          onblur="ocultarSugerenciasProcedi()">
+                          <div id="procedi_sug5" class="sugerencias"
+                          style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                          </div>
                       </div>
                     </div>
                   </div>

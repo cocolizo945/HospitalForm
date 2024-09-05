@@ -1275,3 +1275,88 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 // PRUEBA COMMIT 123
+
+
+// ------ Procedimientos segun el CIE-9 --- inicio
+const procedimientos = [
+  { "nombre": "ABLACIÓN ABIERTA DE LESIÓN O TEJIDO DE HÍGADO", "code": "5023" },
+  { "nombre": "ABLACIÓN ENDOMETRIAL", "code": "6823" },
+  { "nombre": "RESECCIÓN DE NEOPLASIA DE PULMÓN", "code": "3241" },
+  { "nombre": "REDUCCIÓN CERRADA DE FRACTURA", "code": "7854" }
+];
+
+//-- input1 --
+function mostrarSugerenciasProcedi1(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('procedi_sug1');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = procedimientos.filter(nombre => nombre.nombre.toLowerCase().includes(valor) || nombre.code.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre} - ${option.code}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        input.value = option.nombre;
+        listaSugerencias.style.display = 'none';
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasProcedi1() {
+  setTimeout(() => {
+    document.getElementById('procedi_sug1').style.display = "none";
+  }, 200);
+}
+
+//-- input2 --
+function mostrarSugerenciasProcedi2(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('procedi_sug2');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = procedimientos.filter(nombre => nombre.nombre.toLowerCase().includes(valor) || nombre.code.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre} - ${option.code}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        input.value = option.nombre;
+        listaSugerencias.style.display = 'none';
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasProcedi2() {
+  setTimeout(() => {
+    document.getElementById('procedi_sug2').style.display = "none";
+  }, 200);
+}
+
+// ------ Procedimientos segun el CIE-9 --- fin
