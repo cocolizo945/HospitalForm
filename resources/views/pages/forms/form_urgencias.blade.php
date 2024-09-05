@@ -702,9 +702,9 @@
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento3" name="procedimiento3"
                           placeholder="Procedimiento 3" minlength="3"
-                          oninput="mostrarSugerenciasProcedi(this)" autocomplete="off"
-                          onclick="mostrarSugerenciasProcedi(this)" onfocus="mostrarSugerenciasProcedi(this)"
-                          onblur="ocultarSugerenciasProcedi()">
+                          oninput="mostrarSugerenciasProcedi3(this)" autocomplete="off"
+                          onclick="mostrarSugerenciasProcedi3(this)" onfocus="mostrarSugerenciasProcedi3(this)"
+                          onblur="ocultarSugerenciasProcedi3()">
                           <div id="procedi_sug3" class="sugerencias"
                           style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                           </div>
@@ -719,9 +719,9 @@
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento4" name="procedimiento4"
                           placeholder="Procedimiento 4" minlength="3"
-                          oninput="mostrarSugerenciasProcedi(this)" autocomplete="off"
-                          onclick="mostrarSugerenciasProcedi(this)" onfocus="mostrarSugerenciasProcedi(this)"
-                          onblur="ocultarSugerenciasProcedi()">
+                          oninput="mostrarSugerenciasProcedi4(this)" autocomplete="off"
+                          onclick="mostrarSugerenciasProcedi4(this)" onfocus="mostrarSugerenciasProcedi4(this)"
+                          onblur="ocultarSugerenciasProcedi4()">
                           <div id="procedi_sug4" class="sugerencias"
                             style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                           </div>
@@ -736,9 +736,9 @@
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento5" name="procedimiento5"
                           placeholder="Procedimiento 5" minlength="3"
-                          oninput="mostrarSugerenciasProcedi(this)" autocomplete="off"
-                          onclick="mostrarSugerenciasProcedi(this)" onfocus="mostrarSugerenciasProcedi(this)"
-                          onblur="ocultarSugerenciasProcedi()">
+                          oninput="mostrarSugerenciasProcedi5(this)" autocomplete="off"
+                          onclick="mostrarSugerenciasProcedi5(this)" onfocus="mostrarSugerenciasProcedi5(this)"
+                          onblur="ocultarSugerenciasProcedi5()">
                           <div id="procedi_sug5" class="sugerencias"
                           style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                           </div>
