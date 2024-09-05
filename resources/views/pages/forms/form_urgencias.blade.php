@@ -282,40 +282,47 @@
                     </div>
                   </div>
 
-                 <!-- Entidad Federativa/País -->
-<div class="col-md-4" id="div_entidad_pais">
+               <!-- Entidad Federativa/País -->
+<div class="col-md-4">
   <label for="entidad_pais">Entidad Federativa/País:</label>
   <div class="form-group">
-    <input type="text" id="entidad_pais" name="entidad_pais" class="form-control"
-      placeholder="Entidad Federativa o País" autocomplete="off">
-    <ul id="sugerencias_entidad_pais" class="list-group autocomplete-suggestions"></ul>
+    <input type="text" id="entidad_pais" name="entidad_pais" class="form-control" placeholder="Entidad Federativa o País" oninput="mostrarSugerencias(this, 'entidades')" autocomplete="off" onclick="mostrarSugerencias(this, 'entidades')" onfocus="mostrarSugerencias(this, 'entidades')" onblur="ocultarSugerencias('sugerencias_entidad_pais')">
+    <div id="sugerencias_entidad_pais" class="sugerencias"style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></div>
   </div>
 </div>
 
 <!-- Municipio o alcaldía -->
-<div class="col-md-4" id="div_municipio">
-  <label for="municipio">Municipio o Alcaldía:</label>
+<div class="col-md-4">
+  <label for="municipio">Municipio o alcaldía:</label>
   <div class="form-group">
-    <input type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio o Alcaldía" autocomplete="off">
+    <input type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio o Alcaldía" oninput="mostrarSugerencias(this, 'municipios')" autocomplete="off" onclick="mostrarSugerencias(this, 'municipios')" onfocus="mostrarSugerencias(this, 'municipios')" onblur="ocultarSugerencias('sugerencias_municipio')">
+    <div id="sugerencias_municipio" class="sugerencias"style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></div>
   </div>
 </div>
 
 <!-- Localidad -->
-<div class="col-md-4" id="div_localidad">
+<div class="col-md-4">
   <label for="localidad">Localidad:</label>
   <div class="form-group">
-    <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" autocomplete="off">
+    <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" oninput="mostrarSugerencias(this, 'localidades')" autocomplete="off" onclick="mostrarSugerencias(this, 'localidades')" onfocus="mostrarSugerencias(this, 'localidades')" onblur="ocultarSugerencias('sugerencias_localidad')">
+    <div id="sugerencias_localidad" class="sugerencias"style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></div>
   </div>
 </div>
-
-<!-- Código Postal -->
-<div class="col-md-4" id="div_codigo_postal">
-  <label for="codigo_postal">Código Postal:</label>
-  <div class="form-group">
-    <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" placeholder="30700" minlength="5" required>
-  </div>
-</div>
-</div>
+                  <!-- Código Postal -->
+                  <div class="col-md-4">
+                    <label for="codigo_postal">Código Postal:</label>
+                    <div class="form-group">
+                      <input type="text" id="codigo_postal" name="codigo_postal" class="form-control" placeholder="Código Postal" readonly />
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-4 autocomplete-container">
+                  <label for="tipo_vialidad">Tipo de la Vialidad:</label>
+                  <div class="form-group">
+                      <input type="text" id="tipo_vialidad" name="tipo_vialidad" class="form-control autocomplete-input" placeholder="Tipo de Vialidad" autocomplete="off">
+                      <ul class="list-group autocomplete-suggestions"></ul>
+                      </div>
+                  </div>
 
                 <div class="row" id="datosPacienteRow6">
                  <!-- Tipo de la Vialidad -->
