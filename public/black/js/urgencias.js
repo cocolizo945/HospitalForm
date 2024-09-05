@@ -1398,3 +1398,28 @@ function ocultarSugerenciasProcedi2() {
 }
 
 // ------ Procedimientos segun el CIE-9 --- fin
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+//MUJER EDAD MENOR A 9 O MAYOR A 59 BLOQUEA EL CAMPO MUJER_FERTIL
+const edadInput = document.getElementById('edad');
+const sexoInput = document.getElementById('sexo');
+const mujerFertilSection = document.getElementById('mujerFertilSection');
+
+function checkEdadYSexo() {
+    const edad = parseInt(edadInput.value, 10);
+    const sexo = sexoInput.value;
+
+    if (sexo === '2' && edad >= 9 && edad <= 59) {
+        mujerFertilSection.style.display = 'block';
+    } else {
+        mujerFertilSection.style.display = 'none';
+    }
+}
+
+edadInput.addEventListener('input', checkEdadYSexo);
+sexoInput.addEventListener('change', checkEdadYSexo);
+
+// Ejecutar al cargar la página para verificar el estado inicial
+checkEdadYSexo();
+});

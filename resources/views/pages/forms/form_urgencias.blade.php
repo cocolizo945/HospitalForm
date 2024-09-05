@@ -530,7 +530,7 @@
                     </div>
                   </div>
                   <!-- Mujer en edad fértil: -->
-                  <div class="col-md-4">
+                  <div class="col-md-4" id="mujerFertilSection" style="display: none;">
                     <label for="mujer_edad_fertil">Mujer en edad fértil:</label>
                     <div class="form-group">
                       <select id="mujer_edad_fertil" class="selectpicker form-control" name="mujer_edad_fertil"
