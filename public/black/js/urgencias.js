@@ -683,14 +683,52 @@ function ocultarSugerencias(id) {
   }, 200); 
 }
 
-document.getElementById('entidad_pais').addEventListener('input', function() {
-  document.getElementById('municipio').value = '';
-  document.getElementById('localidad').value = '';
-  document.getElementById('codigo_postal').value = '';
-  document.getElementById('sugerencias_municipio').innerHTML = '';
-  document.getElementById('sugerencias_localidad').innerHTML = '';
-});
-
+function toggleCamposMigrante() {
+  const migranteSelect = document.getElementById('migrante');
+  const entidadInput = document.getElementById('entidad_pais');
+  const municipioInput = document.getElementById('municipio');
+  const localidadInput = document.getElementById('localidad');
+  
+  if (migranteSelect.value === "1") { 
+    entidadInput.value = '';
+    municipioInput.value = '';
+    localidadInput.value = '';
+    entidadInput.disabled = false;
+    municipioInput.disabled = false;
+    localidadInput.disabled = false;
+    
+    
+    entidadInput.oninput = null;
+    entidadInput.onclick = null;
+    entidadInput.onfocus = null;
+    
+    municipioInput.oninput = null;
+    municipioInput.onclick = null;
+    municipioInput.onfocus = null;
+    
+    localidadInput.oninput = null;
+    localidadInput.onclick = null;
+    localidadInput.onfocus = null;
+    
+  } else if (migranteSelect.value === "0") { // No es migrante retornado
+    entidadInput.disabled = false;
+    municipioInput.disabled = false;
+    localidadInput.disabled = false;
+    
+    // Rehabilitamos las sugerencias
+    entidadInput.oninput = function() { mostrarSugerencias(this, 'entidades') };
+    entidadInput.onclick = function() { mostrarSugerencias(this, 'entidades') };
+    entidadInput.onfocus = function() { mostrarSugerencias(this, 'entidades') };
+    
+    municipioInput.oninput = function() { mostrarSugerencias(this, 'municipios') };
+    municipioInput.onclick = function() { mostrarSugerencias(this, 'municipios') };
+    municipioInput.onfocus = function() { mostrarSugerencias(this, 'municipios') };
+    
+    localidadInput.oninput = function() { mostrarSugerencias(this, 'localidades') };
+    localidadInput.onclick = function() { mostrarSugerencias(this, 'localidades') };
+    localidadInput.onfocus = function() { mostrarSugerencias(this, 'localidades') };
+  }
+}
 //----------------------------------------------------------
 const cluesData = [
   { "clues": "CSSSA000453", "nombre": "Hospital General Juárez Arriaga" },
