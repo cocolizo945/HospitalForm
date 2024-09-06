@@ -1674,6 +1674,28 @@ function ocultarSugerenciasProcedi5() {
 
 // ------ Procedimientos segun el CIE-9 --- fin
 
+// Define sections to toggle visibility based on select values
+const sectionsToToggle = [
+  {selectId: 'mujer_edad_fertil', targetSection: 'semanasGestacionSection', showValues: ['0']},
+];
+
+// Add event listeners to select elements to toggle visibility of sections
+sectionsToToggle.forEach(item => {
+  const selectElement = document.getElementById(item.selectId);
+  if (selectElement) {
+      selectElement.addEventListener('change', (event) => {
+          const value = event.target.value;
+          const section = document.getElementById(item.targetSection);
+          if (section) {
+              if (item.showValues.includes(value)) {
+                  section.style.display = 'block';
+              } else {
+                  section.style.display = 'none';
+              }
+          }
+      });
+  }
+});
 
 document.addEventListener('DOMContentLoaded', (event) => {
 //MUJER EDAD MENOR A 9 O MAYOR A 59 BLOQUEA EL CAMPO MUJER_FERTIL

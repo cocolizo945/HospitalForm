@@ -549,6 +549,14 @@
                       </select>
                     </div>
                   </div>
+
+                <!-- Semanas de Gestación -->
+                <div class="col-md-4" id="semanasGestacionSection" style="display: none;">
+                    <label for="semanas_gestacion">Semanas de Gestación:</label>
+                    <div class="form-group">
+                      <input class="form-control" type="number" id="semanas_gestacion" name="semanas_gestacion" min="0" placeholder="Semanas de Gestación" required>
+                    </div>
+                  </div>
                 </div>
 
 
