@@ -865,11 +865,11 @@
               <div class="pull-right">
                 <button type="button" id="SaveData" class="btn btn-primary">Guardar datos</button>
                 <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' name='next' value='Siguiente' />
-                <button type="submit" class="btn btn-finish btn-fill btn-primary btn-wd" name="finish">Guardar</button>
+                <button type="button" id="guardarBtn" class="btn btn-finish btn-fill btn-primary btn-wd">Guardar</button>
+                <!--<button type="submit" class="btn btn-finish btn-fill btn-primary btn-wd" name="finish">Guardar</button> -->
               </div>
               <div class="pull-left">
-                <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous'
-                  value='Anterior' />
+                <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous'value='Anterior' />
               </div>
 
               <div class="clearfix"></div>
@@ -886,6 +886,7 @@
 
 @push('js')
   <script src="{{ asset('black/js/urgencias.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     $(document).ready(function () {
     $('.datetimepicker').datetimepicker({
@@ -962,5 +963,28 @@
     });
   </script>
 
+  
+<script>
+  //SOLO MUESTRA Y REINICIA LA PAGINA SIN GUARDAR EN LA BD
+document.addEventListener('DOMContentLoaded', function() {
+    // Evento click para el botón "Guardar"
+    document.getElementById('guardarBtn').addEventListener('click', function(event) {
+        // Prevenir el envío del formulario
+        event.preventDefault();
+
+        // Mostrar el SweetAlert de éxito
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Los datos han sido guardados existosamente.',
+            timer: 3000,
+            showConfirmButton: false
+        }).then(() => {
+            // Recargar la página después de que el alert desaparezca
+            location.reload();
+        });
+    });
+});
+</script>
 
 @endpush
