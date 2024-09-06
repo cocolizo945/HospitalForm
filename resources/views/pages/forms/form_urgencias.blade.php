@@ -265,6 +265,7 @@
                     <option disabled selected>Selección Única</option>
                       <option value="1">SI</option>
                       <option value="0">NO</option>
+                      <option value="9">NO APLICA</option>
                     </select>
                      </div>
                     </div>
@@ -282,44 +283,43 @@
                   </div>
 
              <!-- País -->
-              <div class="col-md-4" >
-              <label for="pais">País:</label>
-               <div class="form-group">
-                <input type="text" id="pais1" name="pais" class="form-control"
-                placeholder="Pais" autocomplete="off" required>
-                 <ul id="sugerencias_pais1" class="list-group autocomplete-suggestions"></ul>
-                </div>
-              </div>
-
-
-  <!-- Entidad Federativa -->
-<div class="col-md-4" id="div_entidad">
-  <label for="entidad">Entidad Federativa:</label>
+<div class="col-md-4">
+  <label for="pais">País:</label>
   <div class="form-group">
-    <input type="text" id="entidad" name="entidad" class="form-control"
-      placeholder="Entidad Federativa" autocomplete="off">
-    <ul id="sugerencias_entidad" class="list-group autocomplete-suggestions"></ul>
+    <input type="text" id="pais1" name="pais" class="form-control" placeholder="País" autocomplete="off" oninput="mostrarSugerencias(this, 'pais')" onfocus="mostrarSugerencias(this, 'pais')">
+    <ul id="sugerencias_pais1" class="list-group autocomplete-suggestions" style="position: absolute; z-index: 1000; display: none;"></ul>
   </div>
 </div>
 
-<!-- Municipio o alcaldía -->
-<div class="col-md-4" id="div_municipio">
+<!-- Entidad Federativa -->
+<div class="col-md-4">
+  <label for="entidad">Entidad Federativa:</label>
+  <div class="form-group">
+    <input type="text" id="entidad" name="entidad" class="form-control" placeholder="Entidad Federativa" autocomplete="off" oninput="mostrarSugerencias(this, 'entidades')" onfocus="mostrarSugerencias(this, 'entidades')">
+    <ul id="sugerencias_entidad" class="list-group autocomplete-suggestions" style="position: absolute; z-index: 1000; display: none;"></ul>
+  </div>
+</div>
+
+<!-- Municipio o Alcaldía -->
+<div class="col-md-4">
   <label for="municipio">Municipio o Alcaldía:</label>
   <div class="form-group">
-    <input type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio o Alcaldía" autocomplete="off">
+    <input type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio o Alcaldía" autocomplete="off" oninput="mostrarSugerencias(this, 'municipios')" onfocus="mostrarSugerencias(this, 'municipios')">
+    <ul id="sugerencias_municipio" class="list-group autocomplete-suggestions" style="position: absolute; z-index: 1000; display: none;"></ul>
   </div>
 </div>
 
 <!-- Localidad -->
-<div class="col-md-4" id="div_localidad">
+<div class="col-md-4">
   <label for="localidad">Localidad:</label>
   <div class="form-group">
-    <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" autocomplete="off">
+    <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" autocomplete="off" oninput="mostrarSugerencias(this, 'localidades')" onfocus="mostrarSugerencias(this, 'localidades')">
+    <ul id="sugerencias_localidad" class="list-group autocomplete-suggestions" style="position: absolute; z-index: 1000; display: none;"></ul>
   </div>
 </div>
 
 <!-- Código Postal -->
-<div class="col-md-4" id="div_codigo_postal">
+<div class="col-md-4">
   <label for="codigo_postal">Código Postal:</label>
   <div class="form-group">
     <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" placeholder="30700" minlength="5" required>
