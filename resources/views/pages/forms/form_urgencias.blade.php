@@ -168,8 +168,8 @@
                   </div>
 
                   
-                <!-- Entidad o País de Nacimiento -->
-                <div class="col-md-4">
+              <!-- Entidad o País de Nacimiento -->
+              <div class="col-md-4">
                     <label for="entidad_nacimiento">Entidad o País de Nacimiento:</label>
                     <div class="form-group">
                       <input type="text" id="entidad_nacimiento" name="entidad_nacimiento" class="form-control"
@@ -281,42 +281,52 @@
                     </div>
                   </div>
 
-                  <!-- Entidad Federativa/País -->
-        <div class="col-md-4">
-          <label for="entidad_pais">Entidad Federativa/País:</label>
-          <div class="form-group">
-            <input type="text" id="entidad_pais" name="entidad_pais" class="form-control" placeholder="Entidad Federativa o País" autocomplete="off" disabled>
-            <div id="sugerencias_entidad_pais" class="sugerencias" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></div>
-          </div>
-        </div>
+      <!-- País -->
+<div class="col-md-4" >
+  <label for="pais">País:</label>
+  <div class="form-group">
+    <input type="text" id="pais1" name="pais" class="form-control"
+      placeholder="Pais" autocomplete="off" required>
+    <ul id="sugerencias_pais1" class="list-group autocomplete-suggestions"></ul>
+  </div>
+</div>
 
-        <!-- Municipio o alcaldía -->
-        <div class="col-md-4">
-          <label for="municipio">Municipio o alcaldía:</label>
-          <div class="form-group">
-            <input type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio o Alcaldía" autocomplete="off" disabled>
-            <div id="sugerencias_municipio" class="sugerencias" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></div>
-          </div>
-        </div>
 
-           <!-- Localidad -->
-        <div class="col-md-4">
-          <label for="localidad">Localidad:</label>
-          <div class="form-group">
-            <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" autocomplete="off" disabled>
-            <div id="sugerencias_localidad" class="sugerencias" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></div>
-          </div>
-        </div>
-                 
-        <!-- Código Postal -->
-        <div class="col-md-4" id="div_codigo_postal">
-          <label for="codigo_postal">Código Postal:</label>
-          <div class="form-group">
-            <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" placeholder="30700" minlength="5" required>
-          </div>
-        </div>
-        </div>
-                <div class="row" id="datosPacienteRow6">
+                  <!-- Entidad Federativa -->
+<div class="col-md-4" id="div_entidad">
+  <label for="entidad">Entidad Federativa:</label>
+  <div class="form-group">
+    <input type="text" id="entidad" name="entidad" class="form-control"
+      placeholder="Entidad Federativa" autocomplete="off">
+    <ul id="sugerencias_entidad" class="list-group autocomplete-suggestions"></ul>
+  </div>
+</div>
+
+<!-- Municipio o alcaldía -->
+<div class="col-md-4" id="div_municipio">
+  <label for="municipio">Municipio o Alcaldía:</label>
+  <div class="form-group">
+    <input type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio o Alcaldía" autocomplete="off">
+  </div>
+</div>
+
+<!-- Localidad -->
+<div class="col-md-4" id="div_localidad">
+  <label for="localidad">Localidad:</label>
+  <div class="form-group">
+    <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" autocomplete="off">
+  </div>
+</div>
+
+<!-- Código Postal -->
+<div class="col-md-4" id="div_codigo_postal">
+  <label for="codigo_postal">Código Postal:</label>
+  <div class="form-group">
+    <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" placeholder="30700" minlength="5" required>
+  </div>
+</div>
+
+                
                  <!-- Tipo de la Vialidad -->
 <div class="col-md-4 autocomplete-container">
     <label for="tipo_vialidad">Tipo de la Vialidad:</label>
@@ -351,9 +361,7 @@
                       <input type="text" class="form-control" id="num_int" name="num_int" placeholder="2B">
                     </div>
                   </div>
-                </div>
-
-                <div class="row" id="datosPacienteRow7">
+                
                  <!-- Tipo de Asentamiento Humano -->
 <div class="col-md-4 autocomplete-container">
     <label for="tipo_asentamiento">Tipo de Asentamiento Humano:</label>
