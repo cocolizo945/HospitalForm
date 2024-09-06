@@ -57,7 +57,6 @@ input_pais.addEventListener('input', function() {
           li.classList.add('list-group-item'); 
           li.style.cursor = 'pointer';
           li.addEventListener('click', function() {
-              input_pais.value = opcion;
               input_pais1.value = opcion;  // Actualizar automáticamente el campo "País"
               sugerencias_pais.style.display = 'none';
             });
@@ -86,7 +85,6 @@ input_pais.addEventListener('focus', function() {
           li.style.cursor = 'pointer';
           li.addEventListener('click', function() {
               input_pais.value = opcion;
-              input_pais1.value = opcion;  // Actualizar automáticamente el campo "País"
               sugerencias_pais.style.display = 'none';
           });
           sugerencias_pais.appendChild(li);
@@ -148,124 +146,7 @@ input_pais1.addEventListener('focus', function() {
 
 //3
 
-// Función para desactivar campos si el país seleccionado no es México
-function manejarSeleccionPais() {
-  const entidad = document.getElementById('entidad');
-  const municipio = document.getElementById('municipio');
-  const localidad = document.getElementById('localidad');
-  const codigoPostal = document.getElementById('codigo_postal');
-  const tipoVialidad = document.getElementById('tipo_vialidad');
-  const nombreVialidad = document.getElementById('nombre_vialidad');
-  const numExt = document.getElementById('num_ext');
-  const numInt = document.getElementById('num_int');
-  const tipoAsentamiento = document.getElementById('tipo_asentamiento');
-  const nombreAsentamiento = document.getElementById('nombre_asentamiento');
-  const telefono = document.getElementById('telefono');
 
-  // Si el país es diferente a México, desactiva y cambia el placeholder
-  if (input_pais1.value.toLowerCase() !== 'mexico') {
-    entidad.disabled = true;
-    entidad.placeholder = "Sin Información";
-    
-    municipio.disabled = true;
-    municipio.placeholder = "Sin Información";
-
-    localidad.disabled = true;
-    localidad.placeholder = "Sin Información";
-
-    codigoPostal.disabled = true;
-    codigoPostal.placeholder = "Sin Información";
-
-    tipoVialidad.disabled = true;
-    tipoVialidad.placeholder = "Sin Información";
-
-    nombreVialidad.disabled = true;
-    nombreVialidad.placeholder = "Sin Información";
-
-    numExt.disabled = true;
-    numExt.placeholder = "Sin Información";
-
-    numInt.disabled = true;
-    numInt.placeholder = "Sin Información";
-
-    tipoAsentamiento.disabled = true;
-    tipoAsentamiento.placeholder = "Sin Información";
-
-    nombreAsentamiento.disabled = true;
-    nombreAsentamiento.placeholder = "Sin Información";
-
-    telefono.disabled = true;
-    telefono.placeholder = "Sin Información";
-
-  } else {
-    // Si el país es México, activa los campos y restaura los placeholders
-    entidad.disabled = false;
-    entidad.placeholder = "Entidad Federativa";
-
-    municipio.disabled = false;
-    municipio.placeholder = "Municipio o Alcaldía";
-
-    localidad.disabled = false;
-    localidad.placeholder = "Localidad";
-
-    codigoPostal.disabled = false;
-    codigoPostal.placeholder = "30700";
-
-    tipoVialidad.disabled = false;
-    tipoVialidad.placeholder = "Tipo de Vialidad";
-
-    nombreVialidad.disabled = false;
-    nombreVialidad.placeholder = "Central Norte";
-
-    numExt.disabled = false;
-    numExt.placeholder = "123";
-
-    numInt.disabled = false;
-    numInt.placeholder = "2B";
-
-    tipoAsentamiento.disabled = false;
-    tipoAsentamiento.placeholder = "Tipo de Asentamiento";
-
-    nombreAsentamiento.disabled = false;
-    nombreAsentamiento.placeholder = "Benito Juárez";
-
-    telefono.disabled = false;
-    telefono.placeholder = "9621234567";
-  }
-}
-
-// Función para actualizar el campo "País" automáticamente y manejar los campos
-input_pais.addEventListener('input', function() {
-  let valor = input_pais.value.toLowerCase();
-  sugerencias_pais.innerHTML = ''; 
-
-  const opcionesFiltradas = paises.filter(pais => pais.toLowerCase().includes(valor));
-
-  if (opcionesFiltradas.length > 0) {
-      sugerencias_pais.style.display = 'block';
-      opcionesFiltradas.forEach(opcion => {
-          const li = document.createElement('li');
-          li.textContent = opcion;
-          li.classList.add('list-group-item'); 
-          li.style.cursor = 'pointer';
-          li.addEventListener('click', function() {
-              input_pais.value = opcion;
-              input_pais1.value = opcion;  // Actualizar automáticamente el campo "País"
-              manejarSeleccionPais();  // Desactivar campos si no es México
-              sugerencias_pais.style.display = 'none';
-          });
-          sugerencias_pais.appendChild(li);
-      });
-  } else {
-      sugerencias_pais.style.display = 'none';
-  }
-});
-
-// Función para manejar también cuando se cambia manualmente el campo "País"
-input_pais1.addEventListener('input', manejarSeleccionPais);
-
-// También ejecutar la función en blur por si selecciona desde el autocomplete
-input_pais1.addEventListener('blur', manejarSeleccionPais);
 
 // Lógica para AC en input's select's (VIALIDAD, ASENTAMIENTO)
 document.addEventListener('DOMContentLoaded', function() {
@@ -788,7 +669,7 @@ function mostrarSugerencias(input, tipo) {
   if (tipo === 'entidades') {
     opciones = entidades;
   } else if (tipo === 'municipios') {
-    let entidadSeleccionada = document.getElementById('entidad_pais').value.toLowerCase().replace(/\s+/g, '');
+    let entidadSeleccionada = document.getElementById('entidad').value.toLowerCase().replace(/\s+/g, '');
     if (data[entidadSeleccionada]) {
       municipios = data[entidadSeleccionada];
       opciones = municipios;
@@ -840,51 +721,29 @@ function ocultarSugerencias(id) {
 }
 
 function toggleCamposMigrante() {
-  const migranteSelect = document.getElementById('migrante');
-  const entidadInput = document.getElementById('entidad_pais');
-  const municipioInput = document.getElementById('municipio');
-  const localidadInput = document.getElementById('localidad');
+  const migranteSelect = document.getElementById('migrante').value;
+  const campos = [
+    'entidad',
+    'municipio',
+    'localidad',
+    'codigo_postal',
+    'tipo_vialidad',
+    'nombre_vialidad',
+    'num_ext',
+    'num_int',
+    'tipo_asentamiento',
+    'nombre_asentamiento'
+  ];
+
+ 
+  campos.forEach(campo => {
+    document.getElementById(campo).disabled = (migranteSelect === '1' || migranteSelect === '9');
+  });
   
-  if (migranteSelect.value === "1") { 
-    entidadInput.value = '';
-    municipioInput.value = '';
-    localidadInput.value = '';
-    entidadInput.disabled = false;
-    municipioInput.disabled = false;
-    localidadInput.disabled = false;
-    
-    
-    entidadInput.oninput = null;
-    entidadInput.onclick = null;
-    entidadInput.onfocus = null;
-    
-    municipioInput.oninput = null;
-    municipioInput.onclick = null;
-    municipioInput.onfocus = null;
-    
-    localidadInput.oninput = null;
-    localidadInput.onclick = null;
-    localidadInput.onfocus = null;
-    
-  } else if (migranteSelect.value === "0") { // No es migrante retornado
-    entidadInput.disabled = false;
-    municipioInput.disabled = false;
-    localidadInput.disabled = false;
-    
-    // Rehabilitamos las sugerencias
-    entidadInput.oninput = function() { mostrarSugerencias(this, 'entidades') };
-    entidadInput.onclick = function() { mostrarSugerencias(this, 'entidades') };
-    entidadInput.onfocus = function() { mostrarSugerencias(this, 'entidades') };
-    
-    municipioInput.oninput = function() { mostrarSugerencias(this, 'municipios') };
-    municipioInput.onclick = function() { mostrarSugerencias(this, 'municipios') };
-    municipioInput.onfocus = function() { mostrarSugerencias(this, 'municipios') };
-    
-    localidadInput.oninput = function() { mostrarSugerencias(this, 'localidades') };
-    localidadInput.onclick = function() { mostrarSugerencias(this, 'localidades') };
-    localidadInput.onfocus = function() { mostrarSugerencias(this, 'localidades') };
-  }
+ 
+  document.getElementById('pais1').disabled = false;
 }
+
 //----------------------------------------------------------
 const cluesData = [
   { "clues": "CSSSA000453", "nombre": "Hospital General Juárez Arriaga" },
@@ -1149,7 +1008,7 @@ $(document).ready(function() {
   $('#traslado_transitorio').on('change', function() {
       var selectedValue = $(this).val();
       var nombreUnidadContainer = $('#nombre_unidad').closest('.col-md-4');
-      var cluesContainer = $('#clues').closest('.col-md-4');
+      var cluesContainer = $('#clue').closest('.col-md-4');
       
       if (selectedValue === '1') { // Si se selecciona 'Sí'
           nombreUnidadContainer.show(); // Muestra 'Nombre de la unidad'
