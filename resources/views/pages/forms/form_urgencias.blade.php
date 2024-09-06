@@ -168,8 +168,8 @@
                   </div>
 
                   
-                <!-- Entidad o País de Nacimiento -->
-                <div class="col-md-4">
+              <!-- Entidad o País de Nacimiento -->
+              <div class="col-md-4">
                     <label for="entidad_nacimiento">Entidad o País de Nacimiento:</label>
                     <div class="form-group">
                       <input type="text" id="entidad_nacimiento" name="entidad_nacimiento" class="form-control"
@@ -281,42 +281,52 @@
                     </div>
                   </div>
 
-                  <!-- Entidad Federativa/País -->
-        <div class="col-md-4">
-          <label for="entidad_pais">Entidad Federativa/País:</label>
-          <div class="form-group">
-            <input type="text" id="entidad_pais" name="entidad_pais" class="form-control" placeholder="Entidad Federativa o País" autocomplete="off" disabled>
-            <div id="sugerencias_entidad_pais" class="sugerencias" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></div>
-          </div>
-        </div>
+      <!-- País -->
+<div class="col-md-4" >
+  <label for="pais">País:</label>
+  <div class="form-group">
+    <input type="text" id="pais1" name="pais" class="form-control"
+      placeholder="Pais" autocomplete="off" required>
+    <ul id="sugerencias_pais1" class="list-group autocomplete-suggestions"></ul>
+  </div>
+</div>
 
-        <!-- Municipio o alcaldía -->
-        <div class="col-md-4">
-          <label for="municipio">Municipio o alcaldía:</label>
-          <div class="form-group">
-            <input type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio o Alcaldía" autocomplete="off" disabled>
-            <div id="sugerencias_municipio" class="sugerencias" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></div>
-          </div>
-        </div>
 
-           <!-- Localidad -->
-        <div class="col-md-4">
-          <label for="localidad">Localidad:</label>
-          <div class="form-group">
-            <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" autocomplete="off" disabled>
-            <div id="sugerencias_localidad" class="sugerencias" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></div>
-          </div>
-        </div>
-                 
-        <!-- Código Postal -->
-        <div class="col-md-4" id="div_codigo_postal">
-          <label for="codigo_postal">Código Postal:</label>
-          <div class="form-group">
-            <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" placeholder="30700" minlength="5" required>
-          </div>
-        </div>
-        </div>
-                <div class="row" id="datosPacienteRow6">
+                  <!-- Entidad Federativa -->
+<div class="col-md-4" id="div_entidad">
+  <label for="entidad">Entidad Federativa:</label>
+  <div class="form-group">
+    <input type="text" id="entidad" name="entidad" class="form-control"
+      placeholder="Entidad Federativa" autocomplete="off">
+    <ul id="sugerencias_entidad" class="list-group autocomplete-suggestions"></ul>
+  </div>
+</div>
+
+<!-- Municipio o alcaldía -->
+<div class="col-md-4" id="div_municipio">
+  <label for="municipio">Municipio o Alcaldía:</label>
+  <div class="form-group">
+    <input type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio o Alcaldía" autocomplete="off">
+  </div>
+</div>
+
+<!-- Localidad -->
+<div class="col-md-4" id="div_localidad">
+  <label for="localidad">Localidad:</label>
+  <div class="form-group">
+    <input type="text" id="localidad" name="localidad" class="form-control" placeholder="Localidad" autocomplete="off">
+  </div>
+</div>
+
+<!-- Código Postal -->
+<div class="col-md-4" id="div_codigo_postal">
+  <label for="codigo_postal">Código Postal:</label>
+  <div class="form-group">
+    <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" placeholder="30700" minlength="5" required>
+  </div>
+</div>
+
+                
                  <!-- Tipo de la Vialidad -->
 <div class="col-md-4 autocomplete-container">
     <label for="tipo_vialidad">Tipo de la Vialidad:</label>
@@ -351,9 +361,7 @@
                       <input type="text" class="form-control" id="num_int" name="num_int" placeholder="2B">
                     </div>
                   </div>
-                </div>
-
-                <div class="row" id="datosPacienteRow7">
+                
                  <!-- Tipo de Asentamiento Humano -->
 <div class="col-md-4 autocomplete-container">
     <label for="tipo_asentamiento">Tipo de Asentamiento Humano:</label>
@@ -663,10 +671,10 @@
                   <h5 class="info-text" id="procedimientos">Procedimientos</h5>
                   <div class="row" id="procedimientosRow1">
                     <!-- Procedimiento 1 -->
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                       <label for="procedimiento1">Procedimiento 1:</label>
                       <div class="form-group">
-                        <input type="text" class="form-control " id="procedimiento1" name="procedimiento1"
+                        <input type="text" class="form-control" id="procedimiento1" name="procedimiento1"
                           placeholder="Reducción cerrada de fractura" minlength="3" required
                           oninput="mostrarSugerenciasProcedi1(this)" autocomplete="off"
                           onclick="mostrarSugerenciasProcedi1(this)" onfocus="mostrarSugerenciasProcedi1(this)"
@@ -676,11 +684,17 @@
                           </div>
                       </div>
                     </div>
+                    <div class="col-md-2">
+                      <label for="procedimineto1">CODIGO CIE-9 MC</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="cie9-codig1" name="cie9-codig1">
+                      </div>
+                    </div>
                   </div>
 
                   <div class="row" id="procedimientosRow2">
                     <!-- Procedimiento 2 -->
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                       <label for="procedimiento2">Procedimiento 2:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento2" name="procedimiento2"
@@ -693,55 +707,79 @@
                           </div>
                       </div>
                     </div>
+                    <div class="col-md-2">
+                      <label for="procedimineto2">CODIGO CIE-9 MC</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="cie9-codig2" name="cie9-codig2">
+                      </div>
+                    </div>
                   </div>
 
                   <div class="row" id="procedimientosRow3">
                     <!-- Procedimiento 3 -->
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                       <label for="procedimiento3">Procedimiento 3:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento3" name="procedimiento3"
                           placeholder="Procedimiento 3" minlength="3"
-                          oninput="mostrarSugerenciasProcedi(this)" autocomplete="off"
-                          onclick="mostrarSugerenciasProcedi(this)" onfocus="mostrarSugerenciasProcedi(this)"
-                          onblur="ocultarSugerenciasProcedi()">
+                          oninput="mostrarSugerenciasProcedi3(this)" autocomplete="off"
+                          onclick="mostrarSugerenciasProcedi3(this)" onfocus="mostrarSugerenciasProcedi3(this)"
+                          onblur="ocultarSugerenciasProcedi3()">
                           <div id="procedi_sug3" class="sugerencias"
                           style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                           </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="procedimineto2">CODIGO CIE-9 MC</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="cie9-codig3" name="cie9-codig3">
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="procedimientosRow4">
                     <!-- Procedimiento 4 -->
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                       <label for="procedimiento4">Procedimiento 4:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento4" name="procedimiento4"
                           placeholder="Procedimiento 4" minlength="3"
-                          oninput="mostrarSugerenciasProcedi(this)" autocomplete="off"
-                          onclick="mostrarSugerenciasProcedi(this)" onfocus="mostrarSugerenciasProcedi(this)"
-                          onblur="ocultarSugerenciasProcedi()">
+                          oninput="mostrarSugerenciasProcedi4(this)" autocomplete="off"
+                          onclick="mostrarSugerenciasProcedi4(this)" onfocus="mostrarSugerenciasProcedi4(this)"
+                          onblur="ocultarSugerenciasProcedi4()">
                           <div id="procedi_sug4" class="sugerencias"
                             style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                           </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="procedimineto4">CODIGO CIE-9 MC</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="cie9-codig4" name="cie9-codig4">
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="procedimientosRow5">
                     <!-- Procedimiento 5 -->
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                       <label for="procedimiento5">Procedimiento 5:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento5" name="procedimiento5"
                           placeholder="Procedimiento 5" minlength="3"
-                          oninput="mostrarSugerenciasProcedi(this)" autocomplete="off"
-                          onclick="mostrarSugerenciasProcedi(this)" onfocus="mostrarSugerenciasProcedi(this)"
-                          onblur="ocultarSugerenciasProcedi()">
+                          oninput="mostrarSugerenciasProcedi5(this)" autocomplete="off"
+                          onclick="mostrarSugerenciasProcedi5(this)" onfocus="mostrarSugerenciasProcedi5(this)"
+                          onblur="ocultarSugerenciasProcedi5()">
                           <div id="procedi_sug5" class="sugerencias"
                           style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
                           </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="procedimineto5">CODIGO CIE-9 MC</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="cie9-codigcie5" name="cie9-codig5">
                       </div>
                     </div>
                   </div>
@@ -753,55 +791,115 @@
                   <h5 class="info-text" id="medicamentosSuministrados">Medicamentos Suministrados</h5>
                   <div class="row" id="medicamentosRow1">
                     <!-- Medicamento 1 -->
-                    <div class="col-md-12">
-                      <label for="medicamento1">Medicamento 1:</label>
+                    <div class="col-md-6">
+                      <label for="medicamento1">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento1" name="medicamento1"
                           placeholder="Paracetamol 500mg" minlength="3" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="medicamneto1">Presentacion</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="present1" name="present1">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="medicamneto1">Codigo de medicamento</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="medic-codig1" name="medic-codig1">
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="medicamentosRow2">
                     <!-- Medicamento 2 -->
-                    <div class="col-md-12">
-                      <label for="medicamento2">Medicamento 2:</label>
+                    <div class="col-md-6">
+                      <label for="medicamento2">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento2" name="medicamento2"
                           placeholder="Diclofenaco 75mg" minlength="3" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="medicamneto1">Presentacion</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="present2" name="present2">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="medicamneto1">Codigo de medicamento</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="medic-codig2" name="medic-codig2">
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="medicamentosRow3">
                     <!-- Medicamento 3 -->
-                    <div class="col-md-12">
-                      <label for="medicamento3">Medicamento 3:</label>
+                    <div class="col-md-6">
+                      <label for="medicamento3">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento3" name="medicamento3"
                           placeholder="Medicamento 3" minlength="3">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="medicamneto1">Presentacion</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="present3" name="present3">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="medicamneto1">Codigo de medicamento</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="medic-codig3" name="medic-codig3">
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="medicamentosRow4">
                     <!-- Medicamento 4 -->
-                    <div class="col-md-12">
-                      <label for="medicamento4">Medicamento 4:</label>
+                    <div class="col-md-6">
+                      <label for="medicamento4">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento4" name="medicamento4"
                           placeholder="Medicamento 4" minlength="3">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="medicamneto1">Presentacion</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="present4" name="present4">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="medicamneto1">Codigo de medicamento</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="medic-codig44" name="medic-codig4">
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="medicamentosRow5">
                     <!-- Medicamento 5 -->
-                    <div class="col-md-12">
-                      <label for="medicamento5">Medicamento 5:</label>
+                    <div class="col-md-6">
+                      <label for="medicamento5">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento5" name="medicamento5"
                           placeholder="Medicamento 5" minlength="3">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="medicamneto1">Presentacion</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="present5" name="present5">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="medicamneto1">Codigo de medicamento</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="medic-codig5" name="medic-codig5">
                       </div>
                     </div>
                   </div>

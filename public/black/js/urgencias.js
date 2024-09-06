@@ -1,4 +1,4 @@
-// Lista de países del mundo
+// Lista de países del mundo (ya está definida)
 const paises = [
   "Afganistan", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", 
   "Arabia Saudita", "Argelia", "Argentina", "Armenia", "Australia", "Austria", 
@@ -38,12 +38,9 @@ const paises = [
 // Referencias a los elementos del DOM
 let sugerencias_pais = document.getElementById('sugerencias_entidad_nacimiento');
 let input_pais = document.getElementById('entidad_nacimiento');
+let sugerencias_pais1 = document.getElementById('sugerencias_pais1');
+let input_pais1 = document.getElementById('pais1');
 
-// Referencias a los campos que deben ocultarse y bloquearse
-let divEntidadPais = document.getElementById('div_entidad_pais');
-let divMunicipio = document.getElementById('div_municipio');
-let divLocalidad = document.getElementById('div_localidad');
-let divCodigoPostal = document.getElementById('div_codigo_postal');
 
 // Función para mostrar sugerencias
 input_pais.addEventListener('input', function() {
@@ -61,21 +58,8 @@ input_pais.addEventListener('input', function() {
           li.style.cursor = 'pointer';
           li.addEventListener('click', function() {
               input_pais.value = opcion;
+              input_pais1.value = opcion;  // Actualizar automáticamente el campo "País"
               sugerencias_pais.style.display = 'none';
-        
-        // Si se selecciona un país distinto a México, ocultar y deshabilitar campos
-if (opcion !== 'Mexico') {
-  divEntidadPais.style.display = 'none';
-  divMunicipio.style.display = 'none';
-  divLocalidad.style.display = 'none';
-  divCodigoPostal.style.display = 'none';
-} else {
-  divEntidadPais.style.display = 'block';
-  divMunicipio.style.display = 'block';
-  divLocalidad.style.display = 'block';
-  divCodigoPostal.style.display = 'block';
-}
-
             });
           sugerencias_pais.appendChild(li);
       });
@@ -102,6 +86,7 @@ input_pais.addEventListener('focus', function() {
           li.style.cursor = 'pointer';
           li.addEventListener('click', function() {
               input_pais.value = opcion;
+              input_pais1.value = opcion;  // Actualizar automáticamente el campo "País"
               sugerencias_pais.style.display = 'none';
           });
           sugerencias_pais.appendChild(li);
@@ -110,6 +95,177 @@ input_pais.addEventListener('focus', function() {
   }
 });
 
+// Función para mostrar sugerencias 2 (Campo País)
+input_pais1.addEventListener('input', function() {
+  let valor = input_pais1.value.toLowerCase();
+  sugerencias_pais1.innerHTML = ''; 
+
+  const opcionesFiltradas = paises.filter(pais1 => pais1.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+      sugerencias_pais1.style.display = 'block';
+      opcionesFiltradas.forEach(opcion => {
+          const li = document.createElement('li');
+          li.textContent = opcion;
+          li.classList.add('list-group-item'); 
+          li.style.cursor = 'pointer';
+          li.addEventListener('click', function() {
+              input_pais1.value = opcion;
+              sugerencias_pais1.style.display = 'none';
+            });
+          sugerencias_pais1.appendChild(li);
+      });
+  } else {
+      sugerencias_pais1.style.display = 'none';
+  }
+});
+
+
+input_pais1.addEventListener('blur', function() {
+  setTimeout(() => {
+      sugerencias_pais1.style.display = 'none';
+  }, 200);
+});
+
+
+input_pais1.addEventListener('focus', function() {
+  if (input_pais1.value === '') {
+      sugerencias_pais1.innerHTML = '';
+      paises.forEach(opcion => {
+          const li = document.createElement('li');
+          li.textContent = opcion;
+          li.classList.add('list-group-item');
+          li.style.cursor = 'pointer';
+          li.addEventListener('click', function() {
+              input_pais1.value = opcion;
+              sugerencias_pais1.style.display = 'none';
+          });
+          sugerencias_pais1.appendChild(li);
+      });
+      sugerencias_pais1.style.display = 'block';
+  }
+});
+
+//3
+
+// Función para desactivar campos si el país seleccionado no es México
+function manejarSeleccionPais() {
+  const entidad = document.getElementById('entidad');
+  const municipio = document.getElementById('municipio');
+  const localidad = document.getElementById('localidad');
+  const codigoPostal = document.getElementById('codigo_postal');
+  const tipoVialidad = document.getElementById('tipo_vialidad');
+  const nombreVialidad = document.getElementById('nombre_vialidad');
+  const numExt = document.getElementById('num_ext');
+  const numInt = document.getElementById('num_int');
+  const tipoAsentamiento = document.getElementById('tipo_asentamiento');
+  const nombreAsentamiento = document.getElementById('nombre_asentamiento');
+  const telefono = document.getElementById('telefono');
+
+  // Si el país es diferente a México, desactiva y cambia el placeholder
+  if (input_pais1.value.toLowerCase() !== 'mexico') {
+    entidad.disabled = true;
+    entidad.placeholder = "Sin Información";
+    
+    municipio.disabled = true;
+    municipio.placeholder = "Sin Información";
+
+    localidad.disabled = true;
+    localidad.placeholder = "Sin Información";
+
+    codigoPostal.disabled = true;
+    codigoPostal.placeholder = "Sin Información";
+
+    tipoVialidad.disabled = true;
+    tipoVialidad.placeholder = "Sin Información";
+
+    nombreVialidad.disabled = true;
+    nombreVialidad.placeholder = "Sin Información";
+
+    numExt.disabled = true;
+    numExt.placeholder = "Sin Información";
+
+    numInt.disabled = true;
+    numInt.placeholder = "Sin Información";
+
+    tipoAsentamiento.disabled = true;
+    tipoAsentamiento.placeholder = "Sin Información";
+
+    nombreAsentamiento.disabled = true;
+    nombreAsentamiento.placeholder = "Sin Información";
+
+    telefono.disabled = true;
+    telefono.placeholder = "Sin Información";
+
+  } else {
+    // Si el país es México, activa los campos y restaura los placeholders
+    entidad.disabled = false;
+    entidad.placeholder = "Entidad Federativa";
+
+    municipio.disabled = false;
+    municipio.placeholder = "Municipio o Alcaldía";
+
+    localidad.disabled = false;
+    localidad.placeholder = "Localidad";
+
+    codigoPostal.disabled = false;
+    codigoPostal.placeholder = "30700";
+
+    tipoVialidad.disabled = false;
+    tipoVialidad.placeholder = "Tipo de Vialidad";
+
+    nombreVialidad.disabled = false;
+    nombreVialidad.placeholder = "Central Norte";
+
+    numExt.disabled = false;
+    numExt.placeholder = "123";
+
+    numInt.disabled = false;
+    numInt.placeholder = "2B";
+
+    tipoAsentamiento.disabled = false;
+    tipoAsentamiento.placeholder = "Tipo de Asentamiento";
+
+    nombreAsentamiento.disabled = false;
+    nombreAsentamiento.placeholder = "Benito Juárez";
+
+    telefono.disabled = false;
+    telefono.placeholder = "9621234567";
+  }
+}
+
+// Función para actualizar el campo "País" automáticamente y manejar los campos
+input_pais.addEventListener('input', function() {
+  let valor = input_pais.value.toLowerCase();
+  sugerencias_pais.innerHTML = ''; 
+
+  const opcionesFiltradas = paises.filter(pais => pais.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+      sugerencias_pais.style.display = 'block';
+      opcionesFiltradas.forEach(opcion => {
+          const li = document.createElement('li');
+          li.textContent = opcion;
+          li.classList.add('list-group-item'); 
+          li.style.cursor = 'pointer';
+          li.addEventListener('click', function() {
+              input_pais.value = opcion;
+              input_pais1.value = opcion;  // Actualizar automáticamente el campo "País"
+              manejarSeleccionPais();  // Desactivar campos si no es México
+              sugerencias_pais.style.display = 'none';
+          });
+          sugerencias_pais.appendChild(li);
+      });
+  } else {
+      sugerencias_pais.style.display = 'none';
+  }
+});
+
+// Función para manejar también cuando se cambia manualmente el campo "País"
+input_pais1.addEventListener('input', manejarSeleccionPais);
+
+// También ejecutar la función en blur por si selecciona desde el autocomplete
+input_pais1.addEventListener('blur', manejarSeleccionPais);
 
 // Lógica para AC en input's select's (VIALIDAD, ASENTAMIENTO)
 document.addEventListener('DOMContentLoaded', function() {
@@ -1316,12 +1472,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // ------ Procedimientos segun el CIE-9 --- inicio
-const procedimientos = [
-  { "nombre": "ABLACIÓN ABIERTA DE LESIÓN O TEJIDO DE HÍGADO", "code": "5023" },
-  { "nombre": "ABLACIÓN ENDOMETRIAL", "code": "6823" },
-  { "nombre": "RESECCIÓN DE NEOPLASIA DE PULMÓN", "code": "3241" },
-  { "nombre": "REDUCCIÓN CERRADA DE FRACTURA", "code": "7854" }
-];
+
+
+let procedimientos = [];
+
+    // Cargar el archivo JSON al iniciar
+    fetch('/json/procedi_CIE9.json')
+      .then(response => response.json())
+      .then(data => {
+        procedimientos = data;
+      })
+      .catch(error => console.error('Error al cargar el JSON:', error));
 
 //-- input1 --
 function mostrarSugerenciasProcedi1(input) {
@@ -1329,13 +1490,13 @@ function mostrarSugerenciasProcedi1(input) {
   let listaSugerencias = document.getElementById('procedi_sug1');
   listaSugerencias.innerHTML = ""; 
 
-  const opcionesFiltradas = procedimientos.filter(nombre => nombre.nombre.toLowerCase().includes(valor) || nombre.code.toLowerCase().includes(valor));
+  const opcionesFiltradas = procedimientos.filter(procedimiento => procedimiento.nombre.toLowerCase().includes(valor));
 
   if (opcionesFiltradas.length > 0) {
     listaSugerencias.style.display = 'block';
     opcionesFiltradas.forEach(option => {
       const li = document.createElement('li');
-      li.textContent = `${option.nombre} - ${option.code}`;
+      li.textContent = `${option.nombre}`;
       li.style.padding = '10px';
       li.style.cursor = 'pointer'; 
       li.style.listStyle = 'none'; 
@@ -1360,19 +1521,20 @@ function ocultarSugerenciasProcedi1() {
   }, 200);
 }
 
+
 //-- input2 --
 function mostrarSugerenciasProcedi2(input) {
   let valor = input.value.toLowerCase();
   let listaSugerencias = document.getElementById('procedi_sug2');
   listaSugerencias.innerHTML = ""; 
 
-  const opcionesFiltradas = procedimientos.filter(nombre => nombre.nombre.toLowerCase().includes(valor) || nombre.code.toLowerCase().includes(valor));
+  const opcionesFiltradas = procedimientos.filter(procedimiento => procedimiento.nombre.toLowerCase().includes(valor));
 
   if (opcionesFiltradas.length > 0) {
     listaSugerencias.style.display = 'block';
     opcionesFiltradas.forEach(option => {
       const li = document.createElement('li');
-      li.textContent = `${option.nombre} - ${option.code}`;
+      li.textContent = `${option.nombre}`;
       li.style.padding = '10px';
       li.style.cursor = 'pointer'; 
       li.style.listStyle = 'none'; 
@@ -1396,6 +1558,119 @@ function ocultarSugerenciasProcedi2() {
     document.getElementById('procedi_sug2').style.display = "none";
   }, 200);
 }
+
+//-- input3 --
+function mostrarSugerenciasProcedi3(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('procedi_sug3');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = procedimientos.filter(procedimiento => procedimiento.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        input.value = option.nombre;
+        listaSugerencias.style.display = 'none';
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasProcedi3() {
+  setTimeout(() => {
+    document.getElementById('procedi_sug3').style.display = "none";
+  }, 200);
+}
+
+//-- input4 --
+function mostrarSugerenciasProcedi4(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('procedi_sug4');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = procedimientos.filter(procedimiento => procedimiento.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        input.value = option.nombre;
+        listaSugerencias.style.display = 'none';
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasProcedi4() {
+  setTimeout(() => {
+    document.getElementById('procedi_sug4').style.display = "none";
+  }, 200);
+}
+
+//-- input5 --
+function mostrarSugerenciasProcedi5(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('procedi_sug5');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = procedimientos.filter(procedimiento => procedimiento.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        input.value = option.nombre;
+        listaSugerencias.style.display = 'none';
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasProcedi5() {
+  setTimeout(() => {
+    document.getElementById('procedi_sug5').style.display = "none";
+  }, 200);
+}
+
+// ------ Procedimientos segun el CIE-9 --- fin
 
 // ------ Procedimientos segun el CIE-9 --- fin
 
