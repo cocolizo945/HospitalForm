@@ -258,16 +258,16 @@
 
                   <!-- ¿Es Migrante Retornado? -->
                   <div class="col-md-2">
-  <label for="migrante">¿Es Migrante Retornado?</label>
-  <div class="form-group">
-    <select class="selectpicker form-control" id="migrante" name="migrante" data-size="7"
-      data-style="btn btn-primary" title="Selección Única" required onchange="toggleCamposMigrante()">
-      <option disabled selected>Selección Única</option>
-      <option value="1">SI</option>
-      <option value="0">NO</option>
-    </select>
-  </div>
-</div>
+                  <label for="migrante">¿Es Migrante Retornado?</label>
+                   <div class="form-group">
+                    <select class="selectpicker form-control" id="migrante" name="migrante" data-size="7"
+                    data-style="btn btn-primary" title="Selección Única" required onchange="toggleCamposMigrante()">
+                    <option disabled selected>Selección Única</option>
+                      <option value="1">SI</option>
+                      <option value="0">NO</option>
+                    </select>
+                     </div>
+                    </div>
                   <!-- ¿Se Considera Afromexicano? -->
                   <div class="col-md-2">
                     <label for="afromexicano">¿Se Considera Afromexicano?</label>
@@ -281,18 +281,18 @@
                     </div>
                   </div>
 
-      <!-- País -->
-<div class="col-md-4" >
-  <label for="pais">País:</label>
-  <div class="form-group">
-    <input type="text" id="pais1" name="pais" class="form-control"
-      placeholder="Pais" autocomplete="off" required>
-    <ul id="sugerencias_pais1" class="list-group autocomplete-suggestions"></ul>
-  </div>
-</div>
+             <!-- País -->
+              <div class="col-md-4" >
+              <label for="pais">País:</label>
+               <div class="form-group">
+                <input type="text" id="pais1" name="pais" class="form-control"
+                placeholder="Pais" autocomplete="off" required>
+                 <ul id="sugerencias_pais1" class="list-group autocomplete-suggestions"></ul>
+                </div>
+              </div>
 
 
-                  <!-- Entidad Federativa -->
+  <!-- Entidad Federativa -->
 <div class="col-md-4" id="div_entidad">
   <label for="entidad">Entidad Federativa:</label>
   <div class="form-group">
@@ -500,7 +500,7 @@
                   <div class="col-md-4">
                     <label for="clues">CLUES:</label>
                     <div class="form-group">
-                      <input type="text" class="form-control" id="clues" name="clues" placeholder="CSSSA006403"
+                      <input type="text" class="form-control" id="clues" name="clue" placeholder="CSSSA006403"
                         oninput="mostrarSugerenciasClues(this)" autocomplete="off"
                         onclick="mostrarSugerenciasClues(this)" onfocus="mostrarSugerenciasClues(this)"
                         onblur="ocultarSugerenciasClues()">

@@ -57,7 +57,6 @@ input_pais.addEventListener('input', function() {
           li.classList.add('list-group-item'); 
           li.style.cursor = 'pointer';
           li.addEventListener('click', function() {
-              input_pais.value = opcion;
               input_pais1.value = opcion;  // Actualizar automáticamente el campo "País"
               sugerencias_pais.style.display = 'none';
             });
@@ -86,7 +85,6 @@ input_pais.addEventListener('focus', function() {
           li.style.cursor = 'pointer';
           li.addEventListener('click', function() {
               input_pais.value = opcion;
-              input_pais1.value = opcion;  // Actualizar automáticamente el campo "País"
               sugerencias_pais.style.display = 'none';
           });
           sugerencias_pais.appendChild(li);
@@ -246,7 +244,6 @@ input_pais.addEventListener('input', function() {
           li.classList.add('list-group-item'); 
           li.style.cursor = 'pointer';
           li.addEventListener('click', function() {
-              input_pais.value = opcion;
               input_pais1.value = opcion;  // Actualizar automáticamente el campo "País"
               manejarSeleccionPais();  // Desactivar campos si no es México
               sugerencias_pais.style.display = 'none';
@@ -785,7 +782,7 @@ function mostrarSugerencias(input, tipo) {
   if (tipo === 'entidades') {
     opciones = entidades;
   } else if (tipo === 'municipios') {
-    let entidadSeleccionada = document.getElementById('entidad_pais').value.toLowerCase().replace(/\s+/g, '');
+    let entidadSeleccionada = document.getElementById('entidad').value.toLowerCase().replace(/\s+/g, '');
     if (data[entidadSeleccionada]) {
       municipios = data[entidadSeleccionada];
       opciones = municipios;
@@ -1146,7 +1143,7 @@ $(document).ready(function() {
   $('#traslado_transitorio').on('change', function() {
       var selectedValue = $(this).val();
       var nombreUnidadContainer = $('#nombre_unidad').closest('.col-md-4');
-      var cluesContainer = $('#clues').closest('.col-md-4');
+      var cluesContainer = $('#clue').closest('.col-md-4');
       
       if (selectedValue === '1') { // Si se selecciona 'Sí'
           nombreUnidadContainer.show(); // Muestra 'Nombre de la unidad'
