@@ -160,8 +160,7 @@ function manejarSeleccionPais() {
   const numInt = document.getElementById('num_int');
   const tipoAsentamiento = document.getElementById('tipo_asentamiento');
   const nombreAsentamiento = document.getElementById('nombre_asentamiento');
-  const telefono = document.getElementById('telefono');
-
+  
   // Si el país es diferente a México, desactiva y cambia el placeholder
   if (input_pais1.value.toLowerCase() !== 'mexico') {
     entidad.disabled = true;
@@ -194,8 +193,7 @@ function manejarSeleccionPais() {
     nombreAsentamiento.disabled = true;
     nombreAsentamiento.placeholder = "Sin Información";
 
-    telefono.disabled = true;
-    telefono.placeholder = "Sin Información";
+    
 
   } else {
     // Si el país es México, activa los campos y restaura los placeholders
@@ -229,8 +227,7 @@ function manejarSeleccionPais() {
     nombreAsentamiento.disabled = false;
     nombreAsentamiento.placeholder = "Benito Juárez";
 
-    telefono.disabled = false;
-    telefono.placeholder = "9621234567";
+    
   }
 }
 
