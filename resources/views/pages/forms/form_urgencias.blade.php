@@ -663,10 +663,10 @@
                   <h5 class="info-text" id="procedimientos">Procedimientos</h5>
                   <div class="row" id="procedimientosRow1">
                     <!-- Procedimiento 1 -->
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                       <label for="procedimiento1">Procedimiento 1:</label>
                       <div class="form-group">
-                        <input type="text" class="form-control " id="procedimiento1" name="procedimiento1"
+                        <input type="text" class="form-control" id="procedimiento1" name="procedimiento1"
                           placeholder="Reducción cerrada de fractura" minlength="3" required
                           oninput="mostrarSugerenciasProcedi1(this)" autocomplete="off"
                           onclick="mostrarSugerenciasProcedi1(this)" onfocus="mostrarSugerenciasProcedi1(this)"
@@ -676,11 +676,17 @@
                           </div>
                       </div>
                     </div>
+                    <div class="col-md-2">
+                      <label for="procedimineto1">CODIGO CIE-9 MC</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="cie9-codig1" name="cie9-codig1">
+                      </div>
+                    </div>
                   </div>
 
                   <div class="row" id="procedimientosRow2">
                     <!-- Procedimiento 2 -->
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                       <label for="procedimiento2">Procedimiento 2:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento2" name="procedimiento2"
@@ -693,11 +699,17 @@
                           </div>
                       </div>
                     </div>
+                    <div class="col-md-2">
+                      <label for="procedimineto2">CODIGO CIE-9 MC</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="cie9-codig2" name="cie9-codig2">
+                      </div>
+                    </div>
                   </div>
 
                   <div class="row" id="procedimientosRow3">
                     <!-- Procedimiento 3 -->
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                       <label for="procedimiento3">Procedimiento 3:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento3" name="procedimiento3"
@@ -710,11 +722,17 @@
                           </div>
                       </div>
                     </div>
+                    <div class="col-md-2">
+                      <label for="procedimineto2">CODIGO CIE-9 MC</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="cie9-codig3" name="cie9-codig3">
+                      </div>
+                    </div>
                   </div>
 
                   <div class="row" id="procedimientosRow4">
                     <!-- Procedimiento 4 -->
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                       <label for="procedimiento4">Procedimiento 4:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento4" name="procedimiento4"
@@ -727,11 +745,17 @@
                           </div>
                       </div>
                     </div>
+                    <div class="col-md-2">
+                      <label for="procedimineto4">CODIGO CIE-9 MC</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="cie9-codig4" name="cie9-codig4">
+                      </div>
+                    </div>
                   </div>
 
                   <div class="row" id="procedimientosRow5">
                     <!-- Procedimiento 5 -->
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                       <label for="procedimiento5">Procedimiento 5:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento5" name="procedimiento5"
@@ -744,6 +768,12 @@
                           </div>
                       </div>
                     </div>
+                    <div class="col-md-2">
+                      <label for="procedimineto5">CODIGO CIE-9 MC</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="cie9-codigcie5" name="cie9-codig5">
+                      </div>
+                    </div>
                   </div>
                 </div>
                 </div>
@@ -753,55 +783,115 @@
                   <h5 class="info-text" id="medicamentosSuministrados">Medicamentos Suministrados</h5>
                   <div class="row" id="medicamentosRow1">
                     <!-- Medicamento 1 -->
-                    <div class="col-md-12">
-                      <label for="medicamento1">Medicamento 1:</label>
+                    <div class="col-md-6">
+                      <label for="medicamento1">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento1" name="medicamento1"
                           placeholder="Paracetamol 500mg" minlength="3" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="medicamneto1">Presentacion</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="present1" name="present1">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="medicamneto1">Codigo de medicamento</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="medic-codig1" name="medic-codig1">
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="medicamentosRow2">
                     <!-- Medicamento 2 -->
-                    <div class="col-md-12">
-                      <label for="medicamento2">Medicamento 2:</label>
+                    <div class="col-md-6">
+                      <label for="medicamento2">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento2" name="medicamento2"
                           placeholder="Diclofenaco 75mg" minlength="3" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="medicamneto1">Presentacion</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="present2" name="present2">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="medicamneto1">Codigo de medicamento</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="medic-codig2" name="medic-codig2">
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="medicamentosRow3">
                     <!-- Medicamento 3 -->
-                    <div class="col-md-12">
-                      <label for="medicamento3">Medicamento 3:</label>
+                    <div class="col-md-6">
+                      <label for="medicamento3">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento3" name="medicamento3"
                           placeholder="Medicamento 3" minlength="3">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="medicamneto1">Presentacion</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="present3" name="present3">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="medicamneto1">Codigo de medicamento</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="medic-codig3" name="medic-codig3">
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="medicamentosRow4">
                     <!-- Medicamento 4 -->
-                    <div class="col-md-12">
-                      <label for="medicamento4">Medicamento 4:</label>
+                    <div class="col-md-6">
+                      <label for="medicamento4">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento4" name="medicamento4"
                           placeholder="Medicamento 4" minlength="3">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="medicamneto1">Presentacion</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="present4" name="present4">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="medicamneto1">Codigo de medicamento</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="medic-codig44" name="medic-codig4">
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="medicamentosRow5">
                     <!-- Medicamento 5 -->
-                    <div class="col-md-12">
-                      <label for="medicamento5">Medicamento 5:</label>
+                    <div class="col-md-6">
+                      <label for="medicamento5">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento5" name="medicamento5"
                           placeholder="Medicamento 5" minlength="3">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="medicamneto1">Presentacion</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="present5" name="present5">
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <label for="medicamneto1">Codigo de medicamento</label>
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="medic-codig5" name="medic-codig5">
                       </div>
                     </div>
                   </div>
