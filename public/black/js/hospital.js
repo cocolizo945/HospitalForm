@@ -815,9 +815,13 @@ document.addEventListener('DOMContentLoaded', function() {
           "LUXACIÓN/ESGUINCE", "HERIDA", "INFECCIÓN DE TRANSMISIÓN SEXUAL", "MÚLTIPLE", 
           "AMPUTACIÓN/AVULSIÓN", "FRACTURA", "DEFUNCIÓN", "MALESTAR EMOCIONAL", 
           "TRASTORNO DEL ESTADO DE ÁNIMO", "OTRO (ESPECIFIQUE)"
+      ],
+      'num_ext': [
+        "S/N"
       ]
   };
 
+  const numIntInput = document.getElementById('num_int');
   document.querySelectorAll('.autocomplete-container').forEach(function(container) {
       const input = container.querySelector('.autocomplete-input');
       const sugerencias = container.querySelector('.autocomplete-suggestions');
@@ -880,8 +884,16 @@ document.addEventListener('DOMContentLoaded', function() {
                   sugerencias.style.display = 'none';
                   sugerencias.style.opacity = '1';
               }, 300);
-          }, 200);
-      });
+
+      // Si seleccionan "S/N" en num_ext, deshabilitamos num_int
+      if (input.id === 'num_ext' && input.value === 'S/N') {
+        numIntInput.setAttribute('disabled', 'disabled');
+        numIntInput.value = ''; // Limpiamos el valor de num_int
+      } else {
+        numIntInput.removeAttribute('disabled');
+      }
+    }, 200);
+  });
 
       function seleccionarOpcion(input, sugerencias, option) {
           seleccionAnterior = option;

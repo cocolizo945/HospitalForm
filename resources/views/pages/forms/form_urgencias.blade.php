@@ -347,10 +347,11 @@
                   </div>
 
                   <!-- Num. Ext. -->
-                  <div class="col-md-2">
+                  <div class="col-md-2  autocomplete-container">
                     <label for="num_ext">Num. Ext.:</label>
                     <div class="form-group">
-                      <input type="text" class="form-control" id="num_ext" name="num_ext" placeholder="123" required>
+                      <input type="text" class="form-control autocomplete-input" id="num_ext" name="num_ext" placeholder="123" autocomplete="off" required>
+                      <ul class="list-group autocomplete-suggestions"></ul>
                     </div>
                   </div>
 
