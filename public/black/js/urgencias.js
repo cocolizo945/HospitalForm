@@ -689,7 +689,7 @@ function mostrarSugerenciasClues(input) {
     listaSugerencias.style.display = 'block';
     opcionesFiltradas.forEach(option => {
       const li = document.createElement('li');
-      li.textContent = `${option.clues} - ${option.nombre}`;
+      li.textContent = `${option.nombre}`;
       li.style.padding = '10px';
       li.style.cursor = 'pointer'; 
       li.style.listStyle = 'none'; 
@@ -698,7 +698,8 @@ function mostrarSugerenciasClues(input) {
       li.style.color = '#000'; 
       li.style.backgroundColor = '#fff'; 
       li.addEventListener('click', function() {
-        input.value = option.clues;
+        document.getElementById('nombre_unidad').value = option.nombre
+        document.getElementById('clue').value = option.clues
         listaSugerencias.style.display = 'none';
       });
       listaSugerencias.appendChild(li);
@@ -1260,13 +1261,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // PRUEBA COMMIT 123
 
 
-// ------ Procedimientos segun el CIE-9 --- inicio
-
+// ------ codigos segun el CIE-9  --- inicio
 
 let procedimientos = [];
 
     // Cargar el archivo JSON al iniciar
-    fetch('/json/procedi_CIE9.json')
+    fetch('/json/code_CIE9.json')
       .then(response => response.json())
       .then(data => {
         procedimientos = data;
@@ -1348,120 +1348,7 @@ function ocultarSugerenciasProcedi2() {
   }, 200);
 }
 
-//-- input3 --
-function mostrarSugerenciasProcedi3(input) {
-  let valor = input.value.toLowerCase();
-  let listaSugerencias = document.getElementById('procedi_sug3');
-  listaSugerencias.innerHTML = ""; 
-
-  const opcionesFiltradas = procedimientos.filter(procedimiento => procedimiento.nombre.toLowerCase().includes(valor));
-
-  if (opcionesFiltradas.length > 0) {
-    listaSugerencias.style.display = 'block';
-    opcionesFiltradas.forEach(option => {
-      const li = document.createElement('li');
-      li.textContent = `${option.nombre}`;
-      li.style.padding = '10px';
-      li.style.cursor = 'pointer'; 
-      li.style.listStyle = 'none'; 
-      li.style.borderBottom = '1px solid #e9ecef'; 
-      li.style.fontWeight = 'bold'; 
-      li.style.color = '#000'; 
-      li.style.backgroundColor = '#fff'; 
-      li.addEventListener('click', function() {
-        input.value = option.nombre;
-        listaSugerencias.style.display = 'none';
-      });
-      listaSugerencias.appendChild(li);
-    });
-  } else {
-    listaSugerencias.style.display = 'none';
-  }
-}
-
-function ocultarSugerenciasProcedi3() {
-  setTimeout(() => {
-    document.getElementById('procedi_sug3').style.display = "none";
-  }, 200);
-}
-
-//-- input4 --
-function mostrarSugerenciasProcedi4(input) {
-  let valor = input.value.toLowerCase();
-  let listaSugerencias = document.getElementById('procedi_sug4');
-  listaSugerencias.innerHTML = ""; 
-
-  const opcionesFiltradas = procedimientos.filter(procedimiento => procedimiento.nombre.toLowerCase().includes(valor));
-
-  if (opcionesFiltradas.length > 0) {
-    listaSugerencias.style.display = 'block';
-    opcionesFiltradas.forEach(option => {
-      const li = document.createElement('li');
-      li.textContent = `${option.nombre}`;
-      li.style.padding = '10px';
-      li.style.cursor = 'pointer'; 
-      li.style.listStyle = 'none'; 
-      li.style.borderBottom = '1px solid #e9ecef'; 
-      li.style.fontWeight = 'bold'; 
-      li.style.color = '#000'; 
-      li.style.backgroundColor = '#fff'; 
-      li.addEventListener('click', function() {
-        input.value = option.nombre;
-        listaSugerencias.style.display = 'none';
-      });
-      listaSugerencias.appendChild(li);
-    });
-  } else {
-    listaSugerencias.style.display = 'none';
-  }
-}
-
-function ocultarSugerenciasProcedi4() {
-  setTimeout(() => {
-    document.getElementById('procedi_sug4').style.display = "none";
-  }, 200);
-}
-
-//-- input5 --
-function mostrarSugerenciasProcedi5(input) {
-  let valor = input.value.toLowerCase();
-  let listaSugerencias = document.getElementById('procedi_sug5');
-  listaSugerencias.innerHTML = ""; 
-
-  const opcionesFiltradas = procedimientos.filter(procedimiento => procedimiento.nombre.toLowerCase().includes(valor));
-
-  if (opcionesFiltradas.length > 0) {
-    listaSugerencias.style.display = 'block';
-    opcionesFiltradas.forEach(option => {
-      const li = document.createElement('li');
-      li.textContent = `${option.nombre}`;
-      li.style.padding = '10px';
-      li.style.cursor = 'pointer'; 
-      li.style.listStyle = 'none'; 
-      li.style.borderBottom = '1px solid #e9ecef'; 
-      li.style.fontWeight = 'bold'; 
-      li.style.color = '#000'; 
-      li.style.backgroundColor = '#fff'; 
-      li.addEventListener('click', function() {
-        input.value = option.nombre;
-        listaSugerencias.style.display = 'none';
-      });
-      listaSugerencias.appendChild(li);
-    });
-  } else {
-    listaSugerencias.style.display = 'none';
-  }
-}
-
-function ocultarSugerenciasProcedi5() {
-  setTimeout(() => {
-    document.getElementById('procedi_sug5').style.display = "none";
-  }, 200);
-}
-
-// ------ Procedimientos segun el CIE-9 --- fin
-
-// ------ Procedimientos segun el CIE-9 --- fin
+// ------ codigos segun el CIE-9 --- fin
 
 // Define sections to toggle visibility based on select values
 const sectionsToToggle = [

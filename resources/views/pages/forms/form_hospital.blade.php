@@ -432,7 +432,7 @@
                   <div class="col-md-4">
                     <label for="codigo_postal">Código Postal:</label>
                     <div class="form-group">
-                      <input type="text" id="codigo_postal" name="codigo_postal" class="form-control" placeholder="Código Postal" readonly />
+                      <input type="text" id="codigo_postal" name="codigo_postal" class="form-control" placeholder="Código Postal"/>
                     </div>
                   </div>
                   

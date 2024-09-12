@@ -494,20 +494,20 @@
                     <label for="nombre_unidad">Nombre de la unidad:</label>
                     <div class="form-group">
                       <input type="text" class="form-control" id="nombre_unidad" name="nombre_unidad"
-                        placeholder="Hospital General" minlength="3" required>
+                        placeholder="Hospital General" minlength="3" required
+                        oninput="mostrarSugerenciasClues(this)" autocomplete="off"
+                        onclick="mostrarSugerenciasClues(this)" onfocus="mostrarSugerenciasClues(this)"
+                        onblur="ocultarSugerenciasClues()">
+                        <div id="sugerencias_clues" class="sugerencias"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </div>
                     </div>
                   </div>
                   <!-- CLUES -->
                   <div class="col-md-4">
                     <label for="clues">CLUES:</label>
                     <div class="form-group">
-                      <input type="text" class="form-control" id="clues" name="clue" placeholder="CSSSA006403"
-                        oninput="mostrarSugerenciasClues(this)" autocomplete="off"
-                        onclick="mostrarSugerenciasClues(this)" onfocus="mostrarSugerenciasClues(this)"
-                        onblur="ocultarSugerenciasClues()">
-                      <div id="sugerencias_clues" class="sugerencias"
-                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                      </div>
+                      <input type="text" class="form-control" id="clue" name="clue" placeholder="CSSSA006403">
                     </div>
                   </div>
                 </div>
@@ -680,115 +680,55 @@
                   <h5 class="info-text" id="procedimientos">Procedimientos</h5>
                   <div class="row" id="procedimientosRow1">
                     <!-- Procedimiento 1 -->
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                       <label for="procedimiento1">Procedimiento 1:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento1" name="procedimiento1"
-                          placeholder="Reducción cerrada de fractura" minlength="3" required
-                          oninput="mostrarSugerenciasProcedi1(this)" autocomplete="off"
-                          onclick="mostrarSugerenciasProcedi1(this)" onfocus="mostrarSugerenciasProcedi1(this)"
-                          onblur="ocultarSugerenciasProcedi1()">
-                          <div id="procedi_sug1" class="sugerencias"
-                          style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <label for="procedimineto1">CODIGO CIE-9 MC</label>
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="cie9-codig1" name="cie9-codig1">
+                          placeholder="Reducción cerrada de fractura" minlength="3" required>
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="procedimientosRow2">
                     <!-- Procedimiento 2 -->
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                       <label for="procedimiento2">Procedimiento 2:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento2" name="procedimiento2"
-                          placeholder="Inmovilización con yeso" minlength="3"
-                          oninput="mostrarSugerenciasProcedi2(this)" autocomplete="off"
-                          onclick="mostrarSugerenciasProcedi2(this)" onfocus="mostrarSugerenciasProcedi2(this)"
-                          onblur="ocultarSugerenciasProcedi2()">
-                          <div id="procedi_sug2" class="sugerencias"
-                          style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <label for="procedimineto2">CODIGO CIE-9 MC</label>
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="cie9-codig2" name="cie9-codig2">
+                          placeholder="Inmovilización con yeso" minlength="3">
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="procedimientosRow3">
                     <!-- Procedimiento 3 -->
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                       <label for="procedimiento3">Procedimiento 3:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento3" name="procedimiento3"
-                          placeholder="Procedimiento 3" minlength="3"
-                          oninput="mostrarSugerenciasProcedi3(this)" autocomplete="off"
-                          onclick="mostrarSugerenciasProcedi3(this)" onfocus="mostrarSugerenciasProcedi3(this)"
-                          onblur="ocultarSugerenciasProcedi3()">
-                          <div id="procedi_sug3" class="sugerencias"
-                          style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <label for="procedimineto2">CODIGO CIE-9 MC</label>
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="cie9-codig3" name="cie9-codig3">
+                          placeholder="Procedimiento 3" minlength="3">
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="procedimientosRow4">
                     <!-- Procedimiento 4 -->
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                       <label for="procedimiento4">Procedimiento 4:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento4" name="procedimiento4"
-                          placeholder="Procedimiento 4" minlength="3"
-                          oninput="mostrarSugerenciasProcedi4(this)" autocomplete="off"
-                          onclick="mostrarSugerenciasProcedi4(this)" onfocus="mostrarSugerenciasProcedi4(this)"
-                          onblur="ocultarSugerenciasProcedi4()">
-                          <div id="procedi_sug4" class="sugerencias"
-                            style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <label for="procedimineto4">CODIGO CIE-9 MC</label>
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="cie9-codig4" name="cie9-codig4">
+                          placeholder="Procedimiento 4" minlength="3">
                       </div>
                     </div>
                   </div>
 
                   <div class="row" id="procedimientosRow5">
                     <!-- Procedimiento 5 -->
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                       <label for="procedimiento5">Procedimiento 5:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="procedimiento5" name="procedimiento5"
-                          placeholder="Procedimiento 5" minlength="3"
-                          oninput="mostrarSugerenciasProcedi5(this)" autocomplete="off"
-                          onclick="mostrarSugerenciasProcedi5(this)" onfocus="mostrarSugerenciasProcedi5(this)"
-                          onblur="ocultarSugerenciasProcedi5()">
-                          <div id="procedi_sug5" class="sugerencias"
-                          style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <label for="procedimineto5">CODIGO CIE-9 MC</label>
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="cie9-codigcie5" name="cie9-codig5">
+                          placeholder="Procedimiento 5" minlength="3">
                       </div>
                     </div>
                   </div>
