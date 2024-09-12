@@ -1125,3 +1125,18 @@ document.addEventListener('DOMContentLoaded', function () {
       }
   });
 });
+//---------------------------------------------------------------------------------------------
+//Manejar la seccion de atencion prehospitalaria de acuerdo a tiempo de traslado
+function toggleTiempoTraslado() {
+  const prehospitalariaSelect = document.getElementById('prehospitalaria').value;
+  const tiempoTrasladoInput = document.getElementById('tiempo_traslado');
+
+  
+  if (prehospitalariaSelect === '2') {
+    tiempoTrasladoInput.disabled = true;
+    tiempoTrasladoInput.value = '00:00';  
+  } else {
+    tiempoTrasladoInput.disabled = false;
+    tiempoTrasladoInput.value = 'HH:mm'; 
+  }
+}

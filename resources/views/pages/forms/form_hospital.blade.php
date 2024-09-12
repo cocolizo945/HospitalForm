@@ -521,22 +521,23 @@
                   </div>
                   <!-- ¿Recibió atención prehospitalaria? -->
                   <div class="col-md-4">
-                    <label for="prehospitalaria">¿Recibió atención prehospitalaria?</label>
-                    <div class="form-group">
-                      <select id="prehospitalaria" class="selectpicker form-control" name="prehospitalaria" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. SI</option>
-                        <option value="2">2. NO</option>
-                      </select>
-                    </div>
-                  </div>
-                  <!-- Tiempo de traslado a la unidad hospitalaria -->
-                  <div class="col-md-4">
-                    <label for="tiempo_traslado">Tiempo de traslado a la unidad hospitalaria:</label>
-                    <div class="form-group">
-                      <input type="text" id="tiempo_traslado" name="tiempo_traslado" class="form-control" value="HH:mm" required>
-                    </div>
-                  </div>
+            <label for="prehospitalaria">¿Recibió atención prehospitalaria?</label>
+            <div class="form-group">
+              <select id="prehospitalaria" class="selectpicker form-control" name="prehospitalaria" data-size="7" data-style="btn btn-primary" required onchange="toggleTiempoTraslado()">
+                <option disabled selected>Selección Única</option>
+                <option value="1">1. SI</option>
+                <option value="2">2. NO</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Tiempo de traslado a la unidad hospitalaria -->
+          <div class="col-md-4">
+            <label for="tiempo_traslado">Tiempo de traslado a la unidad hospitalaria:</label>
+            <div class="form-group">
+              <input type="text" id="tiempo_traslado" name="tiempo_traslado" class="form-control" value="HH:mm" required>
+            </div>
+          </div>
                   <!-- Se sospecha que la/el paciente estaba bajo los efectos de -->
                   <div class="col-md-4">
                     <label for="efectos_paciente">Se sospecha que la/el paciente estaba bajo los efectos de:</label>

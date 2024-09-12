@@ -396,28 +396,25 @@
               <div class="tab-pane" id="form2">
                 <h5 class="info-text" id="estancia">Estancia</h5>
                 <div class="row" id="estanciaRow1">
-                  <!-- Atención prehospitalaria -->
-                  <div class="col-md-2">
-                    <label for="prehospitalaria">Atención prehospitalaria:</label>
+                                    <!-- Atención prehospitalaria -->
+                                    <div class="col-md-4">
+                    <label for="prehospitalaria">¿Recibió atención prehospitalaria?</label>
                     <div class="form-group">
-                      <select class="selectpicker form-control" id="prehospitalaria" name="prehospitalaria"
-                        data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+                      <select id="prehospitalaria" class="selectpicker form-control" name="prehospitalaria" data-size="7" data-style="btn btn-primary" required onchange="toggleTiempoTraslado()">
                         <option disabled selected>Selección Única</option>
-                        <option value="1">SI</option>
-                        <option value="0">NO</option>
+                        <option value="1">1. SI</option>
+                        <option value="2">2. NO</option>
                       </select>
                     </div>
                   </div>
 
                   <!-- Tiempo de traslado a la unidad hospitalaria -->
-                  <div class="col-md-2">
-                    <label for="tiempo_traslado">Tiempo de traslado:</label>
+                  <div class="col-md-4">
+                    <label for="tiempo_traslado">Tiempo de traslado a la unidad hospitalaria:</label>
                     <div class="form-group">
-                      <input type="text" class="form-control" id="tiempo_traslado" name="tiempo_traslado"
-                        placeholder="30" required>
+                      <input type="text" id="tiempo_traslado" name="tiempo_traslado" class="form-control" value="HH:mm" required>
                     </div>
                   </div>
-
                   <!-- Fecha de ingreso -->
                   <div class="col-md-4">
                     <label for="fecha_ingreso">Fecha de ingreso:</label>
