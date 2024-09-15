@@ -798,11 +798,6 @@ document.addEventListener('DOMContentLoaded', function() {
       'servicio_atencion': [
           "CONSULTA EXTERNA", "HOSPITALIZACIÓN", "URGENCIAS", "SERVICIO ESPECIALIZADO DE ATENCIÓN A LA VIOLENCIA", "OTRO SERVICIO (ESPECIFIQUE)"
       ],
-      'tipo_atencion': [
-          "MÉDICA", "PSICOLÓGICA", "QUIRÚRGICA", "PSIQUIÁTRICA", "CONSEJERÍA", "OTRO", 
-          "PÍLDORA ANTICONCEPTIVA DE EMERGENCIA", "PROFILAXIS VIH", "PROFILAXIS OTRAS ITS", 
-          "IVE(INTERRUPCIÓN VOLUNTARIA DEL EMBARAZO)", "VACUNA VPH"
-      ],
       'area_gravedad': [
           "CABEZA", "CARA", "REGIÓN OCULAR", "CUELLO", "COLUMNA VERTEBRAL", "EXTREMIDADES SUPERIORES", 
           "MANO", "TÓRAX", "ESPALDA Y/O GLÚTEOS", "ABDOMEN", "PELVIS", "REGIÓN GENITAL", 
@@ -1139,4 +1134,107 @@ function toggleTiempoTraslado() {
     tiempoTrasladoInput.disabled = false;
     tiempoTrasladoInput.value = 'HH:mm'; 
   }
+}
+
+//TIPO DE ATENCION SELECCIONADA
+const opcionesTipoAtencion = [
+  "MÉDICA", "PSICOLÓGICA", "QUIRÚRGICA", "PSIQUIÁTRICA", "CONSEJERÍA", "OTRO", 
+  "PÍLDORA ANTICONCEPTIVA DE EMERGENCIA", "PROFILAXIS VIH", "PROFILAXIS OTRAS ITS", 
+  "IVE(INTERRUPCIÓN VOLUNTARIA DEL EMBARAZO)", "VACUNA VPH"
+];
+
+const inputTipoAtencion = document.getElementById('tipo_atencion');
+const listaSugerenciastipoA = document.getElementById('sugerencias_tipoA');
+const divSeleccionestipoA = document.getElementById('selecciones_tipoA');
+let listatipoASeleccionadas = [];
+
+// Mostrar todas las opciones al hacer clic (focus) en el input de tipo de atencion
+inputTipoAtencion.addEventListener('focus', function () {
+  mostrarOpcionesFiltradas(opcionesTipoAtencion, listaSugerenciastipoA, inputTipoAtencion);
+});
+
+// Ocultar sugerencias cuando se hace clic fuera del input
+document.addEventListener('click', function(event) {
+  if (!inputTipoAtencion.contains(event.target) && !listaSugerenciastipoA.contains(event.target)) {
+      listaSugerenciastipoA.style.display = 'none';
+  }
+});
+
+function mostrarOpcionesFiltradas(opciones, listaSugerencias, input) {
+  listaSugerencias.innerHTML = ''; 
+  opciones.forEach(opcion => {
+      const elementoLista = document.createElement('li');
+      elementoLista.textContent = opcion;
+      elementoLista.style.padding = '10px';
+      elementoLista.style.cursor = 'pointer';
+      elementoLista.style.listStyle = 'none';
+      elementoLista.style.borderBottom = '1px solid #e9ecef';
+      elementoLista.style.fontWeight = 'bold';
+      elementoLista.style.color = '#000';
+      elementoLista.style.backgroundColor = '#fff';
+      elementoLista.addEventListener('click', function () {
+       if (input === inputTipoAtencion) {
+              agregarTipoASeleccionadas(opcion);
+              listaSugerenciastipoA.style.display = 'none';
+          }
+      });
+      listaSugerencias.appendChild(elementoLista);
+  });
+  listaSugerencias.style.display = 'block';
+}
+
+// Función para manejar el autocompletado 
+inputTipoAtencion.addEventListener('input', function() {
+  const filtro = inputTipoAtencion.value.toLowerCase();
+  const opcionesFiltradas = opcionesTipoAtencion.filter(opcion => opcion.toLowerCase().includes(filtro));
+  mostrarOpcionesFiltradas(opcionesFiltradas, listaSugerenciastipoA, inputTipoAtencion);
+  });
+
+// Función para agregar tipos de atención seleccionados
+function agregarTipoASeleccionadas(opcion) {
+  if (listatipoASeleccionadas.length >= 3) {
+    alert('Solo puedes seleccionar 3 tipos de atención.');
+    return;
+  }
+  if (!listatipoASeleccionadas.includes(opcion)) {
+    listatipoASeleccionadas.push(opcion);
+    actualizarListaTipoASeleccionadas();
+  }
+
+  inputTipoAtencion.value = ''; // Limpiar el input después de seleccionar
+}
+
+// Función para eliminar tipo de atención seleccionada
+function eliminarListaTipoASeleccionada(opcion) {
+  listatipoASeleccionadas = listatipoASeleccionadas.filter(sel => sel !== opcion);
+  actualizarListaTipoASeleccionadas();
+}
+
+// Función para actualizar la lista de tipos de atención seleccionados
+function actualizarListaTipoASeleccionadas() {
+  divSeleccionestipoA.innerHTML = ''; // Limpiar el contenedor antes de actualizar
+  listatipoASeleccionadas.forEach(opcion => {
+    const divtipoA = document.createElement('div');
+    divtipoA.textContent = opcion;
+    divtipoA.style.padding = '5px';
+    divtipoA.style.backgroundColor = '#e9ecef';
+    divtipoA.style.marginBottom = '5px';
+    divtipoA.style.display = 'inline-block';
+    divtipoA.style.fontWeight = 'bold';
+    divtipoA.style.marginRight = '5px';
+
+    const botonEliminar = document.createElement('button');
+    botonEliminar.textContent = 'X';
+    botonEliminar.style.marginLeft = '10px';
+    botonEliminar.style.color = 'red';
+    botonEliminar.style.border = 'none';
+    botonEliminar.style.backgroundColor = 'transparent';
+    botonEliminar.style.cursor = 'pointer';
+    botonEliminar.addEventListener('click', function() {
+      eliminarListaTipoASeleccionada(opcion); // Llamada a la función para eliminar la opción
+    });
+
+    divtipoA.appendChild(botonEliminar);
+    divSeleccionestipoA.appendChild(divtipoA);
+  });
 }

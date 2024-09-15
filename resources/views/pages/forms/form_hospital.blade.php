@@ -746,11 +746,13 @@
                   </div>
 
                   <!-- Tipo de atención -->
-                  <div class="col-md-4 autocomplete-container">
+                  <div class="col-md-4">
                     <label for="tipo_atencion">Tipo de atención:</label>
                     <div class="form-group">
-                      <input type="text" id="tipo_atencion" name="tipo_atencion" class="form-control autocomplete-input" placeholder="Tipo de atención" autocomplete="off" required>
-                      <ul class="list-group autocomplete-suggestions"></ul>
+                      <input type="text" id="tipo_atencion" class="form-control" placeholder="Tipo de atención"/>
+                      <ul id="sugerencias_tipoA"class="list-group"
+                      style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></ul>
+                      <div id="selecciones_tipoA" class="mt-2"></div>
                     </div>
                   </div>
                   <!-- Área Anatómica de Mayor Gravedad -->
