@@ -931,6 +931,27 @@ $(document).ready(function() {
   $('#traslado_transitorio').trigger('change');
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  // oculta o muestra el campo 'Folio de la hoja de lesiones:' en el formulario
+  const llenadoHojaSelect = document.getElementById('llenado_hoja_lesion');
+  const folioHojaLesionContainer = document.getElementById('folio_hoja_lesion').closest('.col-md-6'); 
+  // Función para mostrar u ocultar completamente el campo y su etiqueta
+  function toggleFolioHojaLesion() {
+      if (llenadoHojaSelect.value === '1') { // Si es "SI" (valor 1)
+          folioHojaLesionContainer.style.display = 'block';
+      } else {
+          folioHojaLesionContainer.style.display = 'none'; // Oculta todo el contenedor
+      }
+  }
+
+  // Llama a la función cuando cambia el valor del select
+  llenadoHojaSelect.addEventListener('change', toggleFolioHojaLesion);
+
+  // Llama a la función al cargar la página para ajustar el estado inicial
+  toggleFolioHojaLesion();
+});
+
+
 
 
 // -- AutorrellenadoInputs -- Inicio
