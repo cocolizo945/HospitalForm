@@ -1201,27 +1201,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 </script>
 
-<script>
-  //SOLO MUESTRA Y REINICIA LA PAGINA SIN GUARDAR EN LA BD
-document.addEventListener('DOMContentLoaded', function() {
-    // Evento click para el botón "Guardar"
-    document.getElementById('guardarBtn').addEventListener('click', function(event) {
-        // Prevenir el envío del formulario
-        event.preventDefault();
-
-        // Mostrar el SweetAlert de éxito
-        Swal.fire({
-            icon: 'success',
-            title: 'Éxito',
-            text: 'Los datos han sido guardados existosamente.',
-            timer: 3000,
-            showConfirmButton: false
-        }).then(() => {
-            // Recargar la página después de que el alert desaparezca
-            location.reload();
-        });
-    });
-});
-</script>
-
 @endpush

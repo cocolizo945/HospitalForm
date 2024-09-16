@@ -241,19 +241,61 @@ document.addEventListener('DOMContentLoaded', (event) => {
   //Folio defuncion
   document.addEventListener('DOMContentLoaded', (event) => {
     const destinoSelect = document.getElementById('destino_atencion')
-    const folioDefun = document.getElementById('folio_defuncion').closest('.col-md-4'); //Ocultar todo el contenedor
+    const folioDefun = document.getElementById('folio_defuncion');
+    const folioDefunContainer = folioDefun.closest('.col-md-4'); // Ocultar todo el contenedor
 
     //Ocultar campo Folio defuncion
-    folioDefun.style.display = 'none';
+    folioDefunContainer.style.display = 'none';
 
+    // Escuchar cambios en el select para activar o desactivar el campo
     destinoSelect.addEventListener('change', (event) => {
-      const value = event.target.value;
-      folioDefun.style.display = 'none';
+    const value = event.target.value;
+    folioDefunContainer.style.display = 'none';
 
       if(value == '5'){
-        folioDefun.style.display = 'block'; //Mostrar Campo al elegir opcion
+        folioDefunContainer.style.display = 'block'; // Mostrar campo al elegir opción
+        folioDefun.required = true; // Hacer obligatorio el campo si está visible
+      } else {
+        folioDefunContainer.style.display = 'none'; // Ocultar si no es la opción 5
+        folioDefun.required = false; // Quitar la obligatoriedad del campo
+        folioDefun.value = ''; // Limpiar el valor si no es necesario
       }
     });
+
+    // Evitar que se ingresen caracteres no numéricos en el campo "folio_defuncion"
+    folioDefun.addEventListener('input', function() {
+    this.value = this.value.replace(/\D/g, ''); // Eliminar cualquier carácter que no sea un dígito
+      });
+
+    // Validar que el campo folio_defuncion esté lleno antes de guardar
+  document.getElementById('guardarBtn').addEventListener('click', function(event) {
+    // Prevenir el envío del formulario
+    event.preventDefault();
+
+    // Verificar si el campo folio_defuncion es requerido y si está vacío
+    if (destinoSelect.value == '5' && folioDefun.value.trim() === '') {
+      // Mostrar un alerta si el campo está vacío y es obligatorio
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'El campo "Folio de Defuncion" es obligatorio.',
+        timer: 3000,
+        showConfirmButton: false
+      });
+      return; // Salir de la función sin permitir guardar
+    }
+    // Mostrar el SweetAlert de éxito
+    Swal.fire({
+      icon: 'success',
+      title: 'Éxito',
+      text: 'Los datos han sido guardados existosamente.',
+      timer: 3000,
+      showConfirmButton: false
+  }).then(() => {
+      // Recargar la página después de que el alert desaparezca
+      location.reload();
+  });
+});
   });
 
   document.addEventListener('DOMContentLoaded', (event) => {
