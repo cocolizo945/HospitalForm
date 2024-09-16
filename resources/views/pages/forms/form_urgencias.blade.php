@@ -849,7 +849,40 @@
                       </div>
                     </div>
                   </div>
-                </div>
+              
+                   <!-- Menores de 5 años  -->
+                 <div class="tab-pane" id="form6">
+                  <h5 class="info-text" id="menores5años"> Para Menores de 5 años </h5>
+                  <div class="row" id="menoresRow1">
+                    <!-- IRAS-->
+                  <div class="col-md-6" id="menores5años">
+                    <label for="menores_5_años">IRAS:</label>
+                    <div class="form-group">
+                      <select id="menores_5_años" class="selectpicker form-control" name="menores5años"
+                        data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+                        <option value="0"> Sintomatico</option>
+                        <option value="1">Con antibiotico</option>
+                        <option value="2">Antivirales</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                    <!-- EDAS  -->
+                  <div class="col-md-6" id="menores5años" >
+                    <label for="menores_5_años">EDAS:</label>
+                    <div class="form-group">
+                      <select id="menores_5_años" class="selectpicker form-control" name="menores_5_años"
+                        data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+                        <option value="0"> A </option>
+                        <option value="1"> B </option>
+                        <option value="2"> C</option>
+                      </select>
+                    </div>
+                  </div>
+                  </div>
+                    </div>
+                  </div>
+                
 
                 <!-- Profesional de la Salud Responsable -->
                 <div class="tab-pane" id="form7">
