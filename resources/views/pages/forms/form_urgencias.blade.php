@@ -744,16 +744,10 @@
                           placeholder="Paracetamol 500mg" minlength="3" required>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="present1" name="present1">
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <label for="medicamneto1">Codigo de medicamento</label>
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="medic-codig1" name="medic-codig1">
                       </div>
                     </div>
                   </div>
@@ -767,16 +761,10 @@
                           placeholder="Diclofenaco 75mg" minlength="3" required>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="present2" name="present2">
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <label for="medicamneto1">Codigo de medicamento</label>
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="medic-codig2" name="medic-codig2">
                       </div>
                     </div>
                   </div>
@@ -790,16 +778,10 @@
                           placeholder="Medicamento 3" minlength="3">
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="present3" name="present3">
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <label for="medicamneto1">Codigo de medicamento</label>
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="medic-codig3" name="medic-codig3">
                       </div>
                     </div>
                   </div>
@@ -813,16 +795,10 @@
                           placeholder="Medicamento 4" minlength="3">
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="present4" name="present4">
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <label for="medicamneto1">Codigo de medicamento</label>
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="medic-codig44" name="medic-codig4">
                       </div>
                     </div>
                   </div>
@@ -836,31 +812,25 @@
                           placeholder="Medicamento 5" minlength="3">
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="present5" name="present5">
                       </div>
                     </div>
-                    <div class="col-md-2">
-                      <label for="medicamneto1">Codigo de medicamento</label>
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="medic-codig5" name="medic-codig5">
-                      </div>
-                    </div>
                   </div>
               
                    <!-- Menores de 5 años  -->
-                 <div class="tab-pane" id="form6">
+              <div class="tab-pane" id="form6">
                   <h5 class="info-text" id="menores5años"> Para Menores de 5 años </h5>
                   <div class="row" id="menoresRow1">
                     <!-- IRAS-->
-                  <div class="col-md-6" id="menores5años">
+                  <div class="col-md-5" id="menores5años">
                     <label for="menores_5_años">IRAS:</label>
                     <div class="form-group">
                       <select id="menores_5_años" class="selectpicker form-control" name="menores5años"
                         data-size="7" data-style="btn btn-primary" title="Selección Única" required>
-                        <option value="0"> Sintomatico</option>
+                        <option value="0">Sintomatico</option>
                         <option value="1">Con antibiotico</option>
                         <option value="2">Antivirales</option>
                       </select>
@@ -868,20 +838,25 @@
                   </div>
                   
                     <!-- EDAS  -->
-                  <div class="col-md-6" id="menores5años" >
+                  <div class="col-md-5" id="SelectEdas" >
                     <label for="menores_5_años">EDAS:</label>
                     <div class="form-group">
-                      <select id="menores_5_años" class="selectpicker form-control" name="menores_5_años"
+                      <select id="TipoEDA" class="selectpicker form-control" name="menores_5_años"
                         data-size="7" data-style="btn btn-primary" title="Selección Única" required>
                         <option value="0"> A </option>
                         <option value="1"> B </option>
-                        <option value="2"> C</option>
+                        <option value="2"> C </option>
                       </select>
                     </div>
                   </div>
+
+                  <div class="cold-md-2" id="SuEdas" style="display: none;">
+                    <label for="Sueros">Numero de sobres</label>
+                    <input type="text" class="form-control" id="nsobres">
                   </div>
-                    </div>
-                  </div>
+                </div>
+              </div>
+            </div>
                 
 
                 <!-- Profesional de la Salud Responsable -->

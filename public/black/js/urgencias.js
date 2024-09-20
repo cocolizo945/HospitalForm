@@ -1432,3 +1432,27 @@ function toggleTiempoTraslado() {
     tiempoTrasladoInput.value = 'HH:mm'; 
   }
 }
+
+
+//Sobres en EDAS
+document.addEventListener("DOMContentLoaded", function()
+{
+  const selectEda = document.getElementById('TipoEDA');
+  const inputsobres = document.getElementById('SuEdas');
+  const hbl = document.getElementById('nsobres');
+
+  selectEda.addEventListener('change',seleccionEDAS);
+
+  function seleccionEDAS()
+  {  
+    if(selectEda.value === '0' || selectEda.value === '1')
+    {
+      inputsobres.style.display = 'block';
+    }
+    if(selectEda.value === '2')
+    {
+      inputsobres.style.display = 'none';
+      hbl.value='';
+    }
+  }
+});
