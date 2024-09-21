@@ -538,20 +538,15 @@
               <input type="text" id="tiempo_traslado" name="tiempo_traslado" class="form-control" value="HH:mm" required>
             </div>
           </div>
-                  <!-- Se sospecha que la/el paciente estaba bajo los efectos de -->
-                  <div class="col-md-4">
-                    <label for="efectos_paciente">Se sospecha que la/el paciente estaba bajo los efectos de:</label>
-                    <div class="form-group">
-                    <select id="efectos_paciente" class="selectpicker form-control" name="efectos_paciente" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Alcohol">Alcohol</option>
-                    <option value="Droga por indicación médica">Droga por indicación médica</option>
-                    <option value="Drogas ilegales">Drogas ilegales</option>
-                    <option value="Se ignora">Se ignora</option>
-                    <option value="Ninguna">Ninguna</option>
-                    </select>
-                    </div>
+
+                 <div class="col-md-4 autocomplete-container">
+                  <label for="efectos_paciente">Se sospecha que la/el paciente estaba bajo los efectos de:</label>
+                  <div class="form-group">
+                    <input type="text" id="efectos_paciente" name="efectos_paciente" class="form-control autocomplete-input" placeholder="Escribe para seleccionar" autocomplete="off">
+                    <ul class="list-group autocomplete-suggestions"></ul>
+                    <div id="seleccion_efectos_paciente" class="mt-2"></div>
                   </div>
+                </div>            
                   <!-- En caso de evento autoinfligido, el evento ocurrió -->
                   <div class="col-md-4">
                       <label for="evento_autoinfligido">El evento ocurrió:</label>
@@ -693,20 +688,16 @@
                       <input class="form-control" type="number" id="edad_agresor" name="edad_agresor" min="0" placeholder="Años">
                     </div>
                   </div>
-                  <!-- El/La agresor(a) se sospecha que actuó bajo los efectos de -->
-                  <div class="col-md-4">
-                    <label for="efectos_agresor">El/La agresor(a) se sospecha que actuó bajo los efectos de:</label>
-                    <div class="form-group">
-                    <select id="efectos_agresor" class="selectpicker form-control" name="efectos_agresor" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Alcohol">Alcohol</option>
-                    <option value="Droga por indicación médica">Droga por indicación médica</option>
-                    <option value="Drogas ilegales">Drogas ilegales</option>
-                    <option value="Se ignora">Se ignora</option>
-                    <option value="Ninguna">Ninguna</option>
-                    </select>
-                    </div>
+
+                  <div class="col-md-4 autocomplete-container">
+                  <label for="efectos_agresor">El/La agresor(a) se sospecha que actuó bajo los efectos de:</label>
+                  <div class="form-group">
+                    <input type="text" id="efectos_agresor" name="efectos_agresor" class="form-control autocomplete-input" placeholder="Escribe para seleccionar" autocomplete="off">
+                    <ul class="list-group autocomplete-suggestions"></ul>
+                    <div id="seleccion_efectos_agresor" class="mt-2"></div>
                   </div>
+                </div>
+                  <!-- Campo de efectos del agresor -->
                 </div>
               </div>
             </div>
