@@ -1099,7 +1099,21 @@ let numeroAfiliacion = document.getElementById('numero_afiliacion'); // Campo de
 
 // Función para manejar el autocompletado y otras funcionalidades
 function manejarAutocompletado() {
+  // Mostrar sugerencias al hacer clic o focus en el campo de afiliación
+  input_afiliacion.addEventListener('focus', function() {
+      mostrarSugerencias();
+  });
+  
+  input_afiliacion.addEventListener('click', function() {
+      mostrarSugerencias();
+  });
+
+  // Mostrar sugerencias mientras se escribe
   input_afiliacion.addEventListener('input', function() {
+      mostrarSugerencias();
+  });
+
+  function mostrarSugerencias() {
       let valor = input_afiliacion.value.toLowerCase();
       sugerencias_afiliacion.innerHTML = '';
 
@@ -1136,7 +1150,7 @@ function manejarAutocompletado() {
       } else {
           sugerencias_afiliacion.style.display = 'none';
       }
-  });
+  }
 
   numeroAfiliacion.addEventListener('input', function() {
       let valor = numeroAfiliacion.value;
@@ -1153,6 +1167,7 @@ function manejarAutocompletado() {
       }, 200);
   });
 }
+
 
 // Ejecutar la función de manejo del autocompletado
 document.addEventListener('DOMContentLoaded', manejarAutocompletado);
@@ -1432,27 +1447,3 @@ function toggleTiempoTraslado() {
     tiempoTrasladoInput.value = 'HH:mm'; 
   }
 }
-
-
-//Sobres en EDAS
-document.addEventListener("DOMContentLoaded", function()
-{
-  const selectEda = document.getElementById('TipoEDA');
-  const inputsobres = document.getElementById('SuEdas');
-  const hbl = document.getElementById('nsobres');
-
-  selectEda.addEventListener('change',seleccionEDAS);
-
-  function seleccionEDAS()
-  {  
-    if(selectEda.value === '0' || selectEda.value === '1')
-    {
-      inputsobres.style.display = 'block';
-    }
-    if(selectEda.value === '2')
-    {
-      inputsobres.style.display = 'none';
-      hbl.value='';
-    }
-  }
-});
