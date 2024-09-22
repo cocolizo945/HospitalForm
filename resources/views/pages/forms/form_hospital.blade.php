@@ -221,13 +221,16 @@
                     </div>
                   </div>
                   <!-- Sabe Leer y Escribir -->
-                  <div class="col-md-4">
-                    <label for="leer_escribir">Sabe Leer y Escribir:</label>
+                 <!-- Sabe Leer y Escribir -->
+
+                 <div class="col-md-4">
+                  <label for="leer_escribir">Sabe Leer y Escribir:</label>
                     <div class="form-group">
-                      <input type="text" id="leer_escribir" name="leer_escribir" class="form-control"
-                        placeholder="Selecciona una opción" autocomplete="off" required>
-                      <ul id="leer_escribir_suggestions" class="list-group autocomplete-suggestions"
-                        style="display: none;"></ul>
+                      <select id="leer_escribir" class="selectpicker form-control" name="leer_escribir" data-size="7" data-style="btn btn-primary" required>
+                        <option disabled selected>Selección Única</option>
+                        <option value="1">1. SI</option>
+                        <option value="2">2. NO</option>
+                      </select>
                     </div>
                   </div>
                   <!-- ¿Se Considera Indígena? -->
@@ -314,6 +317,7 @@
                     </div>
                   </div>
                   <!-- Referida(o) por -->
+                  <!-- Referida(o) por -->
                   <div class="col-md-4">
                     <label for="referido_por">Referida(o) por:</label>
                     <div class="form-group">
@@ -322,6 +326,8 @@
                       <ul id="referido_sugg" class="list-group autocomplete-suggestions"></ul>
                     </div>
                   </div>
+
+
                   <!-- Unidad Médica Especifique Nombre -->
                   <div class="col-md-4" id="unidadMedicaEspecifique" style="display: none;">
                     <label for="unidad_medica">Nombre (Unidad Médica):</label>

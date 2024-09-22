@@ -92,6 +92,107 @@ const referidoPorOpciones = [
     "Sin referencia (iniciativa propia)"
 ];
 
+let sugerenciasReferido = document.getElementById('referido_sugg');
+let inputReferido = document.getElementById('referido_por');
+
+// Función para mostrar sugerencias cuando el usuario escribe en el campo
+inputReferido.addEventListener('input', function() {
+  let valor = inputReferido.value.toLowerCase();
+  sugerenciasReferido.innerHTML = ''; // Limpiar sugerencias previas
+
+  // Filtrar las opciones que coincidan con lo que el usuario está escribiendo
+  const opcionesFiltradas = referidoPorOpciones.filter(opcion => opcion.toLowerCase().includes(valor));
+
+  // Si hay opciones filtradas, mostrarlas
+  if (opcionesFiltradas.length > 0) {
+      sugerenciasReferido.style.display = 'block';
+      opcionesFiltradas.forEach(opcion => {
+          const li = document.createElement('li');
+          li.textContent = opcion;
+          li.classList.add('list-group-item'); // Agregar estilo a las sugerencias
+          li.style.cursor = 'pointer';
+          li.addEventListener('click', function() {
+              inputReferido.value = opcion; // Actualizar el valor del campo de entrada
+              sugerenciasReferido.style.display = 'none'; // Ocultar las sugerencias
+          });
+          sugerenciasReferido.appendChild(li);
+      });
+  } else {
+      sugerenciasReferido.style.display = 'none'; // Si no hay coincidencias, ocultar la lista
+  }
+});
+
+// Ocultar las sugerencias al perder el foco (con un pequeño retraso para permitir clic)
+inputReferido.addEventListener('blur', function() {
+  setTimeout(() => {
+      sugerenciasReferido.style.display = 'none';
+  }, 200);
+});
+
+// Mostrar todas las sugerencias cuando el campo recibe foco y está vacío
+inputReferido.addEventListener('focus', function() {
+  if (inputReferido.value === '') {
+      sugerenciasReferido.innerHTML = ''; // Limpiar sugerencias previas
+      referidoPorOpciones.forEach(opcion => {
+          const li = document.createElement('li');
+          li.textContent = opcion;
+          li.classList.add('list-group-item');
+          li.style.cursor = 'pointer';
+          li.addEventListener('click', function() {
+              inputReferido.value = opcion; // Actualizar el valor del campo de entrada
+              sugerenciasReferido.style.display = 'none'; // Ocultar las sugerencias
+          });
+          sugerenciasReferido.appendChild(li);
+      });
+      sugerenciasReferido.style.display = 'block'; // Mostrar la lista de sugerencias
+  }
+});
+
+
+// Elementos del DOM
+const referidoInput = document.getElementById("referido_por");
+const sugerenciasList = document.getElementById("referido_sugg");
+
+// Función para mostrar las sugerencias
+function mostrarSugerencias() {
+    const valorInput = referidoInput.value.toLowerCase();
+    sugerenciasList.innerHTML = ""; // Limpiar las sugerencias anteriores
+
+    // Si el campo está vacío, mostrar todas las opciones
+    const sugerenciasFiltradas = valorInput
+        ? referidoPorOpciones.filter(opcion => opcion.toLowerCase().includes(valorInput))
+        : referidoPorOpciones;
+
+    // Mostrar las sugerencias filtradas
+    sugerenciasFiltradas.forEach(opcion => {
+        const li = document.createElement("li");
+        li.classList.add("list-group-item", "autocomplete-suggestion");
+        li.textContent = opcion;
+
+        // Añadir evento de clic para seleccionar la sugerencia
+        li.addEventListener("click", function () {
+            referidoInput.value = opcion;  // Establecer el valor seleccionado en el input
+            sugerenciasList.innerHTML = ""; // Limpiar las sugerencias
+        });
+
+        sugerenciasList.appendChild(li); // Añadir la sugerencia a la lista
+    });
+}
+
+// Escuchar el evento de entrada en el campo de texto
+referidoInput.addEventListener("input", mostrarSugerencias);
+
+// Mostrar la lista completa de sugerencias cuando el campo recibe foco
+referidoInput.addEventListener("focus", mostrarSugerencias);
+
+// Opcional: Ocultar sugerencias cuando el campo pierde el foco
+referidoInput.addEventListener("blur", function () {
+    setTimeout(() => sugerenciasList.innerHTML = "", 200); // Retraso para permitir selección
+});
+
+
+
+
 // Lista de CLUES para el autocompletado
 const cluesOpciones = [
     "CLUES1",
