@@ -1,374 +1,169 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-  const horaOcurrenciaInput = document.getElementById('tiempo_traslado');
-  const folioInput = document.getElementById('folio');
+// Lista de países del mundo (ya está definida)
+const paises = [
+  "Afganistan", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", 
+  "Arabia Saudita", "Argelia", "Argentina", "Armenia", "Australia", "Austria", 
+  "Azerbaiyan", "Bahamas", "Banglades", "Barbados", "Barein", "Belgica", 
+  "Belice", "Benin", "Bielorrusia", "Birmania", "Bolivia", "Bosnia y Herzegovina", 
+  "Botsuana", "Brasil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", 
+  "Butan", "Cabo Verde", "Camboya", "Camerun", "Canada", "Catar", "Chad", 
+  "Chile", "China", "Chipre", "Ciudad del Vaticano", "Colombia", "Comoras", 
+  "Corea del Norte", "Corea del Sur", "Costa de Marfil", "Costa Rica", "Croacia", 
+  "Cuba", "Dinamarca", "Dominica", "Ecuador", "Egipto", "El Salvador", 
+  "Emiratos Arabes Unidos", "Eritrea", "Eslovaquia", "Eslovenia", "Espana", 
+  "Estados Unidos", "Estonia", "Esuatini", "Etiopia", "Fiyi", "Filipinas", 
+  "Finlandia", "Francia", "Gabon", "Gambia", "Georgia", "Ghana", "Granada", 
+  "Grecia", "Guatemala", "Guinea", "Guinea Bisau", "Guinea Ecuatorial", "Guyana", 
+  "Haiti", "Honduras", "Hungria", "India", "Indonesia", "Irak", "Iran", 
+  "Irlanda", "Islandia", "Islas Marshall", "Islas Salomon", "Israel", "Italia", 
+  "Jamaica", "Japon", "Jordania", "Kazajistan", "Kenia", "Kirguistan", 
+  "Kiribati", "Kosovo", "Kuwait", "Laos", "Lesoto", "Letonia", "Libano", 
+  "Liberia", "Libia", "Liechtenstein", "Lituania", "Luxemburgo", "Madagascar", 
+  "Malasia", "Malaui", "Maldivas", "Mali", "Malta", "Marruecos", "Mauricio", 
+  "Mauritania", "Mexico", "Micronesia", "Moldavia", "Monaco", "Mongolia", 
+  "Montenegro", "Mozambique", "Namibia", "Nauru", "Nepal", "Nicaragua", 
+  "Niger", "Nigeria", "Noruega", "Nueva Zelanda", "Oman", "Paises Bajos", 
+  "Pakistan", "Palaos", "Panama", "Papua Nueva Guinea", "Paraguay", "Peru", 
+  "Polonia", "Portugal", "Reino Unido", "Republica Centroafricana", 
+  "Republica Checa", "Republica del Congo", "Republica Democratica del Congo", 
+  "Republica Dominicana", "Ruanda", "Rumania", "Rusia", "Samoa", "San Cristobal y Nieves", 
+  "San Marino", "San Vicente y las Granadinas", "Santa Lucia", "Santo Tome y Principe", 
+  "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria", 
+  "Somalia", "Sri Lanka", "Sudafrica", "Sudan", "Sudan del Sur", "Suecia", 
+  "Suiza", "Surinam", "Tailandia", "Tanzania", "Tayikistan", "Timor Oriental", 
+  "Togo", "Tonga", "Trinidad y Tobago", "Tunez", "Turkmenistan", "Turquia", 
+  "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistan", "Vanuatu", 
+  "Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue"
+];
 
-  // Inicializar el valor del input de hora
-  horaOcurrenciaInput.value = '00:00';
-  folioInput.value = '0';
+// Referencias a los elementos del DOM
+let sugerencias_pais = document.getElementById('sugerencias_entidad_nacimiento');
+let input_pais = document.getElementById('entidad_nacimiento');
+let sugerencias_pais1 = document.getElementById('sugerencias_pais1');
+let input_pais1 = document.getElementById('pais1');
 
-  // Función para formatear la entrada de tiempo
-  function formatTimeInput(event) {
-    let input = event.target.value.replace(/\D/g, ''); // Eliminar todos los caracteres no numéricos
 
-    if (input.length > 4) {
-      input = input.substring(0, 4); // Limitar a los primeros 4 dígitos
-    }
+// Función para mostrar sugerencias
+input_pais.addEventListener('input', function() {
+  let valor = input_pais.value.toLowerCase();
+  sugerencias_pais.innerHTML = ''; 
+
+  const opcionesFiltradas = paises.filter(pais => pais.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+      sugerencias_pais.style.display = 'block';
+      opcionesFiltradas.forEach(opcion => {
+          const li = document.createElement('li');
+          li.textContent = opcion;
+          li.classList.add('list-group-item'); 
+          li.style.cursor = 'pointer';
+          li.addEventListener('click', function() {
+              input_pais1.value = opcion;  // Actualizar automáticamente el campo "País"
+              sugerencias_pais.style.display = 'none';
+            });
+          sugerencias_pais.appendChild(li);
+      });
+  } else {
+      sugerencias_pais.style.display = 'none';
   }
-
-  // Función para manejar la entrada de teclas en el input de hora
-  function handleKeydownTime(event) {
-    const start = event.target.selectionStart;
-    const end = event.target.selectionEnd;
-
-    if (event.key >= '0' && event.key <= '9') {
-      event.preventDefault();
-
-      if (start < 2) {
-        // Insertar dígitos en la posición de las horas
-        let hours = event.target.value.slice(0, 2).replace(/\D/g, '');
-        hours = (hours + event.key).slice(-2); // Asegurar que se mantengan solo 2 dígitos
-        event.target.value = hours + event.target.value.slice(2);
-        event.target.setSelectionRange(3, 5); // Mover el cursor a los minutos después de introducir las horas
-
-      } else if (start >= 3 && start < 5) {
-        // Insertar dígitos en la posición de los minutos
-        let minutes = event.target.value.slice(3, 5).replace(/\D/g, '');
-        minutes = (minutes + event.key).slice(-2); // Asegurar que se mantengan solo 2 dígitos
-        event.target.value = event.target.value.slice(0, 3) + minutes + event.target.value.slice(5);
-        event.target.setSelectionRange(start + 1, start + 1); // Mantener el cursor en la posición correcta
-      }
-
-      formatTimeInput(event); // Formatear la entrada
-    }
-  }
-
-  // Función para manejar el foco del input de hora, inicialmente en las horas
-  function handleFocusTime(event) {
-    setTimeout(() => {
-      event.target.setSelectionRange(0, 2); // Establecer el foco en las horas
-    }, 0);
-  }
-
-  // Función para manejar la restauración del formato del input de hora si está vacío
-  function handleBlurTime(event) {
-    const value = event.target.value;
-    if (value === '') {
-      event.target.value = '00:00';
-    } else {
-      formatTimeInput(event); // Formatear si el campo no está vacío
-    }
-  }
-
-  // Función para validar el input de folio
-  function validateFolioInput(event) {
-    const input = event.target.value.replace(/\D/g, ''); // Eliminar todos los caracteres no numéricos
-
-    if (input.length > 8) {
-      event.target.value = input.substring(0, 8); // Limitar a 8 caracteres
-    } else {
-      event.target.value = input;
-    }
-  }
-
-
-  //validacion de validar inputcurp
-function manejarValidacionCURP() {
-  const inputCurp = document.getElementById('curp');
-  const mensajeValidacion = document.getElementById('curp-validacion');
-  inputCurp.addEventListener('input', function() {
-      const curp = inputCurp.value.toUpperCase();
-
-      if (validarCURP(curp)) {
-          mensajeValidacion.style.display = 'none';
-      } else {
-          mensajeValidacion.style.display = 'inline';
-      }
-  });
-}
-manejarValidacionCURP();
-// Función de validación de estructura de la curp
-function validarCURP(curp) {
-  const regexCURP = /^[A-Z]{4}(\d{6}|X{6})[HMX](?:[A-Z]{2}|XX)(?:[A-Z\d]{3}|XXX)[A-Z\d]|x$/;
-  return regexCURP.test(curp);
-}
-
-
-//agregar clases
-const inputsC = document.querySelectorAll('.form-control');
-// Añadir una o más clases a cada input
-inputsC.forEach(input => {
-  input.classList.add('autocompletar');  // Añadir una nueva clase
-  // input.classList.add('nueva-clase1', 'nueva-clase2'); // Para añadir múltiples clases
 });
 
 
-// -- AutorrellenadoInputs -- Inicio
+input_pais.addEventListener('blur', function() {
+  setTimeout(() => {
+      sugerencias_pais.style.display = 'none';
+  }, 200);
+});
 
-// Definir la cantidad de "X" para cada input
-const fillValues = {
-  curp: 'XXXXXXXXXXXXXXXXXX',
-  nombre: 'XXXXX',
-  primer_apellido: 'XX',
-  segundo_apellido: 'XX',
-  nombre_vialidad: 'XXXXX',
-  localidad: 'XXXXX',
-  nombre_vialidad: 'XXXXX',
-  num_ext: 'XXXXX',
-  num_int: 'XXXXX',
-  nombre_asentamiento: 'XXXXX',
-  afeccion_principal: 'XXXXX',
-  causa_externa: 'XXXXX',
-  
+
+input_pais.addEventListener('focus', function() {
+  if (input_pais.value === '') {
+      sugerencias_pais.innerHTML = '';
+      paises.forEach(opcion => {
+          const li = document.createElement('li');
+          li.textContent = opcion;
+          li.classList.add('list-group-item');
+          li.style.cursor = 'pointer';
+          li.addEventListener('click', function() {
+              input_pais.value = opcion;
+              sugerencias_pais.style.display = 'none';
+          });
+          sugerencias_pais.appendChild(li);
+      });
+      sugerencias_pais.style.display = 'block';
+  }
+});
+
+// Función para mostrar sugerencias 2 (Campo País)
+input_pais1.addEventListener('input', function() {
+  let valor = input_pais1.value.toLowerCase();
+  sugerencias_pais1.innerHTML = ''; 
+
+  const opcionesFiltradas = paises.filter(pais1 => pais1.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+      sugerencias_pais1.style.display = 'block';
+      opcionesFiltradas.forEach(opcion => {
+          const li = document.createElement('li');
+          li.textContent = opcion;
+          li.classList.add('list-group-item'); 
+          li.style.cursor = 'pointer';
+          li.addEventListener('click', function() {
+              input_pais1.value = opcion;
+              sugerencias_pais1.style.display = 'none';
+            });
+          sugerencias_pais1.appendChild(li);
+      });
+  } else {
+      sugerencias_pais1.style.display = 'none';
+  }
+});
+
+
+input_pais1.addEventListener('blur', function() {
+  setTimeout(() => {
+      sugerencias_pais1.style.display = 'none';
+  }, 200);
+});
+
+
+input_pais1.addEventListener('focus', function() {
+  if (input_pais1.value === '') {
+      sugerencias_pais1.innerHTML = '';
+      paises.forEach(opcion => {
+          const li = document.createElement('li');
+          li.textContent = opcion;
+          li.classList.add('list-group-item');
+          li.style.cursor = 'pointer';
+          li.addEventListener('click', function() {
+              input_pais1.value = opcion;
+              sugerencias_pais1.style.display = 'none';
+          });
+          sugerencias_pais1.appendChild(li);
+      });
+      sugerencias_pais1.style.display = 'block';
+  }
+});
+
+//3
+
+// Lógica para AC en input's select's (Alta por)
+document.addEventListener('DOMContentLoaded', function() {
+const opcionesPorInput = {
+    'alta_por': [
+      "0. Hospitalización", "1. Consulta Externa", "2. Traslado a otra unidad", "3. Domicilio", "4. Defunción", "5. Fuga", "6. Voluntad"
+    ]
 };
 
-// Seleccionar todos los inputs con la clase 'autocompletar'
-const inputsAutocompletar = document.querySelectorAll('.autocompletar');
+document.querySelectorAll('.autocomplete-container').forEach(function(container) {
+    const input = container.querySelector('.autocomplete-input');
+    const sugerencias = container.querySelector('.autocomplete-suggestions');
+    let seleccionAnterior = '';
 
-// Añadir un event listener a cada input
-inputsAutocompletar.forEach(input => {
-  input.addEventListener('keydown', function(event) {
-      // Verificar si la tecla presionada es F9
-      if (event.key === 'F9') {
-          // Obtener el id del input
-          const inputId = input.id;
-          // Obtener el valor de relleno correspondiente desde el objeto fillValues
-          const fillValue = fillValues[inputId];
-          if (fillValue) {
-              // Rellenar el input con el valor especificado
-              input.value = fillValue;
-              event.preventDefault(); // Prevenir el comportamiento por defecto de la tecla F9
-          }
-      }
-  });
-});
+    const opciones = opcionesPorInput[input.id] || [];
 
-// -- AutorrellenadoIntpus -- Fin  
-
-
-
-  // Event listeners para el input de hora
-  horaOcurrenciaInput.addEventListener('input', formatTimeInput);
-  horaOcurrenciaInput.addEventListener('focus', handleFocusTime);
-  horaOcurrenciaInput.addEventListener('keydown', handleKeydownTime);
-  horaOcurrenciaInput.addEventListener('blur', handleBlurTime);
-
-  // Event listeners para el input de folio
-  folioInput.addEventListener('input', validateFolioInput);
-    
-    // Define sections to toggle visibility based on select values
-    const sectionsToToggle = [
-        {selectId: 'afiliacion', targetSection: 'afiliacionEspecifique', showValues: ['12']},
-        {selectId: 'tipo_seguridad', targetSection: 'seguridadEspecifique', showValues: ['Otro (Especifique)']},
-        {selectId: 'escolaridad', targetSection: 'escolaridad_seleccionada', showValues: ['Primaria', 'Secundaria', 'Bachillerato o preparatoria', 'Profesional', 'Posgrado']},
-        {selectId: 'sexo', targetSection: 'mujerFertilSection', showValues: ['Mujer', 'Intersexual']},
-        {selectId: 'mujer_fertil', targetSection: 'semanasGestacionSection', showValues: ['1']},
-        {selectId: 'lengua_indigena', targetSection: 'cualLenguaSection', showValues: ['1']},
-        {selectId: 'referido_por', targetSection: 'unidadMedicaEspecifique', showValues: ['1']},
-        {selectId: 'referido_por', targetSection: 'CluesU', showValues: ['1']},
-        {selectId: 'destino_atencion', targetSection: 'destinoEspecifique', showValues: ['11']}
-    ];
-
-    // Add event listeners to select elements to toggle visibility of sections
-    sectionsToToggle.forEach(item => {
-        const selectElement = document.getElementById(item.selectId);
-        if (selectElement) {
-            selectElement.addEventListener('change', (event) => {
-                const value = event.target.value;
-                const section = document.getElementById(item.targetSection);
-                if (section) {
-                    if (item.showValues.includes(value)) {
-                        section.style.display = 'block';
-                    } else {
-                        section.style.display = 'none';
-                    }
-                }
-            });
-        }
-    });
-
-    //MUJER EDAD MENOR A 9 O MAYOR A 59 BLOQUEA EL CAMPO MUJER_FERTIL
-    const edadInput = document.getElementById('edad');
-    const sexoInput = document.getElementById('sexo');
-    const mujerFertilSection = document.getElementById('mujerFertilSection');
-
-    function checkEdadYSexo() {
-        const edad = parseInt(edadInput.value, 10);
-        const sexo = sexoInput.value;
-
-        if (sexo === 'Mujer' && edad >= 9 && edad <= 59) {
-            mujerFertilSection.style.display = 'block';
-        } else {
-            mujerFertilSection.style.display = 'none';
-        }
-    }
-
-    edadInput.addEventListener('input', checkEdadYSexo);
-    sexoInput.addEventListener('change', checkEdadYSexo);
-
-    // Ejecutar al cargar la página para verificar el estado inicial
-    checkEdadYSexo();
-});
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    // Toggle sections based on the selected option in "intencionalidad_evento"
-    const intencionalidadSelect = document.getElementById('intencionalidad_evento');
-    const accidenteSection = document.getElementById('accidenteSection');
-    const violenciaSection = document.getElementById('violenciaSection');
-    const eventoAutoinfligidoDiv = document.getElementById('evento_autoinfligido').closest('.col-md-4');
-
-    // Ocultar inicialmente el campo "evento_autoinfligido"
-    eventoAutoinfligidoDiv.style.display = 'none';
-
-    intencionalidadSelect.addEventListener('change', (event) => {
-      const value = event.target.value;
-
-      // Hide all sections initially
-      accidenteSection.style.display = 'none';
-      violenciaSection.style.display = 'none';
-      eventoAutoinfligidoDiv.style.display = 'none'; // Ocultar el campo "evento_autoinfligido"
-
-      // Show the relevant section based on the selected value
-      if (value === '1') {
-        accidenteSection.style.display = 'block';
-      } else if (value === '2' || value === '3') {
-        violenciaSection.style.display = 'block';
-      } else if(value === '4'){
-        eventoAutoinfligidoDiv.style.display = 'block'; // Mostrar el campo "evento_autoinfligido"
-      }
-    });
-  });
-
-  //Folio defuncion
-  document.addEventListener('DOMContentLoaded', (event) => {
-    const destinoSelect = document.getElementById('destino_atencion')
-    const folioDefun = document.getElementById('folio_defuncion');
-    const folioDefunContainer = folioDefun.closest('.col-md-4'); // Ocultar todo el contenedor
-
-    //Ocultar campo Folio defuncion
-    folioDefunContainer.style.display = 'none';
-
-    // Escuchar cambios en el select para activar o desactivar el campo
-    destinoSelect.addEventListener('change', (event) => {
-    const value = event.target.value;
-    folioDefunContainer.style.display = 'none';
-
-      if(value == '5'){
-        folioDefunContainer.style.display = 'block'; // Mostrar campo al elegir opción
-        folioDefun.required = true; // Hacer obligatorio el campo si está visible
-      } else {
-        folioDefunContainer.style.display = 'none'; // Ocultar si no es la opción 5
-        folioDefun.required = false; // Quitar la obligatoriedad del campo
-        folioDefun.value = ''; // Limpiar el valor si no es necesario
-      }
-    });
-
-    // Evitar que se ingresen caracteres no numéricos en el campo "folio_defuncion"
-    folioDefun.addEventListener('input', function() {
-    this.value = this.value.replace(/\D/g, ''); // Eliminar cualquier carácter que no sea un dígito
-      });
-
-    // Validar que el campo folio_defuncion esté lleno antes de guardar
-  document.getElementById('guardarBtn').addEventListener('click', function(event) {
-    // Prevenir el envío del formulario
-    event.preventDefault();
-
-    // Verificar si el campo folio_defuncion es requerido y si está vacío
-    if (destinoSelect.value == '5' && folioDefun.value.trim() === '') {
-      // Mostrar un alerta si el campo está vacío y es obligatorio
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'El campo "Folio de Defuncion" es obligatorio.',
-        timer: 3000,
-        showConfirmButton: false
-      });
-      return; // Salir de la función sin permitir guardar
-    }
-    // Mostrar el SweetAlert de éxito
-    Swal.fire({
-      icon: 'success',
-      title: 'Éxito',
-      text: 'Los datos han sido guardados existosamente.',
-      timer: 3000,
-      showConfirmButton: false
-  }).then(() => {
-      // Recargar la página después de que el alert desaparezca
-      location.reload();
-  });
-});
-  });
-
-  document.addEventListener('DOMContentLoaded', (event) => {
-    // Toggle sections based on the selected option in "responsable_evento"
-    const responsableSelect = document.getElementById('responsable_atencion');
-    const responsableSection = document.getElementById('responsableSection');
-
-    responsableSelect.addEventListener('change', (event) => {
-      const value = event.target.value;
-
-      // Hide all sections initially
-      responsableSection.style.display = 'none';
-
-      // Show the relevant section based on the selected value
-      if (value === '1' || value === '2' || value === '3') {
-        responsableSection.style.display = 'block';
-      }
-    });
-  });
-
-  // Codigo para introducir pais
-  document.getElementById('migrante').addEventListener('change', function() {
-  var migrante = this.value;
-  var paisInput = document.getElementById('entidad_pais');
-
-  if (migrante === "2") { 
-      paisInput.value = "Mexico"; 
-      paisInput.setAttribute('readonly', true); 
-  } else if (migrante === "1") { 
-      paisInput.value = ""; 
-      paisInput.removeAttribute('readonly'); 
-  }
-});
-    
-    const opciones = [
-        "Fuego, flama, sustancia caliente/vapor",
-        "Intoxicacion por drogas o medicamentos",
-        "Pie o mano",
-        "Caida",
-        "Objeto contundente",
-        "Objeto punzocortante",
-        "Golpe contra piso o pared",
-        "Cuerpo extrano",
-        "Explosion",
-        "Asfixia o sofocacion",
-        "Multiples agentes",
-        "Proyectil arma de fuego",
-        "Ahorcamiento",
-        "Radiacion",
-        "Sustancias quimicas",
-        "Corriente electrica",
-        "Herramienta o maquinaria",
-        "Sacudidas",
-        "Desastre natural",
-        "Vehiculo de motor",
-        "Ahogamiento por sumersion",
-        "Piquete / mordedura de animal",
-        "Fuerzas de la naturaleza",
-        "Intoxicacion por plantas, hongos venenosos",
-        "Otro (Especifique)",
-        "Se ignora",
-        "No aplica"
-    ];
-
-    // Elementos del HTML
-    const input = document.getElementById('agente_lesion_input');
-    const sugerencias = document.getElementById('sugerencias');
-
-    // Mostrar sugerencias filtradas
-    input.addEventListener('input', function() {
+    input.addEventListener('input', function () {
         const filtro = input.value.toLowerCase();
         sugerencias.innerHTML = '';
-
         const opcionesFiltradas = opciones.filter(option => option.toLowerCase().includes(filtro));
 
         if (opcionesFiltradas.length > 0) {
@@ -376,16 +171,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             opcionesFiltradas.forEach(option => {
                 const li = document.createElement('li');
                 li.textContent = option;
-                li.style.padding = '10px';
-                li.style.cursor = 'pointer'; 
-                li.style.listStyle = 'none'; 
-                li.style.borderBottom = '1px solid #e9ecef'; 
-                li.style.fontWeight = 'bold'; 
-                li.style.color = '#000'; 
-                li.style.backgroundColor = '#fff'; 
-                li.addEventListener('click', function() {
-                    input.value = option;
-                    sugerencias.style.display = 'none';
+                li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
+                li.addEventListener('mousedown', function () {
+                    seleccionarOpcion(input, sugerencias, option);
                 });
                 sugerencias.appendChild(li);
             });
@@ -394,37 +182,68 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 
-  
-    input.addEventListener('blur', function() {
+    input.addEventListener('focus', function () {
+        if (input.value === seleccionAnterior) {
+            input.value = '';
+        }
+        sugerencias.innerHTML = '';
+        opciones.forEach(option => {
+            const li = document.createElement('li');
+            li.textContent = option;
+            li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
+            li.addEventListener('mousedown', function () {
+                seleccionarOpcion(input, sugerencias, option);
+            });
+            sugerencias.appendChild(li);
+        });
+        sugerencias.style.display = 'block';
+    });
+
+    input.addEventListener('blur', function () {
         setTimeout(() => {
-            sugerencias.style.display = 'none';
+            const filtro = input.value.toLowerCase();
+            const opcionCercana = opciones.find(option => option.toLowerCase().includes(filtro));
+
+            if (opcionCercana) {
+                seleccionarOpcion(input, sugerencias, opcionCercana);
+            } else if (!input.value) {
+                input.value = '';
+            }
+
+            sugerencias.style.transition = 'opacity 0.3s';
+            sugerencias.style.opacity = '0';
+            setTimeout(() => {
+                sugerencias.style.display = 'none';
+                sugerencias.style.opacity = '1';
+            }, 300);
         }, 200);
     });
 
+    function seleccionarOpcion(input, sugerencias, option) {
+        seleccionAnterior = option;
+        input.value = option;
+        input.placeholder = option;
+        sugerencias.style.display = 'none';
+    }
+});
+});
 
-    input.addEventListener('focus', function() {
-        if (input.value === '') {
-            sugerencias.innerHTML = '';
-            opciones.forEach(option => {
-                const li = document.createElement('li');
-                li.textContent = option;
-                li.style.padding = '10px'; 
-                li.style.cursor = 'pointer'; 
-                li.style.listStyle = 'none'; 
-                li.style.borderBottom = '1px solid #e9ecef'; 
-                li.style.fontWeight = 'bold'; 
-                li.style.color = '#000'; 
-                li.style.backgroundColor = '#fff'; 
-                li.addEventListener('click', function() {
-                    input.value = option;
-                    sugerencias.style.display = 'none';
-                });
-                sugerencias.appendChild(li);
-            });
-            sugerencias.style.display = 'block';
-        }
-    });
+// INTERCONSULTA
 
+document.addEventListener('DOMContentLoaded', function () {
+const interconsultaSelect = document.getElementById('interconsulta_select');
+const additionalFields = document.getElementById('interconsultaRow2');
+
+// Event listener para el cambio de selección en el dropdown de interconsulta
+interconsultaSelect.addEventListener('change', function () {
+    if (interconsultaSelect.value === "1") { // Si la opción es "SI"
+        additionalFields.style.display = ''; // Muestra los campos
+    } else { // Si la opción es "NO"
+        additionalFields.style.display = 'none'; // Oculta los campos
+    }
+});
+});
+//-------------------------------------------------------------------------------------------------------------------------------------------
 // Estado/municipio/localidad
 const data = {
   "aguascalientes": ["Aguascalientes", "Asientos", "Calvillo", "Cosio", "El Llano", "Jesus Maria", "Pabellon de Arteaga", "Rincon de Romos", "San Francisco de los Romo", "San Jose de Gracia", "Tepezala"],
@@ -518,6 +337,7 @@ const localidades = {
     { localidad: "Cantón Las Chicharras", codigo_postal: "30749" },
     { localidad: "La Cuesta", codigo_postal: "30750" },
     { localidad: "San Sebastián", codigo_postal: "30751" }
+    
     // Agregar el rssto de localidades que falten
   ],
   "Cacahoatan": [
@@ -754,7 +574,7 @@ function mostrarSugerencias(input, tipo) {
   if (tipo === 'entidades') {
     opciones = entidades;
   } else if (tipo === 'municipios') {
-    let entidadSeleccionada = document.getElementById('entidad_pais').value.toLowerCase().replace(/\s+/g, '');
+    let entidadSeleccionada = document.getElementById('entidad').value.toLowerCase().replace(/\s+/g, '');
     if (data[entidadSeleccionada]) {
       municipios = data[entidadSeleccionada];
       opciones = municipios;
@@ -805,16 +625,553 @@ function ocultarSugerencias(id) {
   }, 200); 
 }
 
-document.getElementById('entidad_pais').addEventListener('input', function() {
-  document.getElementById('municipio').value = '';
-  document.getElementById('localidad').value = '';
-  document.getElementById('codigo_postal').value = '';
-  document.getElementById('sugerencias_municipio').innerHTML = '';
-  document.getElementById('sugerencias_localidad').innerHTML = '';
+function toggleCamposMigrante() {
+  const migranteSelect = document.getElementById('migrante').value;
+  const campos = [
+    'entidad',
+    'municipio',
+    'localidad',
+    'codigo_postal',
+    'tipo_vialidad',
+    'nombre_vialidad',
+    'num_ext',
+    'num_int',
+    'tipo_asentamiento',
+    'nombre_asentamiento'
+  ];
+
+ 
+  campos.forEach(campo => {
+    document.getElementById(campo).disabled = (migranteSelect === '1' || migranteSelect === '9');
+  });
+  
+ 
+  document.getElementById('pais1').disabled = false;
+}
+
+//----------------------------------------------------------
+const cluesData = [
+  { "clues": "CSSSA000453", "nombre": "Hospital General Juárez Arriaga" },
+  { "clues": "CSSSA002611", "nombre": "Hospital General Huixtla" },
+  { "clues": "CSSSA004595", "nombre": "Hospital General Palenque" },
+  { "clues": "CSSSA004945", "nombre": "Hospital General Pichucalco" },
+  { "clues": "CSSSA005773", "nombre": "Hospital de la Mujer San Cristóbal de las Casas" },
+  { "clues": "CSSSA006403", "nombre": "Hospital General Tapachula" },
+  { "clues": "CSSSA007074", "nombre": "Hospital General Dr. Juan C. Corzo Tonalá" },
+  { "clues": "CSSSA007540", "nombre": "Hospital Regional Dr. Rafael Pascasio Gamboa Tuxtla" },
+  { "clues": "CSSSA008264", "nombre": "Hospital General Yajalón" },
+  { "clues": "CSSSA018776", "nombre": "Hospital de la Mujer Comitán" },
+  { "clues": "CSSSA018875", "nombre": "Hospital General Bicentenario Villaflores" },
+  { "clues": "CSIMS000251", "nombre": "HGZ 2 Tuxtla Gutiérrez" },
+  { "clues": "CSIMS000205", "nombre": "HGZMF 1 Tapachula" },
+  { "clues": "CSIMO000433", "nombre": "Hospital Bochil" },
+  { "clues": "CSIMO003863", "nombre": "San Felipe Ecatepec" },
+  { "clues": "CSIMO003081", "nombre": "Hospital Ocozocoautla de Espinoza" },
+  { "clues": "CSIMO000170", "nombre": "Hospital Altamirano" },
+  { "clues": "CSIMO005210", "nombre": "Hospital Venustiano Carranza" },
+  { "clues": "CSIMO002620", "nombre": "Hospital Motozintla de Mendoza" },
+  { "clues": "CSIMO002125", "nombre": "Hospital Mapastepec" },
+  { "clues": "CSIMO002784", "nombre": "Hospital Ocosingo" },
+  { "clues": "CSIMO002270", "nombre": "Hospital Guadalupe Tepeyac" },
+  { "clues": "CSIMO002924", "nombre": "Hospital Benemérito de las Américas" }
+];
+
+
+
+function mostrarSugerenciasClues(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('sugerencias_clues');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = cluesData.filter(clues => clues.clues.toLowerCase().includes(valor) || clues.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        document.getElementById('nombre_unidad').value = option.nombre
+        document.getElementById('clue').value = option.clues
+        listaSugerencias.style.display = 'none';
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasClues() {
+  setTimeout(() => {
+    document.getElementById('sugerencias_clues').style.display = "none";
+  }, 200);
+}
+//--------------------------------------------------
+const afeccionesPrincipales = [
+  "Fractura de fémur", "Infarto agudo de miocardio", "Accidente cerebrovascular", 
+  "Neumonía", "Apendicitis aguda", "Insuficiencia renal", "Diabetes mellitus",
+  "Hipertensión arterial", "Asma", "Enfermedad pulmonar obstructiva crónica",
+  // Agrega más afecciones principales aquí
+];
+
+const opcionesComorbilidades = [
+  "Diabetes", "Hipertensión", "Obesidad", "Enfermedad renal crónica",
+  "EPOC", "Asma", "Insuficiencia cardíaca", "Artritis reumatoide", 
+  "Cáncer", "Hepatitis", "Anemia", "Enfermedad hepática", 
+  // Agrega más comorbilidades aquí
+];
+
+const inputAfeccionPrincipal = document.getElementById('afeccion_principal_input');
+const listaSugerenciasAfeccion = document.getElementById('sugerencias_afeccion');
+
+const inputComorbilidades = document.getElementById('comorbilidades_input');
+const listaSugerenciasComorbilidades = document.getElementById('sugerencias_comorbilidades');
+const divSeleccionesComorbilidades = document.getElementById('selecciones_comorbilidades');
+let listaComorbilidadesSeleccionadas = [];
+
+// Mostrar todas las opciones al hacer clic (focus) en el input de afección principal
+inputAfeccionPrincipal.addEventListener('focus', function () {
+  mostrarOpcionesFiltradas(afeccionesPrincipales, listaSugerenciasAfeccion, inputAfeccionPrincipal);
+});
+
+// Mostrar todas las opciones al hacer clic (focus) en el input de comorbilidades
+inputComorbilidades.addEventListener('focus', function () {
+  mostrarOpcionesFiltradas(opcionesComorbilidades, listaSugerenciasComorbilidades, inputComorbilidades);
+});
+
+// Ocultar sugerencias cuando se hace clic fuera del input
+document.addEventListener('click', function(event) {
+  if (!inputAfeccionPrincipal.contains(event.target) && !listaSugerenciasAfeccion.contains(event.target)) {
+      listaSugerenciasAfeccion.style.display = 'none';
+  }
+  if (!inputComorbilidades.contains(event.target) && !listaSugerenciasComorbilidades.contains(event.target)) {
+      listaSugerenciasComorbilidades.style.display = 'none';
+  }
+});
+
+function mostrarOpcionesFiltradas(opciones, listaSugerencias, input) {
+  listaSugerencias.innerHTML = ''; 
+  opciones.forEach(opcion => {
+      const elementoLista = document.createElement('li');
+      elementoLista.textContent = opcion;
+      elementoLista.style.padding = '10px';
+      elementoLista.style.cursor = 'pointer';
+      elementoLista.style.listStyle = 'none';
+      elementoLista.style.borderBottom = '1px solid #e9ecef';
+      elementoLista.style.fontWeight = 'bold';
+      elementoLista.style.color = '#000';
+      elementoLista.style.backgroundColor = '#fff';
+      elementoLista.addEventListener('click', function () {
+          if (input === inputAfeccionPrincipal) {
+              inputAfeccionPrincipal.value = opcion;
+              listaSugerenciasAfeccion.style.display = 'none';
+          } else if (input === inputComorbilidades) {
+              agregarComorbilidadSeleccionada(opcion);
+              listaSugerenciasComorbilidades.style.display = 'none';
+          }
+      });
+      listaSugerencias.appendChild(elementoLista);
+  });
+  listaSugerencias.style.display = 'block';
+}
+
+// Autocompletado para Afección Principal
+inputAfeccionPrincipal.addEventListener('input', function () {
+  const filtro = inputAfeccionPrincipal.value.toLowerCase();
+  const opcionesFiltradas = afeccionesPrincipales.filter(opcion => opcion.toLowerCase().includes(filtro));
+  mostrarOpcionesFiltradas(opcionesFiltradas, listaSugerenciasAfeccion, inputAfeccionPrincipal);
+});
+
+// Autocompletado para Comorbilidades
+inputComorbilidades.addEventListener('input', function () {
+  const filtro = inputComorbilidades.value.toLowerCase();
+  const opcionesFiltradas = opcionesComorbilidades.filter(opcion => opcion.toLowerCase().includes(filtro));
+  mostrarOpcionesFiltradas(opcionesFiltradas, listaSugerenciasComorbilidades, inputComorbilidades);
+});
+
+// Función para agregar comorbilidades seleccionadas
+function agregarComorbilidadSeleccionada(opcion) {
+  if (listaComorbilidadesSeleccionadas.length >= 5) {
+      alert('Solo puedes seleccionar hasta 5 comorbilidades.');
+      return;
+  }
+
+  if (!listaComorbilidadesSeleccionadas.includes(opcion)) {
+      listaComorbilidadesSeleccionadas.push(opcion);
+      actualizarListaComorbilidadesSeleccionadas();
+  }
+
+  inputComorbilidades.value = ''; // Limpiar el input después de seleccionar
+}
+
+// Función para eliminar comorbilidad seleccionada
+function eliminarComorbilidadSeleccionada(opcion) {
+  listaComorbilidadesSeleccionadas = listaComorbilidadesSeleccionadas.filter(sel => sel !== opcion);
+  actualizarListaComorbilidadesSeleccionadas();
+}
+
+// Función para actualizar la lista de comorbilidades seleccionadas
+function actualizarListaComorbilidadesSeleccionadas() {
+  divSeleccionesComorbilidades.innerHTML = '';
+  listaComorbilidadesSeleccionadas.forEach(opcion => {
+      const divComorbilidad = document.createElement('div');
+      divComorbilidad.textContent = opcion;
+      divComorbilidad.style.padding = '5px';
+      divComorbilidad.style.backgroundColor = '#e9ecef';
+      divComorbilidad.style.marginBottom = '5px';
+      divComorbilidad.style.display = 'inline-block';
+      divComorbilidad.style.fontWeight = 'bold';
+      divComorbilidad.style.marginRight = '5px';
+
+      const botonEliminar = document.createElement('button');
+      botonEliminar.textContent = 'X';
+      botonEliminar.style.marginLeft = '10px';
+      botonEliminar.style.color = 'red';
+      botonEliminar.style.border = 'none';
+      botonEliminar.style.backgroundColor = 'transparent';
+      botonEliminar.style.cursor = 'pointer';
+      botonEliminar.addEventListener('click', function () {
+          eliminarComorbilidadSeleccionada(opcion);
+      });
+
+      divComorbilidad.appendChild(botonEliminar);
+      divSeleccionesComorbilidades.appendChild(divComorbilidad);
+  });
+}
+
+//validacion de validar input
+function manejarValidacionCURP() {
+const inputCurp = document.getElementById('curp');
+const mensajeValidacion = document.getElementById('curp-validacion');
+inputCurp.addEventListener('input', function() {
+    const curp = inputCurp.value.toUpperCase();
+
+    if (validarCURP(curp)) {
+        mensajeValidacion.style.display = 'none';
+    } else {
+        mensajeValidacion.style.display = 'inline';
+    }
+});
+}
+manejarValidacionCURP();
+// Función de validación de estructura de la curp
+function validarCURP(curp) {
+const regexCURP = /^[A-Z]{4}(\d{6}|X{6})[HMX](?:[A-Z]{2}|XX)(?:[A-Z\d]{3}|XXX)[A-Z\d]|x$/;
+return regexCURP.test(curp);
+}
+
+
+//agregar clases
+const inputsC = document.querySelectorAll('.form-control');
+// Añadir una o más clases a cada input
+inputsC.forEach(input => {
+  input.classList.add('autocompletar');  // Añadir una nueva clase
+  // input.classList.add('nueva-clase1', 'nueva-clase2'); // Para añadir múltiples clases
 });
 
 
-   
+//ocula o muestra el campo 'Número de Afiliación' en el formulario dependiendo de la opción seleccionada en el campo 'Afiliación a los Servicios de Salud'
+$(document).ready(function() {
+  // Funcionalidad para ocultar/mostrar el campo 'Número de Afiliación'
+  $('#afiliacion').on('change', function() {
+      var selectedValue = $(this).val();
+      var numeroAfiliacionContainer = $('#numero_afiliacion').closest('.col-md-4');
+      
+      if (selectedValue === '0' || selectedValue === '1' || selectedValue === '99') {
+          numeroAfiliacionContainer.hide();
+          $('#numero_afiliacion').val(''); // Limpia el campo al ocultarlo
+      } else {
+          numeroAfiliacionContainer.show();
+      }
+  });
+
+  $('#afiliacion').trigger('change');
+
+  // Funcionalidad para ocultar/mostrar el campo 'Tiempo de traslado'
+  $('#prehospitalaria').on('change', function() {
+      var selectedValue = $(this).val();
+      var tiempoTrasladoContainer = $('#tiempo_traslado').closest('.col-md-2');
+      
+      if (selectedValue === '0') { // Si se selecciona 'No'
+          tiempoTrasladoContainer.hide();
+          $('#tiempo_traslado').val(''); // Limpia el campo al ocultarlo
+      } else {
+          tiempoTrasladoContainer.show();
+      }
+  });
+
+  $('#prehospitalaria').trigger('change');
+
+  // Funcionalidad para ocultar/mostrar 'Nombre de la unidad' y 'CLUES' basado en 'Traslado transitorio'
+  $('#traslado_transitorio').on('change', function() {
+      var selectedValue = $(this).val();
+      var nombreUnidadContainer = $('#nombre_unidad').closest('.col-md-4');
+      var cluesContainer = $('#clue').closest('.col-md-4');
+      
+      if (selectedValue === '1') { // Si se selecciona 'Sí'
+          nombreUnidadContainer.show(); // Muestra 'Nombre de la unidad'
+          cluesContainer.show(); // Muestra 'CLUES'
+      } else {
+          nombreUnidadContainer.hide(); // Oculta 'Nombre de la unidad'
+          cluesContainer.hide(); // Oculta 'CLUES'
+          $('#nombre_unidad').val(''); // Limpia el campo al ocultarlo
+          $('#clues').val(''); // Limpia el campo al ocultarlo
+      }
+  });
+
+  // Ocultar por defecto al cargar la página
+  $('#traslado_transitorio').trigger('change');
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // oculta o muestra el campo 'Folio de la hoja de lesiones:' en el formulario
+  const llenadoHojaSelect = document.getElementById('llenado_hoja_lesion');
+  const folioHojaLesionContainer = document.getElementById('folio_hoja_lesion').closest('.col-md-6'); 
+  // Función para mostrar u ocultar completamente el campo y su etiqueta
+  function toggleFolioHojaLesion() {
+      if (llenadoHojaSelect.value === '1') { // Si es "SI" (valor 1)
+          folioHojaLesionContainer.style.display = 'block';
+      } else {
+          folioHojaLesionContainer.style.display = 'none'; // Oculta todo el contenedor
+      }
+  }
+
+  // Llama a la función cuando cambia el valor del select
+  llenadoHojaSelect.addEventListener('change', toggleFolioHojaLesion);
+
+  // Llama a la función al cargar la página para ajustar el estado inicial
+  toggleFolioHojaLesion();
+});
+
+
+
+
+// -- AutorrellenadoInputs -- Inicio
+
+// Definir la cantidad de "X" para cada input
+const fillValues = {
+  curp: 'XXXXXXXXXXXXXXXXXX',
+  nombre: 'XXXXX',
+  primer_apellido: 'XX',
+  segundo_apellido: 'XX',
+  nombre_vialidad: 'XXXXX',
+  localidad: 'XXXXX',
+  nombre_vialidad: 'XXXXX',
+  num_ext: 'XXXXX',
+  num_int: 'XXXXX',
+  nombre_asentamiento: 'XXXXX',
+  afeccion_principal: 'XXXXX',
+  causa_externa: 'XXXXX',
+  telefono: 'XXXXXXXXXX'
+};
+
+// Seleccionar todos los inputs con la clase 'autocompletar'
+const inputsAutocompletar = document.querySelectorAll('.autocompletar');
+
+// Añadir un event listener a cada input
+inputsAutocompletar.forEach(input => {
+  input.addEventListener('keydown', function(event) {
+      // Verificar si la tecla presionada es F9
+      if (event.key === 'F9') {
+          // Obtener el id del input
+          const inputId = input.id;
+          // Obtener el valor de relleno correspondiente desde el objeto fillValues
+          const fillValue = fillValues[inputId];
+          if (fillValue) {
+              // Rellenar el input con el valor especificado
+              input.value = fillValue;
+              event.preventDefault(); // Prevenir el comportamiento por defecto de la tecla F9
+          }
+      }
+  });
+});
+
+//cambio1
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const clues = document.getElementById('clues');
+  const cluesSuggestions = document.getElementById('clues_suggestions');
+  const preselectedClues = "CSSSA006403"; // CLUES del Hospital General
+  let cluesData = []; // Array para almacenar los datos del JSON
+
+  // Cargar el JSON con todas las CLUES
+  fetch('/json/clues.json')
+      .then(response => response.json())
+      .then(data => {
+          cluesData = data; // Asigna los datos cargados al array cluesData
+
+          // Preseleccionar la CLUES del Hospital General
+          clues.value = preselectedClues;
+      })
+      .catch(error => console.error('Error cargando el JSON de CLUES:', error));
+
+  // Mostrar sugerencias filtradas al escribir en el input
+  clues.addEventListener('input', function () {
+      const filtro = clues.value.toLowerCase();
+      cluesSuggestions.innerHTML = ''; // Limpia las sugerencias anteriores
+      const opcionesFiltradas = cluesData.filter(option => option.clues.toLowerCase().includes(filtro));
+
+      if (opcionesFiltradas.length > 0) {
+          cluesSuggestions.style.display = 'block';
+          opcionesFiltradas.forEach(option => {
+              const li = document.createElement('li');
+              li.textContent = option.clues;
+              li.style.padding = '10px';
+              li.style.cursor = 'pointer';
+              li.style.listStyle = 'none';
+              li.style.borderBottom = '1px solid #e9ecef';
+              li.style.fontWeight = 'bold';
+              li.style.color = '#000';
+              li.style.backgroundColor = '#fff';
+              li.addEventListener('click', function () {
+                  clues.value = option.clues;
+                  cluesSuggestions.style.display = 'none';
+              });
+              cluesSuggestions.appendChild(li);
+          });
+      } else {
+          cluesSuggestions.style.display = 'none';
+      }
+  });
+
+
+  // Mostrar todas las opciones al hacer focus en el input
+  clues.addEventListener('focus', function () {
+      cluesSuggestions.innerHTML = ''; // Limpia las sugerencias
+      cluesData.forEach(option => {
+          const li = document.createElement('li');
+          li.textContent = option.clues;
+          li.style.padding = '10px';
+          li.style.cursor = 'pointer';
+          li.style.listStyle = 'none';
+          li.style.borderBottom = '1px solid #e9ecef';
+          li.style.fontWeight = 'bold';
+          li.style.color = '#000';
+          li.style.backgroundColor = '#fff';
+          li.addEventListener('click', function () {
+              clues.value = option.clues;
+              cluesSuggestions.style.display = 'none';
+          });
+          cluesSuggestions.appendChild(li);
+      });
+      cluesSuggestions.style.display = 'block'; // Muestra todas las sugerencias
+  });
+
+  // Oculta la lista al hacer clic fuera del input
+  clues.addEventListener('blur', function () {
+      setTimeout(() => {
+          cluesSuggestions.style.display = 'none';
+      }, 200);
+  });
+});
+
+//cambio2
+// Lista de afiliaciones
+const afiliaciones = [
+  "No especificado", 
+  "Ninguna", 
+  "IMSS", 
+  "ISSSTE", 
+  "PEMEX", 
+  "SEDENA", 
+  "SEMAR", 
+  "Otra", 
+  "IMSS Bienestar", 
+  "ISSFAM", 
+  "OPD IMSS Bienestar", 
+  "Se ignora"
+];
+
+// Referencias a los elementos del DOM
+let sugerencias_afiliacion = document.getElementById('sugerencias_afiliacion');
+let input_afiliacion = document.getElementById('afiliacion_input');
+let especificarCampo = document.getElementById('afiliacionEspecifique');
+let numeroAfiliacion = document.getElementById('numero_afiliacion'); // Campo de Número de Afiliación
+
+// Función para manejar el autocompletado y otras funcionalidades
+function manejarAutocompletado() {
+  // Mostrar sugerencias al hacer clic o focus en el campo de afiliación
+  input_afiliacion.addEventListener('focus', function() {
+      mostrarSugerencias();
+  });
+  
+  input_afiliacion.addEventListener('click', function() {
+      mostrarSugerencias();
+  });
+
+  // Mostrar sugerencias mientras se escribe
+  input_afiliacion.addEventListener('input', function() {
+      mostrarSugerencias();
+  });
+
+  function mostrarSugerencias() {
+      let valor = input_afiliacion.value.toLowerCase();
+      sugerencias_afiliacion.innerHTML = '';
+
+      const opcionesFiltradas = afiliaciones.filter(afiliacion => afiliacion.toLowerCase().includes(valor));
+
+      if (opcionesFiltradas.length > 0) {
+          sugerencias_afiliacion.style.display = 'block';
+          opcionesFiltradas.forEach(opcion => {
+              const li = document.createElement('li');
+              li.textContent = opcion;
+              li.classList.add('list-group-item');
+              li.style.cursor = 'pointer';
+              li.addEventListener('click', function() {
+                  input_afiliacion.value = opcion;
+                  sugerencias_afiliacion.style.display = 'none';
+                  
+                  // Mostrar el campo adicional si se selecciona 'OTRA'
+                  if (opcion === 'Otra') {
+                      especificarCampo.style.display = 'block';
+                  } else {
+                      especificarCampo.style.display = 'none';
+                  }
+                  
+                  // Deshabilitar el campo Número de Afiliación si se selecciona 'No especificado', 'Ninguna' o 'Se ignora'
+                  if (opcion === 'No especificado' || opcion === 'Ninguna' || opcion === 'Se ignora') {
+                      numeroAfiliacion.disabled = true;
+                      numeroAfiliacion.value = ''; // Limpia el campo
+                  } else {
+                      numeroAfiliacion.disabled = false;
+                  }
+              });
+              sugerencias_afiliacion.appendChild(li);
+          });
+      } else {
+          sugerencias_afiliacion.style.display = 'none';
+      }
+  }
+
+  numeroAfiliacion.addEventListener('input', function() {
+      let valor = numeroAfiliacion.value;
+      
+      // Limitar a 11 dígitos
+      if (valor.length > 11) {
+          numeroAfiliacion.value = valor.slice(0, 11);
+      }
+  });
+
+  input_afiliacion.addEventListener('blur', function() {
+      setTimeout(() => {
+          sugerencias_afiliacion.style.display = 'none';
+      }, 200);
+  });
+}
+
+
+// Ejecutar la función de manejo del autocompletado
+document.addEventListener('DOMContentLoaded', manejarAutocompletado);
+
 
 document.addEventListener('DOMContentLoaded', function() {
   const opcionesPorInput = {
@@ -837,28 +1194,25 @@ document.addEventListener('DOMContentLoaded', function() {
           "ZONA MILITAR", "ZONA NAVAL", "NINGUNO", "CARRETERA", "NO APLICA", 
           "SE IGNORA", "NO ESPECIFICADO", "ZONA COMERCIAL", "LOCALIDAD"
       ],
-      'servicio_atencion': [
-          "CONSULTA EXTERNA", "HOSPITALIZACIÓN", "URGENCIAS", "SERVICIO ESPECIALIZADO DE ATENCIÓN A LA VIOLENCIA", "OTRO SERVICIO (ESPECIFIQUE)"
-      ],
-      'area_gravedad': [
-          "CABEZA", "CARA", "REGIÓN OCULAR", "CUELLO", "COLUMNA VERTEBRAL", "EXTREMIDADES SUPERIORES", 
-          "MANO", "TÓRAX", "ESPALDA Y/O GLÚTEOS", "ABDOMEN", "PELVIS", "REGIÓN GENITAL", 
-          "EXTREMIDADES INFERIORES", "PIES", "MÚLTIPLES", "OTRO (ESPECIFIQUE)"
-      ],
-      'consecuencia_gravedad': [
-          "LACERACIÓN/ABRASIÓN", "APLASTAMIENTO", "CICATRICES", "DEPRESIÓN", "CONTUSIÓN/MALLUGAMIENTO", 
-          "CONGELAMIENTO", "ABORTO", "TRASTORNOS DE ANSIEDAD/ESTRÉS POSTRAUMÁTICO", 
-          "QUEMADURA/CORROSIÓN", "ASFIXIA", "EMBARAZO", "TRASTORNOS PSIQUIÁTRICOS", 
-          "LUXACIÓN/ESGUINCE", "HERIDA", "INFECCIÓN DE TRANSMISIÓN SEXUAL", "MÚLTIPLE", 
-          "AMPUTACIÓN/AVULSIÓN", "FRACTURA", "DEFUNCIÓN", "MALESTAR EMOCIONAL", 
-          "TRASTORNO DEL ESTADO DE ÁNIMO", "OTRO (ESPECIFIQUE)"
-      ],
       'num_ext': [
         "S/N"
-      ]
+      ],
+    'servicio_atencion': [
+      "1. CONSULTA EXTERNA", "2. HOSPITALIZACIÓN", "3. URGENCIAS", "4. SERVICIO ESPECIALIZADO DE ATENCIÓN A LA VIOLENCIA", "5. OTRO SERVICIO (ESPECIFIQUE)"
+    ],
+    'tipo_atencion': [
+      "1. MEDICA", "2. PSICOLÓGICA", "3. QUIRÚRGICA", "4. PSIQUIÁTRICA", "5. CONSEJERÍA", "6. OTRO", "7. PÍLDORA ANTICONCEPTIVA DE EMERGENCIA", "8. PROFILAXIS VIH", "9. PROFILAXIS OTRAS ITS", "10. IVE (INTERRUPCIÓN VOLUNTARIA DEL EMBARAZO)", "11. VACUNA VPH"
+    ],
+    'area_gravedad': [
+      "1. CABEZA", "2. CARGA", "3. REGIÓN OCULAR", "4. CUELLO", "5. COLUMNA VERTEBRAL", "6. EXTREMIDADES SUPERIORES", "7. MANO", "8. TÓRAX", "9. ESPALDO Y/O GLÚTEOS", "10. ABDOMEN", "11. PELVIS", "12. REGIÓN GENITAL", "13. EXTREMIDADES INFERIORES", "14. PIES", "15. MÚLTIPLES", "16. OTRO (ESPECIFIQUE)"
+    ],
+    'consecuencia_gravedad': [
+      "1. LACERACIÓN/ABRASIÓN", "2. APLASTAMIENTO", "3. CICATRICES", "4. DEPRESIÓN", "5. CONTUSIÓN/MALLUGAMIENTO", "6. CONGELAMIENTO", "7. ABORTO", "8. TRASTORNOS DE ANSIEDAD/ESTRÉS POSTRAUMÁTICO", "9. QUEMADURA/CORROSIÓN", "10. ASFIXIA", "11. EMBARAZO", "12. TRASTORNOS PSIQUIÁTRICOS", "13. LUXACIÓN/ESGUINCE", "14. HERIDA", "15. INFECCIÓN DE TRANSMISIÓN SEXUAL", "16. MÚLTIPLE", "17. AMPUTACIÓN/AVULSIÓN", "18. FRACTURA", "19. DEFUNCIÓN", "20. MALESTAR EMOCIONAL", "21. TRASTORNO DEL ESTADO DE ÁNIMO", "22. OTRO (ESPECIFIQUE)"
+    ]
   };
 
   const numIntInput = document.getElementById('num_int');
+
   document.querySelectorAll('.autocomplete-container').forEach(function(container) {
       const input = container.querySelector('.autocomplete-input');
       const sugerencias = container.querySelector('.autocomplete-suggestions');
@@ -920,7 +1274,7 @@ document.addEventListener('DOMContentLoaded', function() {
               setTimeout(() => {
                   sugerencias.style.display = 'none';
                   sugerencias.style.opacity = '1';
-              }, 300);
+          }, 300);
 
       // Si seleccionan "S/N" en num_ext, deshabilitamos num_int
       if (input.id === 'num_ext' && input.value === 'S/N') {
@@ -937,230 +1291,146 @@ document.addEventListener('DOMContentLoaded', function() {
           input.value = option;
           input.placeholder = option;
           sugerencias.style.display = 'none';
-
-          // Mostrar/ocultar campos "Especifique" según la opción seleccionada
-          if (input.id === 'servicio_atencion') {
-              document.getElementById('servicioEspecifique').style.display = option === 'OTRO SERVICIO (ESPECIFIQUE)' ? 'block' : 'none';
-          } else if (input.id === 'area_gravedad') {
-              document.getElementById('areaGravedadEspecifique').style.display = option === 'OTRO (ESPECIFIQUE)' ? 'block' : 'none';
-          } else if (input.id === 'consecuencia_gravedad') {
-              document.getElementById('consecuenciaGravedadEspecifique').style.display = option === 'OTRO (ESPECIFIQUE)' ? 'block' : 'none';
-          }
       }
   });
 });
+// PRUEBA COMMIT 123
 
 
-//seleccion de paises del muendo en pais de nacimiento
-// Lista de países del mundo
-const paises = [
-  "Afganistan", "Albania", "Alemania", "Andorra", "Angola", "Antigua y Barbuda", 
-  "Arabia Saudita", "Argelia", "Argentina", "Armenia", "Australia", "Austria", 
-  "Azerbaiyan", "Bahamas", "Banglades", "Barbados", "Barein", "Belgica", 
-  "Belice", "Benin", "Bielorrusia", "Birmania", "Bolivia", "Bosnia y Herzegovina", 
-  "Botsuana", "Brasil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", 
-  "Butan", "Cabo Verde", "Camboya", "Camerun", "Canada", "Catar", "Chad", 
-  "Chile", "China", "Chipre", "Ciudad del Vaticano", "Colombia", "Comoras", 
-  "Corea del Norte", "Corea del Sur", "Costa de Marfil", "Costa Rica", "Croacia", 
-  "Cuba", "Dinamarca", "Dominica", "Ecuador", "Egipto", "El Salvador", 
-  "Emiratos Arabes Unidos", "Eritrea", "Eslovaquia", "Eslovenia", "Espana", 
-  "Estados Unidos", "Estonia", "Esuatini", "Etiopia", "Fiyi", "Filipinas", 
-  "Finlandia", "Francia", "Gabon", "Gambia", "Georgia", "Ghana", "Granada", 
-  "Grecia", "Guatemala", "Guinea", "Guinea Bisau", "Guinea Ecuatorial", "Guyana", 
-  "Haiti", "Honduras", "Hungria", "India", "Indonesia", "Irak", "Iran", 
-  "Irlanda", "Islandia", "Islas Marshall", "Islas Salomon", "Israel", "Italia", 
-  "Jamaica", "Japon", "Jordania", "Kazajistan", "Kenia", "Kirguistan", 
-  "Kiribati", "Kosovo", "Kuwait", "Laos", "Lesoto", "Letonia", "Libano", 
-  "Liberia", "Libia", "Liechtenstein", "Lituania", "Luxemburgo", "Madagascar", 
-  "Malasia", "Malaui", "Maldivas", "Mali", "Malta", "Marruecos", "Mauricio", 
-  "Mauritania", "Mexico", "Micronesia", "Moldavia", "Monaco", "Mongolia", 
-  "Montenegro", "Mozambique", "Namibia", "Nauru", "Nepal", "Nicaragua", 
-  "Niger", "Nigeria", "Noruega", "Nueva Zelanda", "Oman", "Paises Bajos", 
-  "Pakistan", "Palaos", "Panama", "Papua Nueva Guinea", "Paraguay", "Peru", 
-  "Polonia", "Portugal", "Reino Unido", "Republica Centroafricana", 
-  "Republica Checa", "Republica del Congo", "Republica Democratica del Congo", 
-  "Republica Dominicana", "Ruanda", "Rumania", "Rusia", "Samoa", "San Cristobal y Nieves", 
-  "San Marino", "San Vicente y las Granadinas", "Santa Lucia", "Santo Tome y Principe", 
-  "Senegal", "Serbia", "Seychelles", "Sierra Leona", "Singapur", "Siria", 
-  "Somalia", "Sri Lanka", "Sudafrica", "Sudan", "Sudan del Sur", "Suecia", 
-  "Suiza", "Surinam", "Tailandia", "Tanzania", "Tayikistan", "Timor Oriental", 
-  "Togo", "Tonga", "Trinidad y Tobago", "Tunez", "Turkmenistan", "Turquia", 
-  "Tuvalu", "Ucrania", "Uganda", "Uruguay", "Uzbekistan", "Vanuatu", 
-  "Venezuela", "Vietnam", "Yemen", "Yibuti", "Zambia", "Zimbabue"
-];
+// ------ codigos segun el CIE-9  --- inicio
 
+let procedimientos = [];
 
-let sugerencias_pais = document.getElementById('sugerencias_entidad_nacimiento');
-let input_pais = document.getElementById('entidad_nacimiento');
+    // Cargar el archivo JSON al iniciar
+    fetch('/json/code_CIE9.json')
+      .then(response => response.json())
+      .then(data => {
+        procedimientos = data;
+      })
+      .catch(error => console.error('Error al cargar el JSON:', error));
 
-// Función para mostrar sugerencias
-input_pais.addEventListener('input', function() {
-  let valor = input_pais.value.toLowerCase();
-  sugerencias_pais.innerHTML = ''; 
+//-- input1 --
+function mostrarSugerenciasProcedi1(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('procedi_sug1');
+  listaSugerencias.innerHTML = ""; 
 
-  const opcionesFiltradas = paises.filter(pais => pais.toLowerCase().includes(valor));
+  const opcionesFiltradas = procedimientos.filter(procedimiento => procedimiento.nombre.toLowerCase().includes(valor));
 
   if (opcionesFiltradas.length > 0) {
-      sugerencias_pais.style.display = 'block';
-      opcionesFiltradas.forEach(opcion => {
-          const li = document.createElement('li');
-          li.textContent = opcion;
-          li.classList.add('list-group-item'); 
-          li.style.cursor = 'pointer';
-          li.addEventListener('click', function() {
-              input_pais.value = opcion;
-              sugerencias_pais.style.display = 'none';
-          });
-          sugerencias_pais.appendChild(li);
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        input.value = option.nombre;
+        listaSugerencias.style.display = 'none';
       });
+      listaSugerencias.appendChild(li);
+    });
   } else {
-      sugerencias_pais.style.display = 'none';
+    listaSugerencias.style.display = 'none';
   }
-});
+}
 
-
-input_pais.addEventListener('blur', function() {
+function ocultarSugerenciasProcedi1() {
   setTimeout(() => {
-      sugerencias_pais.style.display = 'none';
+    document.getElementById('procedi_sug1').style.display = "none";
   }, 200);
-});
+}
 
 
-input_pais.addEventListener('focus', function() {
-  if (input_pais.value === '') {
-      sugerencias_pais.innerHTML = '';
-      paises.forEach(opcion => {
-          const li = document.createElement('li');
-          li.textContent = opcion;
-          li.classList.add('list-group-item');
-          li.style.cursor = 'pointer';
-          li.addEventListener('click', function() {
-              input_pais.value = opcion;
-              sugerencias_pais.style.display = 'none';
-          });
-          sugerencias_pais.appendChild(li);
+//-- input2 --
+function mostrarSugerenciasProcedi2(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('procedi_sug2');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = procedimientos.filter(procedimiento => procedimiento.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        input.value = option.nombre;
+        listaSugerencias.style.display = 'none';
       });
-      sugerencias_pais.style.display = 'block';
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
   }
-});
-//Para poder escribir en sitio de ocurrencia
-document.addEventListener('DOMContentLoaded', function() {
-  const input = document.getElementById('sitio_ocurrencia_input');
-  const datalist = document.getElementById('sitio_ocurrencia_list');
+}
 
-  input.setAttribute('list', 'sitio_ocurrencia_list');
+function ocultarSugerenciasProcedi2() {
+  setTimeout(() => {
+    document.getElementById('procedi_sug2').style.display = "none";
+  }, 200);
+}
 
-  input.addEventListener('input', function() {
-      let selectedOption = Array.from(datalist.options).find(option => option.value === input.value);
-      if (selectedOption) {
-          console.log('Opción seleccionada:', selectedOption.value);
-      }
-  });
-});
+// ------ codigos segun el CIE-9 --- fin
 
-// LOGICA PARA APLICAR ESPECIFIQUE EN AC
-document.addEventListener('DOMContentLoaded', function () {
-  // Referencias a los elementos de entrada y sus respectivos campos "Especifique"
-  const sitioOcurrenciaInput = document.getElementById('sitio_ocurrencia_input');
-  const sitioOcurrenciaEspecifique = document.getElementById('otroLugarEspecifique');
+// Define sections to toggle visibility based on select values
+const sectionsToToggle = [
+  {selectId: 'mujer_edad_fertil', targetSection: 'semanasGestacionSection', showValues: ['0']},
+];
 
-  const agenteLesionInput = document.getElementById('agente_lesion_input');
-  const agenteLesionEspecifique = document.getElementById('agenteEspecifique');
-  const agenteLesionSuggestions = document.getElementById('sugerencias'); // El ul donde se muestran las sugerencias
-
-  // Función para mostrar/ocultar campos "Especifique"
-  function toggleEspecifiqueField(input, especifiqueField, triggerValue) {
-      input.addEventListener('input', function () {
-          if (input.value.trim().toUpperCase() === triggerValue.toUpperCase()) {
-              especifiqueField.style.display = 'block';
-          } else {
-              especifiqueField.style.display = 'none';
-          }
-      });
-
-      // Ocultar "Especifique" cuando se pierde el foco si el valor no coincide
-      input.addEventListener('blur', function () {
-          setTimeout(() => {
-              if (input.value.trim().toUpperCase() !== triggerValue.toUpperCase()) {
-                  especifiqueField.style.display = 'none';
+// Add event listeners to select elements to toggle visibility of sections
+sectionsToToggle.forEach(item => {
+  const selectElement = document.getElementById(item.selectId);
+  if (selectElement) {
+      selectElement.addEventListener('change', (event) => {
+          const value = event.target.value;
+          const section = document.getElementById(item.targetSection);
+          if (section) {
+              if (item.showValues.includes(value)) {
+                  section.style.display = 'block';
+              } else {
+                  section.style.display = 'none';
               }
-          }, 200);
+          }
       });
   }
-
-  // Aplicar la lógica para "Sitio de Ocurrencia" y "Agente de Lesión"
-  toggleEspecifiqueField(sitioOcurrenciaInput, sitioOcurrenciaEspecifique, 'Otro lugar (Especifique)');
-  toggleEspecifiqueField(agenteLesionInput, agenteLesionEspecifique, 'Otro (Especifique)');
-  
-  // Lógica adicional para seleccionar una sugerencia del ul (solo para agente de lesión)
-  agenteLesionSuggestions.addEventListener('click', function (event) {
-      if (event.target.tagName === 'LI') {
-          agenteLesionInput.value = event.target.textContent.trim();
-          agenteLesionSuggestions.style.display = 'none';
-          if (event.target.textContent.trim().toUpperCase() === 'Otro (Especifique)'.toUpperCase()) {
-              agenteLesionEspecifique.style.display = 'block';
-          } else {
-              agenteLesionEspecifique.style.display = 'none';
-          }
-      }
-  });
 });
 
-//ESCOLARIDAD SELECCIONADA
-document.addEventListener('DOMContentLoaded', function () {
-  const escolaridadSelect = document.getElementById('escolaridad');
-  const leerEscribirInput = document.getElementById('leer_escribir');
-  const leerEscribirSuggestions = document.getElementById('leer_escribir_suggestions');
+document.addEventListener('DOMContentLoaded', (event) => {
+//MUJER EDAD MENOR A 9 O MAYOR A 59 BLOQUEA EL CAMPO MUJER_FERTIL
+const edadInput = document.getElementById('edad');
+const sexoInput = document.getElementById('sexo');
+const mujerFertilSection = document.getElementById('mujerFertilSection');
 
-  const opcionesLeerEscribir = ["SI", "NO"];
+function checkEdadYSexo() {
+    const edad = parseInt(edadInput.value, 10);
+    const sexo = sexoInput.value;
 
-  // Manejar la selección en el campo escolaridad
-  escolaridadSelect.addEventListener('change', function () {
-      const selectedOption = escolaridadSelect.value;
+    if (sexo === '2' && edad >= 9 && edad <= 59) {
+        mujerFertilSection.style.display = 'block';
+    } else {
+        mujerFertilSection.style.display = 'none';
+    }
+}
 
-      if (selectedOption !== 'Ninguna' && selectedOption !== 'Se ignora') {
-          leerEscribirInput.value = "SI"; // Selecciona "SI" automáticamente
-          leerEscribirInput.disabled = true; // No permitir cambios
-          leerEscribirSuggestions.style.display = 'none'; // Ocultar las sugerencias
-      } else {
-          leerEscribirInput.value = ""; // Resetea la selección
-          leerEscribirInput.disabled = false; // Habilita el campo para permitir selección manual
-      }
-  });
+edadInput.addEventListener('input', checkEdadYSexo);
+sexoInput.addEventListener('change', checkEdadYSexo);
 
-  // Manejar el autocompletado
-  leerEscribirInput.addEventListener('input', function () {
-      const valor = leerEscribirInput.value.toLowerCase();
-      leerEscribirSuggestions.innerHTML = '';
-
-      const opcionesFiltradas = opcionesLeerEscribir.filter(opcion => opcion.toLowerCase().includes(valor));
-
-      if (opcionesFiltradas.length > 0) {
-          leerEscribirSuggestions.style.display = 'block';
-          opcionesFiltradas.forEach(opcion => {
-              const li = document.createElement('li');
-              li.textContent = opcion;
-              li.classList.add('list-group-item');
-              li.style.cursor = 'pointer';
-
-              li.addEventListener('click', function () {
-                  leerEscribirInput.value = opcion; // Establece el valor seleccionado
-                  leerEscribirSuggestions.style.display = 'none'; // Oculta las sugerencias
-              });
-
-              leerEscribirSuggestions.appendChild(li);
-          });
-      } else {
-          leerEscribirSuggestions.style.display = 'none';
-      }
-  });
-
-  // Ocultar sugerencias cuando el usuario hace clic fuera
-  document.addEventListener('click', function(event) {
-      if (!leerEscribirInput.contains(event.target) && !leerEscribirSuggestions.contains(event.target)) {
-          leerEscribirSuggestions.style.display = 'none';
-      }
-  });
+// Ejecutar al cargar la página para verificar el estado inicial
+checkEdadYSexo();
 });
 //---------------------------------------------------------------------------------------------
 //Manejar la seccion de atencion prehospitalaria de acuerdo a tiempo de traslado
@@ -1177,272 +1447,3 @@ function toggleTiempoTraslado() {
     tiempoTrasladoInput.value = 'HH:mm'; 
   }
 }
-
-//TIPO DE ATENCION SELECCIONADA
-const opcionesTipoAtencion = [
-  "MÉDICA", "PSICOLÓGICA", "QUIRÚRGICA", "PSIQUIÁTRICA", "CONSEJERÍA", "OTRO", 
-  "PÍLDORA ANTICONCEPTIVA DE EMERGENCIA", "PROFILAXIS VIH", "PROFILAXIS OTRAS ITS", 
-  "IVE(INTERRUPCIÓN VOLUNTARIA DEL EMBARAZO)", "VACUNA VPH"
-];
-
-const inputTipoAtencion = document.getElementById('tipo_atencion');
-const listaSugerenciastipoA = document.getElementById('sugerencias_tipoA');
-const divSeleccionestipoA = document.getElementById('selecciones_tipoA');
-let listatipoASeleccionadas = [];
-
-// Mostrar todas las opciones al hacer clic (focus) en el input de tipo de atencion
-inputTipoAtencion.addEventListener('focus', function () {
-  mostrarOpcionesFiltradas(opcionesTipoAtencion, listaSugerenciastipoA, inputTipoAtencion);
-});
-
-// Ocultar sugerencias cuando se hace clic fuera del input
-document.addEventListener('click', function(event) {
-  if (!inputTipoAtencion.contains(event.target) && !listaSugerenciastipoA.contains(event.target)) {
-      listaSugerenciastipoA.style.display = 'none';
-  }
-});
-
-function mostrarOpcionesFiltradas(opciones, listaSugerencias, input) {
-  listaSugerencias.innerHTML = ''; 
-  opciones.forEach(opcion => {
-      const elementoLista = document.createElement('li');
-      elementoLista.textContent = opcion;
-      elementoLista.style.padding = '10px';
-      elementoLista.style.cursor = 'pointer';
-      elementoLista.style.listStyle = 'none';
-      elementoLista.style.borderBottom = '1px solid #e9ecef';
-      elementoLista.style.fontWeight = 'bold';
-      elementoLista.style.color = '#000';
-      elementoLista.style.backgroundColor = '#fff';
-      elementoLista.addEventListener('click', function () {
-       if (input === inputTipoAtencion) {
-              agregarTipoASeleccionadas(opcion);
-              listaSugerenciastipoA.style.display = 'none';
-          }
-      });
-      listaSugerencias.appendChild(elementoLista);
-  });
-  listaSugerencias.style.display = 'block';
-}
-
-// Función para manejar el autocompletado 
-inputTipoAtencion.addEventListener('input', function() {
-  const filtro = inputTipoAtencion.value.toLowerCase();
-  const opcionesFiltradas = opcionesTipoAtencion.filter(opcion => opcion.toLowerCase().includes(filtro));
-  mostrarOpcionesFiltradas(opcionesFiltradas, listaSugerenciastipoA, inputTipoAtencion);
-  });
-
-// Función para agregar tipos de atención seleccionados
-function agregarTipoASeleccionadas(opcion) {
-  if (listatipoASeleccionadas.length >= 3) {
-    alert('Solo puedes seleccionar 3 tipos de atención.');
-    return;
-  }
-  if (!listatipoASeleccionadas.includes(opcion)) {
-    listatipoASeleccionadas.push(opcion);
-    actualizarListaTipoASeleccionadas();
-  }
-
-  inputTipoAtencion.value = ''; // Limpiar el input después de seleccionar
-}
-
-// Función para eliminar tipo de atención seleccionada
-function eliminarListaTipoASeleccionada(opcion) {
-  listatipoASeleccionadas = listatipoASeleccionadas.filter(sel => sel !== opcion);
-  actualizarListaTipoASeleccionadas();
-}
-
-// Función para actualizar la lista de tipos de atención seleccionados
-function actualizarListaTipoASeleccionadas() {
-  divSeleccionestipoA.innerHTML = ''; // Limpiar el contenedor antes de actualizar
-  listatipoASeleccionadas.forEach(opcion => {
-    const divtipoA = document.createElement('div');
-    divtipoA.textContent = opcion;
-    divtipoA.style.padding = '5px';
-    divtipoA.style.backgroundColor = '#e9ecef';
-    divtipoA.style.marginBottom = '5px';
-    divtipoA.style.display = 'inline-block';
-    divtipoA.style.fontWeight = 'bold';
-    divtipoA.style.marginRight = '5px';
-
-    const botonEliminar = document.createElement('button');
-    botonEliminar.textContent = 'X';
-    botonEliminar.style.marginLeft = '10px';
-    botonEliminar.style.color = 'red';
-    botonEliminar.style.border = 'none';
-    botonEliminar.style.backgroundColor = 'transparent';
-    botonEliminar.style.cursor = 'pointer';
-    botonEliminar.addEventListener('click', function() {
-      eliminarListaTipoASeleccionada(opcion); // Llamada a la función para eliminar la opción
-    });
-
-    divtipoA.appendChild(botonEliminar);
-    divSeleccionestipoA.appendChild(divtipoA);
-  });
-}
-
-// INICIO: Autocompletado con selección múltiple y manejo especial de "Se ignora"/"Ninguna"
-document.addEventListener('DOMContentLoaded', function() {
-  const opcionesPorInput = {
-    'efectos_paciente': [
-      "Alcohol", 
-      "Droga por indicación médica", 
-      "Drogas ilegales", 
-      "Se ignora", 
-      "Ninguna"
-    ],
-    'efectos_agresor': [
-      "Alcohol", 
-      "Droga por indicación médica", 
-      "Drogas ilegales", 
-      "Se ignora", 
-      "Ninguna"
-    ]
-  };
-
-  let seleccionesEfectosPaciente = [];
-  let seleccionesEfectosAgresor = [];
-
-  document.querySelectorAll('.autocomplete-container').forEach(function(container) {
-    const input = container.querySelector('.autocomplete-input');
-    const sugerencias = container.querySelector('.autocomplete-suggestions');
-    let seleccionAnterior = '';
-    const maxSeleccion = 3;
-
-    const opciones = opcionesPorInput[input.id] || [];
-
-    input.addEventListener('input', function () {
-      // Si "Se ignora" o "Ninguna" están seleccionadas, no permitir más entradas
-      const selecciones = input.id === 'efectos_paciente' ? seleccionesEfectosPaciente : seleccionesEfectosAgresor;
-      if (selecciones.includes('Se ignora') || selecciones.includes('Ninguna')) {
-        return;
-      }
-
-      const filtro = input.value.toLowerCase();
-      sugerencias.innerHTML = '';
-      const opcionesFiltradas = opciones.filter(option => option.toLowerCase().includes(filtro));
-
-      if (opcionesFiltradas.length > 0) {
-        sugerencias.style.display = 'block';
-        opcionesFiltradas.forEach(option => {
-          const li = document.createElement('li');
-          li.textContent = option;
-          li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
-          li.classList.add('list-group-item');
-          li.addEventListener('mousedown', function () {
-            seleccionarOpcion(input, sugerencias, option);
-          });
-          sugerencias.appendChild(li);
-        });
-      } else {
-        sugerencias.style.display = 'none';
-      }
-    });
-
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Tab') {
-        const primeraOpcion = sugerencias.querySelector('li');
-        if (primeraOpcion) {
-          seleccionarOpcion(input, sugerencias, primeraOpcion.textContent);
-          e.preventDefault(); // Prevenir que se cambie de campo al presionar Tab
-        }
-      }
-    });
-
-    input.addEventListener('focus', function () {
-      // Si "Se ignora" o "Ninguna" están seleccionadas, no permitir más entradas
-      const selecciones = input.id === 'efectos_paciente' ? seleccionesEfectosPaciente : seleccionesEfectosAgresor;
-      if (selecciones.includes('Se ignora') || selecciones.includes('Ninguna')) {
-        return;
-      }
-
-      sugerencias.innerHTML = '';
-      opciones.forEach(option => {
-        const li = document.createElement('li');
-        li.textContent = option;
-        li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
-        li.classList.add('list-group-item');
-        li.addEventListener('mousedown', function () {
-          seleccionarOpcion(input, sugerencias, option);
-        });
-        sugerencias.appendChild(li);
-      });
-      sugerencias.style.display = 'block';
-    });
-
-    input.addEventListener('blur', function () {
-      setTimeout(() => {
-        sugerencias.style.transition = 'opacity 0.3s';
-        sugerencias.style.opacity = '0';
-        setTimeout(() => {
-          sugerencias.style.display = 'none';
-          sugerencias.style.opacity = '1';
-        }, 300);
-      }, 200);
-    });
-
-    function seleccionarOpcion(input, sugerencias, option) {
-      const selecciones = input.id === 'efectos_paciente' ? seleccionesEfectosPaciente : seleccionesEfectosAgresor;
-
-      // Si se selecciona "Se ignora" o "Ninguna", eliminar todas las selecciones anteriores
-      if (option === 'Se ignora' || option === 'Ninguna') {
-        selecciones.length = 0; // Limpiar todas las selecciones
-        selecciones.push(option); // Añadir solo "Se ignora" o "Ninguna"
-        actualizarSelecciones(input.id, selecciones);
-        sugerencias.style.display = 'none';
-        input.value = ''; // Limpiar input después de seleccionar
-        return;
-      }
-
-      if (selecciones.includes(option)) return; // Evitar duplicados
-      if (selecciones.length >= maxSeleccion) {
-        alert('Solo puedes seleccionar hasta 3 elementos.');
-        return;
-      }
-
-      selecciones.push(option);
-      actualizarSelecciones(input.id, selecciones);
-      sugerencias.style.display = 'none';
-      input.value = ''; // Limpiar input después de seleccionar
-    }
-
-    function actualizarSelecciones(idCampo, selecciones) {
-      const divSeleccion = document.getElementById(`seleccion_${idCampo}`);
-      divSeleccion.innerHTML = ''; // Limpiar la selección previa
-      selecciones.forEach(opcion => {
-        const divItemSeleccionado = document.createElement('div');
-        divItemSeleccionado.textContent = opcion;
-        divItemSeleccionado.style.padding = '5px';
-        divItemSeleccionado.style.backgroundColor = '#e9ecef';
-        divItemSeleccionado.style.marginBottom = '5px';
-        divItemSeleccionado.style.display = 'inline-block';
-        divItemSeleccionado.style.fontWeight = 'bold';
-        divItemSeleccionado.style.marginRight = '5px';
-
-        const botonEliminar = document.createElement('button');
-        botonEliminar.textContent = 'X';
-        botonEliminar.style.marginLeft = '10px';
-        botonEliminar.style.color = 'red';
-        botonEliminar.style.border = 'none';
-        botonEliminar.style.backgroundColor = 'transparent';
-        botonEliminar.style.cursor = 'pointer';
-        botonEliminar.addEventListener('click', function () {
-          eliminarSeleccion(idCampo, opcion);
-        });
-
-        divItemSeleccionado.appendChild(botonEliminar);
-        divSeleccion.appendChild(divItemSeleccionado);
-      });
-    }
-
-    function eliminarSeleccion(idCampo, opcion) {
-      const selecciones = idCampo === 'efectos_paciente' ? seleccionesEfectosPaciente : seleccionesEfectosAgresor;
-      const index = selecciones.indexOf(opcion);
-      if (index !== -1) {
-        selecciones.splice(index, 1); // Eliminar selección
-        actualizarSelecciones(idCampo, selecciones);
-      }
-    }
-  });
-});
-// FIN: Autocompletado con selección múltiple y manejo especial de "Se ignora"/"Ninguna"

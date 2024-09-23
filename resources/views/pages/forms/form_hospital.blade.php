@@ -71,15 +71,13 @@
                 <div class="row">
                   <!-- CLUES -->
                   <div class="col-lg-5 col-md-6 col-sm-3">
-    <label for="clues">CLUES:</label>
-    <div class="form-group">
-        <input type="text" id="clues" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
-        <ul id="clues_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        </ul>
-    </div>
-    </div>
-
-
+                  <label for="clues">CLUES:</label>
+                  <div class="form-group">
+                  <input type="text" id="clues" name="clues" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
+                      <ul id="clues_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </ul>
+                  </div>
+                  </div>
                   <!-- Folio -->
                   <div class="col-md-4 ml-auto mr-auto">
                     <label for="folio">Folio:</label>
@@ -88,7 +86,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>
 
               <!-- Paciente Afectada(o) -->
               <div class="tab-pane" id="about">
@@ -107,21 +105,21 @@
                   <div class="col-md-4">
                     <label for="primer_apellido">Primer apellido:</label>
                     <div class="form-group">
-                      <input type="text" id="primer_apellido" name="primer_apellido" minLength="3" class="form-control" placeholder="Primer Apellido" required>
+                      <input type="text" id="primer_apellido" name="primer_apellido" minLength="2" class="form-control" placeholder="Primer Apellido" required>
                     </div>
                   </div>
                   <!-- Segundo apellido -->
                   <div class="col-md-4">
                     <label for="segundo_apellido">Segundo apellido:</label>
                     <div class="form-group">
-                      <input type="text" id="segundo_apellido" name="segundo_apellido" minLength="3" class="form-control" placeholder="Segundo Apellido" required>
+                      <input type="text" id="segundo_apellido" name="segundo_apellido" minLength="2" class="form-control" placeholder="Segundo Apellido" >
                     </div>
                   </div>
                   <!-- C.U.R.P. -->
                   <div class="col-md-4">
                     <label for="curp">C.U.R.P.:</label>
                     <div class="form-group">
-                      <input type="text" id="curp" name="curp" maxLength="18" oninput="validarInput(this)" class="form-control" placeholder="Solo 18 caracteres" required>
+                      <input type="text" id="curp" name="curp" maxLength="18" class="form-control" placeholder="Solo 18 caracteres" style="text-transform: uppercase" required>
                       <span id="curp-validacion" style="color: red; display: none;">CURP inválida</span>
                     </div>
                   </div>
@@ -129,7 +127,7 @@
                   <div class="col-md-4">
                     <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
                     <div class="form-group">
-                      <input type="text" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control datepicker" placeholder="dd/mm/yyyy" required>
+                      <input type="text" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control datepicker" placeholder="fecha" required>
                     </div>
                   </div>
                   <!-- Entidad o País de Nacimiento -->
@@ -166,37 +164,26 @@
                   <div class="col-md-4">
                     <label for="afiliacion">Afiliación a los Servicios de Salud:</label>
                     <div class="form-group">
-                      <select id="afiliacion" class="selectpicker form-control" name="afiliacion" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="0">1. No especificado</option>
-                        <option value="1">2. Ninguna</option>
-                        <option value="2">3. IMSS</option>
-                        <option value="3">4. ISSSTE</option>
-                        <option value="4">5. PEMEX</option>
-                        <option value="5">6. SEDENA</option>
-                        <option value="6">7. SEMAR</option>
-                        <option value="7">8. OTRA</option>
-                        <option value="8">9. IMSS Bienestar</option>
-                        <option value="9">10. ISSFAM</option>
-                        <option value="10">11. OPD IMSS Bienestar</option>
-                        <option value="99">12. Se ignora</option>
-                        <option value="12">13. Especifique</option>
-                      </select>
+                      <input type="text" id="afiliacion_input" name="afiliacion_input" class="form-control"
+                        placeholder="Seleccione su afiliación" autocomplete="off" required>
+                      <ul id="sugerencias_afiliacion" class="list-group autocomplete-suggestions"></ul>
+                    </div>
+                  </div>
+                  <!--Especifique el otro lugar-->
+                  <div class="col-md-4" id="afiliacionEspecifique" style="display: none;">
+                    <label for="afiliacion_especifique">Especifique el otro lugar:</label>
+                    <div class="form-group">
+                      <input type="text" id="afiliacion_especifique" name="afiliacion_especifique" class="form-control"
+                        placeholder="Especifique el lugar">
                     </div>
                   </div>
                 
-                <div class="col-md-4" id="afiliacionEspecifique" style="display: none;">
-                  <label for="afiliacion_especifique">Especifique el otro lugar:</label>
-                  <div class="form-group">
-                    <input type="text" id="afiliacion_especifique" name="afiliacion_especifique" class="form-control" placeholder="Especifique el lugar">
-                  </div>
-                </div>
-              
                   <!-- Número de Afiliación -->
                   <div class="col-md-4">
                     <label for="numero_afiliacion">Número de Afiliación:</label>
                     <div class="form-group">
-                      <input class="form-control" type="number" id="numero_afiliacion" name="numero_afiliacion" min="0" placeholder="Número de Afiliación" required>
+                      <input class="form-control" type="number" id="numero_afiliacion" name="numero_afiliacion" min="0"
+                        placeholder="Número de Afiliación" required maxlength="11">
                     </div>
                   </div>
                   <!-- Gratuidad -->
@@ -240,6 +227,7 @@
                     </div>
                   </div>
                   <!-- Sabe Leer y Escribir -->
+
                   <div class="col-md-4">
                     <label for="leer_escribir">Sabe Leer y Escribir:</label>
                       <div lass="form-group">
@@ -248,6 +236,7 @@
                         <input type="radio" id="leer&escribir_no" name="leer&escribir" value="2">
                         <label for="leer&escribir_no">2. NO</label>
                       </div>                  
+
                   </div>
                   <!-- ¿Se Considera Indígena? -->
                   <div class="col-md-4">
@@ -330,22 +319,17 @@
                     </div>
                   </div>
                   <!-- Referida(o) por -->
+                  <!-- Referida(o) por -->
                   <div class="col-md-4">
                     <label for="referido_por">Referida(o) por:</label>
                     <div class="form-group">
-                      <select id="referido_por" class="selectpicker form-control" name="referido_por" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. Unidad médica</option>
-                        <option value="2">2. Procuración de Justicia</option>
-                        <option value="3">3. Secretaría de Educación Pública</option>
-                        <option value="4">4. Desarrollo Social</option>
-                        <option value="5">5. DIF</option>
-                        <option value="6">6. Otras instituciones gubernamentales</option>
-                        <option value="7">7. Instituciones No gubernamentales</option>
-                        <option value="8">8. Sin referencia (iniciativa propia)</option>
-                      </select>
+                      <input type="text" id="referido_por" name="referido_por" class="form-control"
+                        placeholder="Seleccion unica" autocomplete="off" required>
+                      <ul id="referido_sugg" class="list-group autocomplete-suggestions"></ul>
                     </div>
                   </div>
+
+
                   <!-- Unidad Médica Especifique Nombre -->
                   <div class="col-md-4" id="unidadMedicaEspecifique" style="display: none;">
                     <label for="unidad_medica">Nombre (Unidad Médica):</label>
@@ -354,27 +338,36 @@
                     </div>
                   </div>
                   <!-- CLUES -->
-                  <div class="col-md-4" id="CluesU" style="display: none;">
-    <label for="cluesU">Especifique su CLUES:</label>
-    <div class="form-group">
-        <input type="text" id="cluesU" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
-        <ul id="cluesU_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-        </ul>
-    </div>
-</div>
+                  <div class="col-md-4" id="cluesU" style="display: none;">
+                  <label for="cluesU">Especifique su CLUES:</label>
+                  <div class="form-group">
+                      <input type="text" id="cluesU" name="cluesU" class="form-control" placeholder="Selecciona una CLUES" autocomplete="off" />
+                      <ul id="cluesU_suggestions" class="list-group" style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </ul>
+                  </div>
+              </div>
                 </div>
               </div>
               <!-- Evento -->
               <div class="tab-pane" id="account">
                 <h5 class="info-text">Información del Evento</h5>
                 <div class="row">
-                  <!-- Fecha y hora de Ocurrencia -->
+                  <!-- Fecha de Ocurrencia -->
                   <div class="col-md-4">
-                    <label for="fecha_ocurrencia">Fecha y hora de Ocurrencia:</label>
+                    <label for="fecha_ocurrencia">Fecha de Ocurrencia:</label>
                     <div class="form-group">
-                      <input type="text" id="fecha_ocurrencia" name="fecha_ocurrencia" class="form-control datetimepicker" placeholder="dd/mm/yyyy hh:mm AM/PM" required>
+                      <input type="text" id="fecha_ocurrencia" name="fecha_ocurrencia" class="form-control datepicker" placeholder="dd/mm/yyyy" required>
                     </div>
                   </div>
+
+                  <!-- hora de Ocurrencia -->
+                  <div class="col-md-4">
+                    <label for="hora_ocurrencia">hora de Ocurrencia:</label>
+                    <div class="form-group">
+                      <input type="text" id="hora_ocurrencia" name="hora_ocurrencia" class="form-control timepicker" placeholder="hh:mm AM/PM" required>
+                    </div>
+                  </div>
+
                   <!-- ¿Fue día festivo? -->
                   <div class="col-md-4">
                     <label for="festivo">¿Fue día festivo?</label>
@@ -389,22 +382,22 @@
                   <div class="col-md-4">
                     <label for="sitio_ocurrencia">Sitio de Ocurrencia:</label>
                     <div class="form-group">
-                      <select id="sitio_ocurrencia" class="selectpicker form-control form-control" name="sitio_ocurrencia" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="0">1. Vivienda</option>
-                        <option value="1">2. Institución residencial</option>
-                        <option value="2">3. Escuela</option>
-                        <option value="3">4. Área de deporte y atletismo</option>
-                        <option value="4">5. Vía pública (peatón)</option>
-                        <option value="5">6. Comercio y áreas de servicio</option>
-                        <option value="6">7. Trabajo</option>
-                        <option value="7">8. Granja</option>
-                        <option value="8">9. Club, cantina, bar</option>
-                        <option value="9">10. Vehículo automotor público</option>
-                        <option value="10">11. Vehículo automotor privado</option>
-                        <option value="11">12. Otro lugar (Especifique)</option>
-                        <option value="12">13. Lugar no especificado</option>
-                      </select>
+                      <input id="sitio_ocurrencia_input" type="text" class="form-control" placeholder="Escriba para buscar..." required>
+                      <datalist id="sitio_ocurrencia_list">
+                      <option value="Vivienda">
+                      <option value="Institución residencial">
+                      <option value="Escuela">
+                      <option value="Área de deporte y atletismo">
+                      <option value="Vía pública (peatón)">
+                      <option value="Comercio y áreas de servicio">
+                      <option value="Trabajo">
+                      <option value="Granja">
+                      <option value="Club, cantina, bar">
+                      <option value="Vehículo automotor público">
+                      <option value="Vehículo automotor privado">
+                      <option value="Otro lugar (Especifique)">
+                      <option value="Lugar no especificado">
+                      </datalist>
                     </div>
                   </div>
 
@@ -446,7 +439,7 @@
                   <div class="col-md-4">
                     <label for="codigo_postal">Código Postal:</label>
                     <div class="form-group">
-                      <input type="text" id="codigo_postal" name="codigo_postal" class="form-control" placeholder="Código Postal" readonly />
+                      <input type="text" id="codigo_postal" name="codigo_postal" class="form-control" placeholder="Código Postal"/>
                     </div>
                   </div>
                   
@@ -467,10 +460,11 @@
                     </div>
                   </div>
                   <!-- Num. Ext. -->
-                  <div class="col-md-4">
+                  <div class="col-md-2  autocomplete-container">
                     <label for="num_ext">Num. Ext.:</label>
                     <div class="form-group">
-                      <input type="text" id="num_ext" name="num_ext" class="form-control" placeholder="Número Exterior">
+                      <input type="text" class="form-control autocomplete-input" id="num_ext" name="num_ext" placeholder="123" autocomplete="off" required>
+                      <ul class="list-group autocomplete-suggestions"></ul>
                     </div>
                   </div>
                   <!-- Num. Int. -->
@@ -516,9 +510,7 @@
                       </select>
                     </div>
                   </div>
-
                   <!-- Agente de la Lesión -->
-                 
                   <div class="col-md-4">
                   <label for="agente_lesion">Agente de la Lesión:</label>
                   <div class="form-group">
@@ -536,35 +528,46 @@
                   </div>
                   <!-- ¿Recibió atención prehospitalaria? -->
                   <div class="col-md-4">
-                    <label for="prehospitalaria">¿Recibió atención prehospitalaria?</label>
-                    <div lass="form-group">
-                        <input type="radio" id="prehospitalaria_si" name="prehospitalaria" value="1" required>
-                        <label for="prehospitalaria_si">1. SI</label>
-                        <input type="radio" id="prehospitalaria_no" name="prehospitalaria" value="2">
-                        <label for="prehospitalaria_no">2. NO</label>
-                    </div>
+
+            <label for="prehospitalaria">¿Recibió atención prehospitalaria?</label>
+            <div class="form-group">
+              <select id="prehospitalaria" class="selectpicker form-control" name="prehospitalaria" data-size="7" data-style="btn btn-primary" required onchange="toggleTiempoTraslado()">
+                <option disabled selected>Selección Única</option>
+                <option value="1">1. SI</option>
+                <option value="2">2. NO</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Tiempo de traslado a la unidad hospitalaria -->
+          <div class="col-md-4">
+            <label for="tiempo_traslado">Tiempo de traslado a la unidad hospitalaria:</label>
+            <div class="form-group">
+              <input type="text" id="tiempo_traslado" name="tiempo_traslado" class="form-control" value="HH:mm" required>
+            </div>
+          </div>
+
+                 <div class="col-md-4 autocomplete-container">
+                  <label for="efectos_paciente">Se sospecha que la/el paciente estaba bajo los efectos de:</label>
+                  <div class="form-group">
+                    <input type="text" id="efectos_paciente" name="efectos_paciente" class="form-control autocomplete-input" placeholder="Escribe para seleccionar" autocomplete="off">
+                    <ul class="list-group autocomplete-suggestions"></ul>
+                    <div id="seleccion_efectos_paciente" class="mt-2"></div>
+
                   </div>
-                  <!-- Tiempo de traslado a la unidad hospitalaria -->
+                </div>            
+                  <!-- En caso de evento autoinfligido, el evento ocurrió -->
                   <div class="col-md-4">
-                    <label for="tiempo_traslado">Tiempo de traslado a la unidad hospitalaria:</label>
-                    <div class="form-group">
-                      <input type="text" id="tiempo_traslado" name="tiempo_traslado" class="form-control" value="HH:mm" required>
+                      <label for="evento_autoinfligido">El evento ocurrió:</label>
+                      <div class="form-group">
+                        <select id="evento_autoinfligido" class="selectpicker form-control" name="evento_autoinfligido"
+                          required>
+                          <option disabled selected>Selección Única</option>
+                          <option value="Única vez">Única vez</option>
+                          <option value="Repetido">Repetido</option>
+                        </select>
+                      </div>
                     </div>
-                  </div>
-                  <!-- Se sospecha que la/el paciente estaba bajo los efectos de -->
-                  <div class="col-md-4">
-                    <label for="efectos_paciente">Se sospecha que la/el paciente estaba bajo los efectos de:</label>
-                    <div class="form-group">
-                    <select id="efectos_paciente" class="selectpicker form-control" name="efectos_paciente" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Alcohol">Alcohol</option>
-                    <option value="Droga por indicación médica">Droga por indicación médica</option>
-                    <option value="Drogas ilegales">Drogas ilegales</option>
-                    <option value="Se ignora">Se ignora</option>
-                    <option value="Ninguna">Ninguna</option>
-                    </select>
-                    </div>
-                  </div>
                 </div>
                 
               <div id="accidenteSection" style="display: none;">
@@ -692,31 +695,16 @@
                       <input class="form-control" type="number" id="edad_agresor" name="edad_agresor" min="0" placeholder="Años">
                     </div>
                   </div>
-                  <!-- El/La agresor(a) se sospecha que actuó bajo los efectos de -->
-                  <div class="col-md-4">
-                    <label for="efectos_agresor">El/La agresor(a) se sospecha que actuó bajo los efectos de:</label>
-                    <div class="form-group">
-                    <select id="efectos_agresor" class="selectpicker form-control" name="efectos_agresor" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Alcohol">Alcohol</option>
-                    <option value="Droga por indicación médica">Droga por indicación médica</option>
-                    <option value="Drogas ilegales">Drogas ilegales</option>
-                    <option value="Se ignora">Se ignora</option>
-                    <option value="Ninguna">Ninguna</option>
-                    </select>
-                    </div>
+
+                  <div class="col-md-4 autocomplete-container">
+                  <label for="efectos_agresor">El/La agresor(a) se sospecha que actuó bajo los efectos de:</label>
+                  <div class="form-group">
+                    <input type="text" id="efectos_agresor" name="efectos_agresor" class="form-control autocomplete-input" placeholder="Escribe para seleccionar" autocomplete="off">
+                    <ul class="list-group autocomplete-suggestions"></ul>
+                    <div id="seleccion_efectos_agresor" class="mt-2"></div>
                   </div>
-                  <!-- En caso de evento autoinfligido, el evento ocurrió -->
-                  <div class="col-md-4">
-                    <label for="evento_autoinfligido">En caso de evento autoinfligido, el evento ocurrió:</label>
-                    <div class="form-group">
-                    <select id="evento_autoinfligido" class="selectpicker form-control" name="evento_autoinfligido" required>
-                    <option disabled selected>Selección Única</option>
-                    <option value="Única vez">Única vez</option>
-                    <option value="Repetido">Repetido</option>
-                    </select>
-                    </div>
-                  </div>
+                </div>
+                  <!-- Campo de efectos del agresor -->
                 </div>
               </div>
             </div>
@@ -725,109 +713,78 @@
               <div class="tab-pane" id="address">
                 <h5 class="info-text">Información de la Atención</h5>
                 <div class="row">
-                  <!-- Fecha y hora de Atención -->
+                  <!-- Fecha de Atención -->
                   <div class="col-md-4">
-                    <label for="fecha_atencion">Fecha y hora de Atención:</label>
+                    <label for="fecha_atencion">Fecha de Atención:</label>
                     <div class="form-group">
-                      <input type="text" id="fecha_atencion" name="fecha_atencion" class="form-control datetimepicker" placeholder="dd/mm/yyyy hh:mm AM/PM" required>
+                      <input type="text" id="fecha_atencion" name="fecha_atencion" class="form-control datepicker" placeholder="dd/mm/yyyy" required>
+                    </div>
+                  </div>
+                  <!-- Hora de Atención -->
+                  <div class="col-md-4">
+                    <label for="hora_atencion">Hora de Atención:</label>
+                    <div class="form-group">
+                      <input type="text" id="hora_atencion" name="hora_atencion" class="form-control timepicker" placeholder="hh:mm AM/PM" required>
                     </div>
                   </div>
                   <!-- Servicio que otorgó la atención -->
-                  <div class="col-md-4">
+                  <div class="col-md-4 autocomplete-container">
                     <label for="servicio_atencion">Servicio que otorgó la atención:</label>
                     <div class="form-group">
-                      <select id="servicio_atencion" class="selectpicker form-control" name="servicio_atencion" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. Consulta externa</option>
-                        <option value="2">2. Hospitalización</option>
-                        <option value="3">3. Urgencias</option>
-                        <option value="4">4. Servicio especializado de atención a la violencia</option>
-                        <option value="5">5. Otro servicio (Especifique)</option>
-                      </select>
-                    </div>
+                      <input type="text" id="servicio_atencion" name="servicio_atencion" class="form-control autocomplete-input" placeholder="Servicio de atención" autocomplete="off" required>
+                      <ul class="list-group autocomplete-suggestions"></ul>
+                      </div>
                   </div>
+
+                  <div class="col-md-4" id="servicioEspecifique" style="display: none;">
+                      <label for="servicio_especifique">Especifique:</label>
+                      <div class="form-group">
+                          <input type="text" id="servicio_especifique" name="servicio_especifique" class="form-control" placeholder="Servicio que otorgó la atención">
+                      </div>
+                  </div>
+
                   <!-- Tipo de atención -->
                   <div class="col-md-4">
                     <label for="tipo_atencion">Tipo de atención:</label>
                     <div class="form-group">
-                      <select id="tipo_atencion" class="selectpicker form-control" name="tipo_atencion" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. Médica</option>
-                        <option value="2">2. Psicológica</option>
-                        <option value="3">3. Quirúrgica</option>
-                        <option value="4">4. Psiquiátrica</option>
-                        <option value="5">5. Consejería</option>
-                        <option value="6">6. Otro</option>
-                        <option value="7">7. Píldora anticonceptiva de emergencia</option>
-                        <option value="8">8. Profilaxis VIH</option>
-                        <option value="9">9. Profilaxis otras ITS</option>
-                        <option value="10">10. IVE(Interrupción Voluntaria del Embarazo)</option>
-                        <option value="11">11. Vacuna VPH</option>
-                      </select>
+                      <input type="text" id="tipo_atencion" class="form-control" placeholder="Tipo de atención"/>
+                      <ul id="sugerencias_tipoA"class="list-group"
+                      style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"></ul>
+                      <div id="selecciones_tipoA" class="mt-2"></div>
                     </div>
                   </div>
-                </div>
-
-                <div class="row">
                   <!-- Área Anatómica de Mayor Gravedad -->
-                  <div class="col-md-4">
+                  <div class="col-md-4 autocomplete-container">
                     <label for="area_gravedad">Área Anatómica de Mayor Gravedad:</label>
                     <div class="form-group">
-                      <select id="area_gravedad" class="selectpicker form-control" name="area_gravedad" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. Cabeza</option>
-                        <option value="2">2. Cara</option>
-                        <option value="3">3. Región ocular</option>
-                        <option value="4">4. Cuello</option>
-                        <option value="5">5. Columna vertebral</option>
-                        <option value="6">6. Extremidades superiores</option>
-                        <option value="7">7. Mano</option>
-                        <option value="8">8. Tórax</option>
-                        <option value="9">9. Espalda y/o glúteos</option>
-                        <option value="10">10. Abdomen</option>
-                        <option value="11">11. Pelvis</option>
-                        <option value="12">12. Región genital</option>
-                        <option value="13">13. Extremidades inferiores</option>
-                        <option value="14">14. Pies</option>
-                        <option value="15">15. Múltiples</option>
-                        <option value="16">16. Otro (Especifique)</option>
-                      </select>
+                      <input type="text" id="area_gravedad" name="area_gravedad" class="form-control autocomplete-input" placeholder="Areá de gravedad" autocomplete="off" required>
+                      <ul class="list-group autocomplete-suggestions"></ul>
                     </div>
                   </div>
+
+                  <div class="col-md-4" id="areaGravedadEspecifique" style="display: none;">
+                      <label for="area_gravedad_especifique">Especifique:</label>
+                      <div class="form-group">
+                          <input type="text" id="area_gravedad_especifique" name="area_gravedad_especifique" class="form-control" placeholder="Área Anatómica de Mayor Gravedad">
+                      </div>
+                  </div> 
+
                   <!-- Consecuencia Resultante de Mayor Gravedad -->
-                  <div class="col-md-4">
+                  <div class="col-md-4 autocomplete-container">
                     <label for="consecuencia_gravedad">Consecuencia Resultante de Mayor Gravedad:</label>
                     <div class="form-group">
-                      <select id="consecuencia_gravedad" class="selectpicker form-control" name="consecuencia_gravedad" data-size="7" data-style="btn btn-primary" required>
-                        <option disabled selected>Selección Única</option>
-                        <option value="1">1. Laceración/abrasión</option>
-                        <option value="2">2. Aplastamiento</option>
-                        <option value="3">3. Cicatrices</option>
-                        <option value="4">4. Depresión</option>
-                        <option value="5">5. Contusión/mallugamiento</option>
-                        <option value="6">6. Congelamiento</option>
-                        <option value="7">7. Aborto</option>
-                        <option value="8">8. Trastornos de ansiedad/estrés postraumático</option>
-                        <option value="9">9. Quemadura/corrosión</option>
-                        <option value="10">10. Asfixia</option>
-                        <option value="11">11. Embarazo</option>
-                        <option value="12">12. Trastornos psiquiátricos</option>
-                        <option value="13">13. Luxación/esguince</option>
-                        <option value="14">14. Herida</option>
-                        <option value="15">15. Infección de transmisión sexual</option>
-                        <option value="16">16. Múltiple</option>
-                        <option value="17">17. Amputación/avulsión</option>
-                        <option value="18">18. Fractura</option>
-                        <option value="19">19. Defunción</option>
-                        <option value="20">20. Malestar emocional</option>
-                        <option value="21">21. Trastorno del estado de ánimo</option>
-                        <option value="22">22. Otro (Especifique)</option>
-                      </select>
+                      <input type="text" id="consecuencia_gravedad" name="consecuencia_gravedad" class="form-control autocomplete-input" placeholder="Areá de gravedad" autocomplete="off" required>
+                      <ul class="list-group autocomplete-suggestions"></ul>
                     </div>
                   </div>
-                </div>
 
-                <div class="row">
+                  <div class="col-md-4" id="consecuenciaGravedadEspecifique" style="display: none;">
+                      <label for="consecuencia_gravedad_especifique">Especifique:</label>
+                      <div class="form-group">
+                          <input type="text" id="consecuencia_gravedad_especifique" name="consecuencia_gravedad_especifique" class="form-control" placeholder="Consecuencia Resultante de Mayor Gravedad">
+                      </div>
+                  </div>
+
                   <!-- Afección principal -->
                   <div class="col-md-4">
                     <label for="afeccion_principal">Afección principal:</label>
@@ -852,9 +809,7 @@
                         <label for="aviso_ministerio_no">2. No</label>
                     </div>
                   </div>
-                </div>
 
-                <div class="row">
                   <!-- Destino después de la atención -->
                   <div class="col-md-4">
                     <label for="destino_atencion">Destino después de la atención:</label>
@@ -875,6 +830,22 @@
                       </select>
                     </div>
                   </div>
+                  <!--Folio de Defunción-->
+                  <div class="col-md-4">
+                    <label for="folio_defuncion">Folio de Defuncion</label>
+                    <div class="form-group">
+                    <input type="text" id="folio_defuncion" name="folio_defuncion" class="form-control"
+                    placeholder="Por favor escribe el folio"required>
+                    </div>
+                  </div>
+                  <!--Especifique Destino-->
+                  <div class="col-md-4" id="destinoEspecifique" style="display: none;">
+                    <label for="destino_especifique">Especifique el Destino:</label>
+                    <div class="form-group">
+                      <input type="text" id="destino_especifique" name="destino_especifique" class="form-control"
+                        placeholder="Especifique Destino">
+                    </div>
+                  </div>
                   <!-- Responsable de la atención -->
                   <div class="col-md-4">
                     <label for="responsable_atencion">Responsable de la atención:</label>
@@ -889,7 +860,11 @@
                   </div>
                 </div>
 
+              <div id="responsableSection" style="display: none;">
                 <div class="row">
+                  <div class="col-md-12">
+                      <h4 class="card-title-hospital">RESPONSABLE ATENCIÓN</h4>
+                  </div>
                   <!-- Nombre(s) -->
                   <div class="col-md-4">
                     <label for="nombre_responsable">Nombre(s):</label>
@@ -905,15 +880,12 @@
                     </div>
                   </div>
                   <!-- Segundo Apellido -->
-                  <div class="col-md=4">
+                  <div class="col-md-4">
                     <label for="segundo_apellido_responsable">Segundo Apellido:</label>
                     <div class="form-group">
                       <input type="text" id="segundo_apellido_responsable" name="segundo_apellido_responsable" class="form-control" placeholder="Segundo Apellido del Responsable">
                     </div>
                   </div>
-                </div>
-
-                <div class="row">
                   <!-- C.U.R.P. -->
                   <div class="col-md-4">
                     <label for="curp_responsable">C.U.R.P.:</label>
@@ -932,12 +904,16 @@
               </div>
             </div>
           </div>
+        </div>
+
           <div class="card-footer"> 
             <div class="pull-right">
-            <button type="button" id="SaveData" class="btn btn-primary">Guardar datos</button>
+
+                 <button type="button" id="SaveData" class="btn btn-primary">G. datos</button>
               <button type="button" id="darDeAlta" class="btn btn-primary">N. Paciente</button>
               <input type='button' class='btn btn-next btn-fill btn-primary btn-wd' name='next' value='Siguiente' />
-              <button type="submit" class="btn btn-finish btn-fill btn-primary btn-wd" name="finish">Guardar</button>
+              <button type="button" id="guardarBtn" class="btn btn-finish btn-fill btn-primary btn-wd">Guardar</button>
+              <!-- <button type="submit" class="btn btn-finish btn-fill btn-primary btn-wd" name="finish">Guardar</button> -->
             </div>
             <div class="pull-left">
               <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Anterior' />
@@ -957,9 +933,13 @@
 
   <script src="{{ asset('black/js/makefolio.js') }}"></script> 
   <script src="{{ asset('black/js/hospital.js') }}"></script>
+<script src="{{ asset('black/js/hospital.js') }}"></script>
+<script src="{{ asset('black/js/autocomplete.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
     $(document).ready(function() {
+
         $('.datepicker').datetimepicker({
             format: 'DD/MM/YYYY', // Asegúrate de que este es el formato que se está enviando al backend
         });
@@ -971,6 +951,7 @@
         $('#tiempo_traslado').datetimepicker({
             format: 'HH:mm' // Solo tiempo
         });
+
 
         function calcularEdad(fecha) {
             const hoy = new Date();
@@ -1007,14 +988,6 @@
         });
 
     });
-    //Autocompletar
-    document.addEventListener('keydown', function(event) {
-            // Verificar si la tecla presionada es F9
-            if (event.key === 'F9') {
-                // Rellenar el input con "X"
-                document.getElementById('curp').value = 'XXXXXXXXXXXXXXXXXX';
-            }
-        });
 
     function setFormValidation(id) {
       $(id).validate({
@@ -1201,7 +1174,32 @@ document.addEventListener('DOMContentLoaded', function () {
             cluesSuggestions.style.display = 'none';
         }, 200);
     });
-});
-    
+}); 
   </script>
+  
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: '{{ session('success') }}',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        @endif
+
+        @if(session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '{{ session('error') }}',
+                timer: 3000,
+                showConfirmButton: false
+            });
+        @endif
+    });
+</script>
+
 @endpush

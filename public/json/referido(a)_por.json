@@ -1,0 +1,10 @@
+[
+    {"value": "1", "text": "Unidad médica"},
+    {"value": "2", "text": "Procuración de Justicia"},
+    {"value": "3", "text": "Secretaría de Educación Pública"},
+    {"value": "4", "text": "Desarrollo Social"},
+    {"value": "5", "text": "DIF"},
+    {"value": "6", "text": "Otras instituciones gubernamentales"},
+    {"value": "7", "text": "Instituciones No gubernamentales"},
+    {"value": "8", "text": "Sin referencia (iniciativa propia)"}
+]
