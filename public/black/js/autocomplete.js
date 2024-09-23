@@ -22,6 +22,39 @@ let numeroAfiliacion = document.getElementById('numero_afiliacion'); // Campo de
 
 // Función para manejar el autocompletado y otras funcionalidades
 function manejarAutocompletado() {
+    // Muestra todas las opciones cuando se hace clic en el input
+    input_afiliacion.addEventListener('click', function() {
+        sugerencias_afiliacion.innerHTML = '';
+        afiliaciones.forEach(opcion => {
+            const li = document.createElement('li');
+            li.textContent = opcion;
+            li.classList.add('list-group-item');
+            li.style.cursor = 'pointer';
+            li.addEventListener('click', function() {
+                input_afiliacion.value = opcion;
+                sugerencias_afiliacion.style.display = 'none';
+                
+                // Mostrar el campo adicional si se selecciona 'Otra'
+                if (opcion === 'Otra') {
+                    especificarCampo.style.display = 'block';
+                } else {
+                    especificarCampo.style.display = 'none';
+                }
+                
+                // Deshabilitar el campo Número de Afiliación si se selecciona 'No especificado', 'Ninguna' o 'Se ignora'
+                if (opcion === 'No especificado' || opcion === 'Ninguna' || opcion === 'Se ignora') {
+                    numeroAfiliacion.disabled = true;
+                    numeroAfiliacion.value = ''; // Limpia el campo
+                } else {
+                    numeroAfiliacion.disabled = false;
+                }
+            });
+            sugerencias_afiliacion.appendChild(li);
+        });
+        sugerencias_afiliacion.style.display = 'block'; // Muestra la lista al hacer clic
+    });
+
+    // Filtrar opciones mientras se escribe en el input
     input_afiliacion.addEventListener('input', function() {
         let valor = input_afiliacion.value.toLowerCase();
         sugerencias_afiliacion.innerHTML = '';
@@ -39,7 +72,7 @@ function manejarAutocompletado() {
                     input_afiliacion.value = opcion;
                     sugerencias_afiliacion.style.display = 'none';
                     
-                    // Mostrar el campo adicional si se selecciona 'otra'
+                    // Mostrar el campo adicional si se selecciona 'Otra'
                     if (opcion === 'Otra') {
                         especificarCampo.style.display = 'block';
                     } else {
@@ -60,25 +93,16 @@ function manejarAutocompletado() {
             sugerencias_afiliacion.style.display = 'none';
         }
     });
-
-    numeroAfiliacion.addEventListener('input', function() {
-        let valor = numeroAfiliacion.value;
-        
-        // Limitar a 11 dígitos
-        if (valor.length > 11) {
-            numeroAfiliacion.value = valor.slice(0, 11);
-        }
-    });
-
-    input_afiliacion.addEventListener('blur', function() {
-        setTimeout(() => {
+	// Ocultar las sugerencias al hacer clic fuera del input o de las sugerencias
+    document.addEventListener('click', function(event) {
+        if (!input_afiliacion.contains(event.target) && !sugerencias_afiliacion.contains(event.target)) {
             sugerencias_afiliacion.style.display = 'none';
-        }, 200);
+        }
     });
 }
 
-// Ejecutar la función de manejo del autocompletado
-document.addEventListener('DOMContentLoaded', manejarAutocompletado);
+// Llamada a la función de manejo de autocompletado
+manejarAutocompletado();
 
 // Lista de opciones para 'Referida(o) por'
 const referidoPorOpciones = [
