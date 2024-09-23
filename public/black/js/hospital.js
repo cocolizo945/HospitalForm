@@ -1043,66 +1043,71 @@ input_pais.addEventListener('focus', function() {
       sugerencias_pais.style.display = 'block';
   }
 });
-//Para poder escribir en sitio de ocurrencia
-document.addEventListener('DOMContentLoaded', function() {
-  const input = document.getElementById('sitio_ocurrencia_input');
-  const datalist = document.getElementById('sitio_ocurrencia_list');
 
-  input.setAttribute('list', 'sitio_ocurrencia_list');
+//SITIO DE OCURRENCIA
+document.addEventListener("DOMContentLoaded", function () {
+  const sitioOcurrenciaInput = document.getElementById("sitio_ocurrencia_input");
+  const suggestionsList = document.getElementById("suggestions_list");
 
-  input.addEventListener('input', function() {
-      let selectedOption = Array.from(datalist.options).find(option => option.value === input.value);
-      if (selectedOption) {
-          console.log('Opción seleccionada:', selectedOption.value);
-      }
-  });
-});
+  const sitiosOcurrencia = [
+    "Vivienda",
+    "Institución residencial",
+    "Escuela",
+    "Área de deporte y atletismo",
+    "Vía pública (peatón)",
+    "Comercio y áreas de servicio",
+    "Trabajo",
+    "Granja",
+    "Club, cantina, bar",
+    "Vehículo automotor público",
+    "Vehículo automotor privado",
+    "Otro lugar (Especifique)",
+    "Lugar no especificado"
+  ];
 
-// LOGICA PARA APLICAR ESPECIFIQUE EN AC
-document.addEventListener('DOMContentLoaded', function () {
-  // Referencias a los elementos de entrada y sus respectivos campos "Especifique"
-  const sitioOcurrenciaInput = document.getElementById('sitio_ocurrencia_input');
-  const sitioOcurrenciaEspecifique = document.getElementById('otroLugarEspecifique');
+  // Función para mostrar sugerencias filtradas según lo que se escribe
+  function showSuggestions(value) {
+    suggestionsList.innerHTML = ""; // Limpiar la lista de sugerencias
 
-  const agenteLesionInput = document.getElementById('agente_lesion_input');
-  const agenteLesionEspecifique = document.getElementById('agenteEspecifique');
-  const agenteLesionSuggestions = document.getElementById('sugerencias'); // El ul donde se muestran las sugerencias
+    // Filtrar las opciones según el valor ingresado
+    const filteredSuggestions = sitiosOcurrencia.filter(sitio =>
+      sitio.toLowerCase().includes(value.toLowerCase())
+    );
 
-  // Función para mostrar/ocultar campos "Especifique"
-  function toggleEspecifiqueField(input, especifiqueField, triggerValue) {
-      input.addEventListener('input', function () {
-          if (input.value.trim().toUpperCase() === triggerValue.toUpperCase()) {
-              especifiqueField.style.display = 'block';
-          } else {
-              especifiqueField.style.display = 'none';
-          }
+    // Crear las sugerencias en la lista
+    if (filteredSuggestions.length > 0) {
+      suggestionsList.style.display = "block"; // Mostrar lista si hay coincidencias
+      filteredSuggestions.forEach(sitio => {
+        const li = document.createElement("li");
+        li.textContent = sitio;
+        li.classList.add("list-group-item");
+        li.style.cursor = "pointer";
+        li.addEventListener("click", () => {
+          sitioOcurrenciaInput.value = sitio; // Asignar valor al input
+          suggestionsList.style.display = "none"; // Ocultar lista tras seleccionar
+        });
+        suggestionsList.appendChild(li);
       });
-
-      // Ocultar "Especifique" cuando se pierde el foco si el valor no coincide
-      input.addEventListener('blur', function () {
-          setTimeout(() => {
-              if (input.value.trim().toUpperCase() !== triggerValue.toUpperCase()) {
-                  especifiqueField.style.display = 'none';
-              }
-          }, 200);
-      });
+    } else {
+      suggestionsList.style.display = "none"; // Ocultar lista si no hay coincidencias
+    }
   }
 
-  // Aplicar la lógica para "Sitio de Ocurrencia" y "Agente de Lesión"
-  toggleEspecifiqueField(sitioOcurrenciaInput, sitioOcurrenciaEspecifique, 'Otro lugar (Especifique)');
-  toggleEspecifiqueField(agenteLesionInput, agenteLesionEspecifique, 'Otro (Especifique)');
-  
-  // Lógica adicional para seleccionar una sugerencia del ul (solo para agente de lesión)
-  agenteLesionSuggestions.addEventListener('click', function (event) {
-      if (event.target.tagName === 'LI') {
-          agenteLesionInput.value = event.target.textContent.trim();
-          agenteLesionSuggestions.style.display = 'none';
-          if (event.target.textContent.trim().toUpperCase() === 'Otro (Especifique)'.toUpperCase()) {
-              agenteLesionEspecifique.style.display = 'block';
-          } else {
-              agenteLesionEspecifique.style.display = 'none';
-          }
-      }
+  // Mostrar sugerencias al hacer clic en el input
+  sitioOcurrenciaInput.addEventListener("click", function () {
+    showSuggestions(this.value); // Mostrar las opciones según lo que ya se ha escrito
+  });
+
+  // Autocompletar mientras se escribe
+  sitioOcurrenciaInput.addEventListener("input", function () {
+    showSuggestions(this.value); // Filtrar y mostrar las sugerencias mientras escribe
+  });
+
+  // Ocultar la lista si se hace clic fuera del input o de las sugerencias
+  document.addEventListener("click", function (e) {
+    if (!suggestionsList.contains(e.target) && e.target !== sitioOcurrenciaInput) {
+      suggestionsList.style.display = "none"; // Ocultar si hace clic fuera
+    }
   });
 });
 
