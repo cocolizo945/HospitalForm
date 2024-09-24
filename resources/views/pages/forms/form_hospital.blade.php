@@ -380,24 +380,10 @@
                   </div>
                   <!-- Sitio de Ocurrencia -->
                   <div class="col-md-4">
-                    <label for="sitio_ocurrencia">Sitio de Ocurrencia:</label>
+                   <label for="sitio_ocurrencia">Sitio de Ocurrencia:</label>
                     <div class="form-group">
-                      <input id="sitio_ocurrencia_input" type="text" class="form-control" placeholder="Escriba para buscar..." required>
-                      <datalist id="sitio_ocurrencia_list">
-                      <option value="Vivienda">
-                      <option value="Institución residencial">
-                      <option value="Escuela">
-                      <option value="Área de deporte y atletismo">
-                      <option value="Vía pública (peatón)">
-                      <option value="Comercio y áreas de servicio">
-                      <option value="Trabajo">
-                      <option value="Granja">
-                      <option value="Club, cantina, bar">
-                      <option value="Vehículo automotor público">
-                      <option value="Vehículo automotor privado">
-                      <option value="Otro lugar (Especifique)">
-                      <option value="Lugar no especificado">
-                      </datalist>
+                     <input id="sitio_ocurrencia_input" type="text" class="form-control" placeholder="Escriba para buscar..." required>
+                      <ul id="suggestions_list" class="list-group autocomplete-suggestions"></ul>
                     </div>
                   </div>
 
