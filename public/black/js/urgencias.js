@@ -1447,3 +1447,111 @@ function toggleTiempoTraslado() {
     tiempoTrasladoInput.value = 'HH:mm'; 
   }
 }
+
+//Sobres en EDAS
+document.addEventListener("DOMContentLoaded", function()
+{
+  const selectEda = document.getElementById('TipoEDA');
+  const inputsobres = document.getElementById('SuEdas');
+  const hbl = document.getElementById('nsobres');
+
+  selectEda.addEventListener('change',seleccionEDAS);
+
+  function seleccionEDAS()
+  {  
+    if(selectEda.value === '0' || selectEda.value === '1')
+    {
+      inputsobres.style.display = 'block';
+    }
+    if(selectEda.value === '2')
+    {
+      inputsobres.style.display = 'none';
+      hbl.value='';
+    }
+  }
+});
+
+//----medicamentos----
+let medicamentos = [];
+
+    // Cargar el archivo JSON al iniciar
+    fetch('/json/Medicamentos.json')
+      .then(response => response.json())
+      .then(data => {
+        medicamentos = data;
+      })
+      .catch(error => console.error('Error al cargar el JSON:', error));
+
+  //-- inputMedicamentos1 --
+function mostrarmedica1(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('lista_medicamentos1');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = medicamentos.filter(medicaList => medicaList.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        document.getElementById('medicamento1').value = option.nombre
+        listaSugerencias.style.display = 'none';
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasmedic1() {
+  setTimeout(() => {
+    document.getElementById('lista_medicamentos1').style.display = "none";
+  }, 200);
+}
+
+//--inputmedicamento2
+function mostrarmedica2(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('lista_medicamentos2');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = medicamentos.filter(medicaList => medicaList.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        document.getElementById('medicamento2').value = option.nombre
+        listaSugerencias.style.display = 'none';
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasmedic2() {
+  setTimeout(() => {
+    document.getElementById('lista_medicamentos2').style.display = "none";
+  }, 200);
+}

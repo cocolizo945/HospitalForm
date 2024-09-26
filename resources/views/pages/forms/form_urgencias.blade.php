@@ -741,7 +741,13 @@
                       <label for="medicamento1">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento1" name="medicamento1"
-                          placeholder="Paracetamol 500mg" minlength="3" required>
+                          placeholder="Paracetamol 500mg" minlength="3" required
+                          oninput="mostrarmedica1(this)" autocomplete="off"
+                          onclick="mostrarmedica1(this)" onfocus="mostrarmedica1(this)"
+                          onblur="ocultarSugerenciasmedic1()">
+                          <div id="lista_medicamentos1" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </div>
                       </div>
                     </div>
                     <div class="col-md-5">
@@ -758,7 +764,13 @@
                       <label for="medicamento2">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento2" name="medicamento2"
-                          placeholder="Diclofenaco 75mg" minlength="3" required>
+                          placeholder="Diclofenaco 75mg" minlength="3" required
+                          oninput="mostrarmedica2(this)" autocomplete="off"
+                          onclick="mostrarmedica2(this)" onfocus="mostrarmedica2(this)"
+                          onblur="ocultarSugerenciasmedic2()">
+                          <div id="lista_medicamentos2" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </div>
                       </div>
                     </div>
                     <div class="col-md-5">
@@ -829,7 +841,7 @@
                     <label for="menores_5_años">IRAS:</label>
                     <div class="form-group">
                       <select id="menores_5_años" class="selectpicker form-control" name="menores5años"
-                        data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+                        data-size="7" data-style="btn btn-primary" title="Selección Única" >
                         <option value="0">Sintomatico</option>
                         <option value="1">Con antibiotico</option>
                         <option value="2">Antivirales</option>
@@ -842,7 +854,7 @@
                     <label for="menores_5_años">EDAS:</label>
                     <div class="form-group">
                       <select id="TipoEDA" class="selectpicker form-control" name="menores_5_años"
-                        data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+                        data-size="7" data-style="btn btn-primary" title="Selección Única">
                         <option value="0"> A </option>
                         <option value="1"> B </option>
                         <option value="2"> C </option>

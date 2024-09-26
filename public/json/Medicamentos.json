@@ -1,0 +1,8 @@
+[
+    {"nombre":"Acido acetilsalicilico"},{"nombre":"Ibuprofeno"},{"nombre":"Metamizol sodico"},{"nombre":"Paracetamol"},
+    {"nombre":"Buprenorfina"},{"nombre":"Capsaicina"},{"nombre":"Clonixinato de lisina"},{"nombre":"Dexmedetomidina"},
+    {"nombre":"Dextropropoxifeno"},{"nombre":"Etofenamato"},{"nombre":"Fentanilo"},{"nombre":"Hidromorfona"},
+    {"nombre":"Keterolaco"},{"nombre":"Lidocaina"},{"nombre":"Metadona"},{"nombre":"Morfina"},{"nombre":"Nalbufina"},
+    {"nombre":"Oxicodona"},{"nombre":"Oxicodona/Naloxona"},{"nombre":"Tapentadol"},{"nombre":"Tramadol"},
+    {"nombre":"Tramadol-Paracetamol"},{"nombre":"Atropina"},{"nombre":"Epinefrina"},{"nombre":"Lidocaina-Epinefrina"}
+]
