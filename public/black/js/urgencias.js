@@ -147,102 +147,49 @@ input_pais1.addEventListener('focus', function() {
 //3
 
 // Lógica para AC en input's select's (Alta por)
-document.addEventListener('DOMContentLoaded', function() {
-const opcionesPorInput = {
-    'alta_por': [
-      "0. Hospitalización", "1. Consulta Externa", "2. Traslado a otra unidad", "3. Domicilio", "4. Defunción", "5. Fuga", "6. Voluntad"
-    ]
-};
+document.addEventListener("DOMContentLoaded", function()
+{
+  const selectAlta = document.getElementById('Alta_por');
+  const inputMinis = document.getElementById('MinisPub');
 
-document.querySelectorAll('.autocomplete-container').forEach(function(container) {
-    const input = container.querySelector('.autocomplete-input');
-    const sugerencias = container.querySelector('.autocomplete-suggestions');
-    let seleccionAnterior = '';
 
-    const opciones = opcionesPorInput[input.id] || [];
+  selectAlta.addEventListener('change',seleccionAlta);
 
-    input.addEventListener('input', function () {
-        const filtro = input.value.toLowerCase();
-        sugerencias.innerHTML = '';
-        const opcionesFiltradas = opciones.filter(option => option.toLowerCase().includes(filtro));
-
-        if (opcionesFiltradas.length > 0) {
-            sugerencias.style.display = 'block';
-            opcionesFiltradas.forEach(option => {
-                const li = document.createElement('li');
-                li.textContent = option;
-                li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
-                li.addEventListener('mousedown', function () {
-                    seleccionarOpcion(input, sugerencias, option);
-                });
-                sugerencias.appendChild(li);
-            });
-        } else {
-            sugerencias.style.display = 'none';
-        }
-    });
-
-    input.addEventListener('focus', function () {
-        if (input.value === seleccionAnterior) {
-            input.value = '';
-        }
-        sugerencias.innerHTML = '';
-        opciones.forEach(option => {
-            const li = document.createElement('li');
-            li.textContent = option;
-            li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
-            li.addEventListener('mousedown', function () {
-                seleccionarOpcion(input, sugerencias, option);
-            });
-            sugerencias.appendChild(li);
-        });
-        sugerencias.style.display = 'block';
-    });
-
-    input.addEventListener('blur', function () {
-        setTimeout(() => {
-            const filtro = input.value.toLowerCase();
-            const opcionCercana = opciones.find(option => option.toLowerCase().includes(filtro));
-
-            if (opcionCercana) {
-                seleccionarOpcion(input, sugerencias, opcionCercana);
-            } else if (!input.value) {
-                input.value = '';
-            }
-
-            sugerencias.style.transition = 'opacity 0.3s';
-            sugerencias.style.opacity = '0';
-            setTimeout(() => {
-                sugerencias.style.display = 'none';
-                sugerencias.style.opacity = '1';
-            }, 300);
-        }, 200);
-    });
-
-    function seleccionarOpcion(input, sugerencias, option) {
-        seleccionAnterior = option;
-        input.value = option;
-        input.placeholder = option;
-        sugerencias.style.display = 'none';
+  function seleccionAlta()
+  {  
+    if(selectAlta.value === '5')
+    {
+      inputMinis.style.display = 'block';
     }
-});
-});
-
-// INTERCONSULTA
-
-document.addEventListener('DOMContentLoaded', function () {
-const interconsultaSelect = document.getElementById('interconsulta_select');
-const additionalFields = document.getElementById('interconsultaRow2');
-
-// Event listener para el cambio de selección en el dropdown de interconsulta
-interconsultaSelect.addEventListener('change', function () {
-    if (interconsultaSelect.value === "1") { // Si la opción es "SI"
-        additionalFields.style.display = ''; // Muestra los campos
-    } else { // Si la opción es "NO"
-        additionalFields.style.display = 'none'; // Oculta los campos
+    else
+    {
+      inputMinis.style.display = 'none';
+      inputFoliomist.style.display = "none"
     }
+  }
+
+  const selecMinist = document.getElementById('Ministerio');
+  const inputFoliomist = document.getElementById('folioDef');
+
+  selecMinist.addEventListener('change',seleccionMinist);
+  function seleccionMinist()
+  {
+    if(selecMinist.value === '1')
+    {
+      inputFoliomist.style.display = 'block';
+    }
+    else
+    {
+      inputFoliomist.style.display = 'none'
+    }
+  }
+
 });
-});
+
+
+
+
+
 //-------------------------------------------------------------------------------------------------------------------------------------------
 // Estado/municipio/localidad
 const data = {

@@ -511,7 +511,7 @@
 
                 <div class="row" id="estanciaRow4">
                   <!-- Fecha de alta -->
-                  <div class="col-md-4">
+                  <div class="col-md-2">
                     <label for="fecha_alta">Fecha de alta:</label>
                     <div class="form-group">
                       <input type="text" class="form-control datetimepicker" id="fecha_alta" name="fecha_alta"
@@ -519,7 +519,7 @@
                     </div>
                   </div>
                   <!-- hora de alta -->
-                  <div class="col-md-4">
+                  <div class="col-md-2">
                     <label for="hora_alta">hora de alta:</label>
                     <div class="form-group">
                       <input type="text" class="form-control timepicker" id="hora_alta" name="hora_alta"
@@ -527,14 +527,34 @@
                     </div>
                   </div>
                   <!-- Alta Por(Enviado A): -->
-                  <div class="col-md-4 autocomplete-container">
+                  <div class="col-md-3 autocomplete-container">
                     <label for="alta_por">Alta Por(Enviado A):</label>
                     <div class="form-group">
-                      <input type="text" id="alta_por" name="alta_por" class="form-control autocomplete-input"
-                        placeholder="Tipo de Vialidad" autocomplete="off">
-                      <ul class="list-group autocomplete-suggestions"></ul>
+                      <select name="Altapor" id="Alta_por" class="selectpicker form-control" title="Seleccion unica">
+                        <option value="1">Hospitalización</option>
+                        <option value="2">consulta externa</option>
+                        <option value="3">Translado a otra unidad</option>
+                        <option value="4">Domicilio</option>
+                        <option value="5">Denfuncion</option>
+                        <option value="6">Fuga</option>
+                        <option value="7">Voluntad propia</option>
+                      </select>
                     </div>
                   </div>
+
+                  <div class="col-md-2" id="MinisPub" style="display: none;">
+                    <label for="Mins">Ministerio publico</label>
+                    <select name="Ministerio" id="Ministerio" class="selectpicker form-control" title="Seleccion unica">
+                      <option value="1">si</option>
+                      <option value="2">No</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-3" id="folioDef" style="display: none;">
+                    <label for="foliosDef">Folio del certificado</label>
+                    <input type="text" class="form-control" id="folio_Defun" name="folio_Defun">
+                  </div>
+
                   <!-- Mujer en edad fértil: -->
                   <div class="col-md-4" id="mujerFertilSection" style="display: none;">
                     <label for="mujer_edad_fertil">Mujer en edad fértil:</label>
