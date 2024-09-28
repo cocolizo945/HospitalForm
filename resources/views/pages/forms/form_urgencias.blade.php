@@ -773,7 +773,10 @@
                     <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
-                        <input type="text" class="form-control" id="present1" name="present1">
+                        <input type="text" class="form-control" id="present1" name="present1" autocomplete="off">
+                        <div id="lista_presentaciones1" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -784,7 +787,7 @@
                       <label for="medicamento2">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento2" name="medicamento2"
-                          placeholder="Diclofenaco 75mg" minlength="3" required
+                          placeholder="Diclofenaco 75mg" minlength="3"
                           oninput="mostrarmedica2(this)" autocomplete="off"
                           onclick="mostrarmedica2(this)" onfocus="mostrarmedica2(this)"
                           onblur="ocultarSugerenciasmedic2()">
@@ -796,7 +799,10 @@
                     <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
-                        <input type="text" class="form-control" id="present2" name="present2">
+                        <input type="text" class="form-control" id="present2" name="present2" autocomplete="off">
+                        <div id="lista_presentaciones2" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -807,13 +813,22 @@
                       <label for="medicamento3">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento3" name="medicamento3"
-                          placeholder="Medicamento 3" minlength="3">
+                          placeholder="Medicamento 3" minlength="3"
+                          oninput="mostrarmedica3(this)" autocomplete="off"
+                          onclick="mostrarmedica3(this)" onfocus="mostrarmedica3(this)"
+                          onblur="ocultarSugerenciasmedic3()">
+                          <div id="lista_medicamentos3" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </div>
                       </div>
                     </div>
                     <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
-                        <input type="text" class="form-control" id="present3" name="present3">
+                        <input type="text" class="form-control" id="present3" name="present3" autocomplete="off">
+                        <div id="lista_presentaciones3" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -824,13 +839,22 @@
                       <label for="medicamento4">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento4" name="medicamento4"
-                          placeholder="Medicamento 4" minlength="3">
+                          placeholder="Medicamento 4" minlength="3"
+                          oninput="mostrarmedica4(this)" autocomplete="off"
+                          onclick="mostrarmedica4(this)" onfocus="mostrarmedica4(this)"
+                          onblur="ocultarSugerenciasmedic4()">
+                          <div id="lista_medicamentos4" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </div>
                       </div>
                     </div>
                     <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
-                        <input type="text" class="form-control" id="present4" name="present4">
+                        <input type="text" class="form-control" id="present4" name="present4" autocomplete="off">
+                        <div id="lista_presentaciones4" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -841,20 +865,29 @@
                       <label for="medicamento5">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento5" name="medicamento5"
-                          placeholder="Medicamento 5" minlength="3">
+                          placeholder="Medicamento 5" minlength="3"
+                          oninput="mostrarmedica5(this)" autocomplete="off"
+                          onclick="mostrarmedica5(this)" onfocus="mostrarmedica5(this)"
+                          onblur="ocultarSugerenciasmedic5()">
+                          <div id="lista_medicamentos5" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </div>
                       </div>
                     </div>
                     <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
-                        <input type="text" class="form-control" id="present5" name="present5">
+                        <input type="text" class="form-control" id="present5" name="present5" autocomplete="off">
+                        <div id="lista_presentaciones5" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        </div>
                       </div>
                     </div>
                   </div>
               
                    <!-- Menores de 5 años  -->
               <div class="tab-pane" id="form6">
-                  <h5 class="info-text" id="menores5años"> Para Menores de 5 años </h5>
+                  <h5 class="info-text" id="menores5años">Para Menores de 5 años </h5>
                   <div class="row" id="menoresRow1">
                     <!-- IRAS-->
                   <div class="col-md-5" id="menores5años">

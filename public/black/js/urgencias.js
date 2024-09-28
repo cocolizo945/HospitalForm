@@ -1452,6 +1452,7 @@ function mostrarmedica1(input) {
       li.addEventListener('click', function() {
         document.getElementById('medicamento1').value = option.nombre
         listaSugerencias.style.display = 'none';
+        mostrarPresentaciones1(option.presentaciones);  // Llamar a la función para mostrar presentaciones
       });
       listaSugerencias.appendChild(li);
     });
@@ -1465,6 +1466,35 @@ function ocultarSugerenciasmedic1() {
     document.getElementById('lista_medicamentos1').style.display = "none";
   }, 200);
 }
+
+function mostrarPresentaciones1(presentaciones) {
+  let listaPresentaciones = document.getElementById('lista_presentaciones1');
+  listaPresentaciones.innerHTML = ""; // Limpiar las presentaciones anteriores
+  let presentInput = document.getElementById('present1');
+  presentInput.value = ''; // Limpiar el input de presentaciones
+  
+  if (presentaciones.length > 0) {
+    listaPresentaciones.style.display = 'block';
+    presentaciones.forEach(pres => {
+      const li = document.createElement('li');
+      li.textContent = pres;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        presentInput.value = pres; // Actualizar el input con la presentación seleccionada
+        listaPresentaciones.style.display = 'none';
+      });
+      listaPresentaciones.appendChild(li);
+    });
+  } else {
+    listaPresentaciones.style.display = 'none';
+  }
+}
+
 
 //--inputmedicamento2
 function mostrarmedica2(input) {
@@ -1489,6 +1519,7 @@ function mostrarmedica2(input) {
       li.addEventListener('click', function() {
         document.getElementById('medicamento2').value = option.nombre
         listaSugerencias.style.display = 'none';
+        mostrarPresentaciones2(option.presentaciones);
       });
       listaSugerencias.appendChild(li);
     });
@@ -1501,4 +1532,230 @@ function ocultarSugerenciasmedic2() {
   setTimeout(() => {
     document.getElementById('lista_medicamentos2').style.display = "none";
   }, 200);
+}
+
+function mostrarPresentaciones2(presentaciones) {
+  let listaPresentaciones = document.getElementById('lista_presentaciones2');
+  listaPresentaciones.innerHTML = ""; // Limpiar las presentaciones anteriores
+  let presentInput = document.getElementById('present2');
+  presentInput.value = ''; // Limpiar el input de presentaciones
+  
+  if (presentaciones.length > 0) {
+    listaPresentaciones.style.display = 'block';
+    presentaciones.forEach(pres => {
+      const li = document.createElement('li');
+      li.textContent = pres;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        presentInput.value = pres; // Actualizar el input con la presentación seleccionada
+        listaPresentaciones.style.display = 'none';
+      });
+      listaPresentaciones.appendChild(li);
+    });
+  } else {
+    listaPresentaciones.style.display = 'none';
+  }
+}
+
+//--inputmedicamneto3--
+function mostrarmedica3(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('lista_medicamentos3');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = medicamentos.filter(medicaList => medicaList.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        document.getElementById('medicamento3').value = option.nombre
+        listaSugerencias.style.display = 'none';
+        mostrarPresentaciones3(option.presentaciones);
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasmedic3() {
+  setTimeout(() => {
+    document.getElementById('lista_medicamentos3').style.display = "none";
+  }, 200);
+}
+
+function mostrarPresentaciones3(presentaciones) {
+  let listaPresentaciones = document.getElementById('lista_presentaciones3');
+  listaPresentaciones.innerHTML = ""; // Limpiar las presentaciones anteriores
+  let presentInput = document.getElementById('present3');
+  presentInput.value = ''; // Limpiar el input de presentaciones
+  
+  if (presentaciones.length > 0) {
+    listaPresentaciones.style.display = 'block';
+    presentaciones.forEach(pres => {
+      const li = document.createElement('li');
+      li.textContent = pres;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        presentInput.value = pres; // Actualizar el input con la presentación seleccionada
+        listaPresentaciones.style.display = 'none';
+      });
+      listaPresentaciones.appendChild(li);
+    });
+  } else {
+    listaPresentaciones.style.display = 'none';
+  }
+}
+
+//--inputmedicamento4
+function mostrarmedica4(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('lista_medicamentos4');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = medicamentos.filter(medicaList => medicaList.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        document.getElementById('medicamento4').value = option.nombre
+        listaSugerencias.style.display = 'none';
+        mostrarPresentaciones4(option.presentaciones);
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasmedic4() {
+  setTimeout(() => {
+    document.getElementById('lista_medicamentos4').style.display = "none";
+  }, 200);
+}
+
+function mostrarPresentaciones4(presentaciones) {
+  let listaPresentaciones = document.getElementById('lista_presentaciones4');
+  listaPresentaciones.innerHTML = ""; // Limpiar las presentaciones anteriores
+  let presentInput = document.getElementById('present4');
+  presentInput.value = ''; // Limpiar el input de presentaciones
+  
+  if (presentaciones.length > 0) {
+    listaPresentaciones.style.display = 'block';
+    presentaciones.forEach(pres => {
+      const li = document.createElement('li');
+      li.textContent = pres;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        presentInput.value = pres; // Actualizar el input con la presentación seleccionada
+        listaPresentaciones.style.display = 'none';
+      });
+      listaPresentaciones.appendChild(li);
+    });
+  } else {
+    listaPresentaciones.style.display = 'none';
+  }
+}
+
+//--inputmedicamento5
+function mostrarmedica5(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('lista_medicamentos5');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = medicamentos.filter(medicaList => medicaList.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        document.getElementById('medicamento5').value = option.nombre
+        listaSugerencias.style.display = 'none';
+        mostrarPresentaciones5(option.presentaciones);
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasmedic5() {
+  setTimeout(() => {
+    document.getElementById('lista_medicamentos5').style.display = "none";
+  }, 200);
+}
+
+function mostrarPresentaciones5(presentaciones) {
+  let listaPresentaciones = document.getElementById('lista_presentaciones5');
+  listaPresentaciones.innerHTML = ""; // Limpiar las presentaciones anteriores
+  let presentInput = document.getElementById('present5');
+  presentInput.value = ''; // Limpiar el input de presentaciones
+  
+  if (presentaciones.length > 0) {
+    listaPresentaciones.style.display = 'block';
+    presentaciones.forEach(pres => {
+      const li = document.createElement('li');
+      li.textContent = pres;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        presentInput.value = pres; // Actualizar el input con la presentación seleccionada
+        listaPresentaciones.style.display = 'none';
+      });
+      listaPresentaciones.appendChild(li);
+    });
+  } else {
+    listaPresentaciones.style.display = 'none';
+  }
 }
