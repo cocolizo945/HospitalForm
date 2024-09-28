@@ -511,7 +511,7 @@
 
                 <div class="row" id="estanciaRow4">
                   <!-- Fecha de alta -->
-                  <div class="col-md-4">
+                  <div class="col-md-2">
                     <label for="fecha_alta">Fecha de alta:</label>
                     <div class="form-group">
                       <input type="text" class="form-control datetimepicker" id="fecha_alta" name="fecha_alta"
@@ -519,7 +519,7 @@
                     </div>
                   </div>
                   <!-- hora de alta -->
-                  <div class="col-md-4">
+                  <div class="col-md-2">
                     <label for="hora_alta">hora de alta:</label>
                     <div class="form-group">
                       <input type="text" class="form-control timepicker" id="hora_alta" name="hora_alta"
@@ -527,14 +527,34 @@
                     </div>
                   </div>
                   <!-- Alta Por(Enviado A): -->
-                  <div class="col-md-4 autocomplete-container">
+                  <div class="col-md-3 autocomplete-container">
                     <label for="alta_por">Alta Por(Enviado A):</label>
                     <div class="form-group">
-                      <input type="text" id="alta_por" name="alta_por" class="form-control autocomplete-input"
-                        placeholder="Tipo de Vialidad" autocomplete="off">
-                      <ul class="list-group autocomplete-suggestions"></ul>
+                      <select name="Altapor" id="Alta_por" class="selectpicker form-control" title="Seleccion unica">
+                        <option value="1">Hospitalización</option>
+                        <option value="2">consulta externa</option>
+                        <option value="3">Translado a otra unidad</option>
+                        <option value="4">Domicilio</option>
+                        <option value="5">Denfuncion</option>
+                        <option value="6">Fuga</option>
+                        <option value="7">Voluntad propia</option>
+                      </select>
                     </div>
                   </div>
+
+                  <div class="col-md-2" id="MinisPub" style="display: none;">
+                    <label for="Mins">Ministerio publico</label>
+                    <select name="Ministerio" id="Ministerio" class="selectpicker form-control" title="Seleccion unica">
+                      <option value="1">si</option>
+                      <option value="2">No</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-3" id="folioDef" style="display: none;">
+                    <label for="foliosDef">Folio del certificado</label>
+                    <input type="text" class="form-control" id="folio_Defun" name="folio_Defun">
+                  </div>
+
                   <!-- Mujer en edad fértil: -->
                   <div class="col-md-4" id="mujerFertilSection" style="display: none;">
                     <label for="mujer_edad_fertil">Mujer en edad fértil:</label>
@@ -741,13 +761,22 @@
                       <label for="medicamento1">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento1" name="medicamento1"
-                          placeholder="Paracetamol 500mg" minlength="3" required>
+                          placeholder="Paracetamol 500mg" minlength="3" required
+                          oninput="mostrarmedica1(this)" autocomplete="off"
+                          onclick="mostrarmedica1(this)" onfocus="mostrarmedica1(this)"
+                          onblur="ocultarSugerenciasmedic1()">
+                          <div id="lista_medicamentos1" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </div>
                       </div>
                     </div>
                     <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
-                        <input type="text" class="form-control" id="present1" name="present1">
+                        <input type="text" class="form-control" id="present1" name="present1" autocomplete="off">
+                        <div id="lista_presentaciones1" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -758,13 +787,22 @@
                       <label for="medicamento2">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento2" name="medicamento2"
-                          placeholder="Diclofenaco 75mg" minlength="3" required>
+                          placeholder="Diclofenaco 75mg" minlength="3"
+                          oninput="mostrarmedica2(this)" autocomplete="off"
+                          onclick="mostrarmedica2(this)" onfocus="mostrarmedica2(this)"
+                          onblur="ocultarSugerenciasmedic2()">
+                          <div id="lista_medicamentos2" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </div>
                       </div>
                     </div>
                     <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
-                        <input type="text" class="form-control" id="present2" name="present2">
+                        <input type="text" class="form-control" id="present2" name="present2" autocomplete="off">
+                        <div id="lista_presentaciones2" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -775,13 +813,22 @@
                       <label for="medicamento3">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento3" name="medicamento3"
-                          placeholder="Medicamento 3" minlength="3">
+                          placeholder="Medicamento 3" minlength="3"
+                          oninput="mostrarmedica3(this)" autocomplete="off"
+                          onclick="mostrarmedica3(this)" onfocus="mostrarmedica3(this)"
+                          onblur="ocultarSugerenciasmedic3()">
+                          <div id="lista_medicamentos3" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </div>
                       </div>
                     </div>
                     <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
-                        <input type="text" class="form-control" id="present3" name="present3">
+                        <input type="text" class="form-control" id="present3" name="present3" autocomplete="off">
+                        <div id="lista_presentaciones3" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -792,13 +839,22 @@
                       <label for="medicamento4">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento4" name="medicamento4"
-                          placeholder="Medicamento 4" minlength="3">
+                          placeholder="Medicamento 4" minlength="3"
+                          oninput="mostrarmedica4(this)" autocomplete="off"
+                          onclick="mostrarmedica4(this)" onfocus="mostrarmedica4(this)"
+                          onblur="ocultarSugerenciasmedic4()">
+                          <div id="lista_medicamentos4" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </div>
                       </div>
                     </div>
                     <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
-                        <input type="text" class="form-control" id="present4" name="present4">
+                        <input type="text" class="form-control" id="present4" name="present4" autocomplete="off">
+                        <div id="lista_presentaciones4" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -809,27 +865,36 @@
                       <label for="medicamento5">Nombre generico:</label>
                       <div class="form-group">
                         <input type="text" class="form-control" id="medicamento5" name="medicamento5"
-                          placeholder="Medicamento 5" minlength="3">
+                          placeholder="Medicamento 5" minlength="3"
+                          oninput="mostrarmedica5(this)" autocomplete="off"
+                          onclick="mostrarmedica5(this)" onfocus="mostrarmedica5(this)"
+                          onblur="ocultarSugerenciasmedic5()">
+                          <div id="lista_medicamentos5" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                      </div>
                       </div>
                     </div>
                     <div class="col-md-5">
                       <label for="medicamneto1">Presentacion</label>
                       <div class="form-group">
-                        <input type="text" class="form-control" id="present5" name="present5">
+                        <input type="text" class="form-control" id="present5" name="present5" autocomplete="off">
+                        <div id="lista_presentaciones5" class="sugerencias_medicame"
+                        style="position: absolute; z-index: 1000; display: none; width: 100%; background-color: white; border: 1px solid #ced4da; max-height: 200px; overflow-y: auto; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                        </div>
                       </div>
                     </div>
                   </div>
               
                    <!-- Menores de 5 años  -->
               <div class="tab-pane" id="form6">
-                  <h5 class="info-text" id="menores5años"> Para Menores de 5 años </h5>
+                  <h5 class="info-text" id="menores5años">Para Menores de 5 años </h5>
                   <div class="row" id="menoresRow1">
                     <!-- IRAS-->
                   <div class="col-md-5" id="menores5años">
                     <label for="menores_5_años">IRAS:</label>
                     <div class="form-group">
                       <select id="menores_5_años" class="selectpicker form-control" name="menores5años"
-                        data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+                        data-size="7" data-style="btn btn-primary" title="Selección Única" >
                         <option value="0">Sintomatico</option>
                         <option value="1">Con antibiotico</option>
                         <option value="2">Antivirales</option>
@@ -842,7 +907,7 @@
                     <label for="menores_5_años">EDAS:</label>
                     <div class="form-group">
                       <select id="TipoEDA" class="selectpicker form-control" name="menores_5_años"
-                        data-size="7" data-style="btn btn-primary" title="Selección Única" required>
+                        data-size="7" data-style="btn btn-primary" title="Selección Única">
                         <option value="0"> A </option>
                         <option value="1"> B </option>
                         <option value="2"> C </option>

@@ -1305,21 +1305,35 @@ document.addEventListener('DOMContentLoaded', function() {
     ]
   };
 
-  let seleccionesEfectosPaciente = [];
-  let seleccionesEfectosAgresor = [];
+  // Gestionar selecciones por campo de entrada
+  const selecciones = {
+    'efectos_paciente': [],
+    'efectos_agresor': []
+  };
 
   document.querySelectorAll('.autocomplete-container').forEach(function(container) {
     const input = container.querySelector('.autocomplete-input');
     const sugerencias = container.querySelector('.autocomplete-suggestions');
-    let seleccionAnterior = '';
     const maxSeleccion = 3;
-
     const opciones = opcionesPorInput[input.id] || [];
 
     input.addEventListener('input', function () {
+      gestionarSugerencias(input.id);
+    });
+
+    input.addEventListener('focus', function () {
+      gestionarSugerencias(input.id);
+    });
+
+    input.addEventListener('blur', function () {
+      setTimeout(() => {
+        sugerencias.style.display = 'none';
+      }, 200);
+    });
+
+    function gestionarSugerencias(idCampo) {
       // Si "Se ignora" o "Ninguna" están seleccionadas, no permitir más entradas
-      const selecciones = input.id === 'efectos_paciente' ? seleccionesEfectosPaciente : seleccionesEfectosAgresor;
-      if (selecciones.includes('Se ignora') || selecciones.includes('Ninguna')) {
+      if (selecciones[idCampo].includes('Se ignora') || selecciones[idCampo].includes('Ninguna')) {
         return;
       }
 
@@ -1332,105 +1346,50 @@ document.addEventListener('DOMContentLoaded', function() {
         opcionesFiltradas.forEach(option => {
           const li = document.createElement('li');
           li.textContent = option;
-          li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
           li.classList.add('list-group-item');
           li.addEventListener('mousedown', function () {
-            seleccionarOpcion(input, sugerencias, option);
+            seleccionarOpcion(idCampo, sugerencias, option);
           });
           sugerencias.appendChild(li);
         });
       } else {
         sugerencias.style.display = 'none';
       }
-    });
+    }
 
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Tab') {
-        const primeraOpcion = sugerencias.querySelector('li');
-        if (primeraOpcion) {
-          seleccionarOpcion(input, sugerencias, primeraOpcion.textContent);
-          e.preventDefault(); // Prevenir que se cambie de campo al presionar Tab
-        }
-      }
-    });
-
-    input.addEventListener('focus', function () {
-      // Si "Se ignora" o "Ninguna" están seleccionadas, no permitir más entradas
-      const selecciones = input.id === 'efectos_paciente' ? seleccionesEfectosPaciente : seleccionesEfectosAgresor;
-      if (selecciones.includes('Se ignora') || selecciones.includes('Ninguna')) {
-        return;
-      }
-
-      sugerencias.innerHTML = '';
-      opciones.forEach(option => {
-        const li = document.createElement('li');
-        li.textContent = option;
-        li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
-        li.classList.add('list-group-item');
-        li.addEventListener('mousedown', function () {
-          seleccionarOpcion(input, sugerencias, option);
-        });
-        sugerencias.appendChild(li);
-      });
-      sugerencias.style.display = 'block';
-    });
-
-    input.addEventListener('blur', function () {
-      setTimeout(() => {
-        sugerencias.style.transition = 'opacity 0.3s';
-        sugerencias.style.opacity = '0';
-        setTimeout(() => {
-          sugerencias.style.display = 'none';
-          sugerencias.style.opacity = '1';
-        }, 300);
-      }, 200);
-    });
-
-    function seleccionarOpcion(input, sugerencias, option) {
-      const selecciones = input.id === 'efectos_paciente' ? seleccionesEfectosPaciente : seleccionesEfectosAgresor;
-
+    function seleccionarOpcion(idCampo, sugerencias, option) {
       // Si se selecciona "Se ignora" o "Ninguna", eliminar todas las selecciones anteriores
       if (option === 'Se ignora' || option === 'Ninguna') {
-        selecciones.length = 0; // Limpiar todas las selecciones
-        selecciones.push(option); // Añadir solo "Se ignora" o "Ninguna"
-        actualizarSelecciones(input.id, selecciones);
+        selecciones[idCampo] = [option]; // Limpiar y añadir solo "Se ignora" o "Ninguna"
+        actualizarSelecciones(idCampo);
         sugerencias.style.display = 'none';
         input.value = ''; // Limpiar input después de seleccionar
         return;
       }
 
-      if (selecciones.includes(option)) return; // Evitar duplicados
-      if (selecciones.length >= maxSeleccion) {
+      if (selecciones[idCampo].includes(option)) return; // Evitar duplicados
+      if (selecciones[idCampo].length >= maxSeleccion) {
         alert('Solo puedes seleccionar hasta 3 elementos.');
         return;
       }
 
-      selecciones.push(option);
-      actualizarSelecciones(input.id, selecciones);
+      selecciones[idCampo].push(option);
+      actualizarSelecciones(idCampo);
       sugerencias.style.display = 'none';
       input.value = ''; // Limpiar input después de seleccionar
     }
 
-    function actualizarSelecciones(idCampo, selecciones) {
+    function actualizarSelecciones(idCampo) {
       const divSeleccion = document.getElementById(`seleccion_${idCampo}`);
       divSeleccion.innerHTML = ''; // Limpiar la selección previa
-      selecciones.forEach(opcion => {
+      selecciones[idCampo].forEach(opcion => {
         const divItemSeleccionado = document.createElement('div');
         divItemSeleccionado.textContent = opcion;
-        divItemSeleccionado.style.padding = '5px';
-        divItemSeleccionado.style.backgroundColor = '#e9ecef';
-        divItemSeleccionado.style.marginBottom = '5px';
-        divItemSeleccionado.style.display = 'inline-block';
-        divItemSeleccionado.style.fontWeight = 'bold';
-        divItemSeleccionado.style.marginRight = '5px';
+        divItemSeleccionado.classList.add('seleccion-item');
 
         const botonEliminar = document.createElement('button');
         botonEliminar.textContent = 'X';
-        botonEliminar.style.marginLeft = '10px';
-        botonEliminar.style.color = 'red';
-        botonEliminar.style.border = 'none';
-        botonEliminar.style.backgroundColor = 'transparent';
-        botonEliminar.style.cursor = 'pointer';
+        botonEliminar.classList.add('eliminar-boton');
         botonEliminar.addEventListener('click', function () {
           eliminarSeleccion(idCampo, opcion);
         });
@@ -1441,11 +1400,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function eliminarSeleccion(idCampo, opcion) {
-      const selecciones = idCampo === 'efectos_paciente' ? seleccionesEfectosPaciente : seleccionesEfectosAgresor;
-      const index = selecciones.indexOf(opcion);
+      const index = selecciones[idCampo].indexOf(opcion);
       if (index !== -1) {
-        selecciones.splice(index, 1); // Eliminar selección
-        actualizarSelecciones(idCampo, selecciones);
+        selecciones[idCampo].splice(index, 1); // Eliminar selección
+        actualizarSelecciones(idCampo);
       }
     }
   });

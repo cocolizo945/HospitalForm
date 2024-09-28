@@ -147,102 +147,49 @@ input_pais1.addEventListener('focus', function() {
 //3
 
 // Lógica para AC en input's select's (Alta por)
-document.addEventListener('DOMContentLoaded', function() {
-const opcionesPorInput = {
-    'alta_por': [
-      "0. Hospitalización", "1. Consulta Externa", "2. Traslado a otra unidad", "3. Domicilio", "4. Defunción", "5. Fuga", "6. Voluntad"
-    ]
-};
+document.addEventListener("DOMContentLoaded", function()
+{
+  const selectAlta = document.getElementById('Alta_por');
+  const inputMinis = document.getElementById('MinisPub');
 
-document.querySelectorAll('.autocomplete-container').forEach(function(container) {
-    const input = container.querySelector('.autocomplete-input');
-    const sugerencias = container.querySelector('.autocomplete-suggestions');
-    let seleccionAnterior = '';
 
-    const opciones = opcionesPorInput[input.id] || [];
+  selectAlta.addEventListener('change',seleccionAlta);
 
-    input.addEventListener('input', function () {
-        const filtro = input.value.toLowerCase();
-        sugerencias.innerHTML = '';
-        const opcionesFiltradas = opciones.filter(option => option.toLowerCase().includes(filtro));
-
-        if (opcionesFiltradas.length > 0) {
-            sugerencias.style.display = 'block';
-            opcionesFiltradas.forEach(option => {
-                const li = document.createElement('li');
-                li.textContent = option;
-                li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
-                li.addEventListener('mousedown', function () {
-                    seleccionarOpcion(input, sugerencias, option);
-                });
-                sugerencias.appendChild(li);
-            });
-        } else {
-            sugerencias.style.display = 'none';
-        }
-    });
-
-    input.addEventListener('focus', function () {
-        if (input.value === seleccionAnterior) {
-            input.value = '';
-        }
-        sugerencias.innerHTML = '';
-        opciones.forEach(option => {
-            const li = document.createElement('li');
-            li.textContent = option;
-            li.style.fontWeight = (option === seleccionAnterior) ? 'bold' : 'normal';
-            li.addEventListener('mousedown', function () {
-                seleccionarOpcion(input, sugerencias, option);
-            });
-            sugerencias.appendChild(li);
-        });
-        sugerencias.style.display = 'block';
-    });
-
-    input.addEventListener('blur', function () {
-        setTimeout(() => {
-            const filtro = input.value.toLowerCase();
-            const opcionCercana = opciones.find(option => option.toLowerCase().includes(filtro));
-
-            if (opcionCercana) {
-                seleccionarOpcion(input, sugerencias, opcionCercana);
-            } else if (!input.value) {
-                input.value = '';
-            }
-
-            sugerencias.style.transition = 'opacity 0.3s';
-            sugerencias.style.opacity = '0';
-            setTimeout(() => {
-                sugerencias.style.display = 'none';
-                sugerencias.style.opacity = '1';
-            }, 300);
-        }, 200);
-    });
-
-    function seleccionarOpcion(input, sugerencias, option) {
-        seleccionAnterior = option;
-        input.value = option;
-        input.placeholder = option;
-        sugerencias.style.display = 'none';
+  function seleccionAlta()
+  {  
+    if(selectAlta.value === '5')
+    {
+      inputMinis.style.display = 'block';
     }
-});
-});
-
-// INTERCONSULTA
-
-document.addEventListener('DOMContentLoaded', function () {
-const interconsultaSelect = document.getElementById('interconsulta_select');
-const additionalFields = document.getElementById('interconsultaRow2');
-
-// Event listener para el cambio de selección en el dropdown de interconsulta
-interconsultaSelect.addEventListener('change', function () {
-    if (interconsultaSelect.value === "1") { // Si la opción es "SI"
-        additionalFields.style.display = ''; // Muestra los campos
-    } else { // Si la opción es "NO"
-        additionalFields.style.display = 'none'; // Oculta los campos
+    else
+    {
+      inputMinis.style.display = 'none';
+      inputFoliomist.style.display = "none"
     }
+  }
+
+  const selecMinist = document.getElementById('Ministerio');
+  const inputFoliomist = document.getElementById('folioDef');
+
+  selecMinist.addEventListener('change',seleccionMinist);
+  function seleccionMinist()
+  {
+    if(selecMinist.value === '1')
+    {
+      inputFoliomist.style.display = 'block';
+    }
+    else
+    {
+      inputFoliomist.style.display = 'none'
+    }
+  }
+
 });
-});
+
+
+
+
+
 //-------------------------------------------------------------------------------------------------------------------------------------------
 // Estado/municipio/localidad
 const data = {
@@ -1445,5 +1392,370 @@ function toggleTiempoTraslado() {
   } else {
     tiempoTrasladoInput.disabled = false;
     tiempoTrasladoInput.value = 'HH:mm'; 
+  }
+}
+
+//Sobres en EDAS
+document.addEventListener("DOMContentLoaded", function()
+{
+  const selectEda = document.getElementById('TipoEDA');
+  const inputsobres = document.getElementById('SuEdas');
+  const hbl = document.getElementById('nsobres');
+
+  selectEda.addEventListener('change',seleccionEDAS);
+
+  function seleccionEDAS()
+  {  
+    if(selectEda.value === '0' || selectEda.value === '1')
+    {
+      inputsobres.style.display = 'block';
+    }
+    if(selectEda.value === '2')
+    {
+      inputsobres.style.display = 'none';
+      hbl.value='';
+    }
+  }
+});
+
+//----medicamentos----
+let medicamentos = [];
+
+    // Cargar el archivo JSON al iniciar
+    fetch('/json/Medicamentos.json')
+      .then(response => response.json())
+      .then(data => {
+        medicamentos = data;
+      })
+      .catch(error => console.error('Error al cargar el JSON:', error));
+
+  //-- inputMedicamentos1 --
+function mostrarmedica1(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('lista_medicamentos1');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = medicamentos.filter(medicaList => medicaList.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        document.getElementById('medicamento1').value = option.nombre
+        listaSugerencias.style.display = 'none';
+        mostrarPresentaciones1(option.presentaciones);  // Llamar a la función para mostrar presentaciones
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasmedic1() {
+  setTimeout(() => {
+    document.getElementById('lista_medicamentos1').style.display = "none";
+  }, 200);
+}
+
+function mostrarPresentaciones1(presentaciones) {
+  let listaPresentaciones = document.getElementById('lista_presentaciones1');
+  listaPresentaciones.innerHTML = ""; // Limpiar las presentaciones anteriores
+  let presentInput = document.getElementById('present1');
+  presentInput.value = ''; // Limpiar el input de presentaciones
+  
+  if (presentaciones.length > 0) {
+    listaPresentaciones.style.display = 'block';
+    presentaciones.forEach(pres => {
+      const li = document.createElement('li');
+      li.textContent = pres;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        presentInput.value = pres; // Actualizar el input con la presentación seleccionada
+        listaPresentaciones.style.display = 'none';
+      });
+      listaPresentaciones.appendChild(li);
+    });
+  } else {
+    listaPresentaciones.style.display = 'none';
+  }
+}
+
+
+//--inputmedicamento2
+function mostrarmedica2(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('lista_medicamentos2');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = medicamentos.filter(medicaList => medicaList.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        document.getElementById('medicamento2').value = option.nombre
+        listaSugerencias.style.display = 'none';
+        mostrarPresentaciones2(option.presentaciones);
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasmedic2() {
+  setTimeout(() => {
+    document.getElementById('lista_medicamentos2').style.display = "none";
+  }, 200);
+}
+
+function mostrarPresentaciones2(presentaciones) {
+  let listaPresentaciones = document.getElementById('lista_presentaciones2');
+  listaPresentaciones.innerHTML = ""; // Limpiar las presentaciones anteriores
+  let presentInput = document.getElementById('present2');
+  presentInput.value = ''; // Limpiar el input de presentaciones
+  
+  if (presentaciones.length > 0) {
+    listaPresentaciones.style.display = 'block';
+    presentaciones.forEach(pres => {
+      const li = document.createElement('li');
+      li.textContent = pres;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        presentInput.value = pres; // Actualizar el input con la presentación seleccionada
+        listaPresentaciones.style.display = 'none';
+      });
+      listaPresentaciones.appendChild(li);
+    });
+  } else {
+    listaPresentaciones.style.display = 'none';
+  }
+}
+
+//--inputmedicamneto3--
+function mostrarmedica3(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('lista_medicamentos3');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = medicamentos.filter(medicaList => medicaList.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        document.getElementById('medicamento3').value = option.nombre
+        listaSugerencias.style.display = 'none';
+        mostrarPresentaciones3(option.presentaciones);
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasmedic3() {
+  setTimeout(() => {
+    document.getElementById('lista_medicamentos3').style.display = "none";
+  }, 200);
+}
+
+function mostrarPresentaciones3(presentaciones) {
+  let listaPresentaciones = document.getElementById('lista_presentaciones3');
+  listaPresentaciones.innerHTML = ""; // Limpiar las presentaciones anteriores
+  let presentInput = document.getElementById('present3');
+  presentInput.value = ''; // Limpiar el input de presentaciones
+  
+  if (presentaciones.length > 0) {
+    listaPresentaciones.style.display = 'block';
+    presentaciones.forEach(pres => {
+      const li = document.createElement('li');
+      li.textContent = pres;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        presentInput.value = pres; // Actualizar el input con la presentación seleccionada
+        listaPresentaciones.style.display = 'none';
+      });
+      listaPresentaciones.appendChild(li);
+    });
+  } else {
+    listaPresentaciones.style.display = 'none';
+  }
+}
+
+//--inputmedicamento4
+function mostrarmedica4(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('lista_medicamentos4');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = medicamentos.filter(medicaList => medicaList.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        document.getElementById('medicamento4').value = option.nombre
+        listaSugerencias.style.display = 'none';
+        mostrarPresentaciones4(option.presentaciones);
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasmedic4() {
+  setTimeout(() => {
+    document.getElementById('lista_medicamentos4').style.display = "none";
+  }, 200);
+}
+
+function mostrarPresentaciones4(presentaciones) {
+  let listaPresentaciones = document.getElementById('lista_presentaciones4');
+  listaPresentaciones.innerHTML = ""; // Limpiar las presentaciones anteriores
+  let presentInput = document.getElementById('present4');
+  presentInput.value = ''; // Limpiar el input de presentaciones
+  
+  if (presentaciones.length > 0) {
+    listaPresentaciones.style.display = 'block';
+    presentaciones.forEach(pres => {
+      const li = document.createElement('li');
+      li.textContent = pres;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        presentInput.value = pres; // Actualizar el input con la presentación seleccionada
+        listaPresentaciones.style.display = 'none';
+      });
+      listaPresentaciones.appendChild(li);
+    });
+  } else {
+    listaPresentaciones.style.display = 'none';
+  }
+}
+
+//--inputmedicamento5
+function mostrarmedica5(input) {
+  let valor = input.value.toLowerCase();
+  let listaSugerencias = document.getElementById('lista_medicamentos5');
+  listaSugerencias.innerHTML = ""; 
+
+  const opcionesFiltradas = medicamentos.filter(medicaList => medicaList.nombre.toLowerCase().includes(valor));
+
+  if (opcionesFiltradas.length > 0) {
+    listaSugerencias.style.display = 'block';
+    opcionesFiltradas.forEach(option => {
+      const li = document.createElement('li');
+      li.textContent = `${option.nombre}`;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.fontWeight = 'bold'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        document.getElementById('medicamento5').value = option.nombre
+        listaSugerencias.style.display = 'none';
+        mostrarPresentaciones5(option.presentaciones);
+      });
+      listaSugerencias.appendChild(li);
+    });
+  } else {
+    listaSugerencias.style.display = 'none';
+  }
+}
+
+function ocultarSugerenciasmedic5() {
+  setTimeout(() => {
+    document.getElementById('lista_medicamentos5').style.display = "none";
+  }, 200);
+}
+
+function mostrarPresentaciones5(presentaciones) {
+  let listaPresentaciones = document.getElementById('lista_presentaciones5');
+  listaPresentaciones.innerHTML = ""; // Limpiar las presentaciones anteriores
+  let presentInput = document.getElementById('present5');
+  presentInput.value = ''; // Limpiar el input de presentaciones
+  
+  if (presentaciones.length > 0) {
+    listaPresentaciones.style.display = 'block';
+    presentaciones.forEach(pres => {
+      const li = document.createElement('li');
+      li.textContent = pres;
+      li.style.padding = '10px';
+      li.style.cursor = 'pointer'; 
+      li.style.listStyle = 'none'; 
+      li.style.borderBottom = '1px solid #e9ecef'; 
+      li.style.color = '#000'; 
+      li.style.backgroundColor = '#fff'; 
+      li.addEventListener('click', function() {
+        presentInput.value = pres; // Actualizar el input con la presentación seleccionada
+        listaPresentaciones.style.display = 'none';
+      });
+      listaPresentaciones.appendChild(li);
+    });
+  } else {
+    listaPresentaciones.style.display = 'none';
   }
 }
